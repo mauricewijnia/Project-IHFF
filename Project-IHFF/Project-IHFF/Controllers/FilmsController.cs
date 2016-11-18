@@ -7,5 +7,6 @@ namespace Project_IHFF.Controllers
 {
     public class FilmsController
     {
+        int i = 1;
     }
 }
