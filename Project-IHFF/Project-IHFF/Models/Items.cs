@@ -24,12 +24,15 @@ namespace Project_IHFF.Models
         public string description { get; set; }
         public string location { get; set; }
         public decimal price { get; set; }
+        public int quantity { get; set; }
         public string name { get; set; }
+        public System.DateTime startTime { get; set; }
+        public Nullable<System.DateTime> endTime { get; set; }
     
         public virtual FilmExhibitions FilmExhibitions { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrderItems> OrderItems { get; set; }
-        public virtual Restaurants Restaurants { get; set; }
         public virtual Specials Specials { get; set; }
+        public virtual Restaurants Restaurants { get; set; }
     }
 }

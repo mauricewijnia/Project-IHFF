@@ -21,9 +21,9 @@ namespace Project_IHFF.Models
         }
     
         public int id { get; set; }
-        public int personId { get; set; }
-        public System.DateTime dateTime { get; set; }
-        public string pickUpCode { get; set; }
+        public Nullable<int> personId { get; set; }
+        public System.DateTime date { get; set; }
+        public string pickupCode { get; set; }
         public bool isPaid { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

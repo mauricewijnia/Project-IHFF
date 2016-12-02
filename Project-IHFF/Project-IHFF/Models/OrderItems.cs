@@ -14,12 +14,6 @@ namespace Project_IHFF.Models
     
     public partial class OrderItems
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public OrderItems()
-        {
-            this.Reservations = new HashSet<Reservations>();
-        }
-    
         public int id { get; set; }
         public int orderId { get; set; }
         public int itemId { get; set; }
@@ -27,7 +21,5 @@ namespace Project_IHFF.Models
     
         public virtual Items Items { get; set; }
         public virtual Orders Orders { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Reservations> Reservations { get; set; }
     }
 }

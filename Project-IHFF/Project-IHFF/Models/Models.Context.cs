@@ -13,10 +13,10 @@ namespace Project_IHFF.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class iHFF1617S_B2Entities : DbContext
+    public partial class iHFF1617S_B2Entities1 : DbContext
     {
-        public iHFF1617S_B2Entities()
-            : base("name=iHFF1617S_B2Entities")
+        public iHFF1617S_B2Entities1()
+            : base("name=iHFF1617S_B2Entities1")
         {
         }
     
@@ -32,7 +32,6 @@ namespace Project_IHFF.Models
         public virtual DbSet<OrderItems> OrderItems { get; set; }
         public virtual DbSet<Orders> Orders { get; set; }
         public virtual DbSet<Persons> Persons { get; set; }
-        public virtual DbSet<Reservations> Reservations { get; set; }
         public virtual DbSet<Restaurants> Restaurants { get; set; }
         public virtual DbSet<Specials> Specials { get; set; }
     }

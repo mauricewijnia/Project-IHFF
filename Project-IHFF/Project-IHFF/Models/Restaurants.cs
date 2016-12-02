@@ -14,11 +14,19 @@ namespace Project_IHFF.Models
     
     public partial class Restaurants
     {
-        public int itemId { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Restaurants()
+        {
+            this.Items = new HashSet<Items>();
+        }
+    
+        public int id { get; set; }
         public string name { get; set; }
         public System.TimeSpan timeOpen { get; set; }
         public System.TimeSpan timeClosed { get; set; }
+        public string description { get; set; }
     
-        public virtual Items Items { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Items> Items { get; set; }
     }
 }
