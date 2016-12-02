@@ -4,24 +4,24 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="a7e50c9157e24b0d8c24ea0148da6429" Name="Diagram1">
-        <EntityTypeShape EntityType="iHFF1617S_B2Model.Accounts" Width="1.5" PointX="0.75" PointY="3.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="iHFF1617S_B2Model.FilmExhibitions" Width="1.5" PointX="0.875" PointY="10.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="iHFF1617S_B2Model.Films" Width="1.5" PointX="0.875" PointY="12.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="iHFF1617S_B2Model.Items" Width="1.5" PointX="4" PointY="6.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="iHFF1617S_B2Model.OrderItems" Width="1.5" PointX="4" PointY="3.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="iHFF1617S_B2Model.Orders" Width="1.5" PointX="4" PointY="0.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="iHFF1617S_B2Model.Persons" Width="1.5" PointX="0.75" PointY="0.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="iHFF1617S_B2Model.Restaurants" Width="1.5" PointX="6.875" PointY="10.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="iHFF1617S_B2Model.Specials" Width="1.5" PointX="4" PointY="10.125" IsExpanded="true" />
-        <AssociationConnector Association="iHFF1617S_B2Model.Persons_fk0" ManuallyRouted="false" />
-        <AssociationConnector Association="iHFF1617S_B2Model.FilmExhibitions_fk0" ManuallyRouted="false" />
-        <AssociationConnector Association="iHFF1617S_B2Model.FilmExhibitions_fk1" ManuallyRouted="false" />
-        <AssociationConnector Association="iHFF1617S_B2Model.OrderItems_fk1" ManuallyRouted="false" />
-        <AssociationConnector Association="iHFF1617S_B2Model.Specials_fk0" ManuallyRouted="false" />
-        <AssociationConnector Association="iHFF1617S_B2Model.OrderItems_fk0" ManuallyRouted="false" />
-        <AssociationConnector Association="iHFF1617S_B2Model.Orders_fk0" ManuallyRouted="false" />
-        <AssociationConnector Association="iHFF1617S_B2Model.Reservations" ManuallyRouted="false" />
+      <Diagram DiagramId="60f853996cc841f981b12f274d31b301" Name="Diagram1">
+        <EntityTypeShape EntityType="Models.Accounts" Width="1.5" PointX="1.5" PointY="18.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Models.FilmExhibitions" Width="1.5" PointX="3" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Models.Films" Width="1.5" PointX="0.75" PointY="9.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Models.Items" Width="1.5" PointX="0.75" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Models.OrderItems" Width="1.5" PointX="3" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Models.Orders" Width="1.5" PointX="0.75" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Models.Persons" Width="1.5" PointX="1.5" PointY="15.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Models.Restaurants" Width="1.5" PointX="3" PointY="9.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Models.Specials" Width="1.5" PointX="3" PointY="12.75" IsExpanded="true" />
+        <AssociationConnector Association="Models.Persons_fk0" ManuallyRouted="false" />
+        <AssociationConnector Association="Models.FilmExhibitions_fk0" ManuallyRouted="false" />
+        <AssociationConnector Association="Models.FilmExhibitions_fk1" ManuallyRouted="false" />
+        <AssociationConnector Association="Models.OrderItems_fk1" ManuallyRouted="false" />
+        <AssociationConnector Association="Models.Specials_fk0" ManuallyRouted="false" />
+        <AssociationConnector Association="Models.OrderItems_fk0" ManuallyRouted="false" />
+        <AssociationConnector Association="Models.Orders_fk0" ManuallyRouted="false" />
+        <AssociationConnector Association="Models.Reservations" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="iHFF1617S_B2Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="Models.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Accounts">
           <Key>
             <PropertyRef Name="id" />
@@ -203,7 +203,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="iHFF1617S_B2ModelStoreContainer">
+        <EntityContainer Name="ModelsStoreContainer">
           <EntitySet Name="Accounts" EntityType="Self.Accounts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FilmExhibitions" EntityType="Self.FilmExhibitions" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Films" EntityType="Self.Films" Schema="dbo" store:Type="Tables" />
@@ -255,7 +255,7 @@
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="iHFF1617S_B2Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="Models" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="Accounts">
           <Key>
             <PropertyRef Name="id" />
@@ -443,7 +443,7 @@
           <End Role="Items" Type="Self.Items" Multiplicity="*" />
           <End Role="Restaurants" Type="Self.Restaurants" Multiplicity="0..1" />
         </Association>
-        <EntityContainer Name="iHFF1617S_B2Entities2" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="iHFF1617S_B2Entities3" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Accounts" EntityType="Self.Accounts" />
           <EntitySet Name="FilmExhibitions" EntityType="Self.FilmExhibitions" />
           <EntitySet Name="Films" EntityType="Self.Films" />
@@ -491,9 +491,9 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="iHFF1617S_B2ModelStoreContainer" CdmEntityContainer="iHFF1617S_B2Entities2">
+        <EntityContainerMapping StorageEntityContainer="ModelsStoreContainer" CdmEntityContainer="iHFF1617S_B2Entities3">
           <EntitySetMapping Name="Accounts">
-            <EntityTypeMapping TypeName="iHFF1617S_B2Model.Accounts">
+            <EntityTypeMapping TypeName="Models.Accounts">
               <MappingFragment StoreEntitySet="Accounts">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="password" ColumnName="password" />
@@ -501,7 +501,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="FilmExhibitions">
-            <EntityTypeMapping TypeName="iHFF1617S_B2Model.FilmExhibitions">
+            <EntityTypeMapping TypeName="Models.FilmExhibitions">
               <MappingFragment StoreEntitySet="FilmExhibitions">
                 <ScalarProperty Name="itemId" ColumnName="itemId" />
                 <ScalarProperty Name="filmId" ColumnName="filmId" />
@@ -510,7 +510,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Films">
-            <EntityTypeMapping TypeName="iHFF1617S_B2Model.Films">
+            <EntityTypeMapping TypeName="Models.Films">
               <MappingFragment StoreEntitySet="Films">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="director" ColumnName="director" />
@@ -519,7 +519,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Items">
-            <EntityTypeMapping TypeName="iHFF1617S_B2Model.Items">
+            <EntityTypeMapping TypeName="Models.Items">
               <MappingFragment StoreEntitySet="Items">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="description" ColumnName="description" />
@@ -533,7 +533,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="OrderItems">
-            <EntityTypeMapping TypeName="iHFF1617S_B2Model.OrderItems">
+            <EntityTypeMapping TypeName="Models.OrderItems">
               <MappingFragment StoreEntitySet="OrderItems">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="orderId" ColumnName="orderId" />
@@ -543,7 +543,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Orders">
-            <EntityTypeMapping TypeName="iHFF1617S_B2Model.Orders">
+            <EntityTypeMapping TypeName="Models.Orders">
               <MappingFragment StoreEntitySet="Orders">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="personId" ColumnName="personId" />
@@ -554,7 +554,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Persons">
-            <EntityTypeMapping TypeName="iHFF1617S_B2Model.Persons">
+            <EntityTypeMapping TypeName="Models.Persons">
               <MappingFragment StoreEntitySet="Persons">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="firstName" ColumnName="firstName" />
@@ -565,7 +565,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Restaurants">
-            <EntityTypeMapping TypeName="iHFF1617S_B2Model.Restaurants">
+            <EntityTypeMapping TypeName="Models.Restaurants">
               <MappingFragment StoreEntitySet="Restaurants">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="name" ColumnName="name" />
@@ -576,7 +576,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Specials">
-            <EntityTypeMapping TypeName="iHFF1617S_B2Model.Specials">
+            <EntityTypeMapping TypeName="Models.Specials">
               <MappingFragment StoreEntitySet="Specials">
                 <ScalarProperty Name="itemId" ColumnName="itemId" />
                 <ScalarProperty Name="host" ColumnName="host" />
@@ -584,7 +584,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <AssociationSetMapping Name="Reservations" TypeName="iHFF1617S_B2Model.Reservations" StoreEntitySet="Reservations">
+          <AssociationSetMapping Name="Reservations" TypeName="Models.Reservations" StoreEntitySet="Reservations">
             <EndProperty Name="Items">
               <ScalarProperty Name="id" ColumnName="itemId" />
             </EndProperty>

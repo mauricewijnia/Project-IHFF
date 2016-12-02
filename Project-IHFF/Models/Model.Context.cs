@@ -13,10 +13,10 @@ namespace Project_IHFF.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class iHFF1617S_B2Entities2 : DbContext
+    public partial class iHFF1617S_B2Entities3 : DbContext
     {
-        public iHFF1617S_B2Entities2()
-            : base("name=iHFF1617S_B2Entities2")
+        public iHFF1617S_B2Entities3()
+            : base("name=iHFF1617S_B2Entities3")
         {
         }
     
