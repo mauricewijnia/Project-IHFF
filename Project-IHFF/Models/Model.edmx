@@ -1,0 +1,618 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="iHFF1617S_B2Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Accounts">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="password" Type="varchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FilmExhibitions">
+          <Key>
+            <PropertyRef Name="itemId" />
+          </Key>
+          <Property Name="itemId" Type="int" Nullable="false" />
+          <Property Name="filmId" Type="int" Nullable="false" />
+          <Property Name="capaciteit" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Films">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="director" Type="varchar(max)" Nullable="false" />
+          <Property Name="actors" Type="varchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Items">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="description" Type="varchar(max)" />
+          <Property Name="location" Type="varchar(max)" Nullable="false" />
+          <Property Name="price" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="quantity" Type="int" Nullable="false" />
+          <Property Name="name" Type="varchar(max)" Nullable="false" />
+          <Property Name="startTime" Type="datetime" Nullable="false" />
+          <Property Name="endTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="OrderItems">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="orderId" Type="int" Nullable="false" />
+          <Property Name="itemId" Type="int" Nullable="false" />
+          <Property Name="quantity" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Orders">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="personId" Type="int" />
+          <Property Name="date" Type="datetime" Nullable="false" />
+          <Property Name="pickupCode" Type="varchar(max)" />
+          <Property Name="isPaid" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Persons">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="firstName" Type="varchar(max)" Nullable="false" />
+          <Property Name="lastName" Type="varchar(max)" Nullable="false" />
+          <Property Name="email" Type="varchar(max)" Nullable="false" />
+          <Property Name="accountId" Type="int" />
+        </EntityType>
+        <EntityType Name="Reservations">
+          <Key>
+            <PropertyRef Name="itemId" />
+          </Key>
+          <Property Name="itemId" Type="int" Nullable="false" />
+          <Property Name="restaurantId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Restaurants">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="name" Type="varchar(max)" Nullable="false" />
+          <Property Name="timeOpen" Type="time" Precision="7" Nullable="false" />
+          <Property Name="timeClosed" Type="time" Precision="7" Nullable="false" />
+          <Property Name="description" Type="varchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Specials">
+          <Key>
+            <PropertyRef Name="itemId" />
+          </Key>
+          <Property Name="itemId" Type="int" Nullable="false" />
+          <Property Name="host" Type="varchar(max)" Nullable="false" />
+          <Property Name="capaciteit" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FilmExhibitions_fk0">
+          <End Role="Items" Type="Self.Items" Multiplicity="1" />
+          <End Role="FilmExhibitions" Type="Self.FilmExhibitions" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Items">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="FilmExhibitions">
+              <PropertyRef Name="itemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FilmExhibitions_fk1">
+          <End Role="Films" Type="Self.Films" Multiplicity="1" />
+          <End Role="FilmExhibitions" Type="Self.FilmExhibitions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Films">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="FilmExhibitions">
+              <PropertyRef Name="filmId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="OrderItems_fk0">
+          <End Role="Orders" Type="Self.Orders" Multiplicity="1" />
+          <End Role="OrderItems" Type="Self.OrderItems" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orders">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="OrderItems">
+              <PropertyRef Name="orderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="OrderItems_fk1">
+          <End Role="Items" Type="Self.Items" Multiplicity="1" />
+          <End Role="OrderItems" Type="Self.OrderItems" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Items">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="OrderItems">
+              <PropertyRef Name="itemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Orders_fk0">
+          <End Role="Persons" Type="Self.Persons" Multiplicity="0..1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Persons">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="personId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Persons_fk0">
+          <End Role="Accounts" Type="Self.Accounts" Multiplicity="0..1" />
+          <End Role="Persons" Type="Self.Persons" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accounts">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Persons">
+              <PropertyRef Name="accountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Reservations_fk0">
+          <End Role="Items" Type="Self.Items" Multiplicity="1" />
+          <End Role="Reservations" Type="Self.Reservations" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Items">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Reservations">
+              <PropertyRef Name="itemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Reservations_fk1">
+          <End Role="Restaurants" Type="Self.Restaurants" Multiplicity="1" />
+          <End Role="Reservations" Type="Self.Reservations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Restaurants">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Reservations">
+              <PropertyRef Name="restaurantId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Specials_fk0">
+          <End Role="Items" Type="Self.Items" Multiplicity="1" />
+          <End Role="Specials" Type="Self.Specials" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Items">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Specials">
+              <PropertyRef Name="itemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="iHFF1617S_B2ModelStoreContainer">
+          <EntitySet Name="Accounts" EntityType="Self.Accounts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FilmExhibitions" EntityType="Self.FilmExhibitions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Films" EntityType="Self.Films" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Items" EntityType="Self.Items" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrderItems" EntityType="Self.OrderItems" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Persons" EntityType="Self.Persons" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Reservations" EntityType="Self.Reservations" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Restaurants" EntityType="Self.Restaurants" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Specials" EntityType="Self.Specials" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FilmExhibitions_fk0" Association="Self.FilmExhibitions_fk0">
+            <End Role="Items" EntitySet="Items" />
+            <End Role="FilmExhibitions" EntitySet="FilmExhibitions" />
+          </AssociationSet>
+          <AssociationSet Name="FilmExhibitions_fk1" Association="Self.FilmExhibitions_fk1">
+            <End Role="Films" EntitySet="Films" />
+            <End Role="FilmExhibitions" EntitySet="FilmExhibitions" />
+          </AssociationSet>
+          <AssociationSet Name="OrderItems_fk0" Association="Self.OrderItems_fk0">
+            <End Role="Orders" EntitySet="Orders" />
+            <End Role="OrderItems" EntitySet="OrderItems" />
+          </AssociationSet>
+          <AssociationSet Name="OrderItems_fk1" Association="Self.OrderItems_fk1">
+            <End Role="Items" EntitySet="Items" />
+            <End Role="OrderItems" EntitySet="OrderItems" />
+          </AssociationSet>
+          <AssociationSet Name="Orders_fk0" Association="Self.Orders_fk0">
+            <End Role="Persons" EntitySet="Persons" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="Persons_fk0" Association="Self.Persons_fk0">
+            <End Role="Accounts" EntitySet="Accounts" />
+            <End Role="Persons" EntitySet="Persons" />
+          </AssociationSet>
+          <AssociationSet Name="Reservations_fk0" Association="Self.Reservations_fk0">
+            <End Role="Items" EntitySet="Items" />
+            <End Role="Reservations" EntitySet="Reservations" />
+          </AssociationSet>
+          <AssociationSet Name="Reservations_fk1" Association="Self.Reservations_fk1">
+            <End Role="Restaurants" EntitySet="Restaurants" />
+            <End Role="Reservations" EntitySet="Reservations" />
+          </AssociationSet>
+          <AssociationSet Name="Specials_fk0" Association="Self.Specials_fk0">
+            <End Role="Items" EntitySet="Items" />
+            <End Role="Specials" EntitySet="Specials" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="iHFF1617S_B2Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Accounts">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Persons" Relationship="Self.Persons_fk0" FromRole="Accounts" ToRole="Persons" />
+        </EntityType>
+        <EntityType Name="FilmExhibitions">
+          <Key>
+            <PropertyRef Name="itemId" />
+          </Key>
+          <Property Name="itemId" Type="Int32" Nullable="false" />
+          <Property Name="filmId" Type="Int32" Nullable="false" />
+          <Property Name="capaciteit" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Items" Relationship="Self.FilmExhibitions_fk0" FromRole="FilmExhibitions" ToRole="Items" />
+          <NavigationProperty Name="Films" Relationship="Self.FilmExhibitions_fk1" FromRole="FilmExhibitions" ToRole="Films" />
+        </EntityType>
+        <EntityType Name="Films">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="director" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="actors" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="FilmExhibitions" Relationship="Self.FilmExhibitions_fk1" FromRole="Films" ToRole="FilmExhibitions" />
+        </EntityType>
+        <EntityType Name="Items">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="location" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="price" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="quantity" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="startTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="endTime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="FilmExhibitions" Relationship="Self.FilmExhibitions_fk0" FromRole="Items" ToRole="FilmExhibitions" />
+          <NavigationProperty Name="OrderItems" Relationship="Self.OrderItems_fk1" FromRole="Items" ToRole="OrderItems" />
+          <NavigationProperty Name="Specials" Relationship="Self.Specials_fk0" FromRole="Items" ToRole="Specials" />
+          <NavigationProperty Name="Restaurants" Relationship="Self.Reservations" FromRole="Items" ToRole="Restaurants" />
+        </EntityType>
+        <EntityType Name="OrderItems">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="orderId" Type="Int32" Nullable="false" />
+          <Property Name="itemId" Type="Int32" Nullable="false" />
+          <Property Name="quantity" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Items" Relationship="Self.OrderItems_fk1" FromRole="OrderItems" ToRole="Items" />
+          <NavigationProperty Name="Orders" Relationship="Self.OrderItems_fk0" FromRole="OrderItems" ToRole="Orders" />
+        </EntityType>
+        <EntityType Name="Orders">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="personId" Type="Int32" />
+          <Property Name="date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="pickupCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="isPaid" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="OrderItems" Relationship="Self.OrderItems_fk0" FromRole="Orders" ToRole="OrderItems" />
+          <NavigationProperty Name="Persons" Relationship="Self.Orders_fk0" FromRole="Orders" ToRole="Persons" />
+        </EntityType>
+        <EntityType Name="Persons">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="firstName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="lastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="accountId" Type="Int32" />
+          <NavigationProperty Name="Accounts" Relationship="Self.Persons_fk0" FromRole="Persons" ToRole="Accounts" />
+          <NavigationProperty Name="Orders" Relationship="Self.Orders_fk0" FromRole="Persons" ToRole="Orders" />
+        </EntityType>
+        <EntityType Name="Restaurants">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="timeOpen" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="timeClosed" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Items" Relationship="Self.Reservations" FromRole="Restaurants" ToRole="Items" />
+        </EntityType>
+        <EntityType Name="Specials">
+          <Key>
+            <PropertyRef Name="itemId" />
+          </Key>
+          <Property Name="itemId" Type="Int32" Nullable="false" />
+          <Property Name="host" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="capaciteit" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Items" Relationship="Self.Specials_fk0" FromRole="Specials" ToRole="Items" />
+        </EntityType>
+        <Association Name="Persons_fk0">
+          <End Role="Accounts" Type="Self.Accounts" Multiplicity="0..1" />
+          <End Role="Persons" Type="Self.Persons" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accounts">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Persons">
+              <PropertyRef Name="accountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FilmExhibitions_fk0">
+          <End Role="Items" Type="Self.Items" Multiplicity="1" />
+          <End Role="FilmExhibitions" Type="Self.FilmExhibitions" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Items">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="FilmExhibitions">
+              <PropertyRef Name="itemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FilmExhibitions_fk1">
+          <End Role="Films" Type="Self.Films" Multiplicity="1" />
+          <End Role="FilmExhibitions" Type="Self.FilmExhibitions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Films">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="FilmExhibitions">
+              <PropertyRef Name="filmId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="OrderItems_fk1">
+          <End Role="Items" Type="Self.Items" Multiplicity="1" />
+          <End Role="OrderItems" Type="Self.OrderItems" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Items">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="OrderItems">
+              <PropertyRef Name="itemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Specials_fk0">
+          <End Role="Items" Type="Self.Items" Multiplicity="1" />
+          <End Role="Specials" Type="Self.Specials" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Items">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Specials">
+              <PropertyRef Name="itemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="OrderItems_fk0">
+          <End Role="Orders" Type="Self.Orders" Multiplicity="1" />
+          <End Role="OrderItems" Type="Self.OrderItems" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orders">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="OrderItems">
+              <PropertyRef Name="orderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Orders_fk0">
+          <End Role="Persons" Type="Self.Persons" Multiplicity="0..1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Persons">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="personId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Reservations">
+          <End Role="Items" Type="Self.Items" Multiplicity="*" />
+          <End Role="Restaurants" Type="Self.Restaurants" Multiplicity="0..1" />
+        </Association>
+        <EntityContainer Name="iHFF1617S_B2Entities2" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Accounts" EntityType="Self.Accounts" />
+          <EntitySet Name="FilmExhibitions" EntityType="Self.FilmExhibitions" />
+          <EntitySet Name="Films" EntityType="Self.Films" />
+          <EntitySet Name="Items" EntityType="Self.Items" />
+          <EntitySet Name="OrderItems" EntityType="Self.OrderItems" />
+          <EntitySet Name="Orders" EntityType="Self.Orders" />
+          <EntitySet Name="Persons" EntityType="Self.Persons" />
+          <EntitySet Name="Restaurants" EntityType="Self.Restaurants" />
+          <EntitySet Name="Specials" EntityType="Self.Specials" />
+          <AssociationSet Name="Persons_fk0" Association="Self.Persons_fk0">
+            <End Role="Accounts" EntitySet="Accounts" />
+            <End Role="Persons" EntitySet="Persons" />
+          </AssociationSet>
+          <AssociationSet Name="FilmExhibitions_fk0" Association="Self.FilmExhibitions_fk0">
+            <End Role="Items" EntitySet="Items" />
+            <End Role="FilmExhibitions" EntitySet="FilmExhibitions" />
+          </AssociationSet>
+          <AssociationSet Name="FilmExhibitions_fk1" Association="Self.FilmExhibitions_fk1">
+            <End Role="Films" EntitySet="Films" />
+            <End Role="FilmExhibitions" EntitySet="FilmExhibitions" />
+          </AssociationSet>
+          <AssociationSet Name="OrderItems_fk1" Association="Self.OrderItems_fk1">
+            <End Role="Items" EntitySet="Items" />
+            <End Role="OrderItems" EntitySet="OrderItems" />
+          </AssociationSet>
+          <AssociationSet Name="Specials_fk0" Association="Self.Specials_fk0">
+            <End Role="Items" EntitySet="Items" />
+            <End Role="Specials" EntitySet="Specials" />
+          </AssociationSet>
+          <AssociationSet Name="OrderItems_fk0" Association="Self.OrderItems_fk0">
+            <End Role="Orders" EntitySet="Orders" />
+            <End Role="OrderItems" EntitySet="OrderItems" />
+          </AssociationSet>
+          <AssociationSet Name="Orders_fk0" Association="Self.Orders_fk0">
+            <End Role="Persons" EntitySet="Persons" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="Reservations" Association="Self.Reservations">
+            <End Role="Items" EntitySet="Items" />
+            <End Role="Restaurants" EntitySet="Restaurants" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="iHFF1617S_B2ModelStoreContainer" CdmEntityContainer="iHFF1617S_B2Entities2">
+          <EntitySetMapping Name="Accounts">
+            <EntityTypeMapping TypeName="iHFF1617S_B2Model.Accounts">
+              <MappingFragment StoreEntitySet="Accounts">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="password" ColumnName="password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FilmExhibitions">
+            <EntityTypeMapping TypeName="iHFF1617S_B2Model.FilmExhibitions">
+              <MappingFragment StoreEntitySet="FilmExhibitions">
+                <ScalarProperty Name="itemId" ColumnName="itemId" />
+                <ScalarProperty Name="filmId" ColumnName="filmId" />
+                <ScalarProperty Name="capaciteit" ColumnName="capaciteit" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Films">
+            <EntityTypeMapping TypeName="iHFF1617S_B2Model.Films">
+              <MappingFragment StoreEntitySet="Films">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="director" ColumnName="director" />
+                <ScalarProperty Name="actors" ColumnName="actors" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Items">
+            <EntityTypeMapping TypeName="iHFF1617S_B2Model.Items">
+              <MappingFragment StoreEntitySet="Items">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="location" ColumnName="location" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="startTime" ColumnName="startTime" />
+                <ScalarProperty Name="endTime" ColumnName="endTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderItems">
+            <EntityTypeMapping TypeName="iHFF1617S_B2Model.OrderItems">
+              <MappingFragment StoreEntitySet="OrderItems">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="orderId" ColumnName="orderId" />
+                <ScalarProperty Name="itemId" ColumnName="itemId" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Orders">
+            <EntityTypeMapping TypeName="iHFF1617S_B2Model.Orders">
+              <MappingFragment StoreEntitySet="Orders">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="personId" ColumnName="personId" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="pickupCode" ColumnName="pickupCode" />
+                <ScalarProperty Name="isPaid" ColumnName="isPaid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Persons">
+            <EntityTypeMapping TypeName="iHFF1617S_B2Model.Persons">
+              <MappingFragment StoreEntitySet="Persons">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="firstName" ColumnName="firstName" />
+                <ScalarProperty Name="lastName" ColumnName="lastName" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="accountId" ColumnName="accountId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Restaurants">
+            <EntityTypeMapping TypeName="iHFF1617S_B2Model.Restaurants">
+              <MappingFragment StoreEntitySet="Restaurants">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="timeOpen" ColumnName="timeOpen" />
+                <ScalarProperty Name="timeClosed" ColumnName="timeClosed" />
+                <ScalarProperty Name="description" ColumnName="description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Specials">
+            <EntityTypeMapping TypeName="iHFF1617S_B2Model.Specials">
+              <MappingFragment StoreEntitySet="Specials">
+                <ScalarProperty Name="itemId" ColumnName="itemId" />
+                <ScalarProperty Name="host" ColumnName="host" />
+                <ScalarProperty Name="capaciteit" ColumnName="capaciteit" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="Reservations" TypeName="iHFF1617S_B2Model.Reservations" StoreEntitySet="Reservations">
+            <EndProperty Name="Items">
+              <ScalarProperty Name="id" ColumnName="itemId" />
+            </EndProperty>
+            <EndProperty Name="Restaurants">
+              <ScalarProperty Name="id" ColumnName="restaurantId" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
