@@ -1,0 +1,19 @@
+﻿@using Project_IHFF.Models
+@model Items
+
+<h2>Add Item</h2
+@Html.ValidationSummary()
+@using (Html.BeginForm())
+{
+    @Html.LabelFor(x => x.name)
+    @Html.TextBoxFor(x => x.name)
+    <br />
+    @Html.LabelFor(x => x.description)
+    @Html.TextBoxFor(x => x.description)
+    <br />
+    @Html.LabelFor(x => x.location)
+    @Html.TextBoxFor(x => x.location)
+    <br />
+}
+
+

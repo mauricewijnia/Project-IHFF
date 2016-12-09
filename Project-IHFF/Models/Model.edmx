@@ -18,15 +18,16 @@
           </Key>
           <Property Name="itemId" Type="int" Nullable="false" />
           <Property Name="filmId" Type="int" Nullable="false" />
-          <Property Name="capaciteit" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Films">
           <Key>
-            <PropertyRef Name="id" />
+            <PropertyRef Name="filmId" />
           </Key>
-          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="filmId" Type="int" Nullable="false" />
           <Property Name="director" Type="varchar(max)" Nullable="false" />
           <Property Name="actors" Type="varchar(max)" Nullable="false" />
+          <Property Name="image" Type="varchar(max)" />
+          <Property Name="imbdLink" Type="varchar(max)" />
         </EntityType>
         <EntityType Name="Items">
           <Key>
@@ -36,7 +37,6 @@
           <Property Name="description" Type="varchar(max)" />
           <Property Name="location" Type="varchar(max)" Nullable="false" />
           <Property Name="price" Type="decimal" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="quantity" Type="int" Nullable="false" />
           <Property Name="name" Type="varchar(max)" Nullable="false" />
           <Property Name="startTime" Type="datetime" Nullable="false" />
           <Property Name="endTime" Type="datetime" />
@@ -79,13 +79,11 @@
         </EntityType>
         <EntityType Name="Restaurants">
           <Key>
-            <PropertyRef Name="id" />
+            <PropertyRef Name="restaurantId" />
           </Key>
-          <Property Name="id" Type="int" Nullable="false" />
-          <Property Name="name" Type="varchar(max)" Nullable="false" />
+          <Property Name="restaurantId" Type="int" Nullable="false" />
           <Property Name="timeOpen" Type="time" Precision="7" Nullable="false" />
           <Property Name="timeClosed" Type="time" Precision="7" Nullable="false" />
-          <Property Name="description" Type="varchar(max)" Nullable="false" />
         </EntityType>
         <EntityType Name="Specials">
           <Key>
@@ -112,7 +110,7 @@
           <End Role="FilmExhibitions" Type="Self.FilmExhibitions" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Films">
-              <PropertyRef Name="id" />
+              <PropertyRef Name="filmId" />
             </Principal>
             <Dependent Role="FilmExhibitions">
               <PropertyRef Name="filmId" />
@@ -184,7 +182,7 @@
           <End Role="Reservations" Type="Self.Reservations" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Restaurants">
-              <PropertyRef Name="id" />
+              <PropertyRef Name="restaurantId" />
             </Principal>
             <Dependent Role="Reservations">
               <PropertyRef Name="restaurantId" />
@@ -264,24 +262,16 @@
           <Property Name="password" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Persons" Relationship="Self.Persons_fk0" FromRole="Accounts" ToRole="Persons" />
         </EntityType>
-        <EntityType Name="FilmExhibitions">
-          <Key>
-            <PropertyRef Name="itemId" />
-          </Key>
-          <Property Name="itemId" Type="Int32" Nullable="false" />
-          <Property Name="filmId" Type="Int32" Nullable="false" />
-          <Property Name="capaciteit" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Items" Relationship="Self.FilmExhibitions_fk0" FromRole="FilmExhibitions" ToRole="Items" />
-          <NavigationProperty Name="Films" Relationship="Self.FilmExhibitions_fk1" FromRole="FilmExhibitions" ToRole="Films" />
-        </EntityType>
         <EntityType Name="Films">
           <Key>
-            <PropertyRef Name="id" />
+            <PropertyRef Name="filmId" />
           </Key>
-          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="filmId" Type="Int32" Nullable="false" />
           <Property Name="director" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="actors" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="FilmExhibitions" Relationship="Self.FilmExhibitions_fk1" FromRole="Films" ToRole="FilmExhibitions" />
+          <Property Name="image" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="imbdLink" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Items" Relationship="Self.FilmExhibitions" FromRole="Films" ToRole="Items" />
         </EntityType>
         <EntityType Name="Items">
           <Key>
@@ -291,13 +281,12 @@
           <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="location" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="price" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="quantity" Type="Int32" Nullable="false" />
           <Property Name="name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="startTime" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="endTime" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="FilmExhibitions" Relationship="Self.FilmExhibitions_fk0" FromRole="Items" ToRole="FilmExhibitions" />
           <NavigationProperty Name="OrderItems" Relationship="Self.OrderItems_fk1" FromRole="Items" ToRole="OrderItems" />
           <NavigationProperty Name="Specials" Relationship="Self.Specials_fk0" FromRole="Items" ToRole="Specials" />
+          <NavigationProperty Name="Films" Relationship="Self.FilmExhibitions" FromRole="Items" ToRole="Films" />
           <NavigationProperty Name="Restaurants" Relationship="Self.Reservations" FromRole="Items" ToRole="Restaurants" />
         </EntityType>
         <EntityType Name="OrderItems">
@@ -337,13 +326,11 @@
         </EntityType>
         <EntityType Name="Restaurants">
           <Key>
-            <PropertyRef Name="id" />
+            <PropertyRef Name="restaurantId" />
           </Key>
-          <Property Name="id" Type="Int32" Nullable="false" />
-          <Property Name="name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="restaurantId" Type="Int32" Nullable="false" />
           <Property Name="timeOpen" Type="Time" Nullable="false" Precision="7" />
           <Property Name="timeClosed" Type="Time" Nullable="false" Precision="7" />
-          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Items" Relationship="Self.Reservations" FromRole="Restaurants" ToRole="Items" />
         </EntityType>
         <EntityType Name="Specials">
@@ -364,30 +351,6 @@
             </Principal>
             <Dependent Role="Persons">
               <PropertyRef Name="accountId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FilmExhibitions_fk0">
-          <End Role="Items" Type="Self.Items" Multiplicity="1" />
-          <End Role="FilmExhibitions" Type="Self.FilmExhibitions" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="Items">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="FilmExhibitions">
-              <PropertyRef Name="itemId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FilmExhibitions_fk1">
-          <End Role="Films" Type="Self.Films" Multiplicity="1" />
-          <End Role="FilmExhibitions" Type="Self.FilmExhibitions" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Films">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="FilmExhibitions">
-              <PropertyRef Name="filmId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -439,13 +402,16 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FilmExhibitions">
+          <End Role="Items" Type="Self.Items" Multiplicity="*" />
+          <End Role="Films" Type="Self.Films" Multiplicity="0..1" />
+        </Association>
         <Association Name="Reservations">
           <End Role="Items" Type="Self.Items" Multiplicity="*" />
           <End Role="Restaurants" Type="Self.Restaurants" Multiplicity="0..1" />
         </Association>
-        <EntityContainer Name="iHFF1617S_B2Entities3" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="IHFFContext" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Accounts" EntityType="Self.Accounts" />
-          <EntitySet Name="FilmExhibitions" EntityType="Self.FilmExhibitions" />
           <EntitySet Name="Films" EntityType="Self.Films" />
           <EntitySet Name="Items" EntityType="Self.Items" />
           <EntitySet Name="OrderItems" EntityType="Self.OrderItems" />
@@ -456,14 +422,6 @@
           <AssociationSet Name="Persons_fk0" Association="Self.Persons_fk0">
             <End Role="Accounts" EntitySet="Accounts" />
             <End Role="Persons" EntitySet="Persons" />
-          </AssociationSet>
-          <AssociationSet Name="FilmExhibitions_fk0" Association="Self.FilmExhibitions_fk0">
-            <End Role="Items" EntitySet="Items" />
-            <End Role="FilmExhibitions" EntitySet="FilmExhibitions" />
-          </AssociationSet>
-          <AssociationSet Name="FilmExhibitions_fk1" Association="Self.FilmExhibitions_fk1">
-            <End Role="Films" EntitySet="Films" />
-            <End Role="FilmExhibitions" EntitySet="FilmExhibitions" />
           </AssociationSet>
           <AssociationSet Name="OrderItems_fk1" Association="Self.OrderItems_fk1">
             <End Role="Items" EntitySet="Items" />
@@ -481,6 +439,10 @@
             <End Role="Persons" EntitySet="Persons" />
             <End Role="Orders" EntitySet="Orders" />
           </AssociationSet>
+          <AssociationSet Name="FilmExhibitions" Association="Self.FilmExhibitions">
+            <End Role="Items" EntitySet="Items" />
+            <End Role="Films" EntitySet="Films" />
+          </AssociationSet>
           <AssociationSet Name="Reservations" Association="Self.Reservations">
             <End Role="Items" EntitySet="Items" />
             <End Role="Restaurants" EntitySet="Restaurants" />
@@ -491,7 +453,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="ModelsStoreContainer" CdmEntityContainer="iHFF1617S_B2Entities3">
+        <EntityContainerMapping StorageEntityContainer="ModelsStoreContainer" CdmEntityContainer="IHFFContext">
           <EntitySetMapping Name="Accounts">
             <EntityTypeMapping TypeName="Models.Accounts">
               <MappingFragment StoreEntitySet="Accounts">
@@ -500,21 +462,14 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="FilmExhibitions">
-            <EntityTypeMapping TypeName="Models.FilmExhibitions">
-              <MappingFragment StoreEntitySet="FilmExhibitions">
-                <ScalarProperty Name="itemId" ColumnName="itemId" />
-                <ScalarProperty Name="filmId" ColumnName="filmId" />
-                <ScalarProperty Name="capaciteit" ColumnName="capaciteit" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Films">
             <EntityTypeMapping TypeName="Models.Films">
               <MappingFragment StoreEntitySet="Films">
-                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="filmId" ColumnName="filmId" />
                 <ScalarProperty Name="director" ColumnName="director" />
                 <ScalarProperty Name="actors" ColumnName="actors" />
+                <ScalarProperty Name="image" ColumnName="image" />
+                <ScalarProperty Name="imbdLink" ColumnName="imbdLink" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -525,7 +480,6 @@
                 <ScalarProperty Name="description" ColumnName="description" />
                 <ScalarProperty Name="location" ColumnName="location" />
                 <ScalarProperty Name="price" ColumnName="price" />
-                <ScalarProperty Name="quantity" ColumnName="quantity" />
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="startTime" ColumnName="startTime" />
                 <ScalarProperty Name="endTime" ColumnName="endTime" />
@@ -567,11 +521,9 @@
           <EntitySetMapping Name="Restaurants">
             <EntityTypeMapping TypeName="Models.Restaurants">
               <MappingFragment StoreEntitySet="Restaurants">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="restaurantId" ColumnName="restaurantId" />
                 <ScalarProperty Name="timeOpen" ColumnName="timeOpen" />
                 <ScalarProperty Name="timeClosed" ColumnName="timeClosed" />
-                <ScalarProperty Name="description" ColumnName="description" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -584,12 +536,20 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <AssociationSetMapping Name="FilmExhibitions" TypeName="Models.FilmExhibitions" StoreEntitySet="FilmExhibitions">
+            <EndProperty Name="Items">
+              <ScalarProperty Name="id" ColumnName="itemId" />
+            </EndProperty>
+            <EndProperty Name="Films">
+              <ScalarProperty Name="filmId" ColumnName="filmId" />
+            </EndProperty>
+          </AssociationSetMapping>
           <AssociationSetMapping Name="Reservations" TypeName="Models.Reservations" StoreEntitySet="Reservations">
             <EndProperty Name="Items">
               <ScalarProperty Name="id" ColumnName="itemId" />
             </EndProperty>
             <EndProperty Name="Restaurants">
-              <ScalarProperty Name="id" ColumnName="restaurantId" />
+              <ScalarProperty Name="restaurantId" ColumnName="restaurantId" />
             </EndProperty>
           </AssociationSetMapping>
         </EntityContainerMapping>

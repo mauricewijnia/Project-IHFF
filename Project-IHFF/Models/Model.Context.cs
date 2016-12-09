@@ -13,10 +13,10 @@ namespace Project_IHFF.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class iHFF1617S_B2Entities3 : DbContext
+    public partial class IHFFContext : DbContext
     {
-        public iHFF1617S_B2Entities3()
-            : base("name=iHFF1617S_B2Entities3")
+        public IHFFContext()
+            : base("name=IHFFContext")
         {
         }
     
@@ -26,7 +26,6 @@ namespace Project_IHFF.Models
         }
     
         public virtual DbSet<Accounts> Accounts { get; set; }
-        public virtual DbSet<FilmExhibitions> FilmExhibitions { get; set; }
         public virtual DbSet<Films> Films { get; set; }
         public virtual DbSet<Items> Items { get; set; }
         public virtual DbSet<OrderItems> OrderItems { get; set; }

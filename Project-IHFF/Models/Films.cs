@@ -17,14 +17,16 @@ namespace Project_IHFF.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Films()
         {
-            this.FilmExhibitions = new HashSet<FilmExhibitions>();
+            this.Items = new HashSet<Items>();
         }
     
-        public int id { get; set; }
+        public int filmId { get; set; }
         public string director { get; set; }
         public string actors { get; set; }
+        public string image { get; set; }
+        public string imbdLink { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<FilmExhibitions> FilmExhibitions { get; set; }
+        public virtual ICollection<Items> Items { get; set; }
     }
 }
