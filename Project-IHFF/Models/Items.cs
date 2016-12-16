@@ -11,7 +11,6 @@ namespace Project_IHFF.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
     
     public partial class Items
     {
@@ -22,23 +21,11 @@ namespace Project_IHFF.Models
         }
     
         public int id { get; set; }
-
-        [Display(Name = "Description:")]
         public string description { get; set; }
-
-        [Display(Name = "Location:")]
         public string location { get; set; }
-
-        [Display(Name = "Price:")]
         public decimal price { get; set; }
-
-        [Display(Name = "Name:")]
         public string name { get; set; }
-
-        [Display(Name = "Starting time:")]
         public System.DateTime startTime { get; set; }
-
-        [Display(Name = "End time:")]
         public Nullable<System.DateTime> endTime { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -46,5 +33,15 @@ namespace Project_IHFF.Models
         public virtual Specials Specials { get; set; }
         public virtual Films Films { get; set; }
         public virtual Restaurants Restaurants { get; set; }
+
+        public Items(string description, string location, decimal price, string name, DateTime startTime, Nullable<DateTime> endTime)
+        {
+            this.description = description;
+            this.location = location;
+            this.price = price;
+            this.name = name;
+            this.startTime = startTime;
+            this.endTime = endTime;
+        }
     }
 }

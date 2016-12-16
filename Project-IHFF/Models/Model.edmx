@@ -23,17 +23,18 @@
           <Key>
             <PropertyRef Name="filmId" />
           </Key>
-          <Property Name="filmId" Type="int" Nullable="false" />
+          <Property Name="filmId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="director" Type="varchar(max)" Nullable="false" />
           <Property Name="actors" Type="varchar(max)" Nullable="false" />
           <Property Name="image" Type="varchar(max)" />
           <Property Name="imbdLink" Type="varchar(max)" />
+          <Property Name="capacity" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Items">
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="description" Type="varchar(max)" />
           <Property Name="location" Type="varchar(max)" Nullable="false" />
           <Property Name="price" Type="decimal" Precision="18" Scale="0" Nullable="false" />
@@ -91,7 +92,7 @@
           </Key>
           <Property Name="itemId" Type="int" Nullable="false" />
           <Property Name="host" Type="varchar(max)" Nullable="false" />
-          <Property Name="capaciteit" Type="int" Nullable="false" />
+          <Property Name="capacity" Type="int" Nullable="false" />
         </EntityType>
         <Association Name="FilmExhibitions_fk0">
           <End Role="Items" Type="Self.Items" Multiplicity="1" />
@@ -266,18 +267,19 @@
           <Key>
             <PropertyRef Name="filmId" />
           </Key>
-          <Property Name="filmId" Type="Int32" Nullable="false" />
+          <Property Name="filmId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="director" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="actors" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="image" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="imbdLink" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="capacity" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Items" Relationship="Self.FilmExhibitions" FromRole="Films" ToRole="Items" />
         </EntityType>
         <EntityType Name="Items">
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="location" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="price" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
@@ -339,7 +341,7 @@
           </Key>
           <Property Name="itemId" Type="Int32" Nullable="false" />
           <Property Name="host" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="capaciteit" Type="Int32" Nullable="false" />
+          <Property Name="capacity" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Items" Relationship="Self.Specials_fk0" FromRole="Specials" ToRole="Items" />
         </EntityType>
         <Association Name="Persons_fk0">
@@ -470,6 +472,7 @@
                 <ScalarProperty Name="actors" ColumnName="actors" />
                 <ScalarProperty Name="image" ColumnName="image" />
                 <ScalarProperty Name="imbdLink" ColumnName="imbdLink" />
+                <ScalarProperty Name="capacity" ColumnName="capacity" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -532,7 +535,7 @@
               <MappingFragment StoreEntitySet="Specials">
                 <ScalarProperty Name="itemId" ColumnName="itemId" />
                 <ScalarProperty Name="host" ColumnName="host" />
-                <ScalarProperty Name="capaciteit" ColumnName="capaciteit" />
+                <ScalarProperty Name="capacity" ColumnName="capacity" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

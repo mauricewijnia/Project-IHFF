@@ -16,7 +16,7 @@ namespace Project_IHFF.Models
     {
         public int itemId { get; set; }
         public string host { get; set; }
-        public int capaciteit { get; set; }
+        public int capacity { get; set; }
     
         public virtual Items Items { get; set; }
     }

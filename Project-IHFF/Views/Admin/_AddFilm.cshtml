@@ -1,0 +1,36 @@
+﻿@using Project_IHFF.Models
+@model Films
+
+<h1>Partial View</h1>
+@Html.ValidationSummary()
+@using (Html.BeginForm("_AddFilm"))
+{
+    @Html.LabelFor(x => x.name)
+    @Html.TextBoxFor(x => x.name)
+    <br />
+    @Html.LabelFor(x => x.description)
+    @Html.TextBoxFor(x => x.description)
+    <br />
+    @Html.LabelFor(x => x.location)
+    @Html.TextBoxFor(x => x.location)
+    <br />
+    @Html.LabelFor(x => x.price)
+    @Html.TextBoxFor(x => x.price)
+    <br />
+    @Html.LabelFor(x => x.startTime)
+    @Html.TextBoxFor(x => x.startTime)
+    <br />
+    @Html.LabelFor(x => x.endTime)
+    @Html.TextBoxFor(x => x.endTime)
+    <br />
+    @Html.LabelFor(x => x.actors)
+    @Html.TextBoxFor(x => x.actors)
+    <br />
+    @Html.LabelFor(x => x.director)
+    @Html.TextBoxFor(x => x.director)
+    <br />
+    @Html.LabelFor(x => x.capacity)
+    @Html.TextBoxFor(x => x.capacity)
+    <br />
+    <input type="submit" value="Submit" />
+}

@@ -1,19 +1,30 @@
-﻿@using Project_IHFF.Models
-@model Items
+﻿
+<h2>Add Item</h2>
 
-<h2>Add Item</h2
-@Html.ValidationSummary()
-@using (Html.BeginForm())
-{
-    @Html.LabelFor(x => x.name)
-    @Html.TextBoxFor(x => x.name)
-    <br />
-    @Html.LabelFor(x => x.description)
-    @Html.TextBoxFor(x => x.description)
-    <br />
-    @Html.LabelFor(x => x.location)
-    @Html.TextBoxFor(x => x.location)
-    <br />
-}
+<ul class="nav nav-tabs">
+    <li class="active"><a data-toggle="tab" href="#ItemType1">Film</a></li>
+    <li><a data-toggle="tab" href="#ItemType2">Special</a></li>
+    <li><a data-toggle="tab" href="#ItemType3">Restaurant</a></li>
+</ul>
+
+<div class="tab-content">
+    <div id="ItemType1" class="tab-pane fade in active">
+        <h3>Film</h3>
+        <div>
+            @Html.Action("_AddFilm")
+        </div>
+    </div>
+    <div id="ItemType2" class="tab-pane fade">
+        <h3>Special</h3>
+        <div>
+        </div>
+    </div>
+    <div id="ItemType3" class="tab-pane fade">
+        <h3>Restaurant</h3>
+        <div>
+        </div>
+    </div>
+</div>
+
 
 
