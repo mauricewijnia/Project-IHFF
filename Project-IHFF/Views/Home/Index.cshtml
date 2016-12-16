@@ -1,31 +1,47 @@
 ﻿@{
     ViewBag.Title = "Home Page";
 }
+<div id="mycarousel" class="carousel slide slider" data-ride="carousel" style="margin-top:-15px">
 
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="http://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+    <ol class="carousel-indicators">
+        <li data-target="#mycarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#mycarousel" data-slide-to="1"></li>
+        <li data-target="#mycarousel" data-slide-to="2"></li>
+    </ol>
+    <div class="carousel-inner" role="listbox">
+        <div class="item active">
+            <img src="~/img/Slide1.png" />
+        </div>
+        <div class="item">
+            <img src="~/img/Slide2.png" />
+        </div>
+        <div class="item">
+            <img src="~/img/Slide3.png" />
+        </div>
+    </div>
+    <a class="left carousel-control" href="#mycarousel" role="button" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+        <span class="sr-only">Vorige</span>
+    </a>
+    <a class="right carousel-control" href="#mycarousel" role="button" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+        <span class="sr-only">Vorige</span>
+    </a>
 </div>
-
 <div class="row">
     <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+        <img src="~/img/content 1.png" />
+        <p><a class="btn btn-default SeeMore" href="">SEE MORE &raquo;</a></p>
+        <p>Haarlem has officially been a city since 1267 and as such the city has accumulated a lot of interesting buildings and art venue's over the years. This makes Haarlem the perfect location for our festival as it provides lots of interesting things to do while you wait for your next event to start.</p>
     </div>
     <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
+        <img src="~/img/content 2.png" />
+        <p><a class="btn btn-default SeeMore" href="">SEE MORE &raquo;</a></p>
+        <p>The international Haarlem film festival woudln't be a film festival without an awesome list of films that are available to watch. This year's theme is "The Science of Fiction / Celluloid Realism" and we've found some great movies that fit this theme perfectly.</p>
     </div>
     <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+        <img src="~/img/content 3.png" />
+        <p><a class="btn btn-default SeeMore" href="">SEE MORE &raquo;</a></p>
+        <p>After an exciting day of watching films and running through the city experiencing it's glorious culture there's only one thing to make the day even better, and that's food! Haarlem's greatest restaurants are participating with the international Haarlem film festival to provide you with the best food available in the area.</p>
     </div>
 </div>
