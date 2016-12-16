@@ -34,7 +34,7 @@ namespace Project_IHFF.Repositories
 
     public class DbItemsRepository : IItemsRepository
     {
-        private IHFFContext ctx = new IHFFContext();
+        private ModelContainer ctx = new ModelContainer();
 
         public IEnumerable<Items> GetItemsByOrderId()
         {
@@ -49,7 +49,7 @@ namespace Project_IHFF.Repositories
 
         public void AddFilms(Films film)
         {
-            ctx.Films.Add(film);
+            ctx.Items.Add(film);
             ctx.SaveChanges();
         }
     }

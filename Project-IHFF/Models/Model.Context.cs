@@ -13,10 +13,10 @@ namespace Project_IHFF.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class IHFFContext : DbContext
+    public partial class ModelContainer : DbContext
     {
-        public IHFFContext()
-            : base("name=IHFFContext")
+        public ModelContainer()
+            : base("name=ModelContainer")
         {
         }
     
@@ -25,13 +25,11 @@ namespace Project_IHFF.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Accounts> Accounts { get; set; }
-        public virtual DbSet<Films> Films { get; set; }
-        public virtual DbSet<Items> Items { get; set; }
-        public virtual DbSet<OrderItems> OrderItems { get; set; }
         public virtual DbSet<Orders> Orders { get; set; }
+        public virtual DbSet<OrderItem> OrderItems { get; set; }
+        public virtual DbSet<Items> Items { get; set; }
+        public virtual DbSet<FilmExhibition> FilmExhibitions { get; set; }
         public virtual DbSet<Persons> Persons { get; set; }
-        public virtual DbSet<Restaurants> Restaurants { get; set; }
-        public virtual DbSet<Specials> Specials { get; set; }
+        public virtual DbSet<Reservation> Reservations { get; set; }
     }
 }

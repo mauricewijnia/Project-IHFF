@@ -12,14 +12,13 @@ namespace Project_IHFF.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class OrderItems
+    public partial class FilmExhibition
     {
         public int id { get; set; }
-        public int orderId { get; set; }
-        public int itemId { get; set; }
-        public int quantity { get; set; }
+        public System.DateTime startTime { get; set; }
+        public Nullable<System.DateTime> endTime { get; set; }
+        public int filmId { get; set; }
     
-        public virtual Items Items { get; set; }
-        public virtual Orders Orders { get; set; }
+        public virtual Films film { get; set; }
     }
 }

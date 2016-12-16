@@ -4,22 +4,26 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="bf842188362d43dca1661d26278db20c" Name="Diagram1">
-        <EntityTypeShape EntityType="Models.Accounts" Width="1.5" PointX="1.5" PointY="15.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="Models.Films" Width="1.5" PointX="3" PointY="4.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="Models.Items" Width="1.5" PointX="0.75" PointY="6.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="Models.OrderItems" Width="1.5" PointX="6" PointY="6.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="Models.Orders" Width="1.5" PointX="3.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Models.Persons" Width="1.5" PointX="1.5" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="Models.Restaurants" Width="1.5" PointX="3" PointY="10.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="Models.Specials" Width="1.5" PointX="3" PointY="12.75" IsExpanded="true" />
-        <AssociationConnector Association="Models.Persons_fk0" ManuallyRouted="false" />
-        <AssociationConnector Association="Models.OrderItems_fk1" ManuallyRouted="false" />
-        <AssociationConnector Association="Models.Specials_fk0" ManuallyRouted="false" />
-        <AssociationConnector Association="Models.OrderItems_fk0" ManuallyRouted="false" />
-        <AssociationConnector Association="Models.Orders_fk0" ManuallyRouted="false" />
-        <AssociationConnector Association="Models.FilmExhibitions" ManuallyRouted="false" />
-        <AssociationConnector Association="Models.Reservations" ManuallyRouted="false" />
+      <Diagram DiagramId="2aaefee675854b7a9eb1afec17c9e6b3" Name="Diagram1" >
+        <EntityTypeShape EntityType="Model.Orders" Width="1.5" PointX="1.75" PointY="0.5" />
+        <EntityTypeShape EntityType="Model.OrderItem" Width="1.5" PointX="1.75" PointY="3.25" />
+        <AssociationConnector Association="Model.OrdersOrderItems" />
+        <EntityTypeShape EntityType="Model.Items" Width="1.5" PointX="1.75" PointY="6" />
+        <EntityTypeShape EntityType="Model.Films" Width="1.5" PointX="0.5" PointY="9.375" />
+        <InheritanceConnector EntityType="Model.Films" />
+        <EntityTypeShape EntityType="Model.Specials" Width="1.5" PointX="2.625" PointY="9.375" />
+        <InheritanceConnector EntityType="Model.Specials" />
+        <EntityTypeShape EntityType="Model.Restaurants" Width="1.5" PointX="4.75" PointY="9.375" />
+        <InheritanceConnector EntityType="Model.Restaurants" />
+        <EntityTypeShape EntityType="Model.FilmExhibition" Width="1.5" PointX="0.5" PointY="11.875" />
+        <AssociationConnector Association="Model.FilmExhibitionsFilms" />
+        <AssociationConnector Association="Model.ItemsOrderItems" />
+        <EntityTypeShape EntityType="Model.Persons" Width="1.5" PointX="3.875" PointY="0.5" />
+        <EntityTypeShape EntityType="Model.Accounts" Width="1.5" PointX="3.875" PointY="3.125" />
+        <AssociationConnector Association="Model.PersonOrders" />
+        <InheritanceConnector EntityType="Model.Accounts" />
+        <EntityTypeShape EntityType="Model.Reservation" Width="1.5" PointX="4.75" PointY="11.875" />
+        <AssociationConnector Association="Model.ReservationsRestaurants" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

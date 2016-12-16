@@ -17,7 +17,7 @@ namespace Project_IHFF.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Items()
         {
-            this.OrderItems = new HashSet<OrderItems>();
+            this.orderItems = new HashSet<OrderItem>();
         }
     
         public int id { get; set; }
@@ -25,23 +25,8 @@ namespace Project_IHFF.Models
         public string location { get; set; }
         public decimal price { get; set; }
         public string name { get; set; }
-        public System.DateTime startTime { get; set; }
-        public Nullable<System.DateTime> endTime { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<OrderItems> OrderItems { get; set; }
-        public virtual Specials Specials { get; set; }
-        public virtual Films Films { get; set; }
-        public virtual Restaurants Restaurants { get; set; }
-
-        public Items(string description, string location, decimal price, string name, DateTime startTime, Nullable<DateTime> endTime)
-        {
-            this.description = description;
-            this.location = location;
-            this.price = price;
-            this.name = name;
-            this.startTime = startTime;
-            this.endTime = endTime;
-        }
+        public virtual ICollection<OrderItem> orderItems { get; set; }
     }
 }

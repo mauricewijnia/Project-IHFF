@@ -12,12 +12,11 @@ namespace Project_IHFF.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Specials
+    public partial class Specials : Items
     {
-        public int itemId { get; set; }
         public string host { get; set; }
         public int capacity { get; set; }
-    
-        public virtual Items Items { get; set; }
+        public System.DateTime startTime { get; set; }
+        public System.DateTime endTime { get; set; }
     }
 }

@@ -12,9 +12,14 @@ namespace Project_IHFF.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Accounts : Persons
+    public partial class OrderItem
     {
-        public string password { get; set; }
-        public string phoneNumber { get; set; }
+        public int id { get; set; }
+        public int orderId { get; set; }
+        public int quantity { get; set; }
+        public int itemId { get; set; }
+    
+        public virtual Orders order { get; set; }
+        public virtual Items item { get; set; }
     }
 }

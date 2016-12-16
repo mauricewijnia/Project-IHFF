@@ -17,17 +17,15 @@ namespace Project_IHFF.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Persons()
         {
-            this.Orders = new HashSet<Orders>();
+            this.orders = new HashSet<Orders>();
         }
     
         public int id { get; set; }
         public string firstName { get; set; }
         public string lastName { get; set; }
         public string email { get; set; }
-        public Nullable<int> accountId { get; set; }
     
-        public virtual Accounts Accounts { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Orders> Orders { get; set; }
+        public virtual ICollection<Orders> orders { get; set; }
     }
 }
