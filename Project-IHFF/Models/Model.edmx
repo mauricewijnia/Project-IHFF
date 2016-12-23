@@ -463,7 +463,7 @@
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="quantity" Type="String" Nullable="false" />
+          <Property Name="quantity" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Orders" Relationship="Model.TicketsOrders" FromRole="Tickets" ToRole="Orders" />
           <Property Name="orderId" Type="Int32" Nullable="false" />
         </EntityType>
