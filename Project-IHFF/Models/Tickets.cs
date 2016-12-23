@@ -15,7 +15,7 @@ namespace Project_IHFF.Models
     public partial class Tickets
     {
         public int id { get; set; }
-        public string quantity { get; set; }
+        public int quantity { get; set; }
         public int orderId { get; set; }
     
         public virtual Orders Orders { get; set; }
