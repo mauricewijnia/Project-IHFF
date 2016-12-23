@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Project_IHFF.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -9,8 +10,12 @@ namespace Project_IHFF.Controllers
     public class ShoppingCartController : Controller
     {
         // GET: ShoppingCart
-        public ActionResult Index()
+        public ActionResult Index(/*Tickets ticket*/)
         {
+            List<Tickets> tickets = new List<Tickets>();
+            Tickets tickett = new Tickets();
+            tickett.id = 8;
+            tickett.orderId = 3;
             return View();
         }
 
