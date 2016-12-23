@@ -1,60 +1,86 @@
-﻿﻿#logo{
+﻿#logo {
     margin-top: 5px;
     width: 67%;
     margin-top: -30%;
 }
-.nav navbar-nav{
 
+.nav navbar-nav {
 }
-#KleineTekstInNav{
+
+#KleineTekstInNav {
     float: right;
 }
-.TaalVlag{
+
+.TaalVlag {
     margin: 10px;
     margin-top: 17px;
 }
-#DikkeNavTekst{
+
+#DikkeNavTekst {
     font-family: "Franklin Gothic", Times, serif;
     font-size: 24px;
 }
-.NavIcons{
-    margin-top: -7px;    
+
+.NavIcons {
+    margin-top: -7px;
     transform: rotateY(180deg);
     width: 15px;
-
 }
-#ShoppingCart{
+
+#ShoppingCart {
     margin-left: 15px;
     margin-top: -4px;
 }
-#container{
+
+#container {
     background-color: white;
 }
-#AchtergrondMidde{
+
+#AchtergrondMidde {
     background-color: lightgray;
     padding-bottom: 100%;
     z-index: -100;
 }
-#DikkeNavTekst li{
+
+#DikkeNavTekst li {
     margin-left: 15px;
 }
-.container{
+
+.container {
     background-color: white;
 }
-#Content{
+
+#Content {
     padding-top: 15px;
     margin-top: -23px;
+    margin-top: 102px;
 }
-#body{
+
+#body {
     background-color: #e4e4e4;
+    padding-top: 0px;
 }
-.SeeMore{
+
+.SeeMore {
     margin-top: -127px;
     margin-left: 35%;
     background: rgba(0,0,0,0.5);
     color: white;
 }
-.slider{
-        width: 103.2%;
-    margin-left: -1.55%
+
+.slider {
+    width: 103.2%;
+    margin-left: -1.55%;
+}
+
+#DikkeNavTekst li a {
+    color: black;
+}
+
+    #DikkeNavTekst li a:hover {
+        color: #ff6600;
+    }
+
+#KleineTekstInNav li a:hover {
+    color: #ff6600;
 }
