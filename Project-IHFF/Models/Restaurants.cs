@@ -17,13 +17,13 @@ namespace Project_IHFF.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Restaurants()
         {
-            this.reservations = new HashSet<Reservation>();
+            this.RestaurantReservation = new HashSet<RestaurantReservation>();
         }
     
         public System.TimeSpan timeOpen { get; set; }
         public System.TimeSpan timeClosed { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Reservation> reservations { get; set; }
+        public virtual ICollection<RestaurantReservation> RestaurantReservation { get; set; }
     }
 }

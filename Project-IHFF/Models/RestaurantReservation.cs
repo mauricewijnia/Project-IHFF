@@ -12,13 +12,11 @@ namespace Project_IHFF.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Items
+    public partial class RestaurantReservation : Tickets
     {
-        public int id { get; set; }
-        public string description { get; set; }
-        public string location { get; set; }
-        public decimal price { get; set; }
-        public string name { get; set; }
-        public string imagePath { get; set; }
+        public int restaurantId { get; set; }
+        public System.DateTime reservationTime { get; set; }
+    
+        public virtual Restaurants Restaurants { get; set; }
     }
 }

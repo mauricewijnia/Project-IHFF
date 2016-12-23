@@ -12,13 +12,10 @@ namespace Project_IHFF.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class FilmExhibition
+    public partial class SpecialTicket : Tickets
     {
-        public int id { get; set; }
-        public System.DateTime startTime { get; set; }
-        public Nullable<System.DateTime> endTime { get; set; }
-        public int filmId { get; set; }
+        public int specialId { get; set; }
     
-        public virtual Films film { get; set; }
+        public virtual Specials Specials { get; set; }
     }
 }

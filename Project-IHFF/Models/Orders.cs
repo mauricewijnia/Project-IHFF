@@ -17,7 +17,7 @@ namespace Project_IHFF.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Orders()
         {
-            this.orderItems = new HashSet<OrderItem>();
+            this.Tickets = new HashSet<Tickets>();
         }
     
         public int id { get; set; }
@@ -26,8 +26,8 @@ namespace Project_IHFF.Models
         public string isPaid { get; set; }
         public int personId { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<OrderItem> orderItems { get; set; }
         public virtual Persons Persons { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Tickets> Tickets { get; set; }
     }
 }

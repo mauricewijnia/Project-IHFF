@@ -1,30 +1,49 @@
 ﻿@using Project_IHFF.Models
-@model Films
+@model FilmsViewModel
 
 
 @Html.ValidationSummary()
 @using (Html.BeginForm("_AddFilm"))
 {
     <label>Name: </label>
-    @Html.TextBoxFor(x => x.name)
+    @Html.TextBoxFor(x => x.film.name)
     <br />
-    <label>Description: </label>
-    @Html.TextBoxFor(x => x.description)
+    @Html.TextBoxFor(x => x.film.description)
     <br />
     <label>Location: </label>
-    @Html.TextBoxFor(x => x.location)
+    @Html.TextBoxFor(x => x.film.location)
     <br />
     <label>Price: </label>
-    @Html.TextBoxFor(x => x.price)
+    @Html.TextBoxFor(x => x.film.price)
     <br />
     <label>Directors:</label>
-    @Html.TextBoxFor(x => x.director)
+    @Html.TextBoxFor(x => x.film.director)
     <br />
     <label>Actors: </label>
-    @Html.TextBoxFor(x => x.actors)
+    @Html.TextBoxFor(x => x.film.actors)
     <br />
     <label>Capacity: </label>
-    @Html.TextBoxFor(x => x.capacity)
+    @Html.TextBoxFor(x => x.film.capacity)
     <br />
+    <br />
+
+    <label>First Exhibition</label>
+    <br />
+    <label>Starting Time:</label>
+    @Html.TextBoxFor(x => x.exhibitions[0].startTime)
+    <br />
+    <label>Ending Time:</label>
+    @Html.TextBoxFor(x => x.exhibitions[0].endTime)
+    <br />
+    <br />
+    <label>Second Exhibition (Optional)</label>
+    <br />
+    <label>Starting Time:</label>
+    @Html.TextBoxFor(x => x.exhibitions[1].startTime)
+    <br />
+    <label>Ending Time:</label>
+    @Html.TextBoxFor(x => x.exhibitions[1].endTime)
+    <br />
+
     <input type="submit" value="Submit" class="btn btn-primary" />
 }
