@@ -1,9 +1,8 @@
 ﻿@using Project_IHFF.Models
-@model Films
-
+@model Specials
 
 @Html.ValidationSummary()
-@using (Html.BeginForm("_AddFilm"))
+@using (Html.BeginForm("_AddSpecial"))
 {
     <label>Name: </label>
     @Html.TextBoxFor(x => x.name)
@@ -14,14 +13,8 @@
     <label>Location: </label>
     @Html.TextBoxFor(x => x.location)
     <br />
-    <label>Price: </label>
-    @Html.TextBoxFor(x => x.price)
-    <br />
-    <label>Directors:</label>
-    @Html.TextBoxFor(x => x.director)
-    <br />
-    <label>Actors: </label>
-    @Html.TextBoxFor(x => x.actors)
+    <label>Host: </label>
+    @Html.TextBoxFor(x => x.host)
     <br />
     <label>Capacity: </label>
     @Html.TextBoxFor(x => x.capacity)

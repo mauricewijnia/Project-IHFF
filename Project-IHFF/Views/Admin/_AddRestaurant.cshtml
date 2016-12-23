@@ -1,9 +1,8 @@
 ﻿@using Project_IHFF.Models
-@model Films
-
+@model Restaurants
 
 @Html.ValidationSummary()
-@using (Html.BeginForm("_AddFilm"))
+@using (Html.BeginForm("_AddRestaurant"))
 {
     <label>Name: </label>
     @Html.TextBoxFor(x => x.name)
@@ -14,17 +13,14 @@
     <label>Location: </label>
     @Html.TextBoxFor(x => x.location)
     <br />
-    <label>Price: </label>
-    @Html.TextBoxFor(x => x.price)
+    <label>Reservation Cost:</label>
+    @Html.TextBoxFor(x=>x.price)
     <br />
-    <label>Directors:</label>
-    @Html.TextBoxFor(x => x.director)
+    <label>Opening Time: </label>
+    @Html.TextBoxFor(x => x.timeOpen)
     <br />
-    <label>Actors: </label>
-    @Html.TextBoxFor(x => x.actors)
-    <br />
-    <label>Capacity: </label>
-    @Html.TextBoxFor(x => x.capacity)
+    <label>Closing Time: </label>
+    @Html.TextBoxFor(x => x.timeClosed)
     <br />
     <input type="submit" value="Submit" class="btn btn-primary" />
 }

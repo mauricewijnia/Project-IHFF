@@ -3,28 +3,33 @@
 
 <ul class="nav nav-tabs">
     <li class="active"><a data-toggle="tab" href="#ItemType1">Film</a></li>
-    <li><a data-toggle="tab" href="#ItemType2">Special</a></li>
-    <li><a data-toggle="tab" href="#ItemType3">Restaurant</a></li>
+    <li><a data-toggle="tab" href="#ItemType2">Film Exhibition</a></li>
+    <li><a data-toggle="tab" href="#ItemType3">Special</a></li>
+    <li><a data-toggle="tab" href="#ItemType4">Restaurant</a></li>
 </ul>
 
 <div class="tab-content">
     <div id="ItemType1" class="tab-pane fade in active">
-        <h3>Film</h3>
+        <h3>Add Film</h3>
         <div>
             @Html.Action("_AddFilm")
         </div>
     </div>
-    <div id="ItemType2" class="tab-pane fade">
-        <h3>Special</h3>
+    <div id="ItemType2" class="tab-pane fade in active">
+        <h3>Add Film Exhibition</h3>
         <div>
         </div>
     </div>
     <div id="ItemType3" class="tab-pane fade">
-        <h3>Restaurant</h3>
+        <h3>Add Special</h3>
         <div>
+            @Html.Action("_AddSpecial")
+        </div>
+    </div>
+    <div id="ItemType4" class="tab-pane fade">
+        <h3>Add Restaurant</h3>
+        <div>
+            @Html.Action("_AddRestaurant")
         </div>
     </div>
 </div>
-
-
-

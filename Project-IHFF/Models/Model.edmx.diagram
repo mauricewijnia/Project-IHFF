@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="2aaefee675854b7a9eb1afec17c9e6b3" Name="Diagram1" >
+      <Diagram DiagramId="2aaefee675854b7a9eb1afec17c9e6b3" Name="Diagram1" ZoomLevel="95" >
         <EntityTypeShape EntityType="Model.Orders" Width="1.5" PointX="1.75" PointY="0.5" />
         <EntityTypeShape EntityType="Model.OrderItem" Width="1.5" PointX="1.75" PointY="3.25" />
         <AssociationConnector Association="Model.OrdersOrderItems" />
@@ -18,12 +18,13 @@
         <EntityTypeShape EntityType="Model.FilmExhibition" Width="1.5" PointX="0.5" PointY="11.875" />
         <AssociationConnector Association="Model.FilmExhibitionsFilms" />
         <AssociationConnector Association="Model.ItemsOrderItems" />
-        <EntityTypeShape EntityType="Model.Persons" Width="1.5" PointX="3.875" PointY="0.5" />
-        <EntityTypeShape EntityType="Model.Accounts" Width="1.5" PointX="3.875" PointY="3.125" />
+        <EntityTypeShape EntityType="Model.Persons" Width="1.5" PointX="5" PointY="0.5" />
+        <EntityTypeShape EntityType="Model.Accounts" Width="1.5" PointX="5" PointY="3.125" />
         <AssociationConnector Association="Model.PersonOrders" />
         <InheritanceConnector EntityType="Model.Accounts" />
         <EntityTypeShape EntityType="Model.Reservation" Width="1.5" PointX="4.75" PointY="11.875" />
         <AssociationConnector Association="Model.ReservationsRestaurants" />
+        <AssociationConnector Association="Model.PersonsOrders" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

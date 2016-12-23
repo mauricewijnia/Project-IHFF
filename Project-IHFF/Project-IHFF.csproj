@@ -278,9 +278,11 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
-    <Content Include="Views\Admin\AddItem.cshtml" />
     <Content Include="Views\Admin\_AddFilm.cshtml" />
-    <Content Include="Views\Admin\_AddItem.cshtml" />
+    <Content Include="Views\Admin\_AddSpecial.cshtml" />
+    <Content Include="Views\Admin\AddItem.cshtml" />
+    <Content Include="Views\Admin\_AddRestaurant.cshtml" />
+    <Content Include="Views\Admin\_AddExhibition.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

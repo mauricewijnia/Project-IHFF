@@ -28,13 +28,13 @@
       <End Role="Items" EntitySet="Items" />
       <End Role="OrderItems" EntitySet="OrderItems" />
     </AssociationSet>
-    <AssociationSet Name="PersonsOrders" Association="Model.Store.PersonsOrders">
-      <End Role="Persons" EntitySet="Persons" />
-      <End Role="Orders" EntitySet="Orders" />
-    </AssociationSet>
     <AssociationSet Name="ReservationsRestaurants" Association="Model.Store.ReservationsRestaurants">
       <End Role="Reservations" EntitySet="Reservations" />
       <End Role="Restaurants" EntitySet="Items_Restaurants" />
+    </AssociationSet>
+    <AssociationSet Name="PersonsOrders" Association="Model.Store.PersonsOrders">
+      <End Role="Persons" EntitySet="Persons" />
+      <End Role="Orders" EntitySet="Orders" />
     </AssociationSet>
     <AssociationSet Name="FK_Films_inherits_Items" Association="Model.Store.FK_Films_inherits_Items">
       <End Role="Items" EntitySet="Items" />
@@ -179,18 +179,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="PersonsOrders">
-    <End Role="Persons" Type="Model.Store.Persons" Multiplicity="1" />
-    <End Role="Orders" Type="Model.Store.Orders" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Persons">
-        <PropertyRef Name="id" />
-      </Principal>
-      <Dependent Role="Orders">
-        <PropertyRef Name="personId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="ReservationsRestaurants">
     <End Role="Reservations" Type="Model.Store.Reservations" Multiplicity="*" />
     <End Role="Restaurants" Type="Model.Store.Items_Restaurants" Multiplicity="1" />
@@ -200,6 +188,18 @@
       </Principal>
       <Dependent Role="Reservations">
         <PropertyRef Name="restaurantId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PersonsOrders">
+    <End Role="Persons" Type="Model.Store.Persons" Multiplicity="1" />
+    <End Role="Orders" Type="Model.Store.Orders" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Persons">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Orders">
+        <PropertyRef Name="personId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -281,14 +281,14 @@
             <End Role="OrderItems" EntitySet="OrderItems" />
           </AssociationSet>
           <EntitySet Name="Persons" EntityType="Model.Persons" />
-          <AssociationSet Name="PersonsOrders" Association="Model.PersonsOrders">
-            <End Role="Persons" EntitySet="Persons" />
-            <End Role="Orders" EntitySet="Orders" />
-          </AssociationSet>
           <EntitySet Name="Reservations" EntityType="Model.Reservation" />
           <AssociationSet Name="ReservationsRestaurants" Association="Model.ReservationsRestaurants">
             <End Role="Reservations" EntitySet="Reservations" />
             <End Role="Restaurants" EntitySet="Items" />
+          </AssociationSet>
+          <AssociationSet Name="PersonsOrders" Association="Model.PersonsOrders">
+            <End Role="Persons" EntitySet="Persons" />
+            <End Role="Orders" EntitySet="Orders" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="Orders">
@@ -300,7 +300,7 @@
           <Property Name="pickupCode" Type="String" Nullable="false" />
           <Property Name="isPaid" Type="String" Nullable="false" />
           <NavigationProperty Name="orderItems" Relationship="Model.OrdersOrderItems" FromRole="Orders" ToRole="OrderItems" />
-          <NavigationProperty Name="person" Relationship="Model.PersonsOrders" FromRole="Orders" ToRole="Persons" />
+          <NavigationProperty Name="Persons" Relationship="Model.PersonsOrders" FromRole="Orders" ToRole="Persons" />
           <Property Name="personId" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="OrderItem">
@@ -396,24 +396,12 @@
           <Property Name="firstName" Type="String" Nullable="false" />
           <Property Name="lastName" Type="String" Nullable="false" />
           <Property Name="email" Type="String" Nullable="false" />
-          <NavigationProperty Name="orders" Relationship="Model.PersonsOrders" FromRole="Persons" ToRole="Orders" />
+          <NavigationProperty Name="Orders" Relationship="Model.PersonsOrders" FromRole="Persons" ToRole="Orders" />
         </EntityType>
         <EntityType Name="Accounts" BaseType="Model.Persons">
           <Property Name="password" Type="String" Nullable="false" />
           <Property Name="phoneNumber" Type="String" Nullable="false" />
         </EntityType>
-        <Association Name="PersonsOrders">
-          <End Type="Model.Persons" Role="Persons" Multiplicity="1" />
-          <End Type="Model.Orders" Role="Orders" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Persons">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="Orders">
-              <PropertyRef Name="personId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="Reservation">
           <Key>
             <PropertyRef Name="id" />
@@ -432,6 +420,18 @@
             </Principal>
             <Dependent Role="Reservations">
               <PropertyRef Name="restaurantId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PersonsOrders">
+          <End Type="Model.Persons" Role="Persons" Multiplicity="1" />
+          <End Type="Model.Orders" Role="Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Persons">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="personId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>

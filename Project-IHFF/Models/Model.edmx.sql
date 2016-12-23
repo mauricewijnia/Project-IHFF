@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 12/16/2016 10:55:23
+-- Date Created: 12/16/2016 11:51:43
 -- Generated from EDMX file: C:\Users\mauri\Source\Repos\Project-IHFF\Project-IHFF\Models\Model.edmx
 -- --------------------------------------------------
 
@@ -26,11 +26,11 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_ItemsOrderItems]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[OrderItems] DROP CONSTRAINT [FK_ItemsOrderItems];
 GO
-IF OBJECT_ID(N'[dbo].[FK_PersonsOrders]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Orders] DROP CONSTRAINT [FK_PersonsOrders];
-GO
 IF OBJECT_ID(N'[dbo].[FK_ReservationsRestaurants]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Reservations] DROP CONSTRAINT [FK_ReservationsRestaurants];
+GO
+IF OBJECT_ID(N'[dbo].[FK_PersonsOrders]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Orders] DROP CONSTRAINT [FK_PersonsOrders];
 GO
 IF OBJECT_ID(N'[dbo].[FK_Films_inherits_Items]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Items_Films] DROP CONSTRAINT [FK_Films_inherits_Items];
@@ -287,21 +287,6 @@ ON [dbo].[OrderItems]
     ([itemId]);
 GO
 
--- Creating foreign key on [personId] in table 'Orders'
-ALTER TABLE [dbo].[Orders]
-ADD CONSTRAINT [FK_PersonOrders]
-    FOREIGN KEY ([personId])
-    REFERENCES [dbo].[Persons]
-        ([id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating non-clustered index for FOREIGN KEY 'FK_PersonOrders'
-CREATE INDEX [IX_FK_PersonOrders]
-ON [dbo].[Orders]
-    ([personId]);
-GO
-
 -- Creating foreign key on [restaurantId] in table 'Reservations'
 ALTER TABLE [dbo].[Reservations]
 ADD CONSTRAINT [FK_ReservationsRestaurants]
@@ -315,6 +300,21 @@ GO
 CREATE INDEX [IX_FK_ReservationsRestaurants]
 ON [dbo].[Reservations]
     ([restaurantId]);
+GO
+
+-- Creating foreign key on [personId] in table 'Orders'
+ALTER TABLE [dbo].[Orders]
+ADD CONSTRAINT [FK_PersonsOrders]
+    FOREIGN KEY ([personId])
+    REFERENCES [dbo].[Persons]
+        ([id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_PersonsOrders'
+CREATE INDEX [IX_FK_PersonsOrders]
+ON [dbo].[Orders]
+    ([personId]);
 GO
 
 -- Creating foreign key on [id] in table 'Items_Films'

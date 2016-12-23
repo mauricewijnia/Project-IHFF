@@ -10,11 +10,16 @@ namespace Project_IHFF.Repositories
     {
         IEnumerable<Items> GetItemsByOrderId();
         void AddItem(Items item);
-        void AddFilms(Films film);
+        void AddFilmExhibition(FilmExhibition filmExhibition);
     }
 
     public class InMemoryItemsRepository : IItemsRepository
     {
+        public void AddFilmExhibition(FilmExhibition filmExhibition)
+        {
+            throw new NotImplementedException();
+        }
+
         public void AddFilms(Films film)
         {
             throw new NotImplementedException();
@@ -47,9 +52,9 @@ namespace Project_IHFF.Repositories
             ctx.SaveChanges();
         }
 
-        public void AddFilms(Films film)
+        public void AddFilmExhibition(FilmExhibition filmExhibition)
         {
-            ctx.Items.Add(film);
+            ctx.FilmExhibitions.Add(filmExhibition);
             ctx.SaveChanges();
         }
     }

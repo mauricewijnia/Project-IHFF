@@ -28,6 +28,6 @@ namespace Project_IHFF.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrderItem> orderItems { get; set; }
-        public virtual Persons person { get; set; }
+        public virtual Persons Persons { get; set; }
     }
 }

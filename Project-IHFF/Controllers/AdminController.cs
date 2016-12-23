@@ -36,5 +36,33 @@ namespace Project_IHFF.Controllers
             repository.AddItem(film);
             return View();
         }
+
+
+        public ActionResult _AddSpecial()
+        {
+            Specials special = new Specials();
+            return PartialView(special);
+        }
+
+        [HttpPost]
+        public ActionResult _AddSpecial(Specials special)
+        {
+            special.price = 0;
+            repository.AddItem(special);
+            return View();
+        }
+
+        public ActionResult _AddRestaurant()
+        {
+            Restaurants restaurant = new Restaurants();
+            return PartialView(restaurant);
+        }
+
+        [HttpPost]
+        public ActionResult _AddRestaurant(Restaurants restaurant)
+        {
+            repository.AddItem(restaurant);
+            return View();
+        }
     }
 }
