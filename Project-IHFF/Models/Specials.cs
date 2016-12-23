@@ -14,9 +14,18 @@ namespace Project_IHFF.Models
     
     public partial class Specials : Items
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Specials()
+        {
+            this.SpecialTicket = new HashSet<SpecialTicket>();
+        }
+    
         public string host { get; set; }
         public int capacity { get; set; }
         public System.DateTime startTime { get; set; }
         public System.DateTime endTime { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<SpecialTicket> SpecialTicket { get; set; }
     }
 }

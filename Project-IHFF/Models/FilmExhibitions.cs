@@ -12,19 +12,21 @@ namespace Project_IHFF.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Films : Items
+    public partial class FilmExhibitions
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Films()
+        public FilmExhibitions()
         {
-            this.FilmExhibitions = new HashSet<FilmExhibitions>();
+            this.FilmTickets = new HashSet<FilmTickets>();
         }
     
-        public string director { get; set; }
-        public string actors { get; set; }
-        public string capacity { get; set; }
+        public int id { get; set; }
+        public System.DateTime startTime { get; set; }
+        public Nullable<System.DateTime> endTime { get; set; }
+        public int filmId { get; set; }
     
+        public virtual Films Films { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<FilmExhibitions> FilmExhibitions { get; set; }
+        public virtual ICollection<FilmTickets> FilmTickets { get; set; }
     }
 }

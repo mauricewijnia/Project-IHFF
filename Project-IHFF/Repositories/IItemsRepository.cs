@@ -10,12 +10,13 @@ namespace Project_IHFF.Repositories
     {
         IEnumerable<Items> GetItemsByOrderId();
         void AddItem(Items item);
-        void AddFilmExhibition(FilmExhibition filmExhibition);
+        void AddFilmExhibition(FilmExhibitions filmExhibition);
+        Items GetItemByName(string name);
     }
 
     public class InMemoryItemsRepository : IItemsRepository
     {
-        public void AddFilmExhibition(FilmExhibition filmExhibition)
+        public void AddFilmExhibition(FilmExhibitions filmExhibition)
         {
             throw new NotImplementedException();
         }
@@ -30,6 +31,10 @@ namespace Project_IHFF.Repositories
             throw new NotImplementedException();
         }
 
+        public Items GetItemByName(string name)
+        {
+            throw new NotImplementedException();
+        }
 
         public IEnumerable<Items> GetItemsByOrderId()
         {
@@ -52,10 +57,16 @@ namespace Project_IHFF.Repositories
             ctx.SaveChanges();
         }
 
-        public void AddFilmExhibition(FilmExhibition filmExhibition)
+        public void AddFilmExhibition(FilmExhibitions filmExhibition)
         {
-            ctx.FilmExhibitions.Add(filmExhibition);
+            ctx.FilmExhibitionsSet.Add(filmExhibition);
             ctx.SaveChanges();
+        }
+
+        public Items GetItemByName(string name)
+        {
+            Items item = ctx.Items.SingleOrDefault(x => x.name == name);
+            return item;
         }
     }
 }

@@ -7,42 +7,60 @@
     <Schema Namespace="Model.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
   <EntityContainer Name="ModelStoreContainer">
     <EntitySet Name="Orders" EntityType="Model.Store.Orders" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="OrderItems" EntityType="Model.Store.OrderItems" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Items" EntityType="Model.Store.Items" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="FilmExhibitions" EntityType="Model.Store.FilmExhibitions" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Persons" EntityType="Model.Store.Persons" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Reservations" EntityType="Model.Store.Reservations" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="TicketsSet" EntityType="Model.Store.TicketsSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="FilmExhibitionsSet" EntityType="Model.Store.FilmExhibitionsSet" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Items_Films" EntityType="Model.Store.Items_Films" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="TicketsSet_FilmTickets" EntityType="Model.Store.TicketsSet_FilmTickets" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="TicketsSet_RestaurantReservation" EntityType="Model.Store.TicketsSet_RestaurantReservation" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Items_Restaurants" EntityType="Model.Store.Items_Restaurants" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="TicketsSet_SpecialTicket" EntityType="Model.Store.TicketsSet_SpecialTicket" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Items_Specials" EntityType="Model.Store.Items_Specials" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Persons_Accounts" EntityType="Model.Store.Persons_Accounts" store:Type="Tables" Schema="dbo" />
-    <AssociationSet Name="OrdersOrderItems" Association="Model.Store.OrdersOrderItems">
-      <End Role="Orders" EntitySet="Orders" />
-      <End Role="OrderItems" EntitySet="OrderItems" />
-    </AssociationSet>
-    <AssociationSet Name="FilmExhibitionsFilms" Association="Model.Store.FilmExhibitionsFilms">
-      <End Role="FilmExhibitions" EntitySet="FilmExhibitions" />
-      <End Role="Films" EntitySet="Items_Films" />
-    </AssociationSet>
-    <AssociationSet Name="ItemsOrderItems" Association="Model.Store.ItemsOrderItems">
-      <End Role="Items" EntitySet="Items" />
-      <End Role="OrderItems" EntitySet="OrderItems" />
-    </AssociationSet>
-    <AssociationSet Name="ReservationsRestaurants" Association="Model.Store.ReservationsRestaurants">
-      <End Role="Reservations" EntitySet="Reservations" />
-      <End Role="Restaurants" EntitySet="Items_Restaurants" />
-    </AssociationSet>
     <AssociationSet Name="PersonsOrders" Association="Model.Store.PersonsOrders">
       <End Role="Persons" EntitySet="Persons" />
       <End Role="Orders" EntitySet="Orders" />
+    </AssociationSet>
+    <AssociationSet Name="FilmExhibitionsFilms" Association="Model.Store.FilmExhibitionsFilms">
+      <End Role="FilmExhibitions" EntitySet="FilmExhibitionsSet" />
+      <End Role="Films" EntitySet="Items_Films" />
+    </AssociationSet>
+    <AssociationSet Name="FilmTicketsFilmExhibitions" Association="Model.Store.FilmTicketsFilmExhibitions">
+      <End Role="FilmTickets" EntitySet="TicketsSet_FilmTickets" />
+      <End Role="FilmExhibitions" EntitySet="FilmExhibitionsSet" />
+    </AssociationSet>
+    <AssociationSet Name="RestaurantReservationRestaurants" Association="Model.Store.RestaurantReservationRestaurants">
+      <End Role="RestaurantReservation" EntitySet="TicketsSet_RestaurantReservation" />
+      <End Role="Restaurants" EntitySet="Items_Restaurants" />
+    </AssociationSet>
+    <AssociationSet Name="TicketsOrders" Association="Model.Store.TicketsOrders">
+      <End Role="Tickets" EntitySet="TicketsSet" />
+      <End Role="Orders" EntitySet="Orders" />
+    </AssociationSet>
+    <AssociationSet Name="SpecialsSpecialTicket" Association="Model.Store.SpecialsSpecialTicket">
+      <End Role="SpecialTicket" EntitySet="TicketsSet_SpecialTicket" />
+      <End Role="Specials" EntitySet="Items_Specials" />
     </AssociationSet>
     <AssociationSet Name="FK_Films_inherits_Items" Association="Model.Store.FK_Films_inherits_Items">
       <End Role="Items" EntitySet="Items" />
       <End Role="Films" EntitySet="Items_Films" />
     </AssociationSet>
+    <AssociationSet Name="FK_FilmTickets_inherits_Tickets" Association="Model.Store.FK_FilmTickets_inherits_Tickets">
+      <End Role="Tickets" EntitySet="TicketsSet" />
+      <End Role="FilmTickets" EntitySet="TicketsSet_FilmTickets" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RestaurantReservation_inherits_Tickets" Association="Model.Store.FK_RestaurantReservation_inherits_Tickets">
+      <End Role="Tickets" EntitySet="TicketsSet" />
+      <End Role="RestaurantReservation" EntitySet="TicketsSet_RestaurantReservation" />
+    </AssociationSet>
     <AssociationSet Name="FK_Restaurants_inherits_Items" Association="Model.Store.FK_Restaurants_inherits_Items">
       <End Role="Items" EntitySet="Items" />
       <End Role="Restaurants" EntitySet="Items_Restaurants" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SpecialTicket_inherits_Tickets" Association="Model.Store.FK_SpecialTicket_inherits_Tickets">
+      <End Role="Tickets" EntitySet="TicketsSet" />
+      <End Role="SpecialTicket" EntitySet="TicketsSet_SpecialTicket" />
     </AssociationSet>
     <AssociationSet Name="FK_Specials_inherits_Items" Association="Model.Store.FK_Specials_inherits_Items">
       <End Role="Items" EntitySet="Items" />
@@ -63,15 +81,6 @@
     <Property Name="isPaid" Type="nvarchar(max)" Nullable="false" />
     <Property Name="personId" Type="int" Nullable="false" />
   </EntityType>
-  <EntityType Name="OrderItems">
-    <Key>
-      <PropertyRef Name="id" />
-    </Key>
-    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="orderId" Type="int" Nullable="false" />
-    <Property Name="quantity" Type="int" Nullable="false" />
-    <Property Name="itemId" Type="int" Nullable="false" />
-  </EntityType>
   <EntityType Name="Items">
     <Key>
       <PropertyRef Name="id" />
@@ -81,15 +90,7 @@
     <Property Name="location" Type="nvarchar(max)" Nullable="false" />
     <Property Name="price" Type="decimal" Nullable="false" />
     <Property Name="name" Type="nvarchar(max)" Nullable="false" />
-  </EntityType>
-  <EntityType Name="FilmExhibitions">
-    <Key>
-      <PropertyRef Name="id" />
-    </Key>
-    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="startTime" Type="datetime" Nullable="false" />
-    <Property Name="endTime" Type="datetime" Nullable="true" />
-    <Property Name="filmId" Type="int" Nullable="false" />
+    <Property Name="imagePath" Type="nvarchar(max)" Nullable="true" />
   </EntityType>
   <EntityType Name="Persons">
     <Key>
@@ -100,13 +101,22 @@
     <Property Name="lastName" Type="nvarchar(max)" Nullable="false" />
     <Property Name="email" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
-  <EntityType Name="Reservations">
+  <EntityType Name="TicketsSet">
     <Key>
       <PropertyRef Name="id" />
     </Key>
     <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="reservationTime" Type="datetime" Nullable="false" />
-    <Property Name="restaurantId" Type="int" Nullable="false" />
+    <Property Name="quantity" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="orderId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="FilmExhibitionsSet">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="startTime" Type="datetime" Nullable="false" />
+    <Property Name="endTime" Type="datetime" Nullable="true" />
+    <Property Name="filmId" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Items_Films">
     <Key>
@@ -117,12 +127,34 @@
     <Property Name="capacity" Type="nvarchar(max)" Nullable="false" />
     <Property Name="id" Type="int" Nullable="false" />
   </EntityType>
+  <EntityType Name="TicketsSet_FilmTickets">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="filmExhibitionId" Type="int" Nullable="false" />
+    <Property Name="id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TicketsSet_RestaurantReservation">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="restaurantId" Type="int" Nullable="false" />
+    <Property Name="reservationTime" Type="datetime" Nullable="false" />
+    <Property Name="id" Type="int" Nullable="false" />
+  </EntityType>
   <EntityType Name="Items_Restaurants">
     <Key>
       <PropertyRef Name="id" />
     </Key>
     <Property Name="timeOpen" Type="time" Nullable="false" />
     <Property Name="timeClosed" Type="time" Nullable="false" />
+    <Property Name="id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TicketsSet_SpecialTicket">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="specialId" Type="int" Nullable="false" />
     <Property Name="id" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Items_Specials">
@@ -143,20 +175,20 @@
     <Property Name="phoneNumber" Type="nvarchar(max)" Nullable="false" />
     <Property Name="id" Type="int" Nullable="false" />
   </EntityType>
-  <Association Name="OrdersOrderItems">
-    <End Role="Orders" Type="Model.Store.Orders" Multiplicity="1" />
-    <End Role="OrderItems" Type="Model.Store.OrderItems" Multiplicity="*" />
+  <Association Name="PersonsOrders">
+    <End Role="Persons" Type="Model.Store.Persons" Multiplicity="1" />
+    <End Role="Orders" Type="Model.Store.Orders" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Orders">
+      <Principal Role="Persons">
         <PropertyRef Name="id" />
       </Principal>
-      <Dependent Role="OrderItems">
-        <PropertyRef Name="orderId" />
+      <Dependent Role="Orders">
+        <PropertyRef Name="personId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
   <Association Name="FilmExhibitionsFilms">
-    <End Role="FilmExhibitions" Type="Model.Store.FilmExhibitions" Multiplicity="*" />
+    <End Role="FilmExhibitions" Type="Model.Store.FilmExhibitionsSet" Multiplicity="*" />
     <End Role="Films" Type="Model.Store.Items_Films" Multiplicity="1" />
     <ReferentialConstraint>
       <Principal Role="Films">
@@ -167,39 +199,51 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="ItemsOrderItems">
-    <End Role="Items" Type="Model.Store.Items" Multiplicity="1" />
-    <End Role="OrderItems" Type="Model.Store.OrderItems" Multiplicity="*" />
+  <Association Name="FilmTicketsFilmExhibitions">
+    <End Role="FilmTickets" Type="Model.Store.TicketsSet_FilmTickets" Multiplicity="*" />
+    <End Role="FilmExhibitions" Type="Model.Store.FilmExhibitionsSet" Multiplicity="1" />
     <ReferentialConstraint>
-      <Principal Role="Items">
+      <Principal Role="FilmExhibitions">
         <PropertyRef Name="id" />
       </Principal>
-      <Dependent Role="OrderItems">
-        <PropertyRef Name="itemId" />
+      <Dependent Role="FilmTickets">
+        <PropertyRef Name="filmExhibitionId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="ReservationsRestaurants">
-    <End Role="Reservations" Type="Model.Store.Reservations" Multiplicity="*" />
+  <Association Name="RestaurantReservationRestaurants">
+    <End Role="RestaurantReservation" Type="Model.Store.TicketsSet_RestaurantReservation" Multiplicity="*" />
     <End Role="Restaurants" Type="Model.Store.Items_Restaurants" Multiplicity="1" />
     <ReferentialConstraint>
       <Principal Role="Restaurants">
         <PropertyRef Name="id" />
       </Principal>
-      <Dependent Role="Reservations">
+      <Dependent Role="RestaurantReservation">
         <PropertyRef Name="restaurantId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="PersonsOrders">
-    <End Role="Persons" Type="Model.Store.Persons" Multiplicity="1" />
-    <End Role="Orders" Type="Model.Store.Orders" Multiplicity="*" />
+  <Association Name="TicketsOrders">
+    <End Role="Tickets" Type="Model.Store.TicketsSet" Multiplicity="*" />
+    <End Role="Orders" Type="Model.Store.Orders" Multiplicity="1" />
     <ReferentialConstraint>
-      <Principal Role="Persons">
+      <Principal Role="Orders">
         <PropertyRef Name="id" />
       </Principal>
-      <Dependent Role="Orders">
-        <PropertyRef Name="personId" />
+      <Dependent Role="Tickets">
+        <PropertyRef Name="orderId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="SpecialsSpecialTicket">
+    <End Role="SpecialTicket" Type="Model.Store.TicketsSet_SpecialTicket" Multiplicity="*" />
+    <End Role="Specials" Type="Model.Store.Items_Specials" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Specials">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="SpecialTicket">
+        <PropertyRef Name="specialId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -217,6 +261,34 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_FilmTickets_inherits_Tickets">
+    <End Role="Tickets" Type="Model.Store.TicketsSet" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="FilmTickets" Type="Model.Store.TicketsSet_FilmTickets" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Tickets">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="FilmTickets">
+        <PropertyRef Name="id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RestaurantReservation_inherits_Tickets">
+    <End Role="Tickets" Type="Model.Store.TicketsSet" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="RestaurantReservation" Type="Model.Store.TicketsSet_RestaurantReservation" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Tickets">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="RestaurantReservation">
+        <PropertyRef Name="id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Restaurants_inherits_Items">
     <End Role="Items" Type="Model.Store.Items" Multiplicity="1">
       <OnDelete Action="Cascade" />
@@ -227,6 +299,20 @@
         <PropertyRef Name="id" />
       </Principal>
       <Dependent Role="Restaurants">
+        <PropertyRef Name="id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SpecialTicket_inherits_Tickets">
+    <End Role="Tickets" Type="Model.Store.TicketsSet" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="SpecialTicket" Type="Model.Store.TicketsSet_SpecialTicket" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Tickets">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="SpecialTicket">
         <PropertyRef Name="id" />
       </Dependent>
     </ReferentialConstraint>
@@ -265,30 +351,33 @@
       <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="Model" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
         <EntityContainer Name="ModelContainer" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Orders" EntityType="Model.Orders" />
-          <EntitySet Name="OrderItems" EntityType="Model.OrderItem" />
-          <AssociationSet Name="OrdersOrderItems" Association="Model.OrdersOrderItems">
-            <End Role="Orders" EntitySet="Orders" />
-            <End Role="OrderItems" EntitySet="OrderItems" />
-          </AssociationSet>
           <EntitySet Name="Items" EntityType="Model.Items" />
-          <EntitySet Name="FilmExhibitions" EntityType="Model.FilmExhibition" />
-          <AssociationSet Name="FilmExhibitionsFilms" Association="Model.FilmExhibitionsFilms">
-            <End Role="FilmExhibitions" EntitySet="FilmExhibitions" />
-            <End Role="Films" EntitySet="Items" />
-          </AssociationSet>
-          <AssociationSet Name="ItemsOrderItems" Association="Model.ItemsOrderItems">
-            <End Role="Items" EntitySet="Items" />
-            <End Role="OrderItems" EntitySet="OrderItems" />
-          </AssociationSet>
           <EntitySet Name="Persons" EntityType="Model.Persons" />
-          <EntitySet Name="Reservations" EntityType="Model.Reservation" />
-          <AssociationSet Name="ReservationsRestaurants" Association="Model.ReservationsRestaurants">
-            <End Role="Reservations" EntitySet="Reservations" />
-            <End Role="Restaurants" EntitySet="Items" />
-          </AssociationSet>
           <AssociationSet Name="PersonsOrders" Association="Model.PersonsOrders">
             <End Role="Persons" EntitySet="Persons" />
             <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <EntitySet Name="TicketsSet" EntityType="Model.Tickets" />
+          <EntitySet Name="FilmExhibitionsSet" EntityType="Model.FilmExhibitions" />
+          <AssociationSet Name="FilmExhibitionsFilms" Association="Model.FilmExhibitionsFilms">
+            <End Role="FilmExhibitions" EntitySet="FilmExhibitionsSet" />
+            <End Role="Films" EntitySet="Items" />
+          </AssociationSet>
+          <AssociationSet Name="FilmTicketsFilmExhibitions" Association="Model.FilmTicketsFilmExhibitions">
+            <End Role="FilmTickets" EntitySet="TicketsSet" />
+            <End Role="FilmExhibitions" EntitySet="FilmExhibitionsSet" />
+          </AssociationSet>
+          <AssociationSet Name="RestaurantReservationRestaurants" Association="Model.RestaurantReservationRestaurants">
+            <End Role="RestaurantReservation" EntitySet="TicketsSet" />
+            <End Role="Restaurants" EntitySet="Items" />
+          </AssociationSet>
+          <AssociationSet Name="TicketsOrders" Association="Model.TicketsOrders">
+            <End Role="Tickets" EntitySet="TicketsSet" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="SpecialsSpecialTicket" Association="Model.SpecialsSpecialTicket">
+            <End Role="SpecialTicket" EntitySet="TicketsSet" />
+            <End Role="Specials" EntitySet="Items" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="Orders">
@@ -299,33 +388,10 @@
           <Property Name="date" Type="DateTime" Nullable="false" />
           <Property Name="pickupCode" Type="String" Nullable="false" />
           <Property Name="isPaid" Type="String" Nullable="false" />
-          <NavigationProperty Name="orderItems" Relationship="Model.OrdersOrderItems" FromRole="Orders" ToRole="OrderItems" />
           <NavigationProperty Name="Persons" Relationship="Model.PersonsOrders" FromRole="Orders" ToRole="Persons" />
           <Property Name="personId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Tickets" Relationship="Model.TicketsOrders" FromRole="Orders" ToRole="Tickets" />
         </EntityType>
-        <EntityType Name="OrderItem">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <NavigationProperty Name="order" Relationship="Model.OrdersOrderItems" FromRole="OrderItems" ToRole="Orders" />
-          <Property Name="orderId" Type="Int32" Nullable="false" />
-          <Property Name="quantity" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="item" Relationship="Model.ItemsOrderItems" FromRole="OrderItems" ToRole="Items" />
-          <Property Name="itemId" Type="Int32" Nullable="false" />
-        </EntityType>
-        <Association Name="OrdersOrderItems">
-          <End Type="Model.Orders" Role="Orders" Multiplicity="1" />
-          <End Type="Model.OrderItem" Role="OrderItems" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Orders">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="OrderItems">
-              <PropertyRef Name="orderId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="Items">
           <Key>
             <PropertyRef Name="id" />
@@ -335,59 +401,37 @@
           <Property Name="location" Type="String" Nullable="false" />
           <Property Name="price" Type="Decimal" Nullable="false" />
           <Property Name="name" Type="String" Nullable="false" />
-          <NavigationProperty Name="orderItems" Relationship="Model.ItemsOrderItems" FromRole="Items" ToRole="OrderItems" />
+          <Property Name="imagePath" Type="String" Nullable="true" />
         </EntityType>
         <EntityType Name="Films" BaseType="Model.Items" >
           <Property Name="director" Type="String" Nullable="false" />
           <Property Name="actors" Type="String" Nullable="false" />
           <Property Name="capacity" Type="String" Nullable="false" />
-          <NavigationProperty Name="filmExhibitions" Relationship="Model.FilmExhibitionsFilms" FromRole="Films" ToRole="FilmExhibitions" />
+          <NavigationProperty Name="FilmExhibitions" Relationship="Model.FilmExhibitionsFilms" FromRole="Films" ToRole="FilmExhibitions" />
         </EntityType>
         <EntityType Name="Specials" BaseType="Model.Items" >
           <Property Name="host" Type="String" Nullable="false" />
           <Property Name="capacity" Type="Int32" Nullable="false" />
           <Property Name="startTime" Type="DateTime" Nullable="false" />
           <Property Name="endTime" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="SpecialTicket" Relationship="Model.SpecialsSpecialTicket" FromRole="Specials" ToRole="SpecialTicket" />
         </EntityType>
         <EntityType Name="Restaurants" BaseType="Model.Items" >
           <Property Name="timeOpen" Type="Time" Nullable="false" />
           <Property Name="timeClosed" Type="Time" Nullable="false" />
-          <NavigationProperty Name="reservations" Relationship="Model.ReservationsRestaurants" FromRole="Restaurants" ToRole="Reservations" />
+          <NavigationProperty Name="RestaurantReservation" Relationship="Model.RestaurantReservationRestaurants" FromRole="Restaurants" ToRole="RestaurantReservation" />
         </EntityType>
-        <EntityType Name="FilmExhibition">
+        <EntityType Name="FilmExhibitions">
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns="http://schemas.microsoft.com/ado/2009/11/edm" />
           <Property Name="startTime" Type="DateTime" Nullable="false" />
           <Property Name="endTime" Type="DateTime" Nullable="true" />
-          <NavigationProperty Name="film" Relationship="Model.FilmExhibitionsFilms" FromRole="FilmExhibitions" ToRole="Films" />
+          <NavigationProperty Name="Films" Relationship="Model.FilmExhibitionsFilms" FromRole="FilmExhibitions" ToRole="Films" />
           <Property Name="filmId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="FilmTickets" Relationship="Model.FilmTicketsFilmExhibitions" FromRole="FilmExhibitions" ToRole="FilmTickets" />
         </EntityType>
-        <Association Name="FilmExhibitionsFilms">
-          <End Type="Model.FilmExhibition" Role="FilmExhibitions" Multiplicity="*" />
-          <End Type="Model.Films" Role="Films" Multiplicity="1" />
-          <ReferentialConstraint>
-            <Principal Role="Films">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="FilmExhibitions">
-              <PropertyRef Name="filmId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="ItemsOrderItems">
-          <End Type="Model.Items" Role="Items" Multiplicity="1" />
-          <End Type="Model.OrderItem" Role="OrderItems" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Items">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="OrderItems">
-              <PropertyRef Name="itemId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="Persons">
           <Key>
             <PropertyRef Name="id" />
@@ -402,27 +446,6 @@
           <Property Name="password" Type="String" Nullable="false" />
           <Property Name="phoneNumber" Type="String" Nullable="false" />
         </EntityType>
-        <EntityType Name="Reservation">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="reservationTime" Type="DateTime" Nullable="false" />
-          <NavigationProperty Name="restaurant" Relationship="Model.ReservationsRestaurants" FromRole="Reservations" ToRole="Restaurants" />
-          <Property Name="restaurantId" Type="Int32" Nullable="false" />
-        </EntityType>
-        <Association Name="ReservationsRestaurants">
-          <End Type="Model.Reservation" Role="Reservations" Multiplicity="*" />
-          <End Type="Model.Restaurants" Role="Restaurants" Multiplicity="1" />
-          <ReferentialConstraint>
-            <Principal Role="Restaurants">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="Reservations">
-              <PropertyRef Name="restaurantId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="PersonsOrders">
           <End Type="Model.Persons" Role="Persons" Multiplicity="1" />
           <End Type="Model.Orders" Role="Orders" Multiplicity="*" />
@@ -432,6 +455,88 @@
             </Principal>
             <Dependent Role="Orders">
               <PropertyRef Name="personId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Tickets">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="quantity" Type="String" Nullable="false" />
+          <NavigationProperty Name="Orders" Relationship="Model.TicketsOrders" FromRole="Tickets" ToRole="Orders" />
+          <Property Name="orderId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="FilmExhibitionsFilms">
+          <End Type="Model.FilmExhibitions" Role="FilmExhibitions" Multiplicity="*" />
+          <End Type="Model.Films" Role="Films" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="Films">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="FilmExhibitions">
+              <PropertyRef Name="filmId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="FilmTickets" BaseType="Model.Tickets" >
+          <NavigationProperty Name="FilmExhibitions" Relationship="Model.FilmTicketsFilmExhibitions" FromRole="FilmTickets" ToRole="FilmExhibitions" />
+          <Property Name="filmExhibitionId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="FilmTicketsFilmExhibitions">
+          <End Type="Model.FilmTickets" Role="FilmTickets" Multiplicity="*" />
+          <End Type="Model.FilmExhibitions" Role="FilmExhibitions" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="FilmExhibitions">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="FilmTickets">
+              <PropertyRef Name="filmExhibitionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="RestaurantReservation" BaseType="Model.Tickets" >
+          <NavigationProperty Name="Restaurants" Relationship="Model.RestaurantReservationRestaurants" FromRole="RestaurantReservation" ToRole="Restaurants" />
+          <Property Name="restaurantId" Type="Int32" Nullable="false" />
+          <Property Name="reservationTime" Type="DateTime" Nullable="false" />
+        </EntityType>
+        <Association Name="RestaurantReservationRestaurants">
+          <End Type="Model.RestaurantReservation" Role="RestaurantReservation" Multiplicity="*" />
+          <End Type="Model.Restaurants" Role="Restaurants" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="Restaurants">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="RestaurantReservation">
+              <PropertyRef Name="restaurantId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="TicketsOrders">
+          <End Type="Model.Tickets" Role="Tickets" Multiplicity="*" />
+          <End Type="Model.Orders" Role="Orders" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="Orders">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Tickets">
+              <PropertyRef Name="orderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="SpecialTicket" BaseType="Model.Tickets" >
+          <NavigationProperty Name="Specials" Relationship="Model.SpecialsSpecialTicket" FromRole="SpecialTicket" ToRole="Specials" />
+          <Property Name="specialId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="SpecialsSpecialTicket">
+          <End Type="Model.SpecialTicket" Role="SpecialTicket" Multiplicity="*" />
+          <End Type="Model.Specials" Role="Specials" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="Specials">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="SpecialTicket">
+              <PropertyRef Name="specialId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -452,16 +557,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="OrderItems">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.OrderItem)">
-        <MappingFragment StoreEntitySet="OrderItems">
-          <ScalarProperty Name="id" ColumnName="id" />
-          <ScalarProperty Name="orderId" ColumnName="orderId" />
-          <ScalarProperty Name="quantity" ColumnName="quantity" />
-          <ScalarProperty Name="itemId" ColumnName="itemId" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Items">
       <EntityTypeMapping TypeName="IsTypeOf(Model.Items)">
         <MappingFragment StoreEntitySet="Items">
@@ -470,6 +565,7 @@
           <ScalarProperty Name="location" ColumnName="location" />
           <ScalarProperty Name="price" ColumnName="price" />
           <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="imagePath" ColumnName="imagePath" />
         </MappingFragment>
       </EntityTypeMapping>
       <EntityTypeMapping TypeName="IsTypeOf(Model.Films)">
@@ -497,16 +593,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="FilmExhibitions">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.FilmExhibition)">
-        <MappingFragment StoreEntitySet="FilmExhibitions">
-          <ScalarProperty Name="id" ColumnName="id" />
-          <ScalarProperty Name="startTime" ColumnName="startTime" />
-          <ScalarProperty Name="endTime" ColumnName="endTime" />
-          <ScalarProperty Name="filmId" ColumnName="filmId" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Persons">
       <EntityTypeMapping TypeName="IsTypeOf(Model.Persons)">
         <MappingFragment StoreEntitySet="Persons">
@@ -524,12 +610,41 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Reservations">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.Reservation)">
-        <MappingFragment StoreEntitySet="Reservations">
+    <EntitySetMapping Name="TicketsSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Tickets)">
+        <MappingFragment StoreEntitySet="TicketsSet">
           <ScalarProperty Name="id" ColumnName="id" />
-          <ScalarProperty Name="reservationTime" ColumnName="reservationTime" />
+          <ScalarProperty Name="quantity" ColumnName="quantity" />
+          <ScalarProperty Name="orderId" ColumnName="orderId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(Model.FilmTickets)">
+        <MappingFragment StoreEntitySet="TicketsSet_FilmTickets">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="filmExhibitionId" ColumnName="filmExhibitionId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(Model.RestaurantReservation)">
+        <MappingFragment StoreEntitySet="TicketsSet_RestaurantReservation">
+          <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="restaurantId" ColumnName="restaurantId" />
+          <ScalarProperty Name="reservationTime" ColumnName="reservationTime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(Model.SpecialTicket)">
+        <MappingFragment StoreEntitySet="TicketsSet_SpecialTicket">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="specialId" ColumnName="specialId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FilmExhibitionsSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.FilmExhibitions)">
+        <MappingFragment StoreEntitySet="FilmExhibitionsSet">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="startTime" ColumnName="startTime" />
+          <ScalarProperty Name="endTime" ColumnName="endTime" />
+          <ScalarProperty Name="filmId" ColumnName="filmId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

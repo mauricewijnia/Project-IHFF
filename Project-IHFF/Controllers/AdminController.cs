@@ -26,15 +26,26 @@ namespace Project_IHFF.Controllers
 
         public ActionResult _AddFilm()
         {
-            Films film = new Films();
-            return PartialView(film);
+            FilmsViewModel filmViewModel = new FilmsViewModel();
+            filmViewModel.film = new Films();
+            
+            return PartialView(filmViewModel);
         }
 
         [HttpPost]
-        public ActionResult _AddFilm(Films film)
+        public ActionResult _AddFilm(FilmsViewModel filmViewModel)
         {
-            repository.AddItem(film);
-            return View();
+            repository.AddItem(filmViewModel.film);
+
+            Items item = repository.GetItemByName(filmViewModel.film.name);
+            
+            foreach(var x in filmViewModel.exhibitions)
+            {
+                x.filmId = item.id;
+                repository.AddFilmExhibition(x);
+            }
+
+            return PartialView();
         }
 
 

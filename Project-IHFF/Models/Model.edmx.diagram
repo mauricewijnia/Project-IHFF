@@ -4,27 +4,33 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="2aaefee675854b7a9eb1afec17c9e6b3" Name="Diagram1" ZoomLevel="95" >
-        <EntityTypeShape EntityType="Model.Orders" Width="1.5" PointX="1.75" PointY="0.5" />
-        <EntityTypeShape EntityType="Model.OrderItem" Width="1.5" PointX="1.75" PointY="3.25" />
-        <AssociationConnector Association="Model.OrdersOrderItems" />
-        <EntityTypeShape EntityType="Model.Items" Width="1.5" PointX="1.75" PointY="6" />
-        <EntityTypeShape EntityType="Model.Films" Width="1.5" PointX="0.5" PointY="9.375" />
+      <Diagram DiagramId="2aaefee675854b7a9eb1afec17c9e6b3" Name="Diagram1" ZoomLevel="82" >
+        <EntityTypeShape EntityType="Model.Orders" Width="1.5" PointX="7.75" PointY="0.875" />
+        <EntityTypeShape EntityType="Model.Items" Width="1.5" PointX="2.5" PointY="6.875" />
+        <EntityTypeShape EntityType="Model.Films" Width="1.5" PointX="1.25" PointY="10.25" />
         <InheritanceConnector EntityType="Model.Films" />
-        <EntityTypeShape EntityType="Model.Specials" Width="1.5" PointX="2.625" PointY="9.375" />
+        <EntityTypeShape EntityType="Model.Specials" Width="1.5" PointX="3.375" PointY="10.25" />
         <InheritanceConnector EntityType="Model.Specials" />
-        <EntityTypeShape EntityType="Model.Restaurants" Width="1.5" PointX="4.75" PointY="9.375" />
+        <EntityTypeShape EntityType="Model.Restaurants" Width="1.5" PointX="5.5" PointY="10.25" />
         <InheritanceConnector EntityType="Model.Restaurants" />
-        <EntityTypeShape EntityType="Model.FilmExhibition" Width="1.5" PointX="0.5" PointY="11.875" />
-        <AssociationConnector Association="Model.FilmExhibitionsFilms" />
-        <AssociationConnector Association="Model.ItemsOrderItems" />
+        <EntityTypeShape EntityType="Model.FilmExhibitions" Width="1.5" PointX="1.25" PointY="12.75" />
         <EntityTypeShape EntityType="Model.Persons" Width="1.5" PointX="5" PointY="0.5" />
         <EntityTypeShape EntityType="Model.Accounts" Width="1.5" PointX="5" PointY="3.125" />
         <AssociationConnector Association="Model.PersonOrders" />
         <InheritanceConnector EntityType="Model.Accounts" />
-        <EntityTypeShape EntityType="Model.Reservation" Width="1.5" PointX="4.75" PointY="11.875" />
-        <AssociationConnector Association="Model.ReservationsRestaurants" />
         <AssociationConnector Association="Model.PersonsOrders" />
+        <EntityTypeShape EntityType="Model.Tickets" Width="1.5" PointX="7.75" PointY="3.75" />
+        <AssociationConnector Association="Model.FilmExhibitionsFilms" />
+        <EntityTypeShape EntityType="Model.FilmTickets" Width="1.5" PointX="6.375" PointY="6" />
+        <InheritanceConnector EntityType="Model.FilmTickets" />
+        <AssociationConnector Association="Model.FilmTicketsFilmExhibitions" />
+        <EntityTypeShape EntityType="Model.RestaurantReservation" Width="1.5" PointX="10.625" PointY="6" />
+        <InheritanceConnector EntityType="Model.RestaurantReservation" />
+        <AssociationConnector Association="Model.RestaurantReservationRestaurants" />
+        <AssociationConnector Association="Model.TicketsOrders" />
+        <EntityTypeShape EntityType="Model.SpecialTicket" Width="1.5" PointX="8.5" PointY="6" />
+        <InheritanceConnector EntityType="Model.SpecialTicket" />
+        <AssociationConnector Association="Model.SpecialsSpecialTicket" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
