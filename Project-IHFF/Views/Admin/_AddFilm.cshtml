@@ -3,11 +3,12 @@
 
 
 @Html.ValidationSummary()
-@using (Html.BeginForm("_AddFilm"))
+@using (Html.BeginForm("_AddFilm", "AdminController", FormMethod.Post))
 {
     <label>Name: </label>
     @Html.TextBoxFor(x => x.film.name)
     <br />
+    <label>Description:</label>
     @Html.TextBoxFor(x => x.film.description)
     <br />
     <label>Location: </label>
@@ -30,19 +31,19 @@
     <label>First Exhibition</label>
     <br />
     <label>Starting Time:</label>
-    @Html.TextBoxFor(x => x.exhibitions[0].startTime)
+    @Html.TextBoxFor(x => x.exhibitionA.startTime)
     <br />
     <label>Ending Time:</label>
-    @Html.TextBoxFor(x => x.exhibitions[0].endTime)
+    @Html.TextBoxFor(x => x.exhibitionA.endTime)
     <br />
     <br />
     <label>Second Exhibition (Optional)</label>
     <br />
     <label>Starting Time:</label>
-    @Html.TextBoxFor(x => x.exhibitions[1].startTime)
+    @Html.TextBoxFor(x => x.exhibitionB.startTime)
     <br />
     <label>Ending Time:</label>
-    @Html.TextBoxFor(x => x.exhibitions[1].endTime)
+    @Html.TextBoxFor(x => x.exhibitionB.endTime)
     <br />
 
     <input type="submit" value="Submit" class="btn btn-primary" />

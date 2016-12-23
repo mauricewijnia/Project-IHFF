@@ -27,7 +27,6 @@ namespace Project_IHFF.Controllers
         public ActionResult _AddFilm()
         {
             FilmsViewModel filmViewModel = new FilmsViewModel();
-            filmViewModel.film = new Films();
             
             return PartialView(filmViewModel);
         }
@@ -39,11 +38,6 @@ namespace Project_IHFF.Controllers
 
             Items item = repository.GetItemByName(filmViewModel.film.name);
             
-            foreach(var x in filmViewModel.exhibitions)
-            {
-                x.filmId = item.id;
-                repository.AddFilmExhibition(x);
-            }
 
             return PartialView();
         }
