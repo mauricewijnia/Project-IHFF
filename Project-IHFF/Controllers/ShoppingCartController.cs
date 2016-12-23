@@ -16,7 +16,9 @@ namespace Project_IHFF.Controllers
             Tickets tickett = new Tickets();
             tickett.id = 8;
             tickett.orderId = 3;
-            return View();
+            tickett.quantity = 4;
+            tickets.Add(tickett);
+            return View(tickets);
         }
 
         public ActionResult Add()
