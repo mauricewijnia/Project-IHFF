@@ -1,0 +1,10 @@
+﻿@using Project_IHFF.Models;
+@using System.Collections.Generic;
+
+@model List<Tickets>
+
+@foreach (FilmTickets film in Model)
+{
+    <a class="glyphicon glyphicon-plus FloatLeft MinPlusKnop MarginLeft10px" href='@Url.Action("Add", "ShoppingCart", new { id = film.id, Quantity = film.quantity }, null)'>@film.id</a> // geeft het id en de Quantity van de ticket mee
+}
+
