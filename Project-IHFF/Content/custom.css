@@ -54,6 +54,8 @@
     padding-top: 15px;
     margin-top: -23px;
     margin-top: 102px;
+    padding-bottom: 100%;
+    background-color:#CCCCCC;
 }
 
 #body {
@@ -83,4 +85,61 @@
 
 #KleineTekstInNav li a:hover {
     color: #ff6600;
+}
+#ShoppingCartRegel{
+    list-style: none;
+    float: left;
+}
+#ShoppingCartRegel li{
+    float: left;
+    margin-left: 20px;
+    margin-left: 150px;
+}
+.FloatLeft{
+    float:left;
+}
+.MarginLeft10px{
+    margin-left:10px;
+}
+.MinPlusKnop{
+    background-color: #FF9900;
+    padding: 5px;
+    border-radius: 100%;
+    padding-top: 1px;
+    color: #666666;
+    padding-top: 2px;
+    box-shadow: 2px 2px 3px #494949;
+    margin-top: -2px;
+}
+.MinPlusKnop:hover{
+    color: black;
+    text-decoration: none;
+    background-color: #ff6600;
+}
+#ShoppingCartRegelKop{
+    list-style: none;
+    float: left;
+}
+#ShoppingCartRegelKop li{
+    float: left;
+    margin-left: 20px;
+    margin-left: 150px;
+}
+
+#WinkelWagenInhoud{
+    padding-top: 10px;
+    padding-bottom: 40px;
+    background-color: #666666;
+
+}
+#Tickets{
+    margin-left:30px;
+    color: #FF9900;
+}
+#WinkelWagenInhoud li p{
+    color:#F2F2F2;
+}
+#ShoppingCartRegelKop li h4{
+    color: #CCCCCC;
+    font-weight: bold;
 }
