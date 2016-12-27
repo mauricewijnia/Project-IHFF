@@ -143,3 +143,10 @@
     color: #CCCCCC;
     font-weight: bold;
 }
+.RekenAf-btn{
+    background-color: #FF9900;
+    border-color: #FF9900;
+}
+.RekenAf-btn:hover{
+    background-color: #ff6600;
+}

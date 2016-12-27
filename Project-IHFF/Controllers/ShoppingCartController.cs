@@ -18,25 +18,35 @@ namespace Project_IHFF.Controllers
             if (Session["products"] != null)
             {
                 tickets = Session["products"] as List<Tickets>;
-            }       
+            }
 
             Session["Products"] = tickets;
             decimal totaalprijs = 0;
-            if (Session["products"] as List<Tickets> != null)
+            decimal Korting = 0;
+
+            if (Session["products"] as List<Tickets> != null) //alleen bereken als er iets te berekenen valt
             {
-                foreach (FilmTickets film in Session["products"] as List<Tickets>) // berekent totaalprijs
+                foreach (Tickets film in Session["products"] as List<Tickets>) // berekent totaalprijs
                 {
-                    FilmExhibitions exo = film.FilmExhibitions;
-                    Films filmpje = exo.Films;
-                    totaalprijs = totaalprijs + (filmpje.price * film.quantity);
+                    if (film is FilmTickets)
+                    {
+                        FilmExhibitions exo = (((FilmTickets)film).FilmExhibitions);
+                        Films filmpje = exo.Films;
+                        Orders order = new Orders();
+                        if (tickets.Count > 1)
+                        {
+                            totaalprijs = totaalprijs + (filmpje.price * film.quantity);
+                            Korting = totaalprijs * (decimal)0.05;
+                        }
+                        totaalprijs = totaalprijs - Korting;
+                    }
+                    
                 }
             }
             ViewBag.TotaalPrijs = totaalprijs;
+            ViewBag.Korting = Korting;
 
-
-            
-
-                return View(tickets);
+            return View(tickets);
         }
 
         public ActionResult Add(int id, int Quantity)
@@ -78,7 +88,7 @@ namespace Project_IHFF.Controllers
             {
                 tickets.Add(ticket);
             }
-            
+
 
             Session["Products"] = tickets;
             return RedirectToAction("Index");
@@ -91,11 +101,28 @@ namespace Project_IHFF.Controllers
         {
             List<Tickets> tickets = Session["products"] as List<Tickets>;
 
-            foreach (FilmTickets film in tickets)
+            foreach (Tickets ticket in tickets)
             {
-                if (film.id == id)
+                if (ticket is FilmTickets)
                 {
-                    film.quantity++;
+                    if ((((FilmTickets)ticket).id) == id)
+                    {
+                        (((FilmTickets)ticket).quantity)++;
+                    }                   
+                }
+                else if (ticket is RestaurantReservation)
+                {
+                    if ((((RestaurantReservation)ticket).id) == id)
+                    {
+                        (((RestaurantReservation)ticket).quantity)++;
+                    }
+                }
+                else if (ticket is SpecialTicket)
+                {
+                    if ((((SpecialTicket)ticket).id) == id)
+                    {
+                        (((SpecialTicket)ticket).quantity)++;
+                    }
                 }
             }
 
@@ -106,11 +133,30 @@ namespace Project_IHFF.Controllers
         public ActionResult DownQuantity(int id)
         {
             List<Tickets> tickets = Session["products"] as List<Tickets>;
-            foreach (FilmTickets film in tickets)
+
+            foreach (Tickets ticket in tickets)
             {
-                if (film.id == id)
+                if (ticket is FilmTickets)
                 {
-                    film.quantity--;
+                    if ((((FilmTickets)ticket).id) == id)
+                    {
+                        (((FilmTickets)ticket).quantity)--;
+                    }
+                  
+                }
+                else if (ticket is RestaurantReservation)
+                {
+                    if ((((RestaurantReservation)ticket).id) == id)
+                    {
+                        (((RestaurantReservation)ticket).quantity)--;
+                    }
+                }
+                else if (ticket is SpecialTicket)
+                {
+                    if ((((SpecialTicket)ticket).id) == id)
+                    {
+                        (((SpecialTicket)ticket).quantity)--;
+                    }
                 }
             }
 

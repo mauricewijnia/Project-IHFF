@@ -38,11 +38,11 @@ namespace Project_IHFF.Controllers
             FilmtTicket.FilmExhibitions = exo;
             tickets.Add(FilmtTicket);
 
+            // -------------------------------------------------- 2e ticket
             //fake Film
             Films film2 = new Films();
             film2.name = "SexInTheSicty";
             film2.price = 2;
-            // -------------------------------------------------- 2e ticket
             //Fake Exobision
             FilmExhibitions exo2 = new FilmExhibitions();
             exo2.endTime = new DateTime(2016, 3, 9, 17, 3, 7, 123);
@@ -50,7 +50,7 @@ namespace Project_IHFF.Controllers
             exo2.filmId = 5;
             exo2.Films = film2;
 
-
+            
             //fake FilmTicket;
             FilmTickets FilmtTicket2 = new FilmTickets();
             FilmtTicket2.id = 5;
@@ -58,7 +58,31 @@ namespace Project_IHFF.Controllers
             FilmtTicket2.quantity = 9;
             FilmtTicket2.FilmExhibitions = exo2;
             tickets.Add(FilmtTicket2);
-            //---------------------------------------------------------------
+
+            // -------------------------------------------------- 3e ticket
+            Restaurants restauranttje = new Restaurants();
+            restauranttje.name = "McDonalds";
+            restauranttje.id = 12;
+
+            RestaurantReservation restaurant = new RestaurantReservation();
+            restaurant.id = 22;
+            restaurant.reservationTime = new DateTime(2016, 3, 9, 20, 1, 3, 123);
+            restaurant.quantity = 3;
+            restaurant.Restaurants = restauranttje;
+            tickets.Add(restaurant);
+
+            // -------------------------------------------------- 4e ticket
+            Specials specialtje = new Specials();
+            specialtje.name = "Prater";
+            specialtje.startTime = new DateTime(2016, 3, 8, 13, 2, 3, 123);
+            specialtje.endTime = new DateTime(2016, 3, 8, 15, 2, 3, 123);
+
+            SpecialTicket special = new SpecialTicket();
+            special.id = 23;
+            special.quantity = 3;
+            special.Specials = specialtje;
+            tickets.Add(special);
+            //--------------------------------------------------------------- STOP FAKE
 
             Session["Tickets"] = tickets; //gooi de lijst met alle tickets in deze Session pls :)
             return View(tickets);
