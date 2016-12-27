@@ -18,16 +18,31 @@ namespace Project_IHFF.Controllers
             if (Session["products"] != null)
             {
                 tickets = Session["products"] as List<Tickets>;
-            }         
+            }       
 
             Session["Products"] = tickets;
-            return View(tickets);
+            decimal totaalprijs = 0;
+            if (Session["products"] as List<Tickets> != null)
+            {
+                foreach (FilmTickets film in Session["products"] as List<Tickets>) // berekent totaalprijs
+                {
+                    FilmExhibitions exo = film.FilmExhibitions;
+                    Films filmpje = exo.Films;
+                    totaalprijs = totaalprijs + (filmpje.price * film.quantity);
+                }
+            }
+            ViewBag.TotaalPrijs = totaalprijs;
+
+
+            
+
+                return View(tickets);
         }
 
         public ActionResult Add(int id, int Quantity)
         {
-            FilmTickets ticket = new FilmTickets();
-            foreach (FilmTickets film in Session["Tickets"] as List<Tickets>) // zoek toegevoegde ticket in lijst met alle tickets
+            Tickets ticket = new Tickets();
+            foreach (Tickets film in Session["Tickets"] as List<Tickets>) // zoek toegevoegde ticket in lijst met alle tickets
             {
                 if (film.id == id)
                 {
@@ -43,21 +58,20 @@ namespace Project_IHFF.Controllers
                 tickets = Session["products"] as List<Tickets>;
             }
 
-
-
+            int test = 1;
             if (Session["products"] as List<Tickets> != null) // als winkelmandje leeg is moet product sws worden toegevoegd
             {
-                foreach (FilmTickets film in Session["products"] as List<Tickets>) // kijk of toegevoegde ticket al bestaat in winkelwagentje
+                foreach (Tickets film in Session["products"] as List<Tickets>) // kijk of toegevoegde ticket al bestaat in winkelwagentje
                 {
                     if (film.id == id)
                     {
                         film.quantity = film.quantity + Quantity; // hoog de quantity op in plaats van hem toe te voegen
+                        test = 2;
                     }
-                    else
-                    {
-
-                        tickets.Add(ticket);
-                    }
+                }
+                if (test == 1) //als de Quantity niet veranderd is, toevoegen
+                {
+                    tickets.Add(ticket);
                 }
             }
             else
@@ -92,7 +106,6 @@ namespace Project_IHFF.Controllers
         public ActionResult DownQuantity(int id)
         {
             List<Tickets> tickets = Session["products"] as List<Tickets>;
-
             foreach (FilmTickets film in tickets)
             {
                 if (film.id == id)
