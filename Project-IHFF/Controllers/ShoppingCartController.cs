@@ -52,6 +52,9 @@ namespace Project_IHFF.Controllers
         public ActionResult Add(int id, int Quantity)
         {
             Tickets ticket = new Tickets();
+
+
+
             foreach (Tickets film in Session["Tickets"] as List<Tickets>) // zoek toegevoegde ticket in lijst met alle tickets
             {
                 if (film.id == id)
