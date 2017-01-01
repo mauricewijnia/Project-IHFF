@@ -11,7 +11,7 @@ namespace Project_IHFF.Repositories
     interface IAccountRepository
     {
         Accounts GetAccount(string emailAddress, string password);
-        void CreateAccount(string Name, string Emailadress, string Password);
+        void CreateAccount(string firstName, string LastName, string phoneNumber, string Emailadress, string Password);
         int GetContactIdByMail(string Emailaddress);
         IEnumerable<Accounts> GetAllAccount();
 
@@ -25,11 +25,13 @@ namespace Project_IHFF.Repositories
 
     private ModelContainer ctx = new ModelContainer();
 
-    public void CreateAccount(string Name, string Emailadress, string Password)
+    public void CreateAccount(string firstName, string lastName, string phoneNumber, string Emailadress, string Password)
     {
         Accounts account = new Accounts();
+        account.firstName = firstName;
+        account.lastName = lastName;
+        account.phoneNumber = phoneNumber;
         account.email = Emailadress;
-        account.firstName = Name;
         account.password = Password;
         ctx.AccountSet.Add(account);
         ctx.SaveChanges();
@@ -56,7 +58,7 @@ namespace Project_IHFF.Repositories
        Accounts account = new Accounts();
         if (person != null)
         {
-     //      account = ctx.AccountSet.Find(person.ContactAccountId);
+          account = ctx.AccountSet.Find(person.id);
         }
 
         return account;
