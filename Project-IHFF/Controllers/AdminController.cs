@@ -26,9 +26,7 @@ namespace Project_IHFF.Controllers
 
         public ActionResult _AddFilm()
         {
-            FilmsViewModel filmViewModel = new FilmsViewModel();
-            
-            return PartialView(filmViewModel);
+            return PartialView(new FilmsViewModel());
         }
 
         [HttpPost]
@@ -39,7 +37,7 @@ namespace Project_IHFF.Controllers
             Items item = repository.GetItemByName(filmViewModel.film.name);
             
 
-            return PartialView();
+            return View();
         }
 
 

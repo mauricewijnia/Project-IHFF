@@ -106,7 +106,7 @@
       <PropertyRef Name="id" />
     </Key>
     <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="quantity" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="quantity" Type="int" Nullable="false" />
     <Property Name="orderId" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="FilmExhibitionsSet">

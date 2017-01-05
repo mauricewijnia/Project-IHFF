@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 12/23/2016 11:54:36
+-- Date Created: 12/28/2016 15:26:49
 -- Generated from EDMX file: C:\Users\mauri\Source\Repos\Project-IHFF\Project-IHFF\Models\Model.edmx
 -- --------------------------------------------------
 
@@ -135,7 +135,7 @@ GO
 -- Creating table 'TicketsSet'
 CREATE TABLE [dbo].[TicketsSet] (
     [id] int IDENTITY(1,1) NOT NULL,
-    [quantity] nvarchar(max)  NOT NULL,
+    [quantity] int  NOT NULL,
     [orderId] int  NOT NULL
 );
 GO

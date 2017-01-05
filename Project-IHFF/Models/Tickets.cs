@@ -19,7 +19,5 @@ namespace Project_IHFF.Models
         public int orderId { get; set; }
     
         public virtual Orders Orders { get; set; }
-
-
     }
 }

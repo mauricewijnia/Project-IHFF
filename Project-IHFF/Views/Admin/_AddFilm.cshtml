@@ -1,9 +1,8 @@
 ﻿@using Project_IHFF.Models
 @model FilmsViewModel
 
-
 @Html.ValidationSummary()
-@using (Html.BeginForm("_AddFilm", "AdminController", FormMethod.Post))
+@using (Html.BeginForm("_AddFilm"))
 {
     <label>Name: </label>
     @Html.TextBoxFor(x => x.film.name)
@@ -32,6 +31,7 @@
     <br />
     <label>Starting Time:</label>
     @Html.TextBoxFor(x => x.exhibitionA.startTime)
+
     <br />
     <label>Ending Time:</label>
     @Html.TextBoxFor(x => x.exhibitionA.endTime)
@@ -45,6 +45,8 @@
     <label>Ending Time:</label>
     @Html.TextBoxFor(x => x.exhibitionB.endTime)
     <br />
+    
+
 
     <input type="submit" value="Submit" class="btn btn-primary" />
 }
