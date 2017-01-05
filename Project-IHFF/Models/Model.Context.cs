@@ -13,7 +13,7 @@ namespace Project_IHFF.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class ModelContainer : DbContext
+    public partial class ModelContainer : DbContext 
     {
         public ModelContainer()
             : base("name=ModelContainer")
