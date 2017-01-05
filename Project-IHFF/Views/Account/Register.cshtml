@@ -1,0 +1,39 @@
+﻿
+@{
+    ViewBag.Title = "Register";
+}
+
+
+<h2>@ViewBag.newAccount</h2>
+<p>@ViewBag.error</p>
+
+<form method="post" action="Register">
+    <p>First Name:</p>
+    <input type="text" name="firstName" />
+    <br /> <br />
+    <p>Last Name:</p>
+    <input type="text" name="lastName" />
+    <br /> <br />
+    <p>Phone Number:</p>
+    <input type="text" name="phoneNumber" />
+    <br /> <br />
+    <p>Emailadress:</p>
+    <input type="text" name="EmailAdress" />
+    <br /> <br />
+    <p>Password:</p>
+    <input type="password" name="password" />
+    <br /> <br />
+    <p>Repeat Password:</p>
+    <input type="password" name="Passwordcheck" />
+    <br /> <br />
+
+    <input type="submit" value="Register" />
+</form>
+
+<br />
+@Html.ActionLink("Login",
+                "Login",
+                "Account",
+                 null,
+                 null
+                )
