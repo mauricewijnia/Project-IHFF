@@ -10,11 +10,14 @@
     <!-- Required jQuery and jQuery UI Javascript references -->
     <script src="@Url.Content("~/Scripts/jquery-1.7.1.min.js")"></script>
     <script src="@Url.Content("~/Scripts/jquery-ui-1.10.4.min.js")"></script>
+     
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    
+    @RenderSection("scripts", required: false)
 
     @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
-    <link href="@Url.Content("~/Content/custom.css")"
-          rel="stylesheet" type="text/css" />
 
     
 </head>
@@ -36,7 +39,7 @@
                         <br />
                         <br />
                         <ul id="DikkeNavTekst" class="nav navbar-nav">
-                            <li><a href='@Url.Action("Index", "Home")'><img id="logo" src="img\logo.png" /></a></li>
+                            <li><a href='@Url.Action("Index", "Home")'><img id="logo" src="/img/logo.png" /></a></li>
                             <li><a class="glyphicon glyphicon-home NavIcons" href='@Url.Action("Index", "Home")'></a></li>
                             <li>@Html.ActionLink("Film", "Index", "Film")</li>
                             <li>@Html.ActionLink("Restaurant", "About", "Home")</li>
@@ -54,8 +57,5 @@
         @RenderBody()
        
     </div>
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
 </body>
 </html>

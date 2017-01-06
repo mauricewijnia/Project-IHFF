@@ -5,45 +5,45 @@
 @using (Html.BeginForm("_AddFilm"))
 {
     <label>Name: </label>
-    @Html.TextBoxFor(x => x.film.name)
+    @Html.TextBoxFor(x => x.film.name, new { @class = "form-control"})
     <br />
     <label>Description:</label>
-    @Html.TextBoxFor(x => x.film.description)
+    @Html.TextBoxFor(x => x.film.description, new { @class = "form-control" })
     <br />
     <label>Location: </label>
-    @Html.TextBoxFor(x => x.film.location)
+    @Html.TextBoxFor(x => x.film.location, new { @class = "form-control" })
     <br />
     <label>Price: </label>
-    @Html.TextBoxFor(x => x.film.price)
+    @Html.TextBoxFor(x => x.film.price, new { @class = "form-control" })
     <br />
     <label>Directors:</label>
-    @Html.TextBoxFor(x => x.film.director)
+    @Html.TextBoxFor(x => x.film.director, new { @class = "form-control" })
     <br />
     <label>Actors: </label>
-    @Html.TextBoxFor(x => x.film.actors)
+    @Html.TextBoxFor(x => x.film.actors, new { @class = "form-control" })
     <br />
     <label>Capacity: </label>
-    @Html.TextBoxFor(x => x.film.capacity)
+    @Html.TextBoxFor(x => x.film.capacity, new { @class = "form-control" })
     <br />
     <br />
 
     <label>First Exhibition</label>
     <br />
     <label>Starting Time:</label>
-    @Html.TextBoxFor(x => x.exhibitionA.startTime)
+    @Html.TextBoxFor(x => x.exhibitionA.startTime, new { @class = "form-control" })
 
     <br />
     <label>Ending Time:</label>
-    @Html.TextBoxFor(x => x.exhibitionA.endTime)
+    @Html.TextBoxFor(x => x.exhibitionA.endTime, new { @class = "form-control" })
     <br />
     <br />
     <label>Second Exhibition (Optional)</label>
     <br />
     <label>Starting Time:</label>
-    @Html.TextBoxFor(x => x.exhibitionB.startTime)
+    @Html.TextBoxFor(x => x.exhibitionB.startTime, new { @class = "form-control" })
     <br />
     <label>Ending Time:</label>
-    @Html.TextBoxFor(x => x.exhibitionB.endTime)
+    @Html.TextBoxFor(x => x.exhibitionB.endTime, new { @class = "form-control" })
     <br />
     
 
