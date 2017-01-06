@@ -20,7 +20,5 @@ namespace Project_IHFF.Models
         public decimal price { get; set; }
         public string name { get; set; }
         public string imagePath { get; set; }
-
-
     }
 }

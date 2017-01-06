@@ -17,7 +17,6 @@ namespace Project_IHFF.Models
         {
             film = new Films();
             exhibitions = new List<FilmExhibitions>();
-            
         }
         
     }
