@@ -5,48 +5,65 @@
 @using (Html.BeginForm("_AddFilm"))
 {
     <label>Name: </label>
-    @Html.TextBoxFor(x => x.film.name)
+    @Html.TextBoxFor(x => x.film.name, new { @class = "form-control"})
     <br />
     <label>Description:</label>
-    @Html.TextBoxFor(x => x.film.description)
+    @Html.TextBoxFor(x => x.film.description, new { @class = "form-control" })
     <br />
     <label>Location: </label>
-    @Html.TextBoxFor(x => x.film.location)
+    @Html.TextBoxFor(x => x.film.location, new { @class = "form-control" })
     <br />
     <label>Price: </label>
-    @Html.TextBoxFor(x => x.film.price)
+    @Html.TextBoxFor(x => x.film.price, new { @class = "form-control" })
     <br />
     <label>Directors:</label>
-    @Html.TextBoxFor(x => x.film.director)
+    @Html.TextBoxFor(x => x.film.director, new { @class = "form-control" })
     <br />
     <label>Actors: </label>
-    @Html.TextBoxFor(x => x.film.actors)
+    @Html.TextBoxFor(x => x.film.actors, new { @class = "form-control" })
     <br />
     <label>Capacity: </label>
-    @Html.TextBoxFor(x => x.film.capacity)
-    <br />
-    <br />
-
-    <label>First Exhibition</label>
-    <br />
-    <label>Starting Time:</label>
-    @Html.TextBoxFor(x => x.exhibitionA.startTime)
-
-    <br />
-    <label>Ending Time:</label>
-    @Html.TextBoxFor(x => x.exhibitionA.endTime)
-    <br />
-    <br />
-    <label>Second Exhibition (Optional)</label>
-    <br />
-    <label>Starting Time:</label>
-    @Html.TextBoxFor(x => x.exhibitionB.startTime)
-    <br />
-    <label>Ending Time:</label>
-    @Html.TextBoxFor(x => x.exhibitionB.endTime)
-    <br />
+    @Html.TextBoxFor(x => x.film.capacity, new { @class = "form-control" })
     
+    <br />
+    <br />
 
+    <label>Exhibition:</label><br />
+    <label>Starting Time:</label>
+    @Html.TextBoxFor(x => x.exhibitions[0].startTime, new { @class = "form-control" })
+
+    <br />
+    <label>Ending Time:</label>
+    @Html.TextBoxFor(x => x.exhibitions[0].endTime, new { @class = "form-control" })
+    <br />
+    <br />
+    <div id="HiddenDiv">
+        <label>Second Exhibition (Optional)</label>
+        <br />
+        <label>Starting Time:</label>
+        @Html.TextBoxFor(x => x.exhibitions[1].startTime, new { @class = "form-control", id = "HiddenTextBox" })
+        <br />
+        <label>Ending Time:</label>
+        @Html.TextBoxFor(x => x.exhibitions[1].endTime, new { @class = "form-control", id = "HiddenTextBox" })
+        <br />
+    </div>
+
+
+    <input type="button" id="VisibilityButton" name="show" value="+ Add second exhibition" onclick="showDiv()" class="btn btn-primary" />
+
+    <script>
+        function showDiv() {
+            document.getElementById('HiddenDiv').style.display = "block";
+            document.getElementById('VisibilityButton').value = "- Remove second exhibition";
+            document.getElementById('VisibilityButton').onclick = function () { hideDiv() };
+        }
+
+        function hideDiv() {
+            document.getElementById('HiddenDiv').style.display = "none";
+            document.getElementById('VisibilityButton').value = "+ Add second exhibition";
+            document.getElementById('VisibilityButton').onclick = function () { showDiv() };
+        }
+    </script>
 
     <input type="submit" value="Submit" class="btn btn-primary" />
 }

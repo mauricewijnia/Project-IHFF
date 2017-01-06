@@ -5,22 +5,22 @@
 @using (Html.BeginForm("_AddRestaurant"))
 {
     <label>Name: </label>
-    @Html.TextBoxFor(x => x.name)
+    @Html.TextBoxFor(x => x.name, new { @class = "form-control" })
     <br />
     <label>Description: </label>
-    @Html.TextBoxFor(x => x.description)
+    @Html.TextBoxFor(x => x.description, new { @class = "form-control" })
     <br />
     <label>Location: </label>
-    @Html.TextBoxFor(x => x.location)
+    @Html.TextBoxFor(x => x.location, new { @class = "form-control" })
     <br />
     <label>Reservation Cost:</label>
-    @Html.TextBoxFor(x=>x.price)
+    @Html.TextBoxFor(x=>x.price, new { @class = "form-control" })
     <br />
     <label>Opening Time: </label>
-    @Html.TextBoxFor(x => x.timeOpen)
+    @Html.TextBoxFor(x => x.timeOpen, new { @class = "form-control" })
     <br />
     <label>Closing Time: </label>
-    @Html.TextBoxFor(x => x.timeClosed)
+    @Html.TextBoxFor(x => x.timeClosed, new { @class = "form-control" })
     <br />
     <input type="submit" value="Submit" class="btn btn-primary" />
 }

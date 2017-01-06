@@ -33,32 +33,32 @@ namespace Project_IHFF.Repositories
         account.phoneNumber = phoneNumber;
         account.email = Emailadress;
         account.password = Password;
-        ctx.AccountSet.Add(account);
+        ctx.Accounts.Add(account);
         ctx.SaveChanges();
     }
 
     public Accounts GetAccount(string emailAddress, string password)
     {
         Accounts account;
-        account = ctx.AccountSet.SingleOrDefault(a => a.email == emailAddress && a.password == password);
+        account = ctx.Accounts.SingleOrDefault(a => a.email == emailAddress && a.password == password);
         return account;
     }
 
     public Accounts GetAccountByAccountId(int id)
     {
-        Accounts account = ctx.AccountSet.Find(id);
+        Accounts account = ctx.Accounts.Find(id);
         return account;
     }
 
    public Accounts GetAccountById(int id)
     {
        Persons person;
-       person = ctx.AccountSet.Find(id);
+       person = ctx.Accounts.Find(id);
 
        Accounts account = new Accounts();
         if (person != null)
         {
-          account = ctx.AccountSet.Find(person.id);
+          account = ctx.Accounts.Find(person.id);
         }
 
         return account;
@@ -66,14 +66,14 @@ namespace Project_IHFF.Repositories
 
     public IEnumerable<Accounts> GetAllAccount()
     {
-        IEnumerable<Accounts> AllAccounts = ctx.AccountSet.Select(A => A);
+        IEnumerable<Accounts> AllAccounts = ctx.Accounts.Select(A => A);
         return AllAccounts;
     }
 
     public int GetContactIdByMail(string Emailaddress)
     {
         Accounts account;
-        account = ctx.AccountSet.SingleOrDefault(c => c.email == Emailaddress);
+        account = ctx.Accounts.SingleOrDefault(c => c.email == Emailaddress);
         if (account != null)
         {
             return account.id;

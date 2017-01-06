@@ -150,3 +150,60 @@
 .RekenAf-btn:hover{
     background-color: #ff6600;
 }
+
+#HiddenDiv{
+    display: none;
+}
+
+/* Bootstrap override*/
+
+.nav-tabs{
+    border-bottom-color: #FF9900;
+}
+
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus{
+    background-color: #FF9900;
+    border-color: #FF9900;
+    color: white;   
+}
+
+.nav-tabs > li > a{
+    color: black;
+}
+
+.btn-primary{
+    color: white;
+    background-color: #FF9900;
+    border-color: #FF9900;
+}
+
+.btn-primary:hover{
+    background-color: #ff6600;
+    border-color: #ff6600;
+}
+
+.btn-primary:active{
+    background-color: #ff6600;
+    border-color: #ff6600;
+}
+
+textarea:focus,
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="datetime"]:focus,
+input[type="datetime-local"]:focus,
+input[type="date"]:focus,
+input[type="month"]:focus,
+input[type="time"]:focus,
+input[type="week"]:focus,
+input[type="number"]:focus,
+input[type="email"]:focus,
+input[type="url"]:focus,S
+input[type="search"]:focus,
+input[type="tel"]:focus,
+input[type="color"]:focus,
+.uneditable-input:focus {   
+  border-color: #ff6600;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, #ff6600;
+  outline: 0 none;
+}
