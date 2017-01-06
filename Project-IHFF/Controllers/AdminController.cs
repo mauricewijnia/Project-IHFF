@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using Project_IHFF.Models;
 using Project_IHFF.Repositories;
+using System.IO;
 
 namespace Project_IHFF.Controllers
 {
@@ -26,15 +27,39 @@ namespace Project_IHFF.Controllers
 
         public ActionResult _AddFilm()
         {
-            return PartialView(new FilmsViewModel());
+            FilmsViewModel filmsViewModel = new FilmsViewModel();
+            filmsViewModel.exhibitions.Add(new FilmExhibitions());
+            filmsViewModel.exhibitions.Add(new FilmExhibitions());
+            filmsViewModel.exhibitions[0].startTime = new DateTime(2017, 1, 1, 0, 0, 0);
+            filmsViewModel.exhibitions[0].endTime = new DateTime(2017, 1, 1, 0, 0, 0);
+            filmsViewModel.exhibitions[1].startTime = new DateTime(2017, 1, 1, 0, 0, 0);
+            filmsViewModel.exhibitions[1].endTime = new DateTime(2017, 1, 1, 0, 0, 0);
+
+            return PartialView(filmsViewModel);
         }
 
         [HttpPost]
         public ActionResult _AddFilm(FilmsViewModel filmViewModel)
         {
-            repository.AddItem(filmViewModel.film);
+            if (filmViewModel.exhibitions[0].startTime != new DateTime(2017, 1, 1, 0, 0, 0))
+            {
+                repository.AddItem(filmViewModel.film);
+                Items item = repository.GetItemByName(filmViewModel.film.name);
+                foreach (var exhibition in filmViewModel.exhibitions)
+                {
+                    exhibition.filmId = item.id;
+                    if (exhibition.startTime != new DateTime(2017, 1, 1, 0, 0, 0))
+                    {
+                        repository.AddFilmExhibition(exhibition);
+                    }
 
-            Items item = repository.GetItemByName(filmViewModel.film.name);
+                }
+            }
+            else
+            {
+                // throw error
+            }
+            
             
 
             return View();

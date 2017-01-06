@@ -24,11 +24,11 @@
     <br />
     <label>Capacity: </label>
     @Html.TextBoxFor(x => x.film.capacity, new { @class = "form-control" })
+    
     <br />
     <br />
 
-    <label>First Exhibition</label>
-    <br />
+    <label>Exhibition:</label><br />
     <label>Starting Time:</label>
     @Html.TextBoxFor(x => x.exhibitions[0].startTime, new { @class = "form-control" })
 
@@ -41,12 +41,13 @@
         <label>Second Exhibition (Optional)</label>
         <br />
         <label>Starting Time:</label>
-        @Html.TextBoxFor(x => x.exhibitions[1].startTime, new { @class = "form-control", id="HiddenTextBox"})
+        @Html.TextBoxFor(x => x.exhibitions[1].startTime, new { @class = "form-control", id = "HiddenTextBox" })
         <br />
         <label>Ending Time:</label>
-        @Html.TextBoxFor(x => x.exhibitions[1].endTime, new { @class = "form-control", id="HiddenTextBox" })
+        @Html.TextBoxFor(x => x.exhibitions[1].endTime, new { @class = "form-control", id = "HiddenTextBox" })
         <br />
     </div>
+
 
     <input type="button" id="VisibilityButton" name="show" value="+ Add second exhibition" onclick="showDiv()" class="btn btn-primary" />
 
@@ -63,9 +64,6 @@
             document.getElementById('VisibilityButton').onclick = function () { showDiv() };
         }
     </script>
-
-
-
 
     <input type="submit" value="Submit" class="btn btn-primary" />
 }

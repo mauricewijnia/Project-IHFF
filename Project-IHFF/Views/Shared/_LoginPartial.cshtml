@@ -5,14 +5,16 @@
     {
     @Html.AntiForgeryToken()
     <ul id="KleineTekstInNav" class="nav navbar-nav">
-
-        <li>
-            @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Manage", "Account", routeValues: null, htmlAttributes: new { title = "Manage" })
-        </li>
+        
+        <li>@Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Home")</li>
+        @if (User.Identity.Name == "admin")
+        {
+            <li>@Html.ActionLink("Manage content", "Index", "Admin")</li>
+        }
         <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
         <li>@Html.ActionLink("Contact", "Index", "Home")</li>
-        <li><img class="TaalVlag" src="img\engels.png" /></li>
-        <li><img class="TaalVlag" src="img\nl.png" /></li>
+        <li><img class="TaalVlag" src="/img/engels.png" /></li>
+        <li><img class="TaalVlag" src="/img/nl.png" /></li>
 
     </ul>
     }
