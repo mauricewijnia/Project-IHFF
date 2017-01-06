@@ -30,22 +30,41 @@
     <label>First Exhibition</label>
     <br />
     <label>Starting Time:</label>
-    @Html.TextBoxFor(x => x.exhibitionA.startTime, new { @class = "form-control" })
+    @Html.TextBoxFor(x => x.exhibitions[0].startTime, new { @class = "form-control" })
 
     <br />
     <label>Ending Time:</label>
-    @Html.TextBoxFor(x => x.exhibitionA.endTime, new { @class = "form-control" })
+    @Html.TextBoxFor(x => x.exhibitions[0].endTime, new { @class = "form-control" })
     <br />
     <br />
-    <label>Second Exhibition (Optional)</label>
-    <br />
-    <label>Starting Time:</label>
-    @Html.TextBoxFor(x => x.exhibitionB.startTime, new { @class = "form-control" })
-    <br />
-    <label>Ending Time:</label>
-    @Html.TextBoxFor(x => x.exhibitionB.endTime, new { @class = "form-control" })
-    <br />
-    
+    <div id="HiddenDiv">
+        <label>Second Exhibition (Optional)</label>
+        <br />
+        <label>Starting Time:</label>
+        @Html.TextBoxFor(x => x.exhibitions[1].startTime, new { @class = "form-control", id="HiddenTextBox"})
+        <br />
+        <label>Ending Time:</label>
+        @Html.TextBoxFor(x => x.exhibitions[1].endTime, new { @class = "form-control", id="HiddenTextBox" })
+        <br />
+    </div>
+
+    <input type="button" id="VisibilityButton" name="show" value="+ Add second exhibition" onclick="showDiv()" class="btn btn-primary" />
+
+    <script>
+        function showDiv() {
+            document.getElementById('HiddenDiv').style.display = "block";
+            document.getElementById('VisibilityButton').value = "- Remove second exhibition";
+            document.getElementById('VisibilityButton').onclick = function () { hideDiv() };
+        }
+
+        function hideDiv() {
+            document.getElementById('HiddenDiv').style.display = "none";
+            document.getElementById('VisibilityButton').value = "+ Add second exhibition";
+            document.getElementById('VisibilityButton').onclick = function () { showDiv() };
+        }
+    </script>
+
+
 
 
     <input type="submit" value="Submit" class="btn btn-primary" />

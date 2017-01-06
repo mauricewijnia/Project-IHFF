@@ -151,6 +151,11 @@
     background-color: #ff6600;
 }
 
+#HiddenDiv{
+    display: none;
+}
+
+/* Bootstrap override*/
 
 .nav-tabs{
     border-bottom-color: #FF9900;

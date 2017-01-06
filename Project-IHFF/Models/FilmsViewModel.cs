@@ -9,15 +9,15 @@ namespace Project_IHFF.Models
     {
         public Films film { get; set; }
 
-        public FilmExhibitions exhibitionA { get; set; }
-        public FilmExhibitions exhibitionB { get; set; }
+        public List<FilmExhibitions> exhibitions { get; set; }
+        
 
 
         public FilmsViewModel()
         {
             film = new Films();
-            exhibitionA = new FilmExhibitions();
-            exhibitionB = new FilmExhibitions();
+            exhibitions = new List<FilmExhibitions>();
+            
         }
         
     }
