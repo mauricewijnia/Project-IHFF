@@ -12,10 +12,10 @@ namespace Project_IHFF.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class FilmExhibitions
+    public partial class Exhibitions
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public FilmExhibitions()
+        public Exhibitions()
         {
             this.FilmTickets = new HashSet<FilmTickets>();
         }

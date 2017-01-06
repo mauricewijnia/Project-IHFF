@@ -13,7 +13,7 @@ namespace Project_IHFF.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class ModelContainer : DbContext 
+    public partial class ModelContainer : DbContext
     {
         public ModelContainer()
             : base("name=ModelContainer")
@@ -29,7 +29,6 @@ namespace Project_IHFF.Models
         public virtual DbSet<Items> Items { get; set; }
         public virtual DbSet<Persons> Persons { get; set; }
         public virtual DbSet<Tickets> TicketsSet { get; set; }
-        public virtual DbSet<FilmExhibitions> FilmExhibitionsSet { get; set; }
-        public virtual DbSet<Accounts> AccountSet { get; set; }
+        public virtual DbSet<Exhibitions> ExhibitionsSet { get; set; }
     }
 }

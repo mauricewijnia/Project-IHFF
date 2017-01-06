@@ -358,14 +358,14 @@
             <End Role="Orders" EntitySet="Orders" />
           </AssociationSet>
           <EntitySet Name="TicketsSet" EntityType="Model.Tickets" />
-          <EntitySet Name="FilmExhibitionsSet" EntityType="Model.FilmExhibitions" />
+          <EntitySet Name="ExhibitionsSet" EntityType="Model.Exhibitions" />
           <AssociationSet Name="FilmExhibitionsFilms" Association="Model.FilmExhibitionsFilms">
-            <End Role="FilmExhibitions" EntitySet="FilmExhibitionsSet" />
+            <End Role="FilmExhibitions" EntitySet="ExhibitionsSet" />
             <End Role="Films" EntitySet="Items" />
           </AssociationSet>
           <AssociationSet Name="FilmTicketsFilmExhibitions" Association="Model.FilmTicketsFilmExhibitions">
             <End Role="FilmTickets" EntitySet="TicketsSet" />
-            <End Role="FilmExhibitions" EntitySet="FilmExhibitionsSet" />
+            <End Role="FilmExhibitions" EntitySet="ExhibitionsSet" />
           </AssociationSet>
           <AssociationSet Name="RestaurantReservationRestaurants" Association="Model.RestaurantReservationRestaurants">
             <End Role="RestaurantReservation" EntitySet="TicketsSet" />
@@ -407,7 +407,7 @@
           <Property Name="director" Type="String" Nullable="false" />
           <Property Name="actors" Type="String" Nullable="false" />
           <Property Name="capacity" Type="String" Nullable="false" />
-          <NavigationProperty Name="FilmExhibitions" Relationship="Model.FilmExhibitionsFilms" FromRole="Films" ToRole="FilmExhibitions" />
+          <NavigationProperty Name="Exhibitions" Relationship="Model.FilmExhibitionsFilms" FromRole="Films" ToRole="FilmExhibitions" />
         </EntityType>
         <EntityType Name="Specials" BaseType="Model.Items" >
           <Property Name="host" Type="String" Nullable="false" />
@@ -421,7 +421,7 @@
           <Property Name="timeClosed" Type="Time" Nullable="false" />
           <NavigationProperty Name="RestaurantReservation" Relationship="Model.RestaurantReservationRestaurants" FromRole="Restaurants" ToRole="RestaurantReservation" />
         </EntityType>
-        <EntityType Name="FilmExhibitions">
+        <EntityType Name="Exhibitions">
           <Key>
             <PropertyRef Name="id" />
           </Key>
@@ -468,7 +468,7 @@
           <Property Name="orderId" Type="Int32" Nullable="false" />
         </EntityType>
         <Association Name="FilmExhibitionsFilms">
-          <End Type="Model.FilmExhibitions" Role="FilmExhibitions" Multiplicity="*" />
+          <End Type="Model.Exhibitions" Role="FilmExhibitions" Multiplicity="*" />
           <End Type="Model.Films" Role="Films" Multiplicity="1" />
           <ReferentialConstraint>
             <Principal Role="Films">
@@ -485,7 +485,7 @@
         </EntityType>
         <Association Name="FilmTicketsFilmExhibitions">
           <End Type="Model.FilmTickets" Role="FilmTickets" Multiplicity="*" />
-          <End Type="Model.FilmExhibitions" Role="FilmExhibitions" Multiplicity="1" />
+          <End Type="Model.Exhibitions" Role="FilmExhibitions" Multiplicity="1" />
           <ReferentialConstraint>
             <Principal Role="FilmExhibitions">
               <PropertyRef Name="id" />
@@ -638,8 +638,8 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="FilmExhibitionsSet">
-      <EntityTypeMapping TypeName="IsTypeOf(Model.FilmExhibitions)">
+    <EntitySetMapping Name="ExhibitionsSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.Exhibitions)">
         <MappingFragment StoreEntitySet="FilmExhibitionsSet">
           <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="startTime" ColumnName="startTime" />

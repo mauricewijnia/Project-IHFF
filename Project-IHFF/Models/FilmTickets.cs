@@ -16,6 +16,6 @@ namespace Project_IHFF.Models
     {
         public int filmExhibitionId { get; set; }
     
-        public virtual FilmExhibitions FilmExhibitions { get; set; }
+        public virtual Exhibitions FilmExhibitions { get; set; }
     }
 }

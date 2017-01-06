@@ -24,13 +24,6 @@ namespace Project_IHFF.Models
         public string firstName { get; set; }
         public string lastName { get; set; }
         public string email { get; set; }
-
-        public Persons(string firstName, string lastName, string email)
-        {
-            this.firstName = firstName;
-            this.lastName = lastName;
-            this.email = email;
-        }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Orders> Orders { get; set; }

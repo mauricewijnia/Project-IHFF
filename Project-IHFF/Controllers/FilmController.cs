@@ -9,10 +9,17 @@ namespace Project_IHFF.Controllers
 {
     public class FilmController : Controller
     {
+
+
+        //public ActionResult FilmOverzicht()
+
         // GET: Film
         public ActionResult Index()
         {
 
+            /*IEnumerable<FilmExhibitions> allFilms = filmRepository.GetAllFilmExhibitions();
+            return View(allFilms);*/
+            
             // fake shit--------------------------------------------------------------------------------
 
             List<Tickets> tickets = new List<Tickets>();
@@ -23,7 +30,7 @@ namespace Project_IHFF.Controllers
             film.price = 7;
 
             //Fake Exobision
-            FilmExhibitions exo = new FilmExhibitions();
+            Exhibitions exo = new Exhibitions();
             exo.endTime = new DateTime(2016, 3, 9, 17, 5, 7, 123);
             exo.startTime = new DateTime(2016, 3, 9, 16, 5, 7, 123);
             exo.filmId = 6;
@@ -44,7 +51,7 @@ namespace Project_IHFF.Controllers
             film2.name = "SexInTheSicty";
             film2.price = 2;
             //Fake Exobision
-            FilmExhibitions exo2 = new FilmExhibitions();
+            Exhibitions exo2 = new Exhibitions();
             exo2.endTime = new DateTime(2016, 3, 9, 17, 3, 7, 123);
             exo2.startTime = new DateTime(2016, 3, 9, 16, 3, 2, 123);
             exo2.filmId = 5;

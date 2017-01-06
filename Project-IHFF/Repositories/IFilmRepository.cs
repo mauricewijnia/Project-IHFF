@@ -6,17 +6,17 @@ using Project_IHFF.Models;
 
 namespace Project_IHFF.Repositories
 {
-    interface IItemsRepository
-    {
-        IEnumerable<Items> GetItemsByOrderId();
+    interface IFilmRepository
+    {/*
+        IEnumerable<FilmExhibitions> GetAllFilmExhibitions();
         void AddItem(Items item);
-        void AddFilmExhibition(Exhibitions filmExhibition);
-        Items GetItemByName(string name);
+        void AddFilmExhibition(FilmExhibitions filmExhibition);
+        FilmExhibitions getFilmExhibition(int id);*/
     }
 
-    public class InMemoryItemsRepository : IItemsRepository
+    /*public class InMemoryItemsRepository : IItemsRepository
     {
-        public void AddFilmExhibition(Exhibitions filmExhibition)
+        public void AddFilmExhibition(FilmExhibitions filmExhibition)
         {
             throw new NotImplementedException();
         }
@@ -57,9 +57,9 @@ namespace Project_IHFF.Repositories
             ctx.SaveChanges();
         }
 
-        public void AddFilmExhibition(Exhibitions filmExhibition)
+        public void AddFilmExhibition(FilmExhibitions filmExhibition)
         {
-            ctx.ExhibitionsSet.Add(filmExhibition);
+            ctx.FilmExhibitionsSet.Add(filmExhibition);
             ctx.SaveChanges();
         }
 
@@ -68,5 +68,5 @@ namespace Project_IHFF.Repositories
             Items item = ctx.Items.SingleOrDefault(x => x.name == name);
             return item;
         }
-    }
+    }*/
 }
