@@ -11,15 +11,15 @@ namespace Project_IHFF.Controllers
     {
 
 
-        //public ActionResult FilmOverzicht()
+
 
         // GET: Film
         public ActionResult Index()
         {
 
-            /*IEnumerable<FilmExhibitions> allFilms = filmRepository.GetAllFilmExhibitions();
-            return View(allFilms);*/
-            
+            //IEnumerable<Exhibitions> allFilms = filmRepository.GetAllFilmExhibitions();
+            return View();
+            /*
             // fake shit--------------------------------------------------------------------------------
 
             List<Tickets> tickets = new List<Tickets>();
@@ -92,7 +92,7 @@ namespace Project_IHFF.Controllers
             //--------------------------------------------------------------- STOP FAKE
 
             Session["Tickets"] = tickets; //gooi de lijst met alle tickets in deze Session pls :)
-            return View(tickets);
+            return View(tickets);*/
         }
     }
 }

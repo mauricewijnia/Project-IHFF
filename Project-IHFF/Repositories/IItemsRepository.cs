@@ -57,9 +57,9 @@ namespace Project_IHFF.Repositories
             ctx.SaveChanges();
         }
 
-        public void AddFilmExhibition(Exhibitions filmExhibition)
+        public void AddFilmExhibition(Exhibitions Exhibition)
         {
-            ctx.ExhibitionsSet.Add(filmExhibition);
+            ctx.ExhibitionsSet.Add(Exhibition);
             ctx.SaveChanges();
         }
 
