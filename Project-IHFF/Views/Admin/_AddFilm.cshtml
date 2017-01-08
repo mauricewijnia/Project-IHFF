@@ -24,17 +24,21 @@
     <br />
     <label>Capacity: </label>
     @Html.TextBoxFor(x => x.film.capacity, new { @class = "form-control" })
-    
+
     <br />
     <br />
 
-    <label>Exhibition:</label><br />
+    <label>Exhibition:</label>
+    <br />
     <label>Starting Time:</label>
     @Html.TextBoxFor(x => x.exhibitions[0].startTime, new { @class = "form-control" })
+    @Html.ValidationMessageFor(x => x.exhibitions[0].endTime)
+
 
     <br />
     <label>Ending Time:</label>
     @Html.TextBoxFor(x => x.exhibitions[0].endTime, new { @class = "form-control" })
+    @Html.ValidationMessageFor(x => x.exhibitions[0].endTime)
     <br />
     <br />
     <div id="HiddenDiv">
@@ -42,16 +46,21 @@
         <br />
         <label>Starting Time:</label>
         @Html.TextBoxFor(x => x.exhibitions[1].startTime, new { @class = "form-control", id = "HiddenTextBox" })
+        @Html.ValidationMessageFor(x => x.exhibitions[1].startTime)
         <br />
         <label>Ending Time:</label>
         @Html.TextBoxFor(x => x.exhibitions[1].endTime, new { @class = "form-control", id = "HiddenTextBox" })
+        @Html.ValidationMessageFor(x => x.exhibitions[1].endTime)
         <br />
     </div>
 
 
     <input type="button" id="VisibilityButton" name="show" value="+ Add second exhibition" onclick="showDiv()" class="btn btn-primary" />
 
-    <script>
+    <input type="submit" value="Submit" class="btn btn-primary" />
+}
+
+<script type="text/javascript">
         function showDiv() {
             document.getElementById('HiddenDiv').style.display = "block";
             document.getElementById('VisibilityButton').value = "- Remove second exhibition";
@@ -63,7 +72,4 @@
             document.getElementById('VisibilityButton').value = "+ Add second exhibition";
             document.getElementById('VisibilityButton').onclick = function () { showDiv() };
         }
-    </script>
-
-    <input type="submit" value="Submit" class="btn btn-primary" />
-}
+</script>
