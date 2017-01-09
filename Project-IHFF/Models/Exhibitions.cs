@@ -11,6 +11,7 @@ namespace Project_IHFF.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     
     public partial class Exhibitions
     {
@@ -21,8 +22,13 @@ namespace Project_IHFF.Models
         }
     
         public int id { get; set; }
+
+        [DataType(DataType.DateTime)]
+        
         public System.DateTime startTime { get; set; }
-        public Nullable<System.DateTime> endTime { get; set; }
+
+        [DataType(DataType.DateTime)]
+        public System.DateTime endTime { get; set; }
         public int filmId { get; set; }
     
         public virtual Films Films { get; set; }

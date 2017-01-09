@@ -2,66 +2,74 @@
 @model FilmsViewModel
 
 @Html.ValidationSummary()
-@using (Html.BeginForm("_AddFilm"))
+@using (Html.BeginForm("_AddFilm", "Admin", FormMethod.Post, new { @enctype = "multipart/form-data" }))
 {
-    <label>Name: </label>
-    @Html.TextBoxFor(x => x.film.name, new { @class = "form-control"})
-    <br />
-    <label>Description:</label>
-    @Html.TextBoxFor(x => x.film.description, new { @class = "form-control" })
-    <br />
-    <label>Location: </label>
-    @Html.TextBoxFor(x => x.film.location, new { @class = "form-control" })
-    <br />
-    <label>Price: </label>
-    @Html.TextBoxFor(x => x.film.price, new { @class = "form-control" })
-    <br />
-    <label>Directors:</label>
-    @Html.TextBoxFor(x => x.film.director, new { @class = "form-control" })
-    <br />
-    <label>Actors: </label>
-    @Html.TextBoxFor(x => x.film.actors, new { @class = "form-control" })
-    <br />
-    <label>Capacity: </label>
-    @Html.TextBoxFor(x => x.film.capacity, new { @class = "form-control" })
-
-    <br />
+    <div class="row">
+        <div class="col-md-4">
+            <label>Name: </label>
+            @Html.TextBoxFor(x => x.film.name, new { @class = "form-control" })
+            <br />
+            <label>Directors:</label>
+            @Html.TextBoxFor(x => x.film.director, new { @class = "form-control" })
+            <br />
+            <label>Actors: </label>
+            @Html.TextBoxFor(x => x.film.actors, new { @class = "form-control" })
+            <br />
+            <label>Location: </label>
+            @Html.TextBoxFor(x => x.film.location, new { @class = "form-control" })
+            <br />
+            <label>Price: </label>
+            @Html.TextBoxFor(x => x.film.price, new { @class = "form-control" })
+            <br />
+            <label>Capacity: </label>
+            @Html.TextBoxFor(x => x.film.capacity, new { @class = "form-control" })
+        </div>
+        <div class="col-md-4">
+            <label>Description:</label>
+            @Html.TextAreaFor(x => x.film.description, new { @class = "form-control", rows = "5" })
+            <br />
+            <label>Image:</label>
+            <input id="UploadImage" title="Upload an image." type="file" name="upload"/>
+        </div>
+    </div>
+    
     <br />
 
     <label>Exhibition:</label>
     <br />
-    <label>Starting Time:</label>
     <div class="row">
         <div class="col-md-4">
-            @Html.TextBoxFor(x => x.exhibitions[0].startTime.Date, "{0:dd-MM-yyyy}", new { @class = "form-control" })
+            <label>Starting Time:</label>
+            
+            @Html.TextBoxFor(x => x.exhibitions[0].startTime, "{0:dd-MM-yyyy HH:mm}", new { @class = "form-control" })
         </div>
         <div class="col-md-4">
-            @Html.TextBoxFor(x => x.exhibitions[0].startTime, "{0:HH:mm}", new { @class = "form-control" })
+            <label>Ending Time:</label>
+            @Html.TextBoxFor(x => x.exhibitions[0].endTime, "{0:dd-MM-yyyy HH:mm}", new { @class = "form-control" })
         </div>
     </div>
     
-    @Html.ValidationMessageFor(x => x.exhibitions[0].startTime)
 
 
-    <br />
-    <label>Ending Time:</label>
-    @Html.TextBoxFor(x => x.exhibitions[0].endTime, new { @class = "form-control" })
-    @Html.ValidationMessageFor(x => x.exhibitions[0].endTime)
+
     <br />
     <br />
     <div id="HiddenDiv">
         <label>Second Exhibition (Optional)</label>
         <br />
-        <label>Starting Time:</label>
-        @Html.TextBoxFor(x => x.exhibitions[1].startTime, new { @class = "form-control", id = "HiddenTextBox" })
-        @Html.ValidationMessageFor(x => x.exhibitions[1].startTime)
-        <br />
-        <label>Ending Time:</label>
-        @Html.TextBoxFor(x => x.exhibitions[1].endTime, new { @class = "form-control", id = "HiddenTextBox" })
-        @Html.ValidationMessageFor(x => x.exhibitions[1].endTime)
-        <br />
-    </div>
+        <div class="row">
+            <div class="col-md-4">
+                <label>Starting Time:</label>
 
+                @Html.TextBoxFor(x => x.exhibitions[1].startTime, "{0:dd-MM-yyyy HH:mm}", new { @class = "form-control"})
+            </div>
+            <div class="col-md-4">
+                <label>Ending Time:</label>
+                @Html.TextBoxFor(x => x.exhibitions[1].endTime, "{0:dd-MM-yyyy HH:mm}", new { @class = "form-control" })
+            </div>
+        </div>
+    </div>
+    <br />
 
     <input type="button" id="VisibilityButton" name="show" value="+ Add second exhibition" onclick="showDiv()" class="btn btn-primary" />
 

@@ -427,7 +427,7 @@
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns="http://schemas.microsoft.com/ado/2009/11/edm" />
           <Property Name="startTime" Type="DateTime" Nullable="false" />
-          <Property Name="endTime" Type="DateTime" Nullable="true" />
+          <Property Name="endTime" Type="DateTime" Nullable="false" />
           <NavigationProperty Name="Films" Relationship="Model.FilmExhibitionsFilms" FromRole="FilmExhibitions" ToRole="Films" />
           <Property Name="filmId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="FilmTickets" Relationship="Model.FilmTicketsFilmExhibitions" FromRole="FilmExhibitions" ToRole="FilmTickets" />

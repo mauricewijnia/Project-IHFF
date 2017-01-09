@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using Project_IHFF.Models;
 using Project_IHFF.Repositories;
 using System.IO;
+using System.Web.Helpers;
 
 namespace Project_IHFF.Controllers
 {
@@ -39,10 +40,17 @@ namespace Project_IHFF.Controllers
         }
 
         [HttpPost]
-        public ActionResult _AddFilm(FilmsViewModel filmViewModel)
+        public ActionResult _AddFilm(FilmsViewModel filmViewModel, HttpPostedFileBase upload)
         {
-            if (filmViewModel.exhibitions[0].startTime != new DateTime(2017, 1, 1, 0, 0, 0))
+            if (ModelState.IsValid)
             {
+                
+                if(upload != null && upload.ContentLength > 0)
+                {
+                    upload.SaveAs(HttpContext.Server.MapPath("/img/films/") + upload.FileName);
+                    filmViewModel.film.imagePath = "/img/films/" + upload.FileName;
+                }
+
                 repository.AddItem(filmViewModel.film);
                 Items item = repository.GetItemByName(filmViewModel.film.name);
                 foreach (var exhibition in filmViewModel.exhibitions)
@@ -52,15 +60,14 @@ namespace Project_IHFF.Controllers
                     {
                         repository.AddFilmExhibition(exhibition);
                     }
-
-                }
+                }                
+                ModelState.Clear();
+                return RedirectToAction("AddItem");
             }
             else
             {
-                // throw error
+                ModelState.AddModelError("Oops" ,"Something went wrong.");
             }
-            
-            
 
             return View();
         }
@@ -73,10 +80,26 @@ namespace Project_IHFF.Controllers
         }
 
         [HttpPost]
-        public ActionResult _AddSpecial(Specials special)
+        public ActionResult _AddSpecial(Specials special, HttpPostedFileBase upload)
         {
-            special.price = 0;
-            repository.AddItem(special);
+            if (ModelState.IsValid)
+            {
+                if (upload != null && upload.ContentLength > 0)
+                {
+                    upload.SaveAs(HttpContext.Server.MapPath("/img/films/") + upload.FileName);
+                    special.imagePath = "/img/films/" + upload.FileName;
+                }
+
+                special.price = 0;
+                repository.AddItem(special);
+
+                ModelState.Clear();
+                return RedirectToAction("AddItem");
+            }
+            else
+            {
+                ModelState.AddModelError("Oops", "Something went wrong.");
+            }
             return View();
         }
 
@@ -87,10 +110,26 @@ namespace Project_IHFF.Controllers
         }
 
         [HttpPost]
-        public ActionResult _AddRestaurant(Restaurants restaurant)
+        public ActionResult _AddRestaurant(Restaurants restaurant, HttpPostedFileBase upload)
         {
-            repository.AddItem(restaurant);
+            if (ModelState.IsValid)
+            {
+                if (upload != null && upload.ContentLength > 0)
+                {
+                    upload.SaveAs(HttpContext.Server.MapPath("/img/films/") + upload.FileName);
+                    restaurant.imagePath = "/img/films/" + upload.FileName;
+                }
+                repository.AddItem(restaurant);
+                ModelState.Clear();
+                return RedirectToAction("AddItem");
+            }
+            else
+            {
+                ModelState.AddModelError("Oops", "Something went wrong.");
+            }          
             return View();
         }
+
+        
     }
 }
