@@ -11,8 +11,7 @@ namespace Project_IHFF.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class Films : Items
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -20,14 +19,9 @@ namespace Project_IHFF.Models
         {
             this.Exhibitions = new HashSet<Exhibitions>();
         }
-
-        [Required]
+    
         public string director { get; set; }
-
-        [Required]
         public string actors { get; set; }
-
-        [Required]
         public string capacity { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

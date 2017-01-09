@@ -10,7 +10,7 @@
     <EntitySet Name="Items" EntityType="Model.Store.Items" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Persons" EntityType="Model.Store.Persons" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="TicketsSet" EntityType="Model.Store.TicketsSet" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="FilmExhibitionsSet" EntityType="Model.Store.FilmExhibitionsSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ExhibitionsSet" EntityType="Model.Store.ExhibitionsSet" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Items_Films" EntityType="Model.Store.Items_Films" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="TicketsSet_FilmTickets" EntityType="Model.Store.TicketsSet_FilmTickets" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="TicketsSet_RestaurantReservation" EntityType="Model.Store.TicketsSet_RestaurantReservation" store:Type="Tables" Schema="dbo" />
@@ -23,12 +23,12 @@
       <End Role="Orders" EntitySet="Orders" />
     </AssociationSet>
     <AssociationSet Name="FilmExhibitionsFilms" Association="Model.Store.FilmExhibitionsFilms">
-      <End Role="FilmExhibitions" EntitySet="FilmExhibitionsSet" />
+      <End Role="FilmExhibitions" EntitySet="ExhibitionsSet" />
       <End Role="Films" EntitySet="Items_Films" />
     </AssociationSet>
     <AssociationSet Name="FilmTicketsFilmExhibitions" Association="Model.Store.FilmTicketsFilmExhibitions">
       <End Role="FilmTickets" EntitySet="TicketsSet_FilmTickets" />
-      <End Role="FilmExhibitions" EntitySet="FilmExhibitionsSet" />
+      <End Role="FilmExhibitions" EntitySet="ExhibitionsSet" />
     </AssociationSet>
     <AssociationSet Name="RestaurantReservationRestaurants" Association="Model.Store.RestaurantReservationRestaurants">
       <End Role="RestaurantReservation" EntitySet="TicketsSet_RestaurantReservation" />
@@ -109,7 +109,7 @@
     <Property Name="quantity" Type="int" Nullable="false" />
     <Property Name="orderId" Type="int" Nullable="false" />
   </EntityType>
-  <EntityType Name="FilmExhibitionsSet">
+  <EntityType Name="ExhibitionsSet">
     <Key>
       <PropertyRef Name="id" />
     </Key>
@@ -188,7 +188,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FilmExhibitionsFilms">
-    <End Role="FilmExhibitions" Type="Model.Store.FilmExhibitionsSet" Multiplicity="*" />
+    <End Role="FilmExhibitions" Type="Model.Store.ExhibitionsSet" Multiplicity="*" />
     <End Role="Films" Type="Model.Store.Items_Films" Multiplicity="1" />
     <ReferentialConstraint>
       <Principal Role="Films">
@@ -201,7 +201,7 @@
   </Association>
   <Association Name="FilmTicketsFilmExhibitions">
     <End Role="FilmTickets" Type="Model.Store.TicketsSet_FilmTickets" Multiplicity="*" />
-    <End Role="FilmExhibitions" Type="Model.Store.FilmExhibitionsSet" Multiplicity="1" />
+    <End Role="FilmExhibitions" Type="Model.Store.ExhibitionsSet" Multiplicity="1" />
     <ReferentialConstraint>
       <Principal Role="FilmExhibitions">
         <PropertyRef Name="id" />
@@ -442,10 +442,6 @@
           <Property Name="email" Type="String" Nullable="false" />
           <NavigationProperty Name="Orders" Relationship="Model.PersonsOrders" FromRole="Persons" ToRole="Orders" />
         </EntityType>
-        <EntityType Name="Accounts" BaseType="Model.Persons">
-          <Property Name="password" Type="String" Nullable="false" />
-          <Property Name="phoneNumber" Type="String" Nullable="false" />
-        </EntityType>
         <Association Name="PersonsOrders">
           <End Type="Model.Persons" Role="Persons" Multiplicity="1" />
           <End Type="Model.Orders" Role="Orders" Multiplicity="*" />
@@ -540,6 +536,10 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Accounts" BaseType="Model.Persons" >
+          <Property Name="password" Type="String" Nullable="false" />
+          <Property Name="phoneNumber" Type="String" Nullable="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -640,7 +640,7 @@
     </EntitySetMapping>
     <EntitySetMapping Name="ExhibitionsSet">
       <EntityTypeMapping TypeName="IsTypeOf(Model.Exhibitions)">
-        <MappingFragment StoreEntitySet="FilmExhibitionsSet">
+        <MappingFragment StoreEntitySet="ExhibitionsSet">
           <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="startTime" ColumnName="startTime" />
           <ScalarProperty Name="endTime" ColumnName="endTime" />

@@ -31,8 +31,16 @@
     <label>Exhibition:</label>
     <br />
     <label>Starting Time:</label>
-    @Html.TextBoxFor(x => x.exhibitions[0].startTime, new { @class = "form-control" })
-    @Html.ValidationMessageFor(x => x.exhibitions[0].endTime)
+    <div class="row">
+        <div class="col-md-4">
+            @Html.TextBoxFor(x => x.exhibitions[0].startTime.Date, "{0:dd-MM-yyyy}", new { @class = "form-control" })
+        </div>
+        <div class="col-md-4">
+            @Html.TextBoxFor(x => x.exhibitions[0].startTime, "{0:HH:mm}", new { @class = "form-control" })
+        </div>
+    </div>
+    
+    @Html.ValidationMessageFor(x => x.exhibitions[0].startTime)
 
 
     <br />

@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 12/28/2016 15:26:49
+-- Date Created: 01/09/2017 16:29:19
 -- Generated from EDMX file: C:\Users\mauri\Source\Repos\Project-IHFF\Project-IHFF\Models\Model.edmx
 -- --------------------------------------------------
 
@@ -21,7 +21,7 @@ IF OBJECT_ID(N'[dbo].[FK_PersonsOrders]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Orders] DROP CONSTRAINT [FK_PersonsOrders];
 GO
 IF OBJECT_ID(N'[dbo].[FK_FilmExhibitionsFilms]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[FilmExhibitionsSet] DROP CONSTRAINT [FK_FilmExhibitionsFilms];
+    ALTER TABLE [dbo].[ExhibitionsSet] DROP CONSTRAINT [FK_FilmExhibitionsFilms];
 GO
 IF OBJECT_ID(N'[dbo].[FK_FilmTicketsFilmExhibitions]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[TicketsSet_FilmTickets] DROP CONSTRAINT [FK_FilmTicketsFilmExhibitions];
@@ -73,8 +73,8 @@ GO
 IF OBJECT_ID(N'[dbo].[TicketsSet]', 'U') IS NOT NULL
     DROP TABLE [dbo].[TicketsSet];
 GO
-IF OBJECT_ID(N'[dbo].[FilmExhibitionsSet]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[FilmExhibitionsSet];
+IF OBJECT_ID(N'[dbo].[ExhibitionsSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[ExhibitionsSet];
 GO
 IF OBJECT_ID(N'[dbo].[Items_Films]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Items_Films];
@@ -140,8 +140,8 @@ CREATE TABLE [dbo].[TicketsSet] (
 );
 GO
 
--- Creating table 'FilmExhibitionsSet'
-CREATE TABLE [dbo].[FilmExhibitionsSet] (
+-- Creating table 'ExhibitionsSet'
+CREATE TABLE [dbo].[ExhibitionsSet] (
     [id] int IDENTITY(1,1) NOT NULL,
     [startTime] datetime  NOT NULL,
     [endTime] datetime  NULL,
@@ -234,9 +234,9 @@ ADD CONSTRAINT [PK_TicketsSet]
     PRIMARY KEY CLUSTERED ([id] ASC);
 GO
 
--- Creating primary key on [id] in table 'FilmExhibitionsSet'
-ALTER TABLE [dbo].[FilmExhibitionsSet]
-ADD CONSTRAINT [PK_FilmExhibitionsSet]
+-- Creating primary key on [id] in table 'ExhibitionsSet'
+ALTER TABLE [dbo].[ExhibitionsSet]
+ADD CONSTRAINT [PK_ExhibitionsSet]
     PRIMARY KEY CLUSTERED ([id] ASC);
 GO
 
@@ -301,8 +301,8 @@ ON [dbo].[Orders]
     ([personId]);
 GO
 
--- Creating foreign key on [filmId] in table 'FilmExhibitionsSet'
-ALTER TABLE [dbo].[FilmExhibitionsSet]
+-- Creating foreign key on [filmId] in table 'ExhibitionsSet'
+ALTER TABLE [dbo].[ExhibitionsSet]
 ADD CONSTRAINT [FK_FilmExhibitionsFilms]
     FOREIGN KEY ([filmId])
     REFERENCES [dbo].[Items_Films]
@@ -312,7 +312,7 @@ GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_FilmExhibitionsFilms'
 CREATE INDEX [IX_FK_FilmExhibitionsFilms]
-ON [dbo].[FilmExhibitionsSet]
+ON [dbo].[ExhibitionsSet]
     ([filmId]);
 GO
 
@@ -320,7 +320,7 @@ GO
 ALTER TABLE [dbo].[TicketsSet_FilmTickets]
 ADD CONSTRAINT [FK_FilmTicketsFilmExhibitions]
     FOREIGN KEY ([filmExhibitionId])
-    REFERENCES [dbo].[FilmExhibitionsSet]
+    REFERENCES [dbo].[ExhibitionsSet]
         ([id])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 GO

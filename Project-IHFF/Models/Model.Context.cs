@@ -28,7 +28,6 @@ namespace Project_IHFF.Models
         public virtual DbSet<Orders> Orders { get; set; }
         public virtual DbSet<Items> Items { get; set; }
         public virtual DbSet<Persons> Persons { get; set; }
-        public virtual DbSet<Accounts> Accounts { get; set; }
         public virtual DbSet<Tickets> TicketsSet { get; set; }
         public virtual DbSet<Exhibitions> ExhibitionsSet { get; set; }
     }
