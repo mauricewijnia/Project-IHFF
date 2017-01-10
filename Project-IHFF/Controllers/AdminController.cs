@@ -28,8 +28,8 @@ namespace Project_IHFF.Controllers
         public ActionResult _AddFilm()
         {
             FilmsViewModel filmsViewModel = new FilmsViewModel();
-            filmsViewModel.exhibitions.Add(new Exhibitions());
-            filmsViewModel.exhibitions.Add(new Exhibitions());
+            filmsViewModel.exhibitions.Add(new ExhibitionsSet());
+            filmsViewModel.exhibitions.Add(new ExhibitionsSet());
             filmsViewModel.exhibitions[0].startTime = new DateTime(2017, 1, 1, 0, 0, 0);
             filmsViewModel.exhibitions[0].endTime = new DateTime(2017, 1, 1, 0, 0, 0);
             filmsViewModel.exhibitions[1].startTime = new DateTime(2017, 1, 1, 0, 0, 0);

@@ -1,9 +1,11 @@
-﻿using Project_IHFF.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Project_IHFF.Models;
+//using Project_IHFF.Interfaces;
+using Project_IHFF.Repositories;
 
 namespace Project_IHFF.Controllers
 {
@@ -11,14 +13,17 @@ namespace Project_IHFF.Controllers
     {
 
 
-
+        private IFilmRepository filmRepository = new DbFilmRepository();
 
         // GET: Film
         public ActionResult Index()
         {
 
-            //IEnumerable<Exhibitions> allFilms = filmRepository.GetAllFilmExhibitions();
-            return View();
+            //IEnumerable<FilmsViewModel> allFilms = filmRepository.GetAllFilms();
+            IEnumerable<FilmViewModel> allItems= filmRepository.GetAllFilms();
+            return View(allItems);
+
+
             /*
             // fake shit--------------------------------------------------------------------------------
 

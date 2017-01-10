@@ -206,12 +206,13 @@
     <Compile Include="Models\Accounts.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Exhibitions.cs">
+    <Compile Include="Models\ExhibitionsSet.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Films.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\FilmViewModel.cs" />
     <Compile Include="Models\FilmsViewModel.cs" />
     <Compile Include="Models\FilmTickets.cs">
       <DependentUpon>Model.tt</DependentUpon>
@@ -386,6 +387,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\FilmViewModel\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

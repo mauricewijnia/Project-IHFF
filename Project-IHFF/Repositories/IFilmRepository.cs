@@ -7,66 +7,41 @@ using Project_IHFF.Models;
 namespace Project_IHFF.Repositories
 {
     interface IFilmRepository
-    {/*
-        IEnumerable<FilmExhibitions> GetAllFilmExhibitions();
-        void AddItem(Items item);
-        void AddFilmExhibition(FilmExhibitions filmExhibition);
-        FilmExhibitions getFilmExhibition(int id);*/
-    }
-
-    /*public class InMemoryItemsRepository : IItemsRepository
     {
-        public void AddFilmExhibition(FilmExhibitions filmExhibition)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void AddFilms(Films film)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void AddItem(Items item)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Items GetItemByName(string name)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<Items> GetItemsByOrderId()
-        {
-            throw new NotImplementedException();
-        }
+        IEnumerable<FilmViewModel> GetAllFilms();
     }
 
-    public class DbItemsRepository : IItemsRepository
+    public class DbFilmRepository : IFilmRepository
     {
         private ModelContainer ctx = new ModelContainer();
 
-        public IEnumerable<Items> GetItemsByOrderId()
+        public IEnumerable<FilmViewModel> GetAllFilms()
         {
-            throw new NotImplementedException();
-        }
+            // Dit werktals exhibitions eruit is
+            /*
+            var query = (from films in ctx.Films
+                         join exhibitions in ctx.ExhibitionsSet on films.id equals exhibitions.filmId
+                         join items in ctx.Items on films.id equals items.id
+                         
+                         select new FilmViewModel()
+                         {
+                             FilmId = films.id,
+                             Actors = films.actors,
+                             Name = items.name,
+                             StartTime = exhibitions.startTime
 
-        public void AddItem(Items item)
-        {
-            ctx.Items.Add(item);
-            ctx.SaveChanges();
-        }
+                         }).ToList();
 
-        public void AddFilmExhibition(FilmExhibitions filmExhibition)
-        {
-            ctx.FilmExhibitionsSet.Add(filmExhibition);
-            ctx.SaveChanges();
-        }
+            */
+            
 
-        public Items GetItemByName(string name)
-        {
-            Items item = ctx.Items.SingleOrDefault(x => x.name == name);
-            return item;
-        }
-    }*/
+            var query = (from x in ctx.ExhibitionsSet
+                         select new FilmViewModel()
+                         {
+                             StartTime = x.startTime
+                         }).ToList();
+            
+            return query;
+        }   
+    }   
 }

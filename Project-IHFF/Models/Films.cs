@@ -17,7 +17,7 @@ namespace Project_IHFF.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Films()
         {
-            this.Exhibitions = new HashSet<Exhibitions>();
+            this.ExhibitionsSet = new HashSet<ExhibitionsSet>();
         }
     
         public string director { get; set; }
@@ -25,6 +25,6 @@ namespace Project_IHFF.Models
         public string capacity { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Exhibitions> Exhibitions { get; set; }
+        public virtual ICollection<ExhibitionsSet> ExhibitionsSet { get; set; }
     }
 }

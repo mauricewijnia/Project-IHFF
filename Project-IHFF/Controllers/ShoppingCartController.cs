@@ -30,7 +30,7 @@ namespace Project_IHFF.Controllers
                 {
                     if (film is FilmTickets)
                     {
-                        Exhibitions exo = (((FilmTickets)film).FilmExhibitions);
+                        ExhibitionsSet exo = (((FilmTickets)film).FilmExhibitions);
                         Films filmpje = exo.Films;
                         Orders order = new Orders();
                         if (tickets.Count > 1)
