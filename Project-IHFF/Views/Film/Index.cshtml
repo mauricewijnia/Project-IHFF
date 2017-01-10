@@ -1,14 +1,14 @@
 ﻿@using Project_IHFF.Models;
 @using System.Collections.Generic;
 
-@model IEnumerable<FilmViewModel>
+@model IEnumerable<FilmsViewModel>
 
-<table>
-    @foreach (FilmViewModel film in Model)
+    @foreach (FilmsViewModel film in Model)
     {
 
-            <tr>
-                <td>@film.film</td><td></td><td></td><td></td>
-            </tr>
+            <label>@film.film.name </label>
+        foreach(Exhibitions x in film.exhibitions)
+        {
+            <label>@x.startTime.ToString()</label>
+        }
     }
-</table>

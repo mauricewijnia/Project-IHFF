@@ -25,7 +25,7 @@
 
         <div class="col-md-4">
             <label>Description: </label>
-            @Html.TextBoxFor(x => x.description, new { @class = "form-control" })
+            @Html.TextAreaFor(x => x.description, new { @class = "form-control", rows = "5" })
             <br />
             <label>Image:</label>
             <input id="UploadImage" title="Upload an image." type="file" name="upload" />

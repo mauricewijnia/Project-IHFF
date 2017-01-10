@@ -14,8 +14,8 @@ namespace Project_IHFF.Models
     
     public partial class FilmTickets : Tickets
     {
-        public int filmExhibitionId { get; set; }
+        public int exhibitionId { get; set; }
     
-        public virtual ExhibitionsSet FilmExhibitions { get; set; }
+        public virtual Exhibitions ExhibitionsSet { get; set; }
     }
 }

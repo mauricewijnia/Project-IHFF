@@ -13,7 +13,7 @@
         <InheritanceConnector EntityType="Model.Specials" />
         <EntityTypeShape EntityType="Model.Restaurants" Width="1.5" PointX="5.5" PointY="10.25" />
         <InheritanceConnector EntityType="Model.Restaurants" />
-        <EntityTypeShape EntityType="Model.ExhibitionsSet" Width="1.5" PointX="1.25" PointY="12.75" />
+        <EntityTypeShape EntityType="Model.Exhibitions" Width="1.5" PointX="1.25" PointY="12.75" />
         <EntityTypeShape EntityType="Model.Persons" Width="1.5" PointX="5" PointY="0.5" />
         <AssociationConnector Association="Model.PersonOrders" />
         <AssociationConnector Association="Model.PersonsOrders" />
@@ -21,7 +21,6 @@
         <AssociationConnector Association="Model.FilmExhibitionsFilms" />
         <EntityTypeShape EntityType="Model.FilmTickets" Width="1.5" PointX="6.375" PointY="6" />
         <InheritanceConnector EntityType="Model.FilmTickets" />
-        <AssociationConnector Association="Model.FilmTicketsFilmExhibitions" />
         <EntityTypeShape EntityType="Model.RestaurantReservation" Width="1.5" PointX="10.625" PointY="6" />
         <InheritanceConnector EntityType="Model.RestaurantReservation" />
         <AssociationConnector Association="Model.RestaurantReservationRestaurants" />
@@ -31,6 +30,7 @@
         <AssociationConnector Association="Model.SpecialsSpecialTicket" />
         <EntityTypeShape EntityType="Model.Accounts" Width="1.5" PointX="5" PointY="3.375" />
         <InheritanceConnector EntityType="Model.Accounts" />
+        <AssociationConnector Association="Model.FilmTicketsExhibitionsSet" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

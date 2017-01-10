@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 01/09/2017 16:29:19
+-- Date Created: 01/10/2017 18:11:22
 -- Generated from EDMX file: C:\Users\mauri\Source\Repos\Project-IHFF\Project-IHFF\Models\Model.edmx
 -- --------------------------------------------------
 
@@ -21,10 +21,7 @@ IF OBJECT_ID(N'[dbo].[FK_PersonsOrders]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Orders] DROP CONSTRAINT [FK_PersonsOrders];
 GO
 IF OBJECT_ID(N'[dbo].[FK_FilmExhibitionsFilms]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[ExhibitionsSet] DROP CONSTRAINT [FK_FilmExhibitionsFilms];
-GO
-IF OBJECT_ID(N'[dbo].[FK_FilmTicketsFilmExhibitions]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[TicketsSet_FilmTickets] DROP CONSTRAINT [FK_FilmTicketsFilmExhibitions];
+    ALTER TABLE [dbo].[Exhibitions] DROP CONSTRAINT [FK_FilmExhibitionsFilms];
 GO
 IF OBJECT_ID(N'[dbo].[FK_RestaurantReservationRestaurants]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[TicketsSet_RestaurantReservation] DROP CONSTRAINT [FK_RestaurantReservationRestaurants];
@@ -35,11 +32,11 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_SpecialsSpecialTicket]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[TicketsSet_SpecialTicket] DROP CONSTRAINT [FK_SpecialsSpecialTicket];
 GO
+IF OBJECT_ID(N'[dbo].[FK_FilmTicketsExhibitionsSet]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[TicketsSet_FilmTickets] DROP CONSTRAINT [FK_FilmTicketsExhibitionsSet];
+GO
 IF OBJECT_ID(N'[dbo].[FK_Films_inherits_Items]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Items_Films] DROP CONSTRAINT [FK_Films_inherits_Items];
-GO
-IF OBJECT_ID(N'[dbo].[FK_FilmTickets_inherits_Tickets]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[TicketsSet_FilmTickets] DROP CONSTRAINT [FK_FilmTickets_inherits_Tickets];
 GO
 IF OBJECT_ID(N'[dbo].[FK_RestaurantReservation_inherits_Tickets]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[TicketsSet_RestaurantReservation] DROP CONSTRAINT [FK_RestaurantReservation_inherits_Tickets];
@@ -52,6 +49,9 @@ IF OBJECT_ID(N'[dbo].[FK_SpecialTicket_inherits_Tickets]', 'F') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[FK_Specials_inherits_Items]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Items_Specials] DROP CONSTRAINT [FK_Specials_inherits_Items];
+GO
+IF OBJECT_ID(N'[dbo].[FK_FilmTickets_inherits_Tickets]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[TicketsSet_FilmTickets] DROP CONSTRAINT [FK_FilmTickets_inherits_Tickets];
 GO
 IF OBJECT_ID(N'[dbo].[FK_Accounts_inherits_Persons]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Persons_Accounts] DROP CONSTRAINT [FK_Accounts_inherits_Persons];
@@ -73,14 +73,11 @@ GO
 IF OBJECT_ID(N'[dbo].[TicketsSet]', 'U') IS NOT NULL
     DROP TABLE [dbo].[TicketsSet];
 GO
-IF OBJECT_ID(N'[dbo].[ExhibitionsSet]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[ExhibitionsSet];
+IF OBJECT_ID(N'[dbo].[Exhibitions]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Exhibitions];
 GO
 IF OBJECT_ID(N'[dbo].[Items_Films]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Items_Films];
-GO
-IF OBJECT_ID(N'[dbo].[TicketsSet_FilmTickets]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[TicketsSet_FilmTickets];
 GO
 IF OBJECT_ID(N'[dbo].[TicketsSet_RestaurantReservation]', 'U') IS NOT NULL
     DROP TABLE [dbo].[TicketsSet_RestaurantReservation];
@@ -93,6 +90,9 @@ IF OBJECT_ID(N'[dbo].[TicketsSet_SpecialTicket]', 'U') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[Items_Specials]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Items_Specials];
+GO
+IF OBJECT_ID(N'[dbo].[TicketsSet_FilmTickets]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[TicketsSet_FilmTickets];
 GO
 IF OBJECT_ID(N'[dbo].[Persons_Accounts]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Persons_Accounts];
@@ -140,8 +140,8 @@ CREATE TABLE [dbo].[TicketsSet] (
 );
 GO
 
--- Creating table 'ExhibitionsSet'
-CREATE TABLE [dbo].[ExhibitionsSet] (
+-- Creating table 'Exhibitions'
+CREATE TABLE [dbo].[Exhibitions] (
     [id] int IDENTITY(1,1) NOT NULL,
     [startTime] datetime  NOT NULL,
     [endTime] datetime  NULL,
@@ -154,13 +154,6 @@ CREATE TABLE [dbo].[Items_Films] (
     [director] nvarchar(max)  NOT NULL,
     [actors] nvarchar(max)  NOT NULL,
     [capacity] nvarchar(max)  NOT NULL,
-    [id] int  NOT NULL
-);
-GO
-
--- Creating table 'TicketsSet_FilmTickets'
-CREATE TABLE [dbo].[TicketsSet_FilmTickets] (
-    [filmExhibitionId] int  NOT NULL,
     [id] int  NOT NULL
 );
 GO
@@ -194,6 +187,13 @@ CREATE TABLE [dbo].[Items_Specials] (
     [capacity] int  NOT NULL,
     [startTime] datetime  NOT NULL,
     [endTime] datetime  NOT NULL,
+    [id] int  NOT NULL
+);
+GO
+
+-- Creating table 'TicketsSet_FilmTickets'
+CREATE TABLE [dbo].[TicketsSet_FilmTickets] (
+    [exhibitionId] int  NOT NULL,
     [id] int  NOT NULL
 );
 GO
@@ -234,21 +234,15 @@ ADD CONSTRAINT [PK_TicketsSet]
     PRIMARY KEY CLUSTERED ([id] ASC);
 GO
 
--- Creating primary key on [id] in table 'ExhibitionsSet'
-ALTER TABLE [dbo].[ExhibitionsSet]
-ADD CONSTRAINT [PK_ExhibitionsSet]
+-- Creating primary key on [id] in table 'Exhibitions'
+ALTER TABLE [dbo].[Exhibitions]
+ADD CONSTRAINT [PK_Exhibitions]
     PRIMARY KEY CLUSTERED ([id] ASC);
 GO
 
 -- Creating primary key on [id] in table 'Items_Films'
 ALTER TABLE [dbo].[Items_Films]
 ADD CONSTRAINT [PK_Items_Films]
-    PRIMARY KEY CLUSTERED ([id] ASC);
-GO
-
--- Creating primary key on [id] in table 'TicketsSet_FilmTickets'
-ALTER TABLE [dbo].[TicketsSet_FilmTickets]
-ADD CONSTRAINT [PK_TicketsSet_FilmTickets]
     PRIMARY KEY CLUSTERED ([id] ASC);
 GO
 
@@ -273,6 +267,12 @@ GO
 -- Creating primary key on [id] in table 'Items_Specials'
 ALTER TABLE [dbo].[Items_Specials]
 ADD CONSTRAINT [PK_Items_Specials]
+    PRIMARY KEY CLUSTERED ([id] ASC);
+GO
+
+-- Creating primary key on [id] in table 'TicketsSet_FilmTickets'
+ALTER TABLE [dbo].[TicketsSet_FilmTickets]
+ADD CONSTRAINT [PK_TicketsSet_FilmTickets]
     PRIMARY KEY CLUSTERED ([id] ASC);
 GO
 
@@ -301,8 +301,8 @@ ON [dbo].[Orders]
     ([personId]);
 GO
 
--- Creating foreign key on [filmId] in table 'ExhibitionsSet'
-ALTER TABLE [dbo].[ExhibitionsSet]
+-- Creating foreign key on [filmId] in table 'Exhibitions'
+ALTER TABLE [dbo].[Exhibitions]
 ADD CONSTRAINT [FK_FilmExhibitionsFilms]
     FOREIGN KEY ([filmId])
     REFERENCES [dbo].[Items_Films]
@@ -312,23 +312,8 @@ GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_FilmExhibitionsFilms'
 CREATE INDEX [IX_FK_FilmExhibitionsFilms]
-ON [dbo].[ExhibitionsSet]
+ON [dbo].[Exhibitions]
     ([filmId]);
-GO
-
--- Creating foreign key on [filmExhibitionId] in table 'TicketsSet_FilmTickets'
-ALTER TABLE [dbo].[TicketsSet_FilmTickets]
-ADD CONSTRAINT [FK_FilmTicketsFilmExhibitions]
-    FOREIGN KEY ([filmExhibitionId])
-    REFERENCES [dbo].[ExhibitionsSet]
-        ([id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating non-clustered index for FOREIGN KEY 'FK_FilmTicketsFilmExhibitions'
-CREATE INDEX [IX_FK_FilmTicketsFilmExhibitions]
-ON [dbo].[TicketsSet_FilmTickets]
-    ([filmExhibitionId]);
 GO
 
 -- Creating foreign key on [restaurantId] in table 'TicketsSet_RestaurantReservation'
@@ -376,20 +361,26 @@ ON [dbo].[TicketsSet_SpecialTicket]
     ([specialId]);
 GO
 
+-- Creating foreign key on [exhibitionId] in table 'TicketsSet_FilmTickets'
+ALTER TABLE [dbo].[TicketsSet_FilmTickets]
+ADD CONSTRAINT [FK_FilmTicketsExhibitionsSet]
+    FOREIGN KEY ([exhibitionId])
+    REFERENCES [dbo].[Exhibitions]
+        ([id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_FilmTicketsExhibitionsSet'
+CREATE INDEX [IX_FK_FilmTicketsExhibitionsSet]
+ON [dbo].[TicketsSet_FilmTickets]
+    ([exhibitionId]);
+GO
+
 -- Creating foreign key on [id] in table 'Items_Films'
 ALTER TABLE [dbo].[Items_Films]
 ADD CONSTRAINT [FK_Films_inherits_Items]
     FOREIGN KEY ([id])
     REFERENCES [dbo].[Items]
-        ([id])
-    ON DELETE CASCADE ON UPDATE NO ACTION;
-GO
-
--- Creating foreign key on [id] in table 'TicketsSet_FilmTickets'
-ALTER TABLE [dbo].[TicketsSet_FilmTickets]
-ADD CONSTRAINT [FK_FilmTickets_inherits_Tickets]
-    FOREIGN KEY ([id])
-    REFERENCES [dbo].[TicketsSet]
         ([id])
     ON DELETE CASCADE ON UPDATE NO ACTION;
 GO
@@ -426,6 +417,15 @@ ALTER TABLE [dbo].[Items_Specials]
 ADD CONSTRAINT [FK_Specials_inherits_Items]
     FOREIGN KEY ([id])
     REFERENCES [dbo].[Items]
+        ([id])
+    ON DELETE CASCADE ON UPDATE NO ACTION;
+GO
+
+-- Creating foreign key on [id] in table 'TicketsSet_FilmTickets'
+ALTER TABLE [dbo].[TicketsSet_FilmTickets]
+ADD CONSTRAINT [FK_FilmTickets_inherits_Tickets]
+    FOREIGN KEY ([id])
+    REFERENCES [dbo].[TicketsSet]
         ([id])
     ON DELETE CASCADE ON UPDATE NO ACTION;
 GO

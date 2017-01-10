@@ -9,6 +9,8 @@ namespace Project_IHFF.Repositories
     interface IFilmRepository
     {
         IEnumerable<FilmViewModel> GetAllFilms();
+        List<Films> GetAllFilmsToList();
+        List<Exhibitions> GetAllExhibitions();
     }
 
     public class DbFilmRepository : IFilmRepository
@@ -35,13 +37,23 @@ namespace Project_IHFF.Repositories
             */
             
 
-            var query = (from x in ctx.ExhibitionsSet
+            var query = (from x in ctx.Exhibitions
                          select new FilmViewModel()
                          {
                              StartTime = x.startTime
                          }).ToList();
             
             return query;
-        }   
+        } 
+        
+        public List<Exhibitions> GetAllExhibitions()
+        {
+            return ctx.Exhibitions.ToList();
+        }  
+
+        public List<Films> GetAllFilmsToList()
+        {
+            return ctx.Items.OfType<Films>().ToList();
+        }
     }   
 }

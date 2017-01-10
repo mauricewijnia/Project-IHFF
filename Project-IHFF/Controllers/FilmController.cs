@@ -18,10 +18,22 @@ namespace Project_IHFF.Controllers
         // GET: Film
         public ActionResult Index()
         {
+            List<Films> films = filmRepository.GetAllFilmsToList();
+            List<Exhibitions> exhibitions = filmRepository.GetAllExhibitions();
+            List<FilmsViewModel> items = new List<FilmsViewModel>();
+            foreach (Films film in films)
+            {
+                var viewModel = new FilmsViewModel();
+                viewModel.film = film;
+                viewModel.exhibitions = new List<Exhibitions>();
+                viewModel.exhibitions = exhibitions.FindAll(x => x.filmId == film.id);
+                items.Add(viewModel);
+            }
 
             //IEnumerable<FilmsViewModel> allFilms = filmRepository.GetAllFilms();
-            IEnumerable<FilmViewModel> allItems= filmRepository.GetAllFilms();
-            return View(allItems);
+            //IEnumerable<FilmViewModel> allItems = filmRepository.GetAllFilms();
+
+            return View(items);
 
 
             /*
