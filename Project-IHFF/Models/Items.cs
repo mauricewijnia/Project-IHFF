@@ -11,13 +11,18 @@ namespace Project_IHFF.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Items
     {
         public int id { get; set; }
+        [Required]
         public string description { get; set; }
+        [Required]
         public string location { get; set; }
+        [Required]
         public decimal price { get; set; }
+        [Required]
         public string name { get; set; }
         public string imagePath { get; set; }
     }

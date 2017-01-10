@@ -11,6 +11,7 @@ namespace Project_IHFF.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     
     public partial class Restaurants : Items
     {
@@ -19,7 +20,7 @@ namespace Project_IHFF.Models
         {
             this.RestaurantReservation = new HashSet<RestaurantReservation>();
         }
-    
+        
         public System.TimeSpan timeOpen { get; set; }
         public System.TimeSpan timeClosed { get; set; }
     

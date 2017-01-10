@@ -4,20 +4,41 @@
 @Html.ValidationSummary()
 @using (Html.BeginForm("_AddSpecial"))
 {
-    <label>Name: </label>
-    @Html.TextBoxFor(x => x.name, new { @class = "form-control" })
-    <br />
-    <label>Description: </label>
-    @Html.TextBoxFor(x => x.description, new { @class = "form-control" })
-    <br />
-    <label>Location: </label>
-    @Html.TextBoxFor(x => x.location, new { @class = "form-control" })
-    <br />
-    <label>Host: </label>
-    @Html.TextBoxFor(x => x.host, new { @class = "form-control" })
-    <br />
-    <label>Capacity: </label>
-    @Html.TextBoxFor(x => x.capacity, new { @class = "form-control" })
+    <div class="row">
+        <div class="col-md-4">
+            <label>Name: </label>
+            @Html.TextBoxFor(x => x.name, new { @class = "form-control" })
+            <br />
+            <label>Location: </label>
+            @Html.TextBoxFor(x => x.location, new { @class = "form-control" })
+            <br />
+            <label>Host: </label>
+            @Html.TextBoxFor(x => x.host, new { @class = "form-control" })
+            <br />
+            <label>Capacity: </label>
+            @Html.TextBoxFor(x => x.capacity, new { @class = "form-control" })
+            <br />
+            
+        </div>
+        <div class="col-md-4">
+            <label>Description: </label>
+            @Html.TextBoxFor(x => x.description, new { @class = "form-control" })
+            <br />
+            <label>Image:</label>
+            <input id="UploadImage" title="Upload an image." type="file" name="upload" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <label>Starting Time:</label>
+
+            @Html.TextBoxFor(x => x.startTime, "{0:dd-MM-yyyy HH:mm}", new { @class = "form-control" })
+        </div>
+        <div class="col-md-4">
+            <label>Ending Time:</label>
+            @Html.TextBoxFor(x => x.endTime, "{0:dd-MM-yyyy HH:mm}", new { @class = "form-control" })
+        </div>
+    </div>
     <br />
     <input type="submit" value="Submit" class="btn btn-primary" />
 }
