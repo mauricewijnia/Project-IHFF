@@ -1,14 +1,69 @@
 ﻿@using Project_IHFF.Models;
 @using System.Collections.Generic;
 
-@model IEnumerable<FilmsViewModel>
+@model IEnumerable<FilmViewModel>
 
-    @foreach (FilmsViewModel film in Model)
-    {
-
-            <label>@film.film.name </label>
-        foreach(Exhibitions x in film.exhibitions)
-        {
-            <label>@x.startTime.ToString()</label>
+<div class="col-md-8">
+    <div id="filmsContainer">
+        @foreach (FilmViewModel film in Model)
+            {
+            <div class="contentBox">
+                <table>
+                    <tr>
+                        <td>@film.Name</td>
+                        <td>@film.Actors</td>
+                        <td>@film.FilmId</td>
+                        <td>@film.StartTime</td>
+                    </tr>
+                </table>
+            </div>
         }
-    }
+    </div>
+</div>
+<div class="col-md-4 ">
+    <div class="contentBox right">
+        <h1>Search Filters</h1>
+        <div data-toggle="buttons">
+            <label id="monday" class="btn btn-default sort-btn sortDay">
+                <input type="radio" name="options" id="monday"> Mon
+            </label>
+            <label id="tuesday" class="btn btn-default sort-btn sortDay">
+                <input type="radio" name="options" id="tuesday"> Tue
+            </label>
+            <label id="wednesday" class="btn btn-default sort-btn sortDay">
+                <input type="radio" name="options" id="wednesday"> Wed
+            </label>
+            <label id="thursday" class="btn btn-default sort-btn sortDay">
+                <input type="radio" name="options" id="thursday"> Thu
+            </label>
+            <label id="friday" class="btn btn-default sort-btn sortDay">
+                <input type="radio" name="options" id="friday"> Fri
+            </label>
+            <label id="saturday" class="btn btn-default sort-btn sortDay">
+                <input type="radio" name="options" id="saturday"> Sat
+            </label>
+            <label id="sunday" class="btn btn-default sort-btn sortDay">
+                <input type="radio" name="options" id="sunday"> Sun
+            </label>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(document).ready(function()
+{
+    $(".sortDay").click(function ()
+    {
+        var day = $(this).attr('id');
+        // Home is your controller, Index is your action name
+        $("#filmsContainer").load("@Url.Action("FilmsView","Film")", { 'day' : day }, 
+        function (response, status, xhr)
+        {
+            if (status == "error")
+            {
+                alert("An error occurred while loading the results.");
+            }
+        });
+    });
+});
+</script>

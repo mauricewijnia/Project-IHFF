@@ -1,0 +1,18 @@
+﻿@using Project_IHFF.Models;
+@using System.Collections.Generic;
+
+@model IEnumerable<FilmViewModel>
+
+@foreach (FilmViewModel film in Model)
+            {
+    <div class="contentBox">
+        <table>
+            <tr>
+                <td>@film.Name</td>
+                <td>@film.Actors</td>
+                <td>@film.FilmId</td>
+                <td>@film.StartTime</td>
+            </tr>
+        </table>
+    </div>
+}

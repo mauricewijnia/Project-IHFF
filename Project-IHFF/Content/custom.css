@@ -207,3 +207,23 @@ input[type="color"]:focus,
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, #ff6600;
   outline: 0 none;
 }
+
+
+
+/* Rene Css, ik verplaats/sorteer dit later */
+.contentBox {
+    margin-bottom: 15px;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #666666;
+}
+
+.sort-btn{
+    width: 4em;
+    margin: 4px;
+    background-color: #FF9900;
+    border-color: #FF9900;
+}
+.sort-btn:hover{
+    background-color: #ff6600;
+}

@@ -14,10 +14,10 @@ namespace Project_IHFF.Controllers
 
 
         private IFilmRepository filmRepository = new DbFilmRepository();
-
         // GET: Film
         public ActionResult Index()
         {
+            /*
             List<Films> films = filmRepository.GetAllFilmsToList();
             List<Exhibitions> exhibitions = filmRepository.GetAllExhibitions();
             List<FilmsViewModel> items = new List<FilmsViewModel>();
@@ -28,12 +28,12 @@ namespace Project_IHFF.Controllers
                 viewModel.exhibitions = new List<Exhibitions>();
                 viewModel.exhibitions = exhibitions.FindAll(x => x.filmId == film.id);
                 items.Add(viewModel);
-            }
+            }*/
 
-            //IEnumerable<FilmsViewModel> allFilms = filmRepository.GetAllFilms();
+            IEnumerable<FilmViewModel> allFilms = filmRepository.GetAllFilms();
             //IEnumerable<FilmViewModel> allItems = filmRepository.GetAllFilms();
 
-            return View(items);
+            return View(allFilms);
 
 
             /*
@@ -110,6 +110,33 @@ namespace Project_IHFF.Controllers
 
             Session["Tickets"] = tickets; //gooi de lijst met alle tickets in deze Session pls :)
             return View(tickets);*/
+        }
+
+        public virtual ActionResult FilmsView(string day)
+        {
+            int dayNr = 0;
+            switch (day)
+            {
+                //dayNr is +1 
+                //query comparision with datetime adds one day to datetime when turned in day
+                case "monday": dayNr = 2; break;
+                case "tuesday": dayNr = 3; break;
+                case "wednesday": dayNr = 4; break;
+                case "thursday": dayNr = 5; break;
+                case "friday": dayNr = 6; break;
+                case "saturday": dayNr = 7; break;
+                case "sunday": dayNr = 8; break;
+            }
+            IEnumerable<FilmViewModel> filteredFilms = filmRepository.GetFilmsByDay(dayNr);
+            return PartialView(filteredFilms);
+        }
+
+        public PartialViewResult SortedFilms(int day, string sort)
+        {
+
+            return PartialView();
+
+            //db.Racers.Where(r => r.Country == id).OrderByDescending(r => r.Wins).ThenBy(r => r.Lastname).ToList()
         }
     }
 }
