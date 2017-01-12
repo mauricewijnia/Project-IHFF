@@ -174,7 +174,6 @@
 }
 
 .cmsItemContainer{
-    display: -webkit-flex;
     display: flex;  
     background-color: darkgray;
     border-radius: 3px;

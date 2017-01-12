@@ -87,7 +87,7 @@ namespace Project_IHFF.Controllers
                 {
                     UpdateExhibition(exhibition);                    
                 }
-                return RedirectToAction("EditItem");
+                return RedirectToAction("Films");
             }
             else
             {
