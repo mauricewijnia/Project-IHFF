@@ -1,8 +1,10 @@
 ﻿@using Project_IHFF.Models
 @model Specials
 
+<h2>Edit Special</h2>
+
 @Html.ValidationSummary()
-@using (Html.BeginForm("_AddSpecial"))
+@using (Html.BeginForm("EditSpecial", "Admin", FormMethod.Post, new { @enctype = "multipart/form-data" }))
 {
     <div class="row">
         <div class="col-md-4">
@@ -18,14 +20,15 @@
             <label>Capacity: </label>
             @Html.TextBoxFor(x => x.capacity, new { @class = "form-control" })
             <br />
-            
+
         </div>
         <div class="col-md-4">
             <label>Description: </label>
-            @Html.TextBoxFor(x => x.description, new { @class = "form-control" })
+            @Html.TextAreaFor(x => x.description, new { @class = "form-control", rows = "5" })
             <br />
             <label>Image:</label>
             <input id="UploadImage" title="Upload an image." type="file" name="upload" />
+            <img src="@Model.imagePath" alt="Item image" class="itemImage" />
         </div>
     </div>
     <div class="row">
@@ -41,5 +44,8 @@
     </div>
     <br />
     <input type="submit" value="Submit" class="btn btn-primary" />
-    @Html.ActionLink("Reset", "AddItem", null, new { @class = "btn btn-danger" })
+    @Html.ActionLink("Cancel", "Specials", null, new { @class = "btn btn-primary" })
+    @Html.ActionLink("Delete", "DeleteSpecial", new { id = Model.id }, new { @class = "btn btn-danger" })
 }
+
+

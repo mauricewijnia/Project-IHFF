@@ -24,19 +24,19 @@ namespace Project_IHFF.Controllers
         {
             return View();
         }
-        public ActionResult EditItem()
+        public ActionResult Films()
         {
-            IEnumerable<Items> allItems = new List<Items>();
-            allItems = repository.GetAllItems();
-
-            return View(allItems);
+            return View(repository.GetAllFilms());
         }
 
-        public ActionResult DeleteItem(int id)
+        public ActionResult Specials()
         {
-            DeleteImageByItemId(id);
-            repository.DeleteItem(id);
-            return RedirectToAction("EditItem");
+            return View(repository.GetAllSpecials());
+        }
+
+        public ActionResult Restaurants()
+        {
+            return View(repository.GetAllRestaurants());
         }
 
         public ActionResult DeleteFilm(int id)
@@ -44,9 +44,22 @@ namespace Project_IHFF.Controllers
             DeleteImageByItemId(id);
             repository.DeleExhibitionsForFilm(id);
             repository.DeleteItem(id);
-            return RedirectToAction("EditItem");
+            return RedirectToAction("Films");
         }
 
+        public ActionResult DeleteSpecial(int id)
+        {
+            DeleteImageByItemId(id);
+            repository.DeleteItem(id);
+            return RedirectToAction("Specials");
+        }
+
+        public ActionResult DeleteRestaurant(int id)
+        {
+            DeleteImageByItemId(id);
+            repository.DeleteItem(id);
+            return RedirectToAction("Restaurants");
+        }
 
         public ActionResult EditFilm(int id)
         {
@@ -84,7 +97,7 @@ namespace Project_IHFF.Controllers
         }
 
 
-        public ActionResult _AddFilm()
+        public ActionResult AddFilm()
         {
             FilmsViewModel filmsViewModel = new FilmsViewModel();
             filmsViewModel.exhibitions.Add(new Exhibitions());
@@ -94,11 +107,11 @@ namespace Project_IHFF.Controllers
             filmsViewModel.exhibitions[1].startTime = baseTime;
             filmsViewModel.exhibitions[1].endTime = baseTime;
 
-            return PartialView(filmsViewModel);
+            return View(filmsViewModel);
         }
 
         [HttpPost]
-        public ActionResult _AddFilm(FilmsViewModel filmViewModel, HttpPostedFileBase upload)
+        public ActionResult AddFilm(FilmsViewModel filmViewModel, HttpPostedFileBase upload)
         {
 
             if (ModelState.IsValid)
@@ -120,7 +133,7 @@ namespace Project_IHFF.Controllers
                     }
                 }
                 ModelState.Clear();
-                return RedirectToAction("AddItem");
+                return View();
             }
             else
             {
@@ -129,30 +142,61 @@ namespace Project_IHFF.Controllers
             }
         }
 
-        public ActionResult _AddSpecial()
-        {
-            Specials special = new Specials();
-            special.startTime = baseTime;
-            special.endTime = baseTime;
-            return PartialView(special);
+        public ActionResult EditSpecial(int id)
+        {     
+            return View(repository.GetItemById(id));
         }
 
         [HttpPost]
-        public ActionResult _AddSpecial(Specials special, HttpPostedFileBase upload)
+        public ActionResult EditSpecial(Specials special, HttpPostedFileBase upload)
         {
             if (ModelState.IsValid)
             {
                 if (upload != null && upload.ContentLength > 0)
                 {
-                    upload.SaveAs(HttpContext.Server.MapPath("/img/films/") + upload.FileName);
-                    special.imagePath = "/img/films/" + upload.FileName;
+                    DeleteImageByItemId(special.id);
+                    upload.SaveAs(HttpContext.Server.MapPath("/img/specials/") + upload.FileName);
+                    special.imagePath = "/img/specials/" + upload.FileName;
+                }
+
+                special.price = 0;
+                repository.UpdateItem(special);
+
+                ModelState.Clear();
+                return RedirectToAction("Specials");
+            }
+            else
+            {
+                ModelState.AddModelError("Oops", "Something went wrong.");
+                return View();
+            }
+            
+        }
+
+        public ActionResult AddSpecial()
+        {
+            Specials special = new Specials();
+            special.startTime = baseTime;
+            special.endTime = baseTime;
+            return View(special);
+        }
+
+        [HttpPost]
+        public ActionResult AddSpecial(Specials special, HttpPostedFileBase upload)
+        {
+            if (ModelState.IsValid)
+            {
+                if (upload != null && upload.ContentLength > 0)
+                {
+                    upload.SaveAs(HttpContext.Server.MapPath("/img/specials/") + upload.FileName);
+                    special.imagePath = "/img/specials/" + upload.FileName;
                 }
 
                 special.price = 0;
                 repository.AddItem(special);
 
                 ModelState.Clear();
-                return RedirectToAction("AddItem");
+                return View();
             }
             else
             {
@@ -161,25 +205,52 @@ namespace Project_IHFF.Controllers
             return View();
         }
 
-        public ActionResult _AddRestaurant()
+        public ActionResult EditRestaurant(int id)
         {
-            Restaurants restaurant = new Restaurants();
-            return PartialView(restaurant);
+            return View(repository.GetItemById(id));
         }
 
         [HttpPost]
-        public ActionResult _AddRestaurant(Restaurants restaurant, HttpPostedFileBase upload)
+        public ActionResult EditRestaurant(Restaurants restaurant, HttpPostedFileBase upload)
         {
             if (ModelState.IsValid)
             {
                 if (upload != null && upload.ContentLength > 0)
                 {
-                    upload.SaveAs(HttpContext.Server.MapPath("/img/films/") + upload.FileName);
-                    restaurant.imagePath = "/img/films/" + upload.FileName;
+                    DeleteImageByItemId(restaurant.id);
+                    upload.SaveAs(HttpContext.Server.MapPath("/img/Restaurants/") + upload.FileName);
+                    restaurant.imagePath = "/img/Restaurants/" + upload.FileName;
+                }
+                repository.UpdateItem(restaurant);
+                ModelState.Clear();
+                return RedirectToAction("Restaurants");
+            }
+            else
+            {
+                ModelState.AddModelError("Oops", "Something went wrong.");
+            }
+            return View();
+        }
+
+        public ActionResult AddRestaurant()
+        {
+            Restaurants restaurant = new Restaurants();
+            return View(restaurant);
+        }
+
+        [HttpPost]
+        public ActionResult AddRestaurant(Restaurants restaurant, HttpPostedFileBase upload)
+        {
+            if (ModelState.IsValid)
+            {
+                if (upload != null && upload.ContentLength > 0)
+                {
+                    upload.SaveAs(HttpContext.Server.MapPath("/img/Restaurants/") + upload.FileName);
+                    restaurant.imagePath = "/img/Restaurants/" + upload.FileName;
                 }
                 repository.AddItem(restaurant);
                 ModelState.Clear();
-                return RedirectToAction("AddItem");
+                return View();
             }
             else
             {

@@ -1,8 +1,10 @@
 ﻿@using Project_IHFF.Models
 @model Restaurants
 
+<h2>Edit Restaurant</h2>
+
 @Html.ValidationSummary()
-@using (Html.BeginForm("_AddRestaurant"))
+@using (Html.BeginForm("EditRestaurant", "Admin", FormMethod.Post, new { @enctype = "multipart/form-data" }))
 {
     <div class="row">
         <div class="col-md-4">
@@ -29,9 +31,11 @@
             <br />
             <label>Image:</label>
             <input id="UploadImage" title="Upload an image." type="file" name="upload" />
+            <img src="@Model.imagePath" alt="Item image" class="itemImage" />
         </div>
     </div>
     <br />
     <input type="submit" value="Submit" class="btn btn-primary" />
-    @Html.ActionLink("Reset", "AddItem", null, new { @class = "btn btn-danger" })
+    @Html.ActionLink("Cancel", "Restaurants", null, new { @class = "btn btn-primary" })
+    @Html.ActionLink("Delete", "DeleteRestaurant", new { id = Model.id }, new { @class = "btn btn-danger" })
 }

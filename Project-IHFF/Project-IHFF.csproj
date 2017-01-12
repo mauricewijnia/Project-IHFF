@@ -377,10 +377,8 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
-    <Content Include="Views\Admin\_AddFilm.cshtml" />
-    <Content Include="Views\Admin\_AddSpecial.cshtml" />
-    <Content Include="Views\Admin\AddItem.cshtml" />
-    <Content Include="Views\Admin\_AddRestaurant.cshtml" />
+    <Content Include="Views\Admin\AddSpecial.cshtml" />
+    <Content Include="Views\Admin\AddRestaurant.cshtml" />
     <Content Include="Views\ShoppingCart\Index.cshtml" />
     <Content Include="Views\Film\FilmIndex.cshtml" />
     <Content Include="Views\Film\Index.cshtml" />
@@ -388,10 +386,15 @@
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Film\FilmsView.cshtml" />
-    <Content Include="Views\Admin\EditItem.cshtml" />
+    <Content Include="Views\Admin\Films.cshtml" />
     <Content Include="Views\Admin\EditFilm.cshtml" />
     <Content Include="Views\Culture\Index.cshtml" />
     <Content Include="Views\Special\Index.cshtml" />
+    <Content Include="Views\Admin\AddFilm.cshtml" />
+    <Content Include="Views\Admin\EditSpecial.cshtml" />
+    <Content Include="Views\Admin\Specials.cshtml" />
+    <Content Include="Views\Admin\Restaurants.cshtml" />
+    <Content Include="Views\Admin\EditRestaurant.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

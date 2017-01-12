@@ -1,0 +1,40 @@
+﻿@using Project_IHFF.Models
+@model Restaurants
+
+<h2>Add Restaurant</h2>
+
+@Html.ValidationSummary()
+@using (Html.BeginForm("AddRestaurant", "Admin", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+{
+    <div class="row">
+        <div class="col-md-4">
+            <label>Name: </label>
+            @Html.TextBoxFor(x => x.name, new { @class = "form-control" })
+            <br />
+            <label>Location: </label>
+            @Html.TextBoxFor(x => x.location, new { @class = "form-control" })
+            <br />
+            <label>Reservation Cost:</label>
+            @Html.TextBoxFor(x => x.price, new { @class = "form-control" })
+            <br />
+            <label>Opening Time: </label>
+            @Html.TextBoxFor(x => x.timeOpen, new { @class = "form-control" })
+            <br />
+            <label>Closing Time: </label>
+            @Html.TextBoxFor(x => x.timeClosed, new { @class = "form-control" })
+            <br />
+        </div>
+
+        <div class="col-md-4">
+            <label>Description: </label>
+            @Html.TextAreaFor(x => x.description, new { @class = "form-control", rows = "5" })
+            <br />
+            <label>Image:</label>
+            <input id="UploadImage" title="Upload an image." type="file" name="upload" />
+        </div>
+    </div>
+    <br />
+    <input type="submit" value="Submit" class="btn btn-primary" />
+    @Html.ActionLink("Cancel", "Index", null, new { @class = "btn btn-primary" })
+    @Html.ActionLink("Reset", "AddRestaurant", null, new { @class = "btn btn-danger" })
+}
