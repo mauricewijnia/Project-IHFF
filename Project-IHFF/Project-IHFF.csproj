@@ -210,10 +210,11 @@
     <Compile Include="Models\Exhibitions.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\SpecialViewModel.cs" />
     <Compile Include="Models\Films.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\FilmViewModel.cs" />
+    <Compile Include="Models\ExhibitionViewModel.cs" />
     <Compile Include="Models\FilmsViewModel.cs" />
     <Compile Include="Models\FilmTickets.cs">
       <DependentUpon>Model.tt</DependentUpon>
@@ -388,6 +389,7 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Film\FilmsView.cshtml" />
     <Content Include="Views\Culture\Index.cshtml" />
+    <Content Include="Views\Special\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
