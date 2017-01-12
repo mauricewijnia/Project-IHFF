@@ -11,35 +11,19 @@ namespace Project_IHFF.Repositories
         IEnumerable<Items> GetItemsByOrderId();
         void AddItem(Items item);
         void AddFilmExhibition(Exhibitions filmExhibition);
+
+        void UpdateItem(Items item);
+        void UpdateExhibition(Exhibitions exhibition);
+
+        void DeleteItem(int id);
+        void DeleteExhibition(Exhibitions exhibition);
+        void DeleExhibitionsForFilm(int id);
+
+        Items GetItemById(int id);
         Items GetItemByName(string name);
-    }
-
-    public class InMemoryItemsRepository : IItemsRepository
-    {
-        public void AddFilmExhibition(Exhibitions filmExhibition)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void AddFilms(Films film)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void AddItem(Items item)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Items GetItemByName(string name)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<Items> GetItemsByOrderId()
-        {
-            throw new NotImplementedException();
-        }
+        IEnumerable<Items> GetAllItems();
+        Films GetFilmById(int id);
+        List<Exhibitions> GetExhibitionForFilmID(int id);
     }
 
     public class DbItemsRepository : IItemsRepository
@@ -63,10 +47,73 @@ namespace Project_IHFF.Repositories
             ctx.SaveChanges();
         }
 
+        public Items GetItemById(int id)
+        {
+            return ctx.Items.SingleOrDefault(x => x.id == id);
+        }
+
         public Items GetItemByName(string name)
         {
             Items item = ctx.Items.SingleOrDefault(x => x.name == name);
             return item;
+        }
+
+        public IEnumerable<Items> GetAllItems()
+        {
+            return ctx.Items.ToList();
+        }
+
+        public Films GetFilmById(int id)
+        {
+            return ctx.Items.OfType<Films>().SingleOrDefault(x => x.id == id);
+        }
+
+        public List<Exhibitions> GetExhibitionForFilmID(int id)
+        {
+            return ctx.Exhibitions.Where(x => x.filmId == id).ToList();
+        }
+
+        public void UpdateItem(Items item)
+        {
+            Items updateItem = ctx.Items.SingleOrDefault(x => x.id == item.id);
+            if(updateItem != null)
+            {
+                ctx.Entry(updateItem).CurrentValues.SetValues(item);
+                ctx.SaveChanges();
+            }            
+        }
+
+        public void DeleteItem(int id)
+        {
+            Items deleteItem = ctx.Items.SingleOrDefault(x => x.id == id);
+            ctx.Items.Remove(deleteItem);
+            ctx.SaveChanges();
+        }
+
+        public void UpdateExhibition(Exhibitions exhibition)
+        {
+            Exhibitions updateExhibition = ctx.Exhibitions.SingleOrDefault(x => x.id == exhibition.id);
+            if (updateExhibition != null)
+            {
+                ctx.Entry(updateExhibition).CurrentValues.SetValues(exhibition);
+                ctx.SaveChanges();
+            }
+
+        }
+        
+        public void DeleteExhibition(Exhibitions exhibition)
+        {
+            ctx.Exhibitions.Remove(exhibition);
+        }
+
+        public void DeleExhibitionsForFilm(int id)
+        {
+            Films film = ctx.Items.OfType<Films>().SingleOrDefault(x => x.id == id);
+            List<Exhibitions> exhibitions = GetExhibitionForFilmID(id);
+            foreach(var x in exhibitions)
+            {
+                ctx.Exhibitions.Remove(x);
+            }
         }
     }
 }

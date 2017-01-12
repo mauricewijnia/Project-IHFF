@@ -1,18 +1,21 @@
 ﻿@using Project_IHFF.Models;
 @using System.Collections.Generic;
 
-@model IEnumerable<FilmViewModel>
+@model IEnumerable<ExhibitionViewModel>
 
-@foreach (FilmViewModel film in Model)
+@foreach (ExhibitionViewModel film in Model)
             {
     <div class="contentBox">
-        <table>
-            <tr>
-                <td>@film.Name</td>
-                <td>@film.Actors</td>
-                <td>@film.FilmId</td>
-                <td>@film.StartTime</td>
-            </tr>
-        </table>
+        <img src="@film.Image" />
+                @film.Name
+                @film.Actors
+                @film.FilmId
+                @film.StartTime
+                <br />
+                <a class="glyphicon glyphicon-plus-sign qtyBtn"></a>
+                <a class="glyphicon glyphicon-minus-sign qtyBtn"></a>
+                <a class="btn btn-default shopBtn" href='@Url.Action("Add", "ShoppingCart", new { id = @film.FilmId, Quantity = 3 }, null)'>To Programme</a>
+                <a class="btn btn-default shopBtn" href='@Url.Action("Add", "ShoppingCart", new { id = @film.FilmId, Quantity = 3 }, null)'>To shopping Cart</a>
+
     </div>
 }

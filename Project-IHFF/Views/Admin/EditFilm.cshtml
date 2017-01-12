@@ -1,0 +1,134 @@
+﻿@using Project_IHFF.Models
+@model FilmsViewModel
+
+
+<h2>Edit Film</h2>
+
+@Html.ValidationSummary()
+@using (Html.BeginForm("EditFilm", "Admin", FormMethod.Post, new { @enctype = "multipart/form-data", id = "myform" }))
+{
+    <div class="row">
+        <div class="col-md-4">
+            <label>Name: </label>
+            @Html.TextBoxFor(x => x.film.name, new { @class = "form-control" })
+            <br />
+            <label>Directors:</label>
+            @Html.TextBoxFor(x => x.film.director, new { @class = "form-control" })
+            <br />
+            <label>Actors: </label>
+            @Html.TextBoxFor(x => x.film.actors, new { @class = "form-control" })
+            <br />
+            <label>Location: </label>
+            @Html.TextBoxFor(x => x.film.location, new { @class = "form-control" })
+            <br />
+            <label>Price: </label>
+            @Html.TextBoxFor(x => x.film.price, new { @class = "form-control" })
+            <br />
+            <label>Capacity: </label>
+            @Html.TextBoxFor(x => x.film.capacity, new { @class = "form-control" })
+        </div>
+        <div class="col-md-4">
+            <label>Description:</label>
+            @Html.TextAreaFor(x => x.film.description, new { @class = "form-control", rows = "5" })
+            <br />
+            <label>Image:</label>
+            <input id="UploadImage" title="Upload an image." type="file" name="upload" />
+            <img src="@Model.film.imagePath" alt="Item image" class="itemImage" />
+
+            @Html.HiddenFor(x => x.film.id)
+            @Html.HiddenFor(x=> x.film.imagePath)
+        </div>
+    </div>
+
+    <br />
+
+    <label>Exhibition:</label>
+    <br />
+    <div class="row">
+        <div class="col-md-4">
+            <label>Starting Time:</label>
+
+            @Html.TextBoxFor(x => x.exhibitions[0].startTime, "{0:dd-MM-yyyy HH:mm}", new { @class = "form-control dateTime" })
+        </div>
+        <div class="col-md-4">
+            <label>Ending Time:</label>
+            @Html.TextBoxFor(x => x.exhibitions[0].endTime, "{0:dd-MM-yyyy HH:mm}", new { @class = "form-control dateTime" })
+        </div>
+        @Html.HiddenFor(x=>x.exhibitions[0].id)
+        @Html.HiddenFor(x => x.exhibitions[0].filmId)
+    </div>
+
+    if (Model.exhibitions.Count < 2)
+    {
+
+        Exhibitions exhibition = new Exhibitions();
+        exhibition.startTime = new DateTime(2017, 1, 1, 0, 0, 0);
+        exhibition.endTime = new DateTime(2017, 1, 1, 0, 0, 0);
+        Model.exhibitions.Add(exhibition);
+    }
+
+     <div id="HiddenDiv">
+         <br />
+         <label>Second Exhibition (Optional)</label>
+         <br />
+         <div class="row">
+             <div class="col-md-4">
+                 <label>Starting Time:</label>
+
+                 @Html.TextBoxFor(x => x.exhibitions[1].startTime, "{0:dd-MM-yyyy HH:mm}", new { @class = "form-control hiddenTextBox"})
+             </div>
+             <div class="col-md-4">
+                 <label>Ending Time:</label>
+                 @Html.TextBoxFor(x => x.exhibitions[1].endTime, "{0:dd-MM-yyyy HH:mm}", new { @class = "form-control hiddenTextBox"})
+             </div>
+             @Html.HiddenFor(x => x.exhibitions[1].id)
+             @Html.HiddenFor(x => x.exhibitions[1].filmId)
+         </div>
+     </div>
+    <br />
+    <input type="button" id="VisibilityButton" name="show" value="+ Add second exhibition" onclick="showDiv()" class="btn btn-primary" />
+    <br />
+    <br />
+
+    <input type="submit" value="Submit" class="btn btn-primary" />
+    @Html.ActionLink("Delete", "DeleteFilm", new { id = Model.film.id }, new { @class = "btn btn-danger" })
+
+}
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        if ($(".hiddenTextBox").attr("value") != "01-01-2017 00:00") {
+            showDiv();
+        }
+    })
+
+    $(function () {
+        $("#myForm").submit(function (event) {
+            event.preventDefault();
+            return validateDateTime();
+        });
+    });
+
+    function validateDateTime() {
+        if ($(".dateTime").val == "01-01-2017 00:00") {
+            alert("Invalid date & time combination.");
+            return false;
+        }
+        else {
+            return true;
+        }
+    }
+
+    function showDiv() {
+        document.getElementById('HiddenDiv').style.display = "block";
+        document.getElementById('VisibilityButton').value = "- Remove second exhibition";
+        document.getElementById('VisibilityButton').onclick = function () { hideDiv() };
+    }
+
+    function hideDiv() {
+        document.getElementById('HiddenDiv').style.display = "none";
+        document.getElementById('VisibilityButton').value = "+ Add second exhibition";
+        document.getElementById('VisibilityButton').onclick = function () { showDiv() };
+        $('.hiddenTextBox').attr("value", "01-01-2017 00:00");
+    }
+</script>

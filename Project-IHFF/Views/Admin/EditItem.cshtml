@@ -1,0 +1,30 @@
+﻿@using Project_IHFF.Models
+@model IEnumerable<Items>
+
+<h2>Edit Items</h2>
+
+<h2>Films</h2>
+<div class="container cmsEditContainer">
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            if (item is Films)
+            {
+                <div class="col-md-3">
+                    <div class="cmsItemContainer">
+                        <label>@item.name</label>
+                        @Html.ActionLink("Edit", "EditFilm", new { id = item.id }, new { @class = "btn btn-primary cmsEditButton" })
+                    </div>
+                    
+                </div>
+            }
+        }
+    </div>
+</div>
+
+
+<h2>Specials</h2>
+
+<h2>Restaurants</h2>
+
+

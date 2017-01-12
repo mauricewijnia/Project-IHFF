@@ -155,6 +155,38 @@
     display: none;
 }
 
+/* Images*/
+
+.itemImage{
+    width: 160px;
+    margin: 10px auto;
+}
+
+/* CMS */
+
+.cmsEditButton{
+    width: 100px;
+    float:right;
+}
+
+.cmsEditContainer{
+    background-color: #CCC;
+    position: relative;
+}
+
+.cmsItemContainer{
+    background-color: darkgray;
+    border-radius: 3px;
+    margin: 5px 0;
+    padding: 5px;
+}
+
+.cmsItemContainer label{
+    margin-top: 8px;
+    margin-left: 10px;
+}
+
+
 /* Bootstrap override*/
 
 .nav-tabs{
@@ -183,6 +215,11 @@
 }
 
 .btn-primary:active{
+    background-color: #ff6600;
+    border-color: #ff6600;
+}
+
+.btn-primary:focus{
     background-color: #ff6600;
     border-color: #ff6600;
 }
@@ -217,13 +254,30 @@ input[type="color"]:focus,
     border-radius: 5px;
     background-color: #666666;
 }
-
-.sort-btn{
+.shopBtn {
+    width: 12em;
+    margin: 4px;
+    background-color: #FF9900;
+    border-color: #FF9900;
+}
+.shopBtn:hover{
+    background-color: #ff6600;
+}
+.sortBtn{
     width: 4em;
     margin: 4px;
     background-color: #FF9900;
     border-color: #FF9900;
 }
-.sort-btn:hover{
+.sortBtn:hover{
     background-color: #ff6600;
+}
+
+.qtyBtn {
+    color: #FF9900;
+    font-size: 1.5em;
+}
+
+.qtyBtn:hover {
+    color: #FF6600;
 }
