@@ -1,0 +1,104 @@
+﻿<script src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyBNsEnJz7K0fRtRb9xg8cw6RthggU8KeeI" type="text/javascript"></script>
+
+<div id="u1613" class="ax_default box_1">
+    <div id="u1613_div" class=""></div>
+    <!-- Unnamed () -->
+    <div id="u1614" class="text" style="display: inline; visibility: visible">
+        <p><span>test</span></p>
+    </div>
+</div>
+
+
+<style>
+    #map_canvas img {
+        max-width: none;
+    }
+</style>
+
+<!-- info window popup css-->
+<style>
+    .infoDiv {
+        height: 200px;
+        width: 300px;
+        -webkit-user-select: none;
+        background-color: white;
+    }
+</style>
+<br />
+<!-- google map css -->
+<div id="map_canvas" style="height: 550px;"></div>
+
+@section scripts {
+    <section class="scripts">
+
+        <script type="text/javascript">
+
+    $(document).ready(function () {
+        Initialize();
+    });
+
+    function Initialize() {
+
+        // Google has tweaked their interface somewhat - this tells the api to use that new UI
+        google.maps.visualRefresh = true;
+        var Haarlem = new google.maps.LatLng(52.387386, 4.646219);
+
+        // These are options that set initial zoom level, where the map is centered globally to start, and the type of map to show
+        var mapOptions = {
+            zoom: 13,
+            center: Haarlem,
+            mapTypeId: google.maps.MapTypeId.G_NORMAL_MAP
+        };
+
+        // This makes the div with id "map_canvas" a google map
+        var map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
+
+        // a sample list of JSON encoded data of places to visit in Tunisia
+        // you can either make up a JSON list server side, or call it from a controller using JSONResult
+        var data = [
+                  { "Id": 1, "PlaceName": "Stempels Brasserie",},
+                  { "Id": 2, "PlaceName": "De Uitkijk",},
+                  { "Id": 3, "PlaceName": "Dijkers", "GeoLong": "52.380533", "GeoLat": "4.636618" },
+                  { "Id": 4, "PlaceName": "Terra", "GeoLong": "52.406732", "GeoLat": "4.622309", "Marker": "http://labs.google.com/ridefinder/images/mm_20_blue.png" },
+                  { "Id": 5, "PlaceName": "Ratatouille", "GeoLong": "52.378701", "GeoLat": "4.637673", "Marker": "http://labs.google.com/ridefinder/images/mm_20_yellow.png" },
+                  { "Id": 6, "PlaceName": "De Ark", "GeoLong": "52.377178", "GeoLat": "4.633261", "Adress": "Nieuw Heiligland 3", "City": "2011EM, Haarlem", "Phone": "+023 531 1078", "Email": "info@deark.nl", "image": "../img/restaurants/deark.png"}
+        ];
+
+
+        // Using the JQuery "each" selector to iterate through the JSON list and drop marker pins
+        $.each(data, function (i, item) {
+            var marker = new google.maps.Marker({
+                'position': new google.maps.LatLng(item.GeoLong, item.GeoLat),
+                'map': map,
+                'title': item.PlaceName,
+                'icon': item.Marker
+            });
+
+                // Start of newly added code block
+            var contentString = '<div id="content" style="margin-left:15px; margin-top:3px;overflow:hidden;">'+'<div id="bodyContent">'
+                +'<img src='+ item.image +' style="width:172px;height:110px;"/>'
+                +'<br><font style="color:black;font:13px tahoma;margin-left:5px;">'
+                + item.PlaceName + '</font><br><br><div style="font:13px verdana;color:darkgreen;margin-left:5px;">' + item.Adress + ' <br>' + item.City
+                +'<br>' + item.Phone + '<br>' + item.Email + '<br><br>'
+                +'</div>'+'</div>';
+
+            // Make the marker-pin blue!
+
+
+            // put in some information about each json object - in this case, the opening hours.
+            var infowindow = new google.maps.InfoWindow({
+                content: contentString,
+                width: 192,
+                height: 1000
+            });
+
+            // finally hook up an "OnClick" listener to the map so it pops up out info-window when the marker-pin is clicked!
+            google.maps.event.addListener(marker, 'click', function ()
+            {
+                infowindow.open(map, marker);
+            });
+        })
+    }
+        </script>
+    </section>
+}
