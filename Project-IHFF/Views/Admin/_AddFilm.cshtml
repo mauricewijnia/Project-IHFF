@@ -30,6 +30,7 @@
             <br />
             <label>Image:</label>
             <input id="UploadImage" title="Upload an image." type="file" name="upload"/>
+            
         </div>
     </div>
     
@@ -48,32 +49,29 @@
             @Html.TextBoxFor(x => x.exhibitions[0].endTime, "{0:dd-MM-yyyy HH:mm}", new { @class = "form-control" })
         </div>
     </div>
-    
-
-
-
-    <br />
-    <br />
     <div id="HiddenDiv">
+        <br />
         <label>Second Exhibition (Optional)</label>
         <br />
         <div class="row">
             <div class="col-md-4">
                 <label>Starting Time:</label>
 
-                @Html.TextBoxFor(x => x.exhibitions[1].startTime, "{0:dd-MM-yyyy HH:mm}", new { @class = "form-control"})
+                @Html.TextBoxFor(x => x.exhibitions[1].startTime, "{0:dd-MM-yyyy HH:mm}", new { @class = "form-control", id = "hiddenTextBox"})
             </div>
             <div class="col-md-4">
                 <label>Ending Time:</label>
-                @Html.TextBoxFor(x => x.exhibitions[1].endTime, "{0:dd-MM-yyyy HH:mm}", new { @class = "form-control" })
+                @Html.TextBoxFor(x => x.exhibitions[1].endTime, "{0:dd-MM-yyyy HH:mm}", new { @class = "form-control", id = "hiddenTextBox" })
             </div>
         </div>
-    </div>
+    </div> 
     <br />
-
     <input type="button" id="VisibilityButton" name="show" value="+ Add second exhibition" onclick="showDiv()" class="btn btn-primary" />
-
+    <br />
+    <br />
     <input type="submit" value="Submit" class="btn btn-primary" />
+    @Html.ActionLink("Reset", "AddItem", null, new { @class = "btn btn-danger" })
+
 }
 
 <script type="text/javascript">
@@ -85,6 +83,7 @@
 
         function hideDiv() {
             document.getElementById('HiddenDiv').style.display = "none";
+            document.getElementById('hiddenTextBox').value = "1-1-2017 00:00"
             document.getElementById('VisibilityButton').value = "+ Add second exhibition";
             document.getElementById('VisibilityButton').onclick = function () { showDiv() };
         }
