@@ -1,11 +1,46 @@
 ﻿<script src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyBNsEnJz7K0fRtRb9xg8cw6RthggU8KeeI" type="text/javascript"></script>
 
-<div id="u1613" class="ax_default box_1">
-    <div id="u1613_div" class=""></div>
-    <!-- Unnamed () -->
-    <div id="u1614" class="text" style="display: inline; visibility: visible">
-        <p><span>test</span></p>
+    <div id="u1614">
+        <h1 id="MainCategory">Culture</h1>
+        <p id="text">Welcome to the International Haarlem film festival (iHff).
+        The organization is working hard to make this year’s festival even better than last year’s and we hope that everyone who will pay a visit
+        to the IHff will have a great time with the huge array of events that are being planned.
+        Haarlem will once again serve as the background of the festival so we would like to inform you about the rich culture the city can offer you during the time between events.</p>
+        <img src="http://www.leuketip.nl/images/db/560ae5fce4b0e31341a0e98c/original.jpg" id="cultureimages"/>
     </div>
+
+
+<div id="u1614">
+    <h1 id="MainCategory">Museums</h1>
+    <p id="text">
+        Haarlem has a lot of museums that are worth paying a visit. One of the most unique museums is
+        “Het Dolhuys” which loosely translates to “the madhouse”, it’s a museum about the human mind
+        and really showcases the thin line between crazy and normal. For people that prefer more
+        traditional museums with beautiful paintings there is the Frans Hals museum, which focusses on 16th and 17th century paintings made by the painter Frans Hals and there’s also a modern art museum called "De Hallen".
+    </p>
+    <img src="http://www.leuketip.nl/images/db/560ae5fce4b0e31341a0e98c/original.jpg" id="cultureimages" />
+</div>
+
+<div id="u1614">
+    <h1 id="MainCategory">Monuments</h1>
+    <p id="text">
+        If you prefer visiting historical monuments over museums you will love Haarlem. Haarlem is an old
+        city and as such has a lot of old buildings that are very well preserved.
+        Former weigh house “De Waag” used to be a place where trading good were weighed and taxes were being paid from 1599 until 1915, now it houses a bar and an art exhibition space.
+        Another interesting landmark is the St. Joseph church, the first official catholic church after the iconoclastic fury or “statue storm”.
+        It served as the main catholic church in Haarlem, but because of the rapid growth of Catholicism
+        it was too small after only 90 years and a new cathedral was built.
+    </p>
+    <img src="http://www.leuketip.nl/images/db/560ae5fce4b0e31341a0e98c/original.jpg" id="cultureimages2" />
+</div>
+
+<div id="u1614">
+    <h1 id="MainCategory">And more</h1>
+    <p id="text">
+        These are just some examples of the diverse culture Haarlem has to offer.
+        If you’re interested in any of them or like to find out what other venue’s you can visit while you’re at the IHff, you can pay a visit to weebly.com.
+    </p>
+    <img src="http://www.leuketip.nl/images/db/560ae5fce4b0e31341a0e98c/original.jpg" id="cultureimages3" />
 </div>
 
 
@@ -17,14 +52,14 @@
 
 <!-- info window popup css-->
 <style>
-    .infoDiv {
-        height: 200px;
-        width: 300px;
+.infowindow {
+        height: 5500px;
+        width: 3550px;
         -webkit-user-select: none;
         background-color: white;
     }
 </style>
-<br />
+
 <!-- google map css -->
 <div id="map_canvas" style="height: 550px;"></div>
 
@@ -56,12 +91,17 @@
         // a sample list of JSON encoded data of places to visit in Tunisia
         // you can either make up a JSON list server side, or call it from a controller using JSONResult
         var data = [
-                  { "Id": 1, "PlaceName": "Stempels Brasserie",},
-                  { "Id": 2, "PlaceName": "De Uitkijk",},
-                  { "Id": 3, "PlaceName": "Dijkers", "GeoLong": "52.380533", "GeoLat": "4.636618" },
-                  { "Id": 4, "PlaceName": "Terra", "GeoLong": "52.406732", "GeoLat": "4.622309", "Marker": "http://labs.google.com/ridefinder/images/mm_20_blue.png" },
-                  { "Id": 5, "PlaceName": "Ratatouille", "GeoLong": "52.378701", "GeoLat": "4.637673", "Marker": "http://labs.google.com/ridefinder/images/mm_20_yellow.png" },
-                  { "Id": 6, "PlaceName": "De Ark", "GeoLong": "52.377178", "GeoLat": "4.633261", "Adress": "Nieuw Heiligland 3", "City": "2011EM, Haarlem", "Phone": "+023 531 1078", "Email": "info@deark.nl", "image": "../img/restaurants/deark.png"}
+                  { "Id": 1, "PlaceName": "Stempels Brasserie", "GeoLong": "52.380827", "GeoLat": "4.638282", "Adress": "Klokhuisplein 9", "City": "2011 HK, Haarlem", "Phone": "+023 512 39 10", "Email": "info@stempelsinhaarlem.nl", "image": "../img/restaurants/stempels.png", "Marker": "http://labs.google.com/ridefinder/images/mm_20_yellow.png" },
+                  { "Id": 2, "PlaceName": "De Uitkijk", "GeoLong": "52.410086", "GeoLat": "4.604256", "Adress": "Hoge Duin en Daalseweg 6", "City": "2061 AG, Bloemendaal", "Phone": "+023 525 11 62", "Email": "restaurant@uitkijk-kopjebloemendaal.nl", "image": "../img/restaurants/deuitkijk.png", "Marker": "http://labs.google.com/ridefinder/images/mm_20_yellow.png" },
+                  { "Id": 3, "PlaceName": "Dijkers", "GeoLong": "52.380533", "GeoLat": "4.636618", "Adress": "Warmoesstraat 5", "City": "2011 HN Haarlem", "Phone": "+023 551 15 64", "Email": "info@restaurantdijkers.nl", "image": "../img/restaurants/dijkers.png", "Marker": "http://labs.google.com/ridefinder/images/mm_20_yellow.png" },
+                  { "Id": 4, "PlaceName": "Terra", "GeoLong": "52.406732", "GeoLat": "4.622309", "Adress": "Kerkplein 16A", "City": "2061 JD Bloemendaal", "Phone": "+023 527 7856", "Email": "info@terra.nl", "image": "../img/restaurants/terra.png", "Marker": "http://labs.google.com/ridefinder/images/mm_20_yellow.png" },
+                  { "Id": 5, "PlaceName": "Ratatouille", "GeoLong": "52.378701", "GeoLat": "4.637673", "Adress": "Spaarne 96", "City": "2011 CL Haarlem", "Phone": "+023 542 7270", "Email": "info@ratatouillefoodandwine.nl", "image": "../img/restaurants/ratatouille.png", "Marker": "http://labs.google.com/ridefinder/images/mm_20_yellow.png" },
+                  { "Id": 6, "PlaceName": "De Ark", "GeoLong": "52.377178", "GeoLat": "4.633261", "Adress": "Nieuw Heiligland 3", "City": "2011EM, Haarlem", "Phone": "+023 531 1078", "Email": "info@deark.nl", "image": "../img/restaurants/deark.png", "Marker": "http://labs.google.com/ridefinder/images/mm_20_yellow.png" },
+                  { "Id": 7, "PlaceName": "Philharmonie", "GeoLong": "52.381537", "GeoLat": "4.638797", "Adress": "Lange Begijnestraat 11", "City": "2011 HH, Haarlem", "Phone": "+023 512 1212", "Email": "service@theater-haarlem.nl", "image": "../img/theathers/philharmonie.png", "Marker": "http://labs.google.com/ridefinder/images/mm_20_blue.png" },
+                  { "Id": 8, "PlaceName": "Toneelschuur ", "GeoLong": "52.381997", "GeoLat": "4.639054", "Adress": "Lange Begijnestraat 9", "City": "2011 HH, Haarlem", "Phone": "+023 517 3910", "Email": "informatie@toneelschuur.nl", "image": "../img/theathers/toneelschuur.png", "Marker": "http://labs.google.com/ridefinder/images/mm_20_blue.png" },
+                  { "Id": 9, "PlaceName": "Pathé ", "GeoLong": "52.381764", "GeoLat": "4.629414", "Adress": "Zijlvest 41-43", "City": "2011 VB, Haarlem", "Phone": "+0900 1458", "image": "../img/theathers/pathe.png", "Marker": "http://labs.google.com/ridefinder/images/mm_20_blue.png" },
+                  { "Id": 9, "PlaceName": "Sint Bavo", "GeoLong": "52.376474", "GeoLat": "4.622860", "Adress": "Zijlvest 41-43", "City": "2011 VB, Haarlem", "Phone": "+0900 1458", "image": "../img/theathers/pathe.png", "Marker": "http://labs.google.com/ridefinder/images/mm_20_red.png" },
+                  { "Id": 9, "PlaceName": "De Adriaan", "GeoLong": "52.383701", "GeoLat": "4.642732", "Adress": "Papentorenvest 1A", "City": "2011 AV, Haarlem", "Phone": "+023 545 0259", "image": "../img/cultuur/deadriaan.png", "Marker": "http://labs.google.com/ridefinder/images/mm_20_red.png" },
         ];
 
 
@@ -82,9 +122,6 @@
                 +'<br>' + item.Phone + '<br>' + item.Email + '<br><br>'
                 +'</div>'+'</div>';
 
-            // Make the marker-pin blue!
-
-
             // put in some information about each json object - in this case, the opening hours.
             var infowindow = new google.maps.InfoWindow({
                 content: contentString,
@@ -95,10 +132,25 @@
             // finally hook up an "OnClick" listener to the map so it pops up out info-window when the marker-pin is clicked!
             google.maps.event.addListener(marker, 'click', function ()
             {
-                infowindow.open(map, marker);
+                if (!marker.open) {
+                    infowindow.open(map, marker);
+                    marker.open = true;
+                }
+                else {
+                    infowindow.close();
+                    marker.open = false;
+                }
+                google.maps.event.addListener(map, 'click', function () {
+                    infowindow.close();
+                    marker.open = false;
+                });
             });
         })
     }
         </script>
     </section>
 }
+<div id="map_info"><img src="http://labs.google.com/ridefinder/images/mm_20_yellow.png" /> Restaurants.
+    <img src="http://labs.google.com/ridefinder/images/mm_20_blue.png" /> Theathers.
+    <img src="http://labs.google.com/ridefinder/images/mm_20_red.png" /> Culturele Activiteiten.
+    </div>
