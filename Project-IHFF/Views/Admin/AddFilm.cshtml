@@ -1,8 +1,10 @@
 ﻿@using Project_IHFF.Models
 @model FilmsViewModel
 
+<h2> Add Film</h2>
+
 @Html.ValidationSummary()
-@using (Html.BeginForm("_AddFilm", "Admin", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+@using (Html.BeginForm("AddFilm", "Admin", FormMethod.Post, new { @enctype = "multipart/form-data" }))
 {
     <div class="row">
         <div class="col-md-4">
@@ -29,11 +31,11 @@
             @Html.TextAreaFor(x => x.film.description, new { @class = "form-control", rows = "5" })
             <br />
             <label>Image:</label>
-            <input id="UploadImage" title="Upload an image." type="file" name="upload"/>
-            
+            <input id="UploadImage" title="Upload an image." type="file" name="upload" />
+
         </div>
     </div>
-    
+
     <br />
 
     <label>Exhibition:</label>
@@ -41,8 +43,8 @@
     <div class="row">
         <div class="col-md-4">
             <label>Starting Time:</label>
-            
-            @Html.TextBoxFor(x => x.exhibitions[0].startTime, "{0:dd-MM-yyyy HH:mm}", new { @class = "form-control" })
+
+            @Html.TextBoxFor(x => x.exhibitions[0].startTime, "{0:dd-MM-yyyy HH:mm}", new { @class = "form-control", id = "startTime" })
         </div>
         <div class="col-md-4">
             <label>Ending Time:</label>
@@ -57,24 +59,37 @@
             <div class="col-md-4">
                 <label>Starting Time:</label>
 
-                @Html.TextBoxFor(x => x.exhibitions[1].startTime, "{0:dd-MM-yyyy HH:mm}", new { @class = "form-control", id = "hiddenTextBox"})
+                @Html.TextBoxFor(x => x.exhibitions[1].startTime, "{0:dd-MM-yyyy HH:mm}", new { @class = "form-control", id = "hiddenTextBox" })
             </div>
             <div class="col-md-4">
                 <label>Ending Time:</label>
                 @Html.TextBoxFor(x => x.exhibitions[1].endTime, "{0:dd-MM-yyyy HH:mm}", new { @class = "form-control", id = "hiddenTextBox" })
             </div>
         </div>
-    </div> 
+    </div>
     <br />
     <input type="button" id="VisibilityButton" name="show" value="+ Add second exhibition" onclick="showDiv()" class="btn btn-primary" />
     <br />
     <br />
-    <input type="submit" value="Submit" class="btn btn-primary" />
-    @Html.ActionLink("Reset", "AddItem", null, new { @class = "btn btn-danger" })
+    <input type="submit" value="Submit" class="btn btn-primary" onclick="return validateForm()" />
+    @Html.ActionLink("Cancel", "Index", null, new { @class = "btn btn-primary"})
+    @Html.ActionLink("Reset", "AddFilm", null, new { @class = "btn btn-danger" })
 
 }
 
 <script type="text/javascript">
+    function validateForm() {
+        var x = $("#startTime").val();
+        if (x == "01-01-2017 00:00") {
+            alert("Invalid date & time combination. Please enter a different starting time.")
+            return false;
+        }
+        else {
+            return true;
+        }
+
+    }
+
         function showDiv() {
             document.getElementById('HiddenDiv').style.display = "block";
             document.getElementById('VisibilityButton').value = "- Remove second exhibition";
@@ -88,3 +103,4 @@
             document.getElementById('VisibilityButton').onclick = function () { showDiv() };
         }
 </script>
+

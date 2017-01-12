@@ -21,9 +21,13 @@ namespace Project_IHFF.Repositories
 
         Items GetItemById(int id);
         Items GetItemByName(string name);
-        IEnumerable<Items> GetAllItems();
         Films GetFilmById(int id);
         List<Exhibitions> GetExhibitionForFilmID(int id);
+
+        IEnumerable<Items> GetAllItems();
+        IEnumerable<Films> GetAllFilms();
+        IEnumerable<Specials> GetAllSpecials();
+        IEnumerable<Restaurants> GetAllRestaurants();
     }
 
     public class DbItemsRepository : IItemsRepository
@@ -114,6 +118,21 @@ namespace Project_IHFF.Repositories
             {
                 ctx.Exhibitions.Remove(x);
             }
+        }
+
+        public IEnumerable<Films> GetAllFilms()
+        {
+            return ctx.Items.OfType<Films>().ToList();
+        }
+
+        public IEnumerable<Specials> GetAllSpecials()
+        {
+            return ctx.Items.OfType<Specials>().ToList();
+        }
+
+        public IEnumerable<Restaurants> GetAllRestaurants()
+        {
+            return ctx.Items.OfType<Restaurants>().ToList();
         }
     }
 }
