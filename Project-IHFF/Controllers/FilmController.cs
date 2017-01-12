@@ -30,7 +30,7 @@ namespace Project_IHFF.Controllers
                 items.Add(viewModel);
             }*/
 
-            IEnumerable<FilmViewModel> allFilms = filmRepository.GetAllFilms();
+            IEnumerable<ExhibitionViewModel> allFilms = filmRepository.GetAllFilms();
             //IEnumerable<FilmViewModel> allItems = filmRepository.GetAllFilms();
 
             return View(allFilms);
@@ -127,8 +127,9 @@ namespace Project_IHFF.Controllers
                 case "saturday": dayNr = 7; break;
                 case "sunday": dayNr = 8; break;
             }
-            IEnumerable<FilmViewModel> filteredFilms = filmRepository.GetFilmsByDay(dayNr);
-            return PartialView(filteredFilms);
+            //if dayNr = 0 (no day filter is set) get all films. otherwise a dayNr is set above and "GetFilmsByDay" is triggerd
+            IEnumerable<ExhibitionViewModel> filmList = (dayNr == 0) ? filmRepository.GetAllFilms() : filmRepository.GetFilmsByDay(dayNr);
+            return PartialView(filmList);
         }
 
         public PartialViewResult SortedFilms(int day, string sort)

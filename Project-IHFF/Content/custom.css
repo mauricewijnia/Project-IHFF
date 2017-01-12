@@ -254,13 +254,30 @@ input[type="color"]:focus,
     border-radius: 5px;
     background-color: #666666;
 }
-
-.sort-btn{
+.shopBtn {
+    width: 12em;
+    margin: 4px;
+    background-color: #FF9900;
+    border-color: #FF9900;
+}
+.shopBtn:hover{
+    background-color: #ff6600;
+}
+.sortBtn{
     width: 4em;
     margin: 4px;
     background-color: #FF9900;
     border-color: #FF9900;
 }
-.sort-btn:hover{
+.sortBtn:hover{
     background-color: #ff6600;
+}
+
+.qtyBtn {
+    color: #FF9900;
+    font-size: 1.5em;
+}
+
+.qtyBtn:hover {
+    color: #FF6600;
 }
