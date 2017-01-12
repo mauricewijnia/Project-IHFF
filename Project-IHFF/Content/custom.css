@@ -287,3 +287,21 @@ input[type="color"]:focus,
 .qtyBtn:hover {
     color: #FF6600;
 }
+.noPadd{
+    padding: 0px;
+}
+.title {
+    color: #FF9900;
+}
+
+.subTitle, .title {
+    margin: 0.2em 0;
+}
+
+.description {
+    font-size: 0.8em;
+}
+
+.whiteText {
+    color: #F2F2F2;
+}

@@ -6,16 +6,29 @@
 @foreach (ExhibitionViewModel film in Model)
             {
     <div class="contentBox">
-        <img src="@film.Image" />
-                @film.Name
-                @film.Actors
-                @film.FilmId
-                @film.StartTime
-                <br />
+        <div class="col-md-2 noPadd">
+            <img src="@film.Image" style="height:13em" />
+        </div>
+        <div class="col-md-10 noPadd whiteText">
+            <div class="col-md-9">
+                <h1 class="title">@film.Name</h1>
+                <h3 class="subTitle">@film.Director</h3>
+                <p class="description">@film.Description</p>
+                <p>@film.Actors</p>           
+            </div>
+            <div class="col-md-3">
+                <p>@film.StartTime.DayOfWeek</p>
+                <p>@film.StartTime.ToString("HH:mm") - @film.EndTime.Value.ToString("HH:mm")</p>
+            </div>
+            <div class="clearfix"></div>
+            <div class="col-md-12">
                 <a class="glyphicon glyphicon-plus-sign qtyBtn"></a>
                 <a class="glyphicon glyphicon-minus-sign qtyBtn"></a>
                 <a class="btn btn-default shopBtn" href='@Url.Action("Add", "ShoppingCart", new { id = @film.FilmId, Quantity = 3 }, null)'>To Programme</a>
                 <a class="btn btn-default shopBtn" href='@Url.Action("Add", "ShoppingCart", new { id = @film.FilmId, Quantity = 3 }, null)'>To shopping Cart</a>
-
+            </div>
+        </div>
+        <div class="clearfix"></div>
     </div>
+
 }

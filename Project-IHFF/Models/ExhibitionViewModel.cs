@@ -14,6 +14,7 @@ namespace Project_IHFF.Models
         public string Director { get; set; }
         public string Actors { get; set; }
         public string Image { get; set; }
+        public string Day { get; set; }
         public string Location { get; set; }
         public decimal Price { get; set; }
         public string Capacity { get; set; }
