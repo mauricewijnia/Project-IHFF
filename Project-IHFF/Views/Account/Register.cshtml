@@ -4,30 +4,30 @@
 }
 
 
-<h2>@ViewBag.newAccount</h2>
+<h3>@ViewBag.newAccount</h3>
 <p>@ViewBag.error</p>
 
 <form method="post" action="Register">
     <p>First Name:</p>
-    <input type="text" name="firstName" />
-    <br /> <br />
+    <input type="text" name="firstName" class="form-control" />
+    <br />
     <p>Last Name:</p>
-    <input type="text" name="lastName" />
-    <br /> <br />
+    <input type="text" name="lastName" class="form-control" />
+    <br />
     <p>Phone Number:</p>
-    <input type="text" name="phoneNumber" />
-    <br /> <br />
+    <input type="text" name="phoneNumber" class="form-control">
+    <br />
     <p>Emailadress:</p>
-    <input type="text" name="EmailAdress" />
-    <br /> <br />
+    <input type="text" name="EmailAdress" class="form-control" />
+    <br />
     <p>Password:</p>
-    <input type="password" name="password" />
-    <br /> <br />
+    <input type="password" name="password" class="form-control" />
+    <br />
     <p>Repeat Password:</p>
-    <input type="password" name="Passwordcheck" />
-    <br /> <br />
+    <input type="password" name="Passwordcheck" class="form-control" />
+    <br />
 
-    <input type="submit" value="Register" />
+    <input type="submit" value="Register" class="btn btn-primary" />
 </form>
 
 <br />
@@ -35,5 +35,5 @@
                 "Login",
                 "Account",
                  null,
-                 null
+                 new { @class = "btn btn-primary" }
                 )
