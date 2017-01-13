@@ -44,6 +44,12 @@ namespace Project_IHFF.Repositories
         return account;
     }
 
+
+
+
+    /// 
+
+
     public Accounts GetAccountByAccountId(int id)
     {
         Accounts account = ctx.Persons.OfType<Accounts>().SingleOrDefault(x => x.id == id);

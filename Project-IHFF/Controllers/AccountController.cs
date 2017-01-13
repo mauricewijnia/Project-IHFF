@@ -20,9 +20,8 @@ namespace Project_IHFF.Controllers
         }
 
         [HttpGet]
-        public ActionResult Register(string error = "")
+        public ActionResult Register()
         {
-            ViewBag.error = error;
             ViewBag.newAccount = "Make a new account";
             return View();
         }
@@ -32,7 +31,7 @@ namespace Project_IHFF.Controllers
         {
             if (Password != Passwordcheck)
             {
-                return RedirectToAction("Register", "Account", new { fout = "The filled in passwords do not match!" });
+                return RedirectToAction("Register", "Account", new { error = "The filled in passwords do not match!" });
             }
             ViewBag.Registering = "Account has been made, log in here";
             accountRepository.CreateAccount(firstName, lastName, phoneNumber, EmailAdress, Password);
