@@ -16,7 +16,7 @@ namespace Project_IHFF.Repositories
         void UpdateExhibition(Exhibitions exhibition);
 
         void DeleteItem(int id);
-        void DeleteExhibition(Exhibitions exhibition);
+        void DeleteExhibition(int id);
         void DeleExhibitionsForFilm(int id);
 
         Items GetItemById(int id);
@@ -105,9 +105,11 @@ namespace Project_IHFF.Repositories
 
         }
         
-        public void DeleteExhibition(Exhibitions exhibition)
+        public void DeleteExhibition(int id)
         {
-            ctx.Exhibitions.Remove(exhibition);
+            Exhibitions deleteExhibition = ctx.Exhibitions.SingleOrDefault(x => x.id == id);
+            ctx.Exhibitions.Remove(deleteExhibition);
+            ctx.SaveChanges();
         }
 
         public void DeleExhibitionsForFilm(int id)
@@ -117,6 +119,7 @@ namespace Project_IHFF.Repositories
             foreach(var x in exhibitions)
             {
                 ctx.Exhibitions.Remove(x);
+                ctx.SaveChanges();
             }
         }
 

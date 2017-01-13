@@ -21,14 +21,14 @@ namespace Project_IHFF.Models
             this.SpecialTicket = new HashSet<SpecialTicket>();
         }
 
-        [Required]
+        [Required(AllowEmptyStrings = false)]
         public string host { get; set; }
-        [Required]
+        [Required(AllowEmptyStrings = false)]
         public int capacity { get; set; }
-        [Required]
+        [Required(AllowEmptyStrings = false)]
         [DataType(DataType.DateTime)]
         public System.DateTime startTime { get; set; }
-        [Required]
+        [Required(AllowEmptyStrings = false)]
         [DataType(DataType.DateTime)]
         public System.DateTime endTime { get; set; }
     

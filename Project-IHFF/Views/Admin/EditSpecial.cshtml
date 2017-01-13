@@ -1,7 +1,11 @@
 ﻿@using Project_IHFF.Models
 @model Specials
 
-<h2>Edit Special</h2>
+<div class="addPageTitle">
+    <h2>Edit Special</h2>
+</div>
+
+
 
 @Html.ValidationSummary()
 @using (Html.BeginForm("EditSpecial", "Admin", FormMethod.Post, new { @enctype = "multipart/form-data" }))
@@ -43,9 +47,12 @@
         </div>
     </div>
     <br />
-    <input type="submit" value="Submit" class="btn btn-primary" />
-    @Html.ActionLink("Cancel", "Specials", null, new { @class = "btn btn-primary" })
-    @Html.ActionLink("Delete", "DeleteSpecial", new { id = Model.id }, new { @class = "btn btn-danger" })
+    <div class="cmsButtonGroup">
+        <input type="submit" value="Submit" class="btn btn-primary" />
+        @Html.ActionLink("Cancel", "Specials", null, new { @class = "btn btn-primary" })
+        @Html.ActionLink("Delete", "DeleteSpecial", new { id = Model.id }, new { @class = "btn btn-danger" })
+    </div>
+
 }
 
 

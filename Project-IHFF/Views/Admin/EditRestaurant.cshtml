@@ -1,7 +1,11 @@
 ﻿@using Project_IHFF.Models
 @model Restaurants
 
-<h2>Edit Restaurant</h2>
+<div class="addPageTitle">
+    <h2>Edit Restaurant</h2>
+</div>
+
+
 
 @Html.ValidationSummary()
 @using (Html.BeginForm("EditRestaurant", "Admin", FormMethod.Post, new { @enctype = "multipart/form-data" }))
@@ -35,7 +39,10 @@
         </div>
     </div>
     <br />
-    <input type="submit" value="Submit" class="btn btn-primary" />
-    @Html.ActionLink("Cancel", "Restaurants", null, new { @class = "btn btn-primary" })
-    @Html.ActionLink("Delete", "DeleteRestaurant", new { id = Model.id }, new { @class = "btn btn-danger" })
+    <div class="cmsButtonGroup">
+        <input type="submit" value="Submit" class="btn btn-primary" />
+        @Html.ActionLink("Cancel", "Restaurants", null, new { @class = "btn btn-primary" })
+        @Html.ActionLink("Delete", "DeleteRestaurant", new { id = Model.id }, new { @class = "btn btn-danger" })
+    </div>
+    
 }

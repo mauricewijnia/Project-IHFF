@@ -16,13 +16,13 @@ namespace Project_IHFF.Models
     public partial class Items
     {
         public int id { get; set; }
-        [Required]
+        [Required(AllowEmptyStrings = false)]
         public string description { get; set; }
-        [Required]
+        [Required(AllowEmptyStrings = false)]
         public string location { get; set; }
-        [Required]
+        [Required(AllowEmptyStrings = false)]
         public decimal price { get; set; }
-        [Required]
+        [Required(AllowEmptyStrings = false)]
         public string name { get; set; }
         public string imagePath { get; set; }
     }
