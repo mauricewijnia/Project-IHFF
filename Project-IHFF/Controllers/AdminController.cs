@@ -26,17 +26,17 @@ namespace Project_IHFF.Controllers
         }
         public ActionResult Films()
         {
-            return View(repository.GetAllFilms());
+            return View(repository.GetAllFilms().OrderBy(x => x.name));
         }
 
         public ActionResult Specials()
         {
-            return View(repository.GetAllSpecials());
+            return View(repository.GetAllSpecials().OrderBy(x => x.name));
         }
 
         public ActionResult Restaurants()
         {
-            return View(repository.GetAllRestaurants());
+            return View(repository.GetAllRestaurants().OrderBy(x => x.name));
         }
 
         public ActionResult DeleteFilm(int id)
