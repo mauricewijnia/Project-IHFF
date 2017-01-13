@@ -1,7 +1,10 @@
 ﻿@using Project_IHFF.Models
 @model IEnumerable<Specials>
 
-<h2>Edit Specials</h2>
+<div class="editPageTitle">
+    <h2>Edit Specials</h2>
+</div>
+
 
 <div class="container cmsEditContainer">
     <div class="row">
@@ -12,8 +15,9 @@
                         <label>@item.name</label>
                         @Html.ActionLink("Edit", "EditSpecial", new { id = item.id }, new { @class = "btn btn-primary cmsEditButton" })
                     </div>
-
                 </div>
         }
+        
     </div>
 </div>
+@Html.ActionLink("Back", "Index", null, new { @class = "btn btn-primary cmsBackButton" })

@@ -164,6 +164,12 @@
 
 /* CMS */
 
+.container.cms{
+    background-color: #CCC;
+    margin: 0;
+    padding: 0;
+}
+
 .cmsEditButton{
     height: 25px;
     line-height: 0.8;
@@ -185,10 +191,69 @@
 
 .cmsItemContainer label{
     text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+
 }
 
 .cmsMenuRow{
     background-color: #ccc;
+    display: flex;
+}
+
+.cmsMenuRow .btn{
+    height: 150px;
+    width: 150px;
+    line-height: 18;
+    border-radius:3px;
+    margin: auto 10px;
+    
+}
+
+.cmsMenuRow .addItem{
+    background-image: url(/img/cms/plus.png);
+    background-repeat:no-repeat;
+    background-size: 100px;
+    background-position:center;
+    background-position-y: 10px;
+}
+
+.cmsMenuRow .editItem{
+    background-image: url(/img/cms/edit.png);
+    background-repeat:no-repeat;
+    background-size: 100px;
+    background-position:center;
+    background-position-y: 10px;
+}
+
+
+.cmsBackButton{
+    margin-left: 14px;
+    margin-top: 5px;
+}
+
+.editPageTitle{
+    display: flex;
+    justify-content: center;
+    border-bottom: 1px solid darkgray;
+    margin-bottom: 10px;
+}
+
+.editPageTitle h2{
+        font-family: "Franklin Gothic", Times, serif;
+        font-weight:100;
+        font-size: 24px;
+}
+
+.addPageTitle{
+    border-bottom: 1px solid darkgray;
+    margin-bottom: 10px;
+}
+
+.addPageTitle h2{
+    font-family: "Franklin Gothic", Times, serif;
+    font-weight:100;
+    font-size: 24px;
 }
 
 

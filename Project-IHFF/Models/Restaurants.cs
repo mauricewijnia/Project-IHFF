@@ -21,10 +21,10 @@ namespace Project_IHFF.Models
             this.RestaurantReservation = new HashSet<RestaurantReservation>();
         }
 
-        [Required]
+        [Required(AllowEmptyStrings = false)]
         [DataType(DataType.Time)]
         public System.TimeSpan timeOpen { get; set; }
-        [Required]
+        [Required(AllowEmptyStrings = false)]
         [DataType(DataType.Time)]
         public System.TimeSpan timeClosed { get; set; }
     

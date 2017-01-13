@@ -1,18 +1,27 @@
 ﻿
-<h2>Manage Content</h2>
 
-<div class="container">
-    <div class="row">
-        <div class="cmsMenuRow">
-            @Html.ActionLink("Add Films", "AddFilm", "Admin", null, new { @class = "btn btn-primary" })
-            @Html.ActionLink("Add Specials", "AddSpecial", "Admin", null, new { @class = "btn btn-primary" })
-            @Html.ActionLink("Add Restaurants", "AddRestaurant", "Admin", null, new { @class = "btn btn-primary" })
-        </div>
+<div class="container cms">
+    <div class="addPageTitle">
+        <h2>Manage Films</h2>
+    </div>
+    <div class="cmsMenuRow">
+        @Html.ActionLink("Add Films", "AddFilm", "Admin", null, new { @class = "btn btn-primary addItem" })
+        @Html.ActionLink("Edit Films", "Films", "Admin", null, new { @class = "btn btn-primary editItem" })
+    </div>
+    <div class="addPageTitle">
+        <h2>Manage Specials</h2>
+    </div>
+    <div class="cmsMenuRow">
+        @Html.ActionLink("Add Specials", "AddSpecial", "Admin", null, new { @class = "btn btn-primary addItem" })
+        @Html.ActionLink("Edit Specials", "Specials", "Admin", null, new { @class = "btn btn-primary editItem" })
+        
+    </div>
+    <div class="addPageTitle">
+        <h2>Manage Restaurants</h2>
+    </div>
+    <div class="cmsMenuRow">
+        @Html.ActionLink("Add Restaurants", "AddRestaurant", "Admin", null, new { @class = "btn btn-primary addItem" })
+        @Html.ActionLink("Edit Restaurants", "Restaurants", "Admin", null, new { @class = "btn btn-primary editItem" })
     </div>
 </div>
 <br />
-<div>
-    @Html.ActionLink("Edit Films", "Films", "Admin", null, new { @class = "btn btn-primary" })
-    @Html.ActionLink("Edit Specials", "Specials", "Admin", null, new { @class = "btn btn-primary" })
-    @Html.ActionLink("Edit Restaurants", "Restaurants", "Admin", null, new { @class = "btn btn-primary" })
-</div>

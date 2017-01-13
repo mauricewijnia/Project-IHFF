@@ -8,17 +8,12 @@
 
 <form method="post" action="Login">
     <p>Emailadress:</p>
-    <input type="text" name="EmailAdress" />
-    <br /> <br />
+    <input type="text" name="EmailAdress" class="form-control" />
+    <br />
     <p>Password:</p>
-    <input type="password" name="password" />
-    <br /> <br />
-    <input type="submit" value="Login" />
+    <input type="password" name="password" class="form-control"/>
+    <br />
+    <input type="submit" value="Login" class="btn btn-primary" />
 </form>
 <br />
-@Html.ActionLink("Make a New Account",
-                "Register",
-                "Account",
-                 null,
-                 null
-                )
+@Html.ActionLink("Make a New Account", "Register", "Account", null, new { @class = "btn btn-primary"})

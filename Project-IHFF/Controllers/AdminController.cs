@@ -85,6 +85,7 @@ namespace Project_IHFF.Controllers
                 Items item = repository.GetFilmById(filmViewModel.film.id);
                 foreach (var exhibition in filmViewModel.exhibitions)
                 {
+                    exhibition.filmId = filmViewModel.film.id;
                     UpdateExhibition(exhibition);                    
                 }
                 return RedirectToAction("Films");
@@ -92,7 +93,7 @@ namespace Project_IHFF.Controllers
             else
             {
                 ModelState.AddModelError("Oops", "Something went wrong.");
-                return View();
+                return View(filmViewModel);
             }
         }
 
@@ -133,12 +134,12 @@ namespace Project_IHFF.Controllers
                     }
                 }
                 ModelState.Clear();
-                return View();
+                return RedirectToAction("AddFilm");
             }
             else
             {
                 ModelState.AddModelError("Oops", "Something went wrong.");
-                return View();
+                return View(filmViewModel);
             }
         }
 
@@ -168,7 +169,7 @@ namespace Project_IHFF.Controllers
             else
             {
                 ModelState.AddModelError("Oops", "Something went wrong.");
-                return View();
+                return View(special);
             }
             
         }
@@ -201,8 +202,9 @@ namespace Project_IHFF.Controllers
             else
             {
                 ModelState.AddModelError("Oops", "Something went wrong.");
+                return View(special);
             }
-            return View();
+            
         }
 
         public ActionResult EditRestaurant(int id)
@@ -228,8 +230,9 @@ namespace Project_IHFF.Controllers
             else
             {
                 ModelState.AddModelError("Oops", "Something went wrong.");
+                return View(restaurant);
             }
-            return View();
+            
         }
 
         public ActionResult AddRestaurant()
@@ -255,8 +258,9 @@ namespace Project_IHFF.Controllers
             else
             {
                 ModelState.AddModelError("Oops", "Something went wrong.");
+                return View(restaurant);
             }
-            return View();
+            
         }
 
         public void UpdateExhibition(Exhibitions exhibition)
@@ -275,9 +279,11 @@ namespace Project_IHFF.Controllers
             }
             else if(exhibition.id != 0)
             {
-                repository.DeleteExhibition(exhibition);
+                if(exhibition.startTime == baseTime)
+                {
+                    repository.DeleteExhibition(exhibition.id);
+                }
             }
-            
         }
 
         public void DeleteImageByItemId(int id)

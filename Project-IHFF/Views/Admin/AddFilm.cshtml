@@ -1,7 +1,10 @@
 ﻿@using Project_IHFF.Models
 @model FilmsViewModel
 
-<h2> Add Film</h2>
+<div class="addPageTitle">
+    <h2>Add Film</h2>
+</div>
+
 
 @Html.ValidationSummary()
 @using (Html.BeginForm("AddFilm", "Admin", FormMethod.Post, new { @enctype = "multipart/form-data" }))
@@ -71,22 +74,35 @@
     <input type="button" id="VisibilityButton" name="show" value="+ Add second exhibition" onclick="showDiv()" class="btn btn-primary" />
     <br />
     <br />
-    <input type="submit" value="Submit" class="btn btn-primary" onclick="return validateForm()" />
-    @Html.ActionLink("Cancel", "Index", null, new { @class = "btn btn-primary"})
-    @Html.ActionLink("Reset", "AddFilm", null, new { @class = "btn btn-danger" })
+    <div class="cmsButtonGroup">
+        <input type="submit" value="Submit" class="btn btn-primary" onclick="return validateForm()" />
+        @Html.ActionLink("Cancel", "Index", null, new { @class = "btn btn-primary" })
+        @Html.ActionLink("Reset", "AddFilm", null, new { @class = "btn btn-danger" })
+    </div>
+
 
 }
 
 <script type="text/javascript">
     function validateForm() {
+        var bool = true;
         var x = $("#startTime").val();
         if (x == "01-01-2017 00:00") {
             alert("Invalid date & time combination. Please enter a different starting time.")
-            return false;
+            bool = false;
+            return bool;
         }
-        else {
-            return true;
-        }
+
+        var dates = new Array($(".dateTime"));
+        dates.forEach(function (item, index) {
+            if (item.val() = "") {
+                bool = false;
+            }
+            if (!bool) {
+                alert("Date fields cannot be empty.")
+            }
+            return bool;
+        })
 
     }
 

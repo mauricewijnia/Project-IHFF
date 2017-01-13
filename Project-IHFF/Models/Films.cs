@@ -21,11 +21,11 @@ namespace Project_IHFF.Models
             this.ExhibitionsSet = new HashSet<Exhibitions>();
         }
         
-        [Required]
+        [Required(AllowEmptyStrings = false)]
         public string director { get; set; }
-        [Required]
+        [Required(AllowEmptyStrings = false)]
         public string actors { get; set; }
-        [Required]
+        [Required(AllowEmptyStrings = false)]
         public string capacity { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
