@@ -1,17 +1,18 @@
-﻿using Project_IHFF.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using System.Web.UI;
+using Project_IHFF.Models;
+//using Project_IHFF.Interfaces;
+using Project_IHFF.Repositories;
 
 namespace Project_IHFF.Controllers
 {
     public class ShoppingCartController : Controller
     {
         // GET: ShoppingCart
-
+        private IFilmRepository filmRepository = new DbFilmRepository();
         public ActionResult Index()
         {
             List<Tickets> tickets = new List<Tickets>();
@@ -38,9 +39,13 @@ namespace Project_IHFF.Controllers
                             totaalprijs = totaalprijs + (filmpje.price * film.quantity);
                             Korting = totaalprijs * (decimal)0.05;
                         }
+                        else
+                        {
+                            totaalprijs = filmpje.price * film.quantity;
+                        }
                         totaalprijs = totaalprijs - Korting;
                     }
-                    
+
                 }
             }
             ViewBag.TotaalPrijs = totaalprijs;
@@ -52,9 +57,6 @@ namespace Project_IHFF.Controllers
         public ActionResult Add(int id, int Quantity)
         {
             Tickets ticket = new Tickets();
-
-
-
             foreach (Tickets film in Session["Tickets"] as List<Tickets>) // zoek toegevoegde ticket in lijst met alle tickets
             {
                 if (film.id == id)
@@ -63,7 +65,6 @@ namespace Project_IHFF.Controllers
                     ticket.quantity = Quantity;
                 }
             }
-
 
             List<Tickets> tickets = new List<Tickets>();
             if (Session["products"] != null) // haal lijst met producten van winkelwagentje op als ze er zijn
@@ -96,6 +97,7 @@ namespace Project_IHFF.Controllers
             Session["Products"] = tickets;
             return RedirectToAction("Index");
         }
+
         public ActionResult Remove()
         {
             return View();
@@ -111,7 +113,7 @@ namespace Project_IHFF.Controllers
                     if ((((FilmTickets)ticket).id) == id)
                     {
                         (((FilmTickets)ticket).quantity)++;
-                    }                   
+                    }
                 }
                 else if (ticket is RestaurantReservation)
                 {
@@ -145,7 +147,7 @@ namespace Project_IHFF.Controllers
                     {
                         (((FilmTickets)ticket).quantity)--;
                     }
-                  
+
                 }
                 else if (ticket is RestaurantReservation)
                 {

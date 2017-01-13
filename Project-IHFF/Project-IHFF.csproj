@@ -197,7 +197,9 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\BoothController.cs" />
     <Compile Include="Controllers\CultureController.cs" />
+    <Compile Include="Controllers\FakeFilmController.cs" />
     <Compile Include="Controllers\FilmController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ShoppingCartController.cs" />
@@ -263,6 +265,7 @@
     <Compile Include="Repositories\IFilmRepository.cs" />
     <Compile Include="Repositories\IItemsRepository.cs" />
     <Compile Include="Repositories\IAccountRepository.cs" />
+    <Compile Include="Repositories\IShoppingCartRepository.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -379,7 +382,6 @@
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Admin\AddSpecial.cshtml" />
     <Content Include="Views\Admin\AddRestaurant.cshtml" />
-    <Content Include="Views\ShoppingCart\Index.cshtml" />
     <Content Include="Views\Film\FilmIndex.cshtml" />
     <Content Include="Views\Film\Index.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
@@ -395,6 +397,9 @@
     <Content Include="Views\Admin\Specials.cshtml" />
     <Content Include="Views\Admin\Restaurants.cshtml" />
     <Content Include="Views\Admin\EditRestaurant.cshtml" />
+    <Content Include="Views\ShoppingCart\Index.cshtml" />
+    <Content Include="Views\FakeFilm\Index.cshtml" />
+    <Content Include="Views\Booth\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
