@@ -1,0 +1,25 @@
+﻿
+@using System.Collections.Generic;
+
+<div id="WinkelWagenInhoud">
+    <h1 id="Tickets">Purchage</h1>
+
+    <select id="u4_input" style="margin-left:30px;">
+        <option value="Ideal">Ideal</option>
+        <option value="PayPal">PayPal</option>
+        <option value="MasterCard">MasterCard</option>
+    </select>
+    <form method="post" action="Register" style="margin-left:30px;">
+        <p style="color: orange;">Name:</p>
+        <input type="text" name="Name" />
+        <br /> <br />
+        <p  style="color: orange;">Phone Number:</p>
+        <input type="text" name="phoneNumber" />
+        <br /> <br />
+        <p  style="color: orange;">Emailadress:</p>
+        <input type="text" name="EmailAdress" />
+        <br /> <br />
+
+        <p><a href="@Url.Action("PurchaseDone", "ShoppingCart")" class="btn btn-primary btn-lg RekenAf-btn">Purchage &raquo;</a></p>
+    </form>
+</div>

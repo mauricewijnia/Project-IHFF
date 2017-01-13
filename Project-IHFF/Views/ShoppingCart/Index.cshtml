@@ -28,6 +28,7 @@
             <br />
             <br />
             <ul id="ShoppingCartRegel">
+                <a class="glyphicon glyphicon-remove FloatLeft MinPlusKnop MarginLeft10px" href='@Url.Action("Remove", "ShoppingCart", new { id = (((FilmTickets)ticket).id), }, null)'></a>
                 <li><p style="min-width:90px; display:block;">@filmpje.name</p></li>
                 <li style="margin-left:118px"><p>@exo.startTime.ToString("H:mm") - </p></li>
                 @if (exo.endTime != null)
@@ -58,6 +59,7 @@
             <br />
             <br />
             <ul id="ShoppingCartRegel">
+                <a class="glyphicon glyphicon-remove FloatLeft MinPlusKnop MarginLeft10px" href='@Url.Action("Remove", "ShoppingCart", new { id = (((RestaurantReservation)ticket).id), }, null)'></a>
                 <li><p style="min-width:90px; display:block;">@restauranttje.name</p></li>
                 <li style="margin-left:118px"><p>@Reserveringstijd.ToString("H:mm") - </p></li>
                 <li style="margin-left:3px"><p>@ReserveringstijdEind.ToString("H:mm")</p></li>
@@ -81,6 +83,7 @@
             <br />
             <br />
             <ul id="ShoppingCartRegel">
+                <a class="glyphicon glyphicon-remove FloatLeft MinPlusKnop MarginLeft10px" href='@Url.Action("Remove", "ShoppingCart", new { id = (((RestaurantReservation)ticket).id), }, null)'></a>
                 <li><p style="min-width:90px; display:block;">@restauranttje.name</p></li>
                 <li style="margin-left:118px"><p>@Reserveringstijd.ToString("H:mm") - </p></li>
                 <li style="margin-left:3px"><p>@ReserveringstijdEind.ToString("H:mm")</p></li>
@@ -104,6 +107,7 @@
             <br />
             <br />
             <ul id="ShoppingCartRegel">
+                <a class="glyphicon glyphicon-remove FloatLeft MinPlusKnop MarginLeft10px" href='@Url.Action("Remove", "ShoppingCart", new { id = (((SpecialTicket)ticket).id), }, null)'></a>
                 <li><p style="min-width:80px; display:block;">@Specialtje.name</p></li>
                 <li style="margin-left:118px"><p>@Reserveringstijd.ToString("H:mm") - </p></li>
                 <li style="margin-left:3px"><p>@ReserveringstijdEind.ToString("H:mm")</p></li>
@@ -126,5 +130,5 @@
 
 <p><a href="@Url.Action("Index", "Booth")" class="btn btn-primary btn-lg RekenAf-btn">Collect at booth &raquo;</a></p>
 <br />
-<p><a href="@Url.Action("Index", "ShoppingCart")" class="btn btn-primary btn-lg RekenAf-btn">Purchase tickets &raquo;</a></p>
+<p><a href="@Url.Action("Purchase", "ShoppingCart")" class="btn btn-primary btn-lg RekenAf-btn">Purchase tickets &raquo;</a></p>
 

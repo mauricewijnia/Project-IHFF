@@ -11,6 +11,7 @@ namespace Project_IHFF.Controllers
 {
     public class ShoppingCartController : Controller
     {
+        IShoppingCartRepository shoppingReop = new DbShoppingCartRepository();
         // GET: ShoppingCart
         private IFilmRepository filmRepository = new DbFilmRepository();
         public ActionResult Index()
@@ -98,9 +99,21 @@ namespace Project_IHFF.Controllers
             return RedirectToAction("Index");
         }
 
-        public ActionResult Remove()
+        public ActionResult Remove(int id)
         {
-            return View();
+
+            List<Tickets> tickets = Session["products"] as List<Tickets>;
+            List<Tickets> tickets2 = new List<Tickets>();
+            foreach (Tickets ticket in tickets)
+            {
+                if (ticket.id != id)
+                {
+                    tickets2.Add(ticket);
+                }
+            }
+
+            Session["Products"] = tickets2;
+            return RedirectToAction("Index");
         }
         public ActionResult UpQuantity(int id)
         {
@@ -171,6 +184,31 @@ namespace Project_IHFF.Controllers
 
         public ActionResult Purchase()
         {
+            return View();
+        }
+        
+        public ActionResult PurchaseDone()
+        {
+            Accounts account = Session["loggedin_account"] as Accounts;
+            List<Tickets> tickets = new List<Tickets>();
+            if (Session["products"] != null)
+            {
+                tickets = Session["products"] as List<Tickets>;
+            }
+            else
+            {
+                return RedirectToAction("Index", "ShoppingCart");
+            }
+            Orders order = new Orders();
+            order.date = DateTime.Now;
+            order.isPaid = "yes";
+            Random randon = new Random();
+            int rnd = randon.Next(1000, 9999);
+            order.pickupCode = rnd.ToString();
+            account.Orders.Add(order);
+            shoppingReop.AddOrder(order, account);
+            List<Tickets> ticketsss = new List<Tickets>();
+            Session["products"] = ticketsss;
             return View();
         }
     }

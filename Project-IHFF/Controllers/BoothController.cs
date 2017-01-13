@@ -24,6 +24,11 @@ public class BoothController : Controller
         {
             return RedirectToAction("Index", "ShoppingCart");
         }
+
+        if (account == null)
+        {
+            return RedirectToAction("Index", "ShoppingCart");
+        }
         Orders order = new Orders();
         order.date = DateTime.Now;
         order.isPaid = "no";
@@ -32,7 +37,8 @@ public class BoothController : Controller
         order.pickupCode = rnd.ToString();
         account.Orders.Add(order);
         shoppingReop.AddOrder(order, account);
-
+        List<Tickets> ticketsss = new List<Tickets>();
+        Session["products"] = ticketsss;
         return View(order);
     }
 }

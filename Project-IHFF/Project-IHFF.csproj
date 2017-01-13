@@ -400,6 +400,8 @@
     <Content Include="Views\ShoppingCart\Index.cshtml" />
     <Content Include="Views\FakeFilm\Index.cshtml" />
     <Content Include="Views\Booth\Index.cshtml" />
+    <Content Include="Views\ShoppingCart\Purchase.cshtml" />
+    <Content Include="Views\ShoppingCart\PurchaseDone.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
