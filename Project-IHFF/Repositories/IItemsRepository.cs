@@ -20,7 +20,7 @@ namespace Project_IHFF.Repositories
         void DeleExhibitionsForFilm(int id);
 
         Items GetItemById(int id);
-        Items GetItemByName(string name);
+        Items GetFilmByName(string name);
         Films GetFilmById(int id);
         List<Exhibitions> GetExhibitionForFilmID(int id);
 
@@ -56,9 +56,10 @@ namespace Project_IHFF.Repositories
             return ctx.Items.SingleOrDefault(x => x.id == id);
         }
 
-        public Items GetItemByName(string name)
+        public Items GetFilmByName(string name)
         {
-            Items item = ctx.Items.SingleOrDefault(x => x.name == name);
+            Items item = ctx.Items.OfType<Films>().SingleOrDefault(x => x.name == name);
+            
             return item;
         }
 
