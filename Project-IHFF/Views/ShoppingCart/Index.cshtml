@@ -1,6 +1,5 @@
 ﻿@using Project_IHFF.Models;
 @model List<Tickets>
-@{ decimal totaal;}
 @{
     ViewBag.Title = "Index";
 }
@@ -18,111 +17,16 @@
     {
         if (ticket is FilmTickets)
         {
-
-
-            Exhibitions exo = (((FilmTickets)ticket).ExhibitionsSet);
-            Films filmpje = exo.Films;
-
-
-
-            <br />
-            <br />
-            <ul id="ShoppingCartRegel">
-                <a class="glyphicon glyphicon-remove FloatLeft MinPlusKnop MarginLeft10px" href='@Url.Action("Remove", "ShoppingCart", new { id = (((FilmTickets)ticket).id), }, null)'></a>
-                <li><p style="min-width:90px; display:block;">@filmpje.name</p></li>
-                <li style="margin-left:118px"><p>@exo.startTime.ToString("H:mm") - </p></li>
-                @if (exo.endTime != null)
-                {
-                    DateTime eindtijd = (DateTime)exo.endTime; // zet DateTime? om naam DateTime
-
-                    <li style="margin-left:3px"><p>@eindtijd.ToString("H:mm")</p></li>
-                }
-                else
-                {
-                    <li style="margin-left:3px"><p></p></li>
-                }
-                <li style="margin-left:96px"><p>@exo.startTime.ToString("dddd")</p></li>
-                <li style="margin-left:92px">
-                    <a class="glyphicon glyphicon-plus FloatLeft MinPlusKnop MarginLeft10px" href='@Url.Action("UpQuantity", "ShoppingCart", new { id = (((FilmTickets)ticket).id), }, null)'></a>
-                    <p class="FloatLeft MarginLeft10px">@(((FilmTickets)ticket).quantity)</p>
-                    <a class="glyphicon glyphicon-minus FloatLeft MinPlusKnop MarginLeft10px" href='@Url.Action("DownQuantity", "ShoppingCart", new { id = (((FilmTickets)ticket).id), }, null)'></a>
-                </li>
-                <li><p>€@(filmpje.price * (((FilmTickets)ticket).quantity))</p></li>
-            </ul>
+           @Html.Partial("_FilmLines", ticket);
         }
         else if (ticket is RestaurantReservation)
         {
-            Restaurants restauranttje = (((RestaurantReservation)ticket).Restaurants);
-            DateTime Reserveringstijd = (((RestaurantReservation)ticket).reservationTime);
-            DateTime ReserveringstijdEind = Reserveringstijd.AddHours(+2);
-            int id = (((RestaurantReservation)ticket).id);
-            <br />
-            <br />
-            <ul id="ShoppingCartRegel">
-                <a class="glyphicon glyphicon-remove FloatLeft MinPlusKnop MarginLeft10px" href='@Url.Action("Remove", "ShoppingCart", new { id = (((RestaurantReservation)ticket).id), }, null)'></a>
-                <li><p style="min-width:90px; display:block;">@restauranttje.name</p></li>
-                <li style="margin-left:118px"><p>@Reserveringstijd.ToString("H:mm") - </p></li>
-                <li style="margin-left:3px"><p>@ReserveringstijdEind.ToString("H:mm")</p></li>
-
-                <li style="margin-left:96px"><p>@Reserveringstijd.ToString("dddd")</p></li>
-                <li style="margin-left:92px">
-                    <a class="glyphicon glyphicon-plus FloatLeft MinPlusKnop MarginLeft10px" href='@Url.Action("UpQuantity", "ShoppingCart", new { id = id , }, null)'></a>
-                    <p class="FloatLeft MarginLeft10px">@ticket.quantity</p>
-                    <a class="glyphicon glyphicon-minus FloatLeft MinPlusKnop MarginLeft10px" href='@Url.Action("DownQuantity", "ShoppingCart", new { id = id, }, null)'></a>
-                </li>
-
-                <li><p>€,-</p></li>
-            </ul>
-        }
-        else if (ticket is RestaurantReservation)
-        {
-            Restaurants restauranttje = (((RestaurantReservation)ticket).Restaurants);
-            DateTime Reserveringstijd = (((RestaurantReservation)ticket).reservationTime);
-            DateTime ReserveringstijdEind = Reserveringstijd.AddHours(+2);
-            int id = (((RestaurantReservation)ticket).id);
-            <br />
-            <br />
-            <ul id="ShoppingCartRegel">
-                <a class="glyphicon glyphicon-remove FloatLeft MinPlusKnop MarginLeft10px" href='@Url.Action("Remove", "ShoppingCart", new { id = (((RestaurantReservation)ticket).id), }, null)'></a>
-                <li><p style="min-width:90px; display:block;">@restauranttje.name</p></li>
-                <li style="margin-left:118px"><p>@Reserveringstijd.ToString("H:mm") - </p></li>
-                <li style="margin-left:3px"><p>@ReserveringstijdEind.ToString("H:mm")</p></li>
-
-                <li style="margin-left:96px"><p>@Reserveringstijd.ToString("dddd")</p></li>
-                <li style="margin-left:92px">
-                    <a class="glyphicon glyphicon-plus FloatLeft MinPlusKnop MarginLeft10px" href='@Url.Action("UpQuantity", "ShoppingCart", new { id = id , }, null)'></a>
-                    <p class="FloatLeft MarginLeft10px">@ticket.quantity</p>
-                    <a class="glyphicon glyphicon-minus FloatLeft MinPlusKnop MarginLeft10px" href='@Url.Action("DownQuantity", "ShoppingCart", new { id = id, }, null)'></a>
-                </li>
-
-                <li><p>€,-</p></li>
-            </ul>
+            @Html.Partial("_RestaurantLines", ticket);
         }
         else if (ticket is SpecialTicket)
         {
-            Specials Specialtje = (((SpecialTicket)ticket).Specials);
-            DateTime Reserveringstijd = Specialtje.startTime;
-            DateTime ReserveringstijdEind = Specialtje.endTime;
-            int id = (((SpecialTicket)ticket).id);
-            <br />
-            <br />
-            <ul id="ShoppingCartRegel">
-                <a class="glyphicon glyphicon-remove FloatLeft MinPlusKnop MarginLeft10px" href='@Url.Action("Remove", "ShoppingCart", new { id = (((SpecialTicket)ticket).id), }, null)'></a>
-                <li><p style="min-width:80px; display:block;">@Specialtje.name</p></li>
-                <li style="margin-left:118px"><p>@Reserveringstijd.ToString("H:mm") - </p></li>
-                <li style="margin-left:3px"><p>@ReserveringstijdEind.ToString("H:mm")</p></li>
-
-                <li style="margin-left:96px"><p>@Reserveringstijd.ToString("dddd")</p></li>
-                <li style="margin-left:92px">
-                    <a class="glyphicon glyphicon-plus FloatLeft MinPlusKnop MarginLeft10px" href='@Url.Action("UpQuantity", "ShoppingCart", new { id = id , }, null)'></a>
-                    <p class="FloatLeft MarginLeft10px">@ticket.quantity</p>
-                    <a class="glyphicon glyphicon-minus FloatLeft MinPlusKnop MarginLeft10px" href='@Url.Action("DownQuantity", "ShoppingCart", new { id = id, }, null)'></a>
-                </li>
-
-                <li><p>€,-</p></li>
-            </ul>
+            @Html.Partial("_SpecialLines", ticket);
         }
-
     }
 </div>
 <h1 id="Totaalprijs">€@ViewBag.TotaalPrijs.ToString("N2")</h1>

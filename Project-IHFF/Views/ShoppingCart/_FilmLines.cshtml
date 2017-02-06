@@ -1,0 +1,34 @@
+﻿@using Project_IHFF.Models;
+@model FilmTickets
+
+
+ @{Exhibitions exo = (((FilmTickets)Model).ExhibitionsSet);
+     Films filmpje = exo.Films; }
+
+<br />
+<br />
+<ul id="ShoppingCartRegel">
+    <a class="glyphicon glyphicon-remove FloatLeft MinPlusKnop MarginLeft10px" href='@Url.Action("Remove", "ShoppingCart", new { id = (((FilmTickets)Model).id), }, null)'></a>
+    <li><p style="min-width:90px; display:block;">@filmpje.name</p></li>
+    <li style="margin-left:118px"><p>@exo.startTime.ToString("H:mm") - </p></li>
+    @if (exo.endTime != null)
+    {
+        DateTime eindtijd = (DateTime)exo.endTime; // zet DateTime? om naam DateTime
+
+        <li style="margin-left:3px"><p>@eindtijd.ToString("H:mm")</p></li>
+    }
+    else
+    {
+        <li style="margin-left:3px"><p></p></li>
+    }
+    <li style="margin-left:96px"><p>@exo.startTime.ToString("dddd")</p></li>
+    <li style="margin-left:92px">
+        <a class="glyphicon glyphicon-plus FloatLeft MinPlusKnop MarginLeft10px" href='@Url.Action("ChangeQuantity", "ShoppingCart", new { id = (((FilmTickets)Model).id), aantal = 1}, null)'></a>
+        <p class="FloatLeft MarginLeft10px">@(((FilmTickets)Model).quantity)</p>
+        <a class="glyphicon glyphicon-minus FloatLeft MinPlusKnop MarginLeft10px" href='@Url.Action("ChangeQuantity", "ShoppingCart", new { id = (((FilmTickets)Model).id), aantal = -1}, null)'></a>
+    </li>
+    <li><p>€@(filmpje.price * (((FilmTickets)Model).quantity))</p></li>
+</ul>
+
+
+

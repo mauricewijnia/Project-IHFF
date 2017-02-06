@@ -31,6 +31,8 @@ namespace Project_IHFF.Controllers
             }*/
 
             IEnumerable<ExhibitionViewModel> allFilms = filmRepository.GetAllFilms();
+
+            
             //IEnumerable<FilmViewModel> allItems = filmRepository.GetAllFilms();
 
             return View(allFilms);

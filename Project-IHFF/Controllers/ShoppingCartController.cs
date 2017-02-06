@@ -14,6 +14,7 @@ namespace Project_IHFF.Controllers
         IShoppingCartRepository shoppingReop = new DbShoppingCartRepository();
         // GET: ShoppingCart
         private IFilmRepository filmRepository = new DbFilmRepository();
+        private ISpecialsRepository specialsRepository = new DbSpecialsRepository();
         public ActionResult Index()
         {
             List<Tickets> tickets = new List<Tickets>();
@@ -58,22 +59,24 @@ namespace Project_IHFF.Controllers
         public ActionResult Add(int id, int Quantity)
         {
             Tickets ticket = new Tickets();
-            foreach (Tickets film in Session["Tickets"] as List<Tickets>) // zoek toegevoegde ticket in lijst met alle tickets
+            List<Tickets> Alltickets = AllTickets();
+            List<Tickets> tickets = new List<Tickets>();
+            foreach (Tickets item in Alltickets) // zoek toegevoegde ticket in lijst met alle tickets
             {
-                if (film.id == id)
+                if (item.id == id)
                 {
-                    ticket = film;
+                    ticket = item;
                     ticket.quantity = Quantity;
                 }
-            }
+            }          
 
-            List<Tickets> tickets = new List<Tickets>();
+            List<Tickets> ticketss = new List<Tickets>();
             if (Session["products"] != null) // haal lijst met producten van winkelwagentje op als ze er zijn
             {
                 tickets = Session["products"] as List<Tickets>;
             }
 
-            int test = 1;
+            int breaker = 1;
             if (Session["products"] as List<Tickets> != null) // als winkelmandje leeg is moet product sws worden toegevoegd
             {
                 foreach (Tickets film in Session["products"] as List<Tickets>) // kijk of toegevoegde ticket al bestaat in winkelwagentje
@@ -81,10 +84,10 @@ namespace Project_IHFF.Controllers
                     if (film.id == id)
                     {
                         film.quantity = film.quantity + Quantity; // hoog de quantity op in plaats van hem toe te voegen
-                        test = 2;
+                        breaker = 2;
                     }
                 }
-                if (test == 1) //als de Quantity niet veranderd is, toevoegen
+                if (breaker == 1) //als de Quantity niet veranderd is, toevoegen
                 {
                     tickets.Add(ticket);
                 }
@@ -97,6 +100,62 @@ namespace Project_IHFF.Controllers
 
             Session["Products"] = tickets;
             return RedirectToAction("Index");
+        }
+
+        private List<Tickets> AllTickets()
+        {
+            List<Tickets> tickets = new List<Tickets>();
+            IEnumerable<ExhibitionViewModel> allFilms = filmRepository.GetAllFilms();
+            foreach (ExhibitionViewModel exo in allFilms)
+            {
+                Films film2 = new Films();
+                film2.name = exo.Name;
+                film2.price = exo.Price;
+
+                //Exobision
+                Exhibitions exo2 = new Exhibitions();
+                exo2.endTime = exo.EndTime;
+                exo2.startTime = exo.StartTime;
+                exo2.filmId = exo.FilmId;
+                exo2.Films = film2;
+
+
+                //FilmTicket;
+                FilmTickets FilmtTicket2 = new FilmTickets();
+                FilmtTicket2.id = exo.FilmId;
+                FilmtTicket2.ExhibitionsSet = exo2;
+                tickets.Add(FilmtTicket2);
+            }
+            IEnumerable<SpecialViewModel> allRestaurant = specialsRepository.GetAllRestaurant();
+            foreach (SpecialViewModel rest in allRestaurant)
+            {
+                Restaurants restauranttje = new Restaurants();
+                restauranttje.name = rest.Name;
+                restauranttje.id = rest.ItemId;
+
+                RestaurantReservation restaurant = new RestaurantReservation();
+                restaurant.id = rest.ItemId;
+                restaurant.reservationTime = rest.StartTime;
+                restaurant.quantity = 0;
+                restaurant.Restaurants = restauranttje;
+                tickets.Add(restaurant);
+            }
+            IEnumerable<SpecialViewModel> allSpecials = specialsRepository.GetAllSpecials();
+            foreach (SpecialViewModel spec in allSpecials)
+            {
+                Specials specialtje = new Specials();
+                specialtje.name = spec.Name;
+                specialtje.startTime = spec.StartTime;
+                specialtje.endTime = spec.EndTime;
+
+                SpecialTicket special = new SpecialTicket();
+                special.id = spec.ItemId;
+                special.quantity = 0;
+                special.Specials = specialtje;
+                tickets.Add(special);
+            }
+
+            return tickets;
         }
 
         public ActionResult Remove(int id)
@@ -115,66 +174,15 @@ namespace Project_IHFF.Controllers
             Session["Products"] = tickets2;
             return RedirectToAction("Index");
         }
-        public ActionResult UpQuantity(int id)
+        public ActionResult ChangeQuantity(int id, int aantal)
         {
             List<Tickets> tickets = Session["products"] as List<Tickets>;
 
             foreach (Tickets ticket in tickets)
             {
-                if (ticket is FilmTickets)
+                if (ticket.id == id)
                 {
-                    if ((((FilmTickets)ticket).id) == id)
-                    {
-                        (((FilmTickets)ticket).quantity)++;
-                    }
-                }
-                else if (ticket is RestaurantReservation)
-                {
-                    if ((((RestaurantReservation)ticket).id) == id)
-                    {
-                        (((RestaurantReservation)ticket).quantity)++;
-                    }
-                }
-                else if (ticket is SpecialTicket)
-                {
-                    if ((((SpecialTicket)ticket).id) == id)
-                    {
-                        (((SpecialTicket)ticket).quantity)++;
-                    }
-                }
-            }
-
-            Session["Products"] = tickets;
-            return RedirectToAction("Index");
-        }
-
-        public ActionResult DownQuantity(int id)
-        {
-            List<Tickets> tickets = Session["products"] as List<Tickets>;
-
-            foreach (Tickets ticket in tickets)
-            {
-                if (ticket is FilmTickets)
-                {
-                    if ((((FilmTickets)ticket).id) == id)
-                    {
-                        (((FilmTickets)ticket).quantity)--;
-                    }
-
-                }
-                else if (ticket is RestaurantReservation)
-                {
-                    if ((((RestaurantReservation)ticket).id) == id)
-                    {
-                        (((RestaurantReservation)ticket).quantity)--;
-                    }
-                }
-                else if (ticket is SpecialTicket)
-                {
-                    if ((((SpecialTicket)ticket).id) == id)
-                    {
-                        (((SpecialTicket)ticket).quantity)--;
-                    }
+                    ticket.quantity = ticket.quantity + aantal;
                 }
             }
 

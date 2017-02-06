@@ -1,0 +1,24 @@
+﻿
+@using Project_IHFF.Models;
+@model SpecialTicket
+
+@{Specials Specialtje = (((SpecialTicket)Model).Specials);
+    DateTime Reserveringstijd = Specialtje.startTime;
+    DateTime ReserveringstijdEind = Specialtje.endTime;
+    int id = (((SpecialTicket)Model).id); }
+<br />
+<br />
+<ul id="ShoppingCartRegel">
+    <a class="glyphicon glyphicon-remove FloatLeft MinPlusKnop MarginLeft10px" href='@Url.Action("Remove", "ShoppingCart", new { id = (((SpecialTicket)Model).id), }, null)'></a>
+    <li><p style="min-width:80px; display:block;">@Specialtje.name</p></li>
+    <li style="margin-left:118px"><p>@Reserveringstijd.ToString("H:mm") - </p></li>
+    <li style="margin-left:3px"><p>@ReserveringstijdEind.ToString("H:mm")</p></li>
+
+    <li style="margin-left:96px"><p>@Reserveringstijd.ToString("dddd")</p></li>
+    <li style="margin-left:92px">
+        <a class="glyphicon glyphicon-plus FloatLeft MinPlusKnop MarginLeft10px" href='@Url.Action("ChangeQuantity", "ShoppingCart", new { id = (((SpecialTicket)Model).id), aantal = 1}, null)'></a>
+        <p class="FloatLeft MarginLeft10px">@(((SpecialTicket)Model).quantity)</p>
+        <a class="glyphicon glyphicon-minus FloatLeft MinPlusKnop MarginLeft10px" href='@Url.Action("ChangeQuantity", "ShoppingCart", new { id = (((SpecialTicket)Model).id), aantal = -1}, null)'></a>
+    </li>
+    <li><p>€,-</p></li>
+</ul>
