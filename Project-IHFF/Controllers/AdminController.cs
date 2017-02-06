@@ -9,6 +9,7 @@ using System.IO;
 
 namespace Project_IHFF.Controllers
 {
+    [Authorize(Users = "admin")]
     public class AdminController : Controller
     {
         private IItemsRepository repository = new DbItemsRepository();
@@ -97,17 +98,9 @@ namespace Project_IHFF.Controllers
             }
         }
 
-
         public ActionResult AddFilm()
         {
-            FilmsViewModel filmsViewModel = new FilmsViewModel();
-            filmsViewModel.exhibitions.Add(new Exhibitions());
-            filmsViewModel.exhibitions.Add(new Exhibitions());
-            filmsViewModel.exhibitions[0].startTime = baseTime;
-            filmsViewModel.exhibitions[0].endTime = baseTime;
-            filmsViewModel.exhibitions[1].startTime = baseTime;
-            filmsViewModel.exhibitions[1].endTime = baseTime;
-
+            FilmsViewModel filmsViewModel = InitFilmsViewModel();
             return View(filmsViewModel);
         }
 
@@ -122,17 +115,25 @@ namespace Project_IHFF.Controllers
                     upload.SaveAs(HttpContext.Server.MapPath("/img/films/") + upload.FileName);
                     filmViewModel.film.imagePath = "/img/films/" + upload.FileName;
                 }
-
-                repository.AddItem(filmViewModel.film);
-                Items item = repository.GetItemByName(filmViewModel.film.name);
-                foreach (var exhibition in filmViewModel.exhibitions)
+                if(repository.GetFilmByName(filmViewModel.film.name) == null)
                 {
-                    exhibition.filmId = item.id;
-                    if (exhibition.startTime != baseTime)
+                    repository.AddItem(filmViewModel.film);
+                    Items item = repository.GetFilmByName(filmViewModel.film.name);
+                    foreach (var exhibition in filmViewModel.exhibitions)
                     {
-                        repository.AddFilmExhibition(exhibition);
+                        exhibition.filmId = item.id;
+                        if (exhibition.startTime != baseTime)
+                        {
+                            repository.AddFilmExhibition(exhibition);
+                        }
                     }
                 }
+                else
+                {
+                    ModelState.AddModelError("", "A film with that name already exists");
+                    return View(filmViewModel);
+                }
+                               
                 ModelState.Clear();
                 return RedirectToAction("AddFilm");
             }
@@ -297,6 +298,18 @@ namespace Project_IHFF.Controllers
                     System.IO.File.Delete(oldImagePath);
                 }
             }
+        }
+
+        public FilmsViewModel InitFilmsViewModel()
+        {
+            FilmsViewModel filmsViewModel = new FilmsViewModel();
+            filmsViewModel.exhibitions.Add(new Exhibitions());
+            filmsViewModel.exhibitions.Add(new Exhibitions());
+            filmsViewModel.exhibitions[0].startTime = baseTime;
+            filmsViewModel.exhibitions[0].endTime = baseTime;
+            filmsViewModel.exhibitions[1].startTime = baseTime;
+            filmsViewModel.exhibitions[1].endTime = baseTime;
+            return filmsViewModel;
         }
     }
 }
