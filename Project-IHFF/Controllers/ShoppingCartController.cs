@@ -39,15 +39,17 @@ namespace Project_IHFF.Controllers
                         if (tickets.Count > 1)
                         {
                             totaalprijs = totaalprijs + (filmpje.price * film.quantity);
-                            Korting = totaalprijs * (decimal)0.05;
                         }
                         else
                         {
                             totaalprijs = filmpje.price * film.quantity;
                         }
-                        totaalprijs = totaalprijs - Korting;
                     }
-
+                }
+                if (tickets.Count > 1)
+                {
+                    Korting = totaalprijs * (decimal)0.05;
+                    totaalprijs = totaalprijs - Korting;
                 }
             }
             ViewBag.TotaalPrijs = totaalprijs;
@@ -56,11 +58,22 @@ namespace Project_IHFF.Controllers
             return View(tickets);
         }
 
-        public ActionResult Add(int id, int Quantity)
+        public ActionResult Add(int id, int Quantity, bool shopcart, bool remove)
         {
             Tickets ticket = new Tickets();
             List<Tickets> Alltickets = AllTickets();
             List<Tickets> tickets = new List<Tickets>();
+            string sessie;
+
+            if (!shopcart) //als het naar shopping cart doe wishlist sessie en anders product sessie
+            {
+                sessie = "wishlist";
+            }
+            else
+            {
+                sessie = "products";
+            }
+
             foreach (Tickets item in Alltickets) // zoek toegevoegde ticket in lijst met alle tickets
             {
                 if (item.id == id)
@@ -68,39 +81,51 @@ namespace Project_IHFF.Controllers
                     ticket = item;
                     ticket.quantity = Quantity;
                 }
-            }          
-
-            List<Tickets> ticketss = new List<Tickets>();
-            if (Session["products"] != null) // haal lijst met producten van winkelwagentje op als ze er zijn
-            {
-                tickets = Session["products"] as List<Tickets>;
             }
-
-            int breaker = 1;
-            if (Session["products"] as List<Tickets> != null) // als winkelmandje leeg is moet product sws worden toegevoegd
-            {
-                foreach (Tickets film in Session["products"] as List<Tickets>) // kijk of toegevoegde ticket al bestaat in winkelwagentje
+                if (Session[sessie] != null) // haal lijst met producten van winkelwagentje op als ze er zijn
                 {
-                    if (film.id == id)
+                    tickets = Session[sessie] as List<Tickets>;
+                }
+
+                int breaker = 1;
+                if (Session[sessie] as List<Tickets> != null) // als winkelmandje leeg is moet product sws worden toegevoegd
+                {
+                    foreach (Tickets film in Session[sessie] as List<Tickets>) // kijk of toegevoegde ticket al bestaat in winkelwagentje
                     {
-                        film.quantity = film.quantity + Quantity; // hoog de quantity op in plaats van hem toe te voegen
-                        breaker = 2;
+                        if (film.id == id)
+                        {
+                            film.quantity = film.quantity + Quantity; // hoog de quantity op in plaats van hem toe te voegen
+                            breaker = 2;
+                        }
+                    }
+                    if (breaker == 1) //als de Quantity niet veranderd is, toevoegen
+                    {
+                        tickets.Add(ticket);
                     }
                 }
-                if (breaker == 1) //als de Quantity niet veranderd is, toevoegen
+                else
                 {
                     tickets.Add(ticket);
                 }
+
+
+                Session[sessie] = tickets;
+            if (remove)
+            {
+                bool shopping = false;
+                return RedirectToAction("Remove", new { id = id, shopcart = shopping});
+            }
+
+            if (shopcart)
+            {
+                return RedirectToAction("Index");
             }
             else
             {
-                tickets.Add(ticket);
+                return RedirectToAction("Index", "WishList");
             }
-
-
-            Session["Products"] = tickets;
-            return RedirectToAction("Index");
-        }
+             
+            }
 
         private List<Tickets> AllTickets()
         {
@@ -111,6 +136,7 @@ namespace Project_IHFF.Controllers
                 Films film2 = new Films();
                 film2.name = exo.Name;
                 film2.price = exo.Price;
+                film2.id = exo.FilmId;
 
                 //Exobision
                 Exhibitions exo2 = new Exhibitions();
@@ -118,7 +144,7 @@ namespace Project_IHFF.Controllers
                 exo2.startTime = exo.StartTime;
                 exo2.filmId = exo.FilmId;
                 exo2.Films = film2;
-
+                exo.ExhibitionId = film2.id;
 
                 //FilmTicket;
                 FilmTickets FilmtTicket2 = new FilmTickets();
@@ -158,10 +184,18 @@ namespace Project_IHFF.Controllers
             return tickets;
         }
 
-        public ActionResult Remove(int id)
+        public ActionResult Remove(int id, bool shopcart)
         {
-
-            List<Tickets> tickets = Session["products"] as List<Tickets>;
+            string sessie;
+            if (!shopcart) //als het naar shopping cart doe wishlist sessie en anders product sessie
+            {
+                sessie = "wishlist";
+            }
+            else
+            {
+                sessie = "products";
+            }
+            List<Tickets> tickets = Session[sessie] as List<Tickets>;
             List<Tickets> tickets2 = new List<Tickets>();
             foreach (Tickets ticket in tickets)
             {
@@ -171,12 +205,29 @@ namespace Project_IHFF.Controllers
                 }
             }
 
-            Session["Products"] = tickets2;
-            return RedirectToAction("Index");
+            Session[sessie] = tickets2;
+
+            if (shopcart)
+            {
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return RedirectToAction("Index", "WishList");
+            }
         }
-        public ActionResult ChangeQuantity(int id, int aantal)
+        public ActionResult ChangeQuantity(int id, int aantal, bool shopcart)
         {
-            List<Tickets> tickets = Session["products"] as List<Tickets>;
+            string sessie;
+            if (!shopcart) //als het naar shopping cart doe wishlist sessie en anders product sessie
+            {
+                sessie = "wishlist";
+            }
+            else
+            {
+                sessie = "products";
+            }
+            List<Tickets> tickets = Session[sessie] as List<Tickets>;
 
             foreach (Tickets ticket in tickets)
             {
@@ -186,15 +237,48 @@ namespace Project_IHFF.Controllers
                 }
             }
 
-            Session["Products"] = tickets;
-            return RedirectToAction("Index");
+            Session[sessie] = tickets;
+
+            if (shopcart)
+            {
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return RedirectToAction("Index", "WishList");
+            }
         }
 
         public ActionResult Purchase()
         {
             return View();
         }
-        
+        public ActionResult MoveAllToCart()
+        {
+            List<Tickets> Wishtickets = new List<Tickets>();
+            List<Tickets> tickets = new List<Tickets>();
+
+            if (Session["WishList"] != null) // haal lijst met producten van Wishlist op als ze er zijn
+            {
+                Wishtickets = Session["WishList"] as List<Tickets>;
+
+                Session["WishList"] = null; // maak wishlist leeg
+            }
+
+            if (Session["products"] != null) // haal lijst met producten van winkelwagentje op als ze er zijn
+            {
+                tickets = Session["products"] as List<Tickets>;
+            }
+
+            foreach (Tickets ticket in Wishtickets) // voeg alle wishlisttickets toe aan shoppingcartList
+            {
+                tickets.Add(ticket);
+            }
+
+            Session["Products"] = tickets;
+
+            return RedirectToAction("Index");
+        }
         public ActionResult PurchaseDone()
         {
             Accounts account = Session["loggedin_account"] as Accounts;

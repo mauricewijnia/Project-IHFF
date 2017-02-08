@@ -26,8 +26,8 @@
                 <span id="@("add"+film.ExhibitionId)" class="glyphicon glyphicon-plus-sign qtyBtn"></span>
                 <span id="@("qty"+film.ExhibitionId)">1</span>
                 <span id="@("min"+film.ExhibitionId)" class="glyphicon glyphicon-minus-sign qtyBtn"></span>
-                <a class="btn btn-default shopBtn" href='@Url.Action("Add", "ShoppingCart", new { id = @film.FilmId, Quantity = 3 }, null)'>To Programme</a>
-                <a class="btn btn-default shopBtn" href='@Url.Action("Add", "ShoppingCart", new { id = @film.FilmId, Quantity = 3 }, null)'>To shopping Cart</a>
+                <a class="btn btn-default shopBtn" href='@Url.Action("Add", "ShoppingCart", new { id = @film.FilmId, Quantity = 3, shopcart = false, remove = false }, null)'>To Programme</a>
+                <a class="btn btn-default shopBtn" href='@Url.Action("Add", "ShoppingCart", new { id = @film.FilmId, Quantity = 3, shopcart = true, remove = false }, null)'>To shopping Cart</a>
             </div>
         </div>
         <div class="clearfix"></div>

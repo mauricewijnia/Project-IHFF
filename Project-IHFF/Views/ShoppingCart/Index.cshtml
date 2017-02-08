@@ -29,8 +29,8 @@
         }
     }
 </div>
-<h1 id="Totaalprijs">€@ViewBag.TotaalPrijs.ToString("N2")</h1>
 <h1 id="Totaalprijs">-€@ViewBag.Korting.ToString("N2")</h1>
+<h1 id="Totaalprijs">€@ViewBag.TotaalPrijs.ToString("N2")</h1>
 
 <p><a href="@Url.Action("Index", "Booth")" class="btn btn-primary btn-lg RekenAf-btn">Collect at booth &raquo;</a></p>
 <br />

@@ -119,11 +119,12 @@
 #ShoppingCartRegelKop{
     list-style: none;
     float: left;
+    margin-left:150px;
 }
 #ShoppingCartRegelKop li{
     float: left;
     margin-left: 20px;
-    margin-left: 150px;
+    margin-left: 100px;
 }
 
 #WinkelWagenInhoud{
