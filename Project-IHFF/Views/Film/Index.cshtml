@@ -10,28 +10,48 @@
 </div>
 <div class="col-md-4 ">
     <div class="contentBox right">
-        <h1>Search Filters</h1>
+        <h2>Search Filters</h2>
         <div data-toggle="buttons">
             <label id="monday" class="btn btn-default sortBtn sortDay">
-                <input type="radio" name="options" id="monday"> Mon
+                <input type="radio" name="filterDay" id="monday"> Mon
             </label>
             <label id="tuesday" class="btn btn-default sortBtn sortDay">
-                <input type="radio" name="options" id="tuesday"> Tue
+                <input type="radio" name="filterDay" id="tuesday"> Tue
             </label>
             <label id="wednesday" class="btn btn-default sortBtn sortDay">
-                <input type="radio" name="options" id="wednesday"> Wed
+                <input type="radio" name="filterDay" id="wednesday"> Wed
             </label>
             <label id="thursday" class="btn btn-default sortBtn sortDay">
-                <input type="radio" name="options" id="thursday"> Thu
+                <input type="radio" name="filterDay" id="thursday"> Thu
             </label>
             <label id="friday" class="btn btn-default sortBtn sortDay">
-                <input type="radio" name="options" id="friday"> Fri
+                <input type="radio" name="filterDay" id="friday"> Fri
             </label>
             <label id="saturday" class="btn btn-default sortBtn sortDay">
-                <input type="radio" name="options" id="saturday"> Sat
+                <input type="radio" name="filterDay" id="saturday"> Sat
             </label>
             <label id="sunday" class="btn btn-default sortBtn sortDay">
-                <input type="radio" name="options" id="sunday"> Sun
+                <input type="radio" name="filterDay" id="sunday"> Sun
+            </label>
+        </div>
+        <div data-toggle="buttons">
+            <label id="philharmonie" class="btn btn-default sortBtn sortPlace">
+                <input type="radio" name="filterPlace" id="philharmonie"> Philharmonie
+            </label>
+            <label id="toneelschuur" class="btn btn-default sortBtn sortPlace">
+                <input type="radio" name="filterPlace" id="toneelschuur"> Toneelschuur
+            </label>
+            <label id="pathe" class="btn btn-default sortBtn sortPlace">
+                <input type="radio" name="filterPlace" id="pathe"> Pathé
+            </label>
+        </div>
+        <h2>Sort movies</h2>
+        <div data-toggle="buttons">
+            <label id="filterTime" class="btn btn-default sortBtn sortOrder">
+                <input type="radio" name="filterOrder" id="filterTime"> Time
+            </label>
+            <label id="filterName" class="btn btn-default sortBtn sortOrder">
+                <input type="radio" name="filterOrder" id="filterName"> Name
             </label>
         </div>
     </div>
@@ -40,9 +60,38 @@
 <script type="text/javascript">
 $(document).ready(function()
 {
-    $(".sortDay").click(function ()
+    $(".sortBtn").click(function ()
     {
-        var day = $(this).attr('id');
+
+        //all selected filters
+        var day = $('input[name=filterDay]:checked').attr('id');
+        var place = $('input[name=filterPlace]:checked').attr('id');
+        var order = $('input[name=filterOrder]:checked').attr('id');
+
+        if ($(this).attr('id') == day ) {
+            $(this).checked = false;
+            $("#filmsContainer").load("@Url.Action("FilmsView","Film")", { 'day' : day });
+            alert("test")
+        }
+        //http://jsfiddle.net/GoranMottram/VGPhD/2/
+        //if ($('#monday').attr("checked") = true) { alert("it's checked"); }
+        if ($(this).attr(':checked')) {
+            altert("oke");
+            //if ($(this).hasClass("sortDay")) { day = empty; $('input[name="filterDay"]')[0].checked = false; }
+            //else if ($(this).hasClass("sortPlace")) { place = empty }
+            //else if ($(this).hasClass("sortOrder")) { order = empty }
+        } else {
+
+            if ($(this).hasClass("sortDay")) { day = $(this).attr('id') }
+            else if ($(this).hasClass("sortPlace")) { place = $(this).attr('id') }
+            else if ($(this).hasClass("sortOrder")) { order = $(this).attr('id') }
+        }
+
+
+        //replace the new selected selected filter (this click function)
+        //alert(day + " " + place + " " + order);
+
+
         // Home is your controller, Index is your action name
         $("#filmsContainer").load("@Url.Action("FilmsView","Film")", { 'day' : day });
     });
