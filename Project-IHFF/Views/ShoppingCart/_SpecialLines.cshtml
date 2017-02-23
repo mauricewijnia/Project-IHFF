@@ -1,0 +1,42 @@
+﻿
+@using Project_IHFF.Models;
+@model SpecialTicket
+
+@{Specials Specialtje = (((SpecialTicket)Model).Specials);
+    DateTime Reserveringstijd = Specialtje.startTime;
+    DateTime ReserveringstijdEind = Specialtje.endTime;
+    int id = (((SpecialTicket)Model).id); }
+<br />
+<br />
+
+@{bool shopcartContr; }
+@if (ViewContext.RouteData.Values["Controller"].ToString().ToLower() == "shoppingcart")
+{
+    shopcartContr = true;
+}
+else
+{
+    shopcartContr = false;
+}
+<ul id="ShoppingCartRegel">
+    <a class="glyphicon glyphicon-remove FloatLeft MinPlusKnop MarginLeft10px" href='@Url.Action("Remove", "ShoppingCart", new { id = (((SpecialTicket)Model).id), shopcart = shopcartContr}, null)'></a>
+    <li><p style="min-width:100px; margin-right:-61px; display:block;">@Specialtje.name</p></li>
+    <li style="margin-left:118px"><p>@Reserveringstijd.ToString("H:mm") - </p></li>
+    <li style="margin-left:3px"><p>@ReserveringstijdEind.ToString("H:mm")</p></li>
+
+    <li style="margin-left:96px"><p>@Reserveringstijd.ToString("dddd")</p></li>
+    <li style="margin-left:92px">
+        <a class="glyphicon glyphicon-plus FloatLeft MinPlusKnop MarginLeft10px" href='@Url.Action("ChangeQuantity", "ShoppingCart", new { id = (((SpecialTicket)Model).id), aantal = 1, shopcart = shopcartContr}, null)'></a>
+        <p class="FloatLeft MarginLeft10px">@(((SpecialTicket)Model).quantity)</p>
+        <a class="glyphicon glyphicon-minus FloatLeft MinPlusKnop MarginLeft10px" href='@Url.Action("ChangeQuantity", "ShoppingCart", new { id = (((SpecialTicket)Model).id), aantal = -1, shopcart = shopcartContr}, null)'></a>
+    </li>
+    <li><p style="margin-left:-60px;">€,-</p></li>
+    @if (ViewContext.RouteData.Values["Controller"].ToString().ToLower() == "shoppingcart")
+    {
+        <li>
+            <a id="ShoppingCart" class="glyphicon glyphicon-shopping-cart NavIcons" style="margin-left: -50px;
+    font-size: 25px;
+    color: #ff9900;" @Url.Action("Add", "ShoppingCart", new { id = @Specialtje.id, Quantity = (((SpecialTicket)Model).quantity), shopcart = true }, null)></a>
+        </li>
+    }
+</ul>

@@ -203,6 +203,7 @@
     <Compile Include="Controllers\FilmController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ShoppingCartController.cs" />
+    <Compile Include="Controllers\WishListController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -212,6 +213,7 @@
     <Compile Include="Models\Exhibitions.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\RestaurantViewModel.cs" />
     <Compile Include="Models\SpecialViewModel.cs" />
     <Compile Include="Models\Films.cs">
       <DependentUpon>Model.tt</DependentUpon>
@@ -266,6 +268,7 @@
     <Compile Include="Repositories\IItemsRepository.cs" />
     <Compile Include="Repositories\IAccountRepository.cs" />
     <Compile Include="Repositories\IShoppingCartRepository.cs" />
+    <Compile Include="Repositories\ISpecialsRepository.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -402,6 +405,10 @@
     <Content Include="Views\Booth\Index.cshtml" />
     <Content Include="Views\ShoppingCart\Purchase.cshtml" />
     <Content Include="Views\ShoppingCart\PurchaseDone.cshtml" />
+    <Content Include="Views\ShoppingCart\_FilmLines.cshtml" />
+    <Content Include="Views\ShoppingCart\_RestaurantLines.cshtml" />
+    <Content Include="Views\ShoppingCart\_SpecialLines.cshtml" />
+    <Content Include="Views\WishList\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

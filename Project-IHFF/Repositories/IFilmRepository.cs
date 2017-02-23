@@ -36,14 +36,12 @@ namespace Project_IHFF.Repositories
                              Image = items.imagePath,
                              Location = items.location,
                              Price = items.price,
-                             Capacity = films.capacity, 
+                             Capacity = films.capacity,
                              StartTime = exhibitions.startTime,
                              EndTime = exhibitions.endTime
-
                          }).ToList();
             return query;
         }
-
 
         public IEnumerable<ExhibitionViewModel> GetFilmsByDay(int day)
         {
@@ -75,11 +73,11 @@ namespace Project_IHFF.Repositories
         public List<Exhibitions> GetAllExhibitions()
         {
             return ctx.Exhibitions.ToList();
-        }  
+        }
 
         public List<Films> GetAllFilmsToList()
         {
             return ctx.Items.OfType<Films>().ToList();
         }
-    }   
+    }
 }

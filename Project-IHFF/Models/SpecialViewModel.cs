@@ -15,6 +15,6 @@ namespace Project_IHFF.Models
         public decimal Price { get; set; }
         public string Capacity { get; set; }
         public DateTime StartTime { get; set; }
-        public Nullable<DateTime> EndTime { get; set; }
+        public DateTime EndTime { get; set; }
     }
 }
