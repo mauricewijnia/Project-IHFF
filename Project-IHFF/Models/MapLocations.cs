@@ -12,13 +12,17 @@ namespace Project_IHFF.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Items
+    public partial class MapLocations
     {
         public int id { get; set; }
-        public string description { get; set; }
-        public string location { get; set; }
-        public decimal price { get; set; }
-        public string name { get; set; }
+        public string placeName { get; set; }
+        public double geoLong { get; set; }
+        public double geoLat { get; set; }
+        public string adress { get; set; }
+        public string city { get; set; }
+        public string phone { get; set; }
+        public string email { get; set; }
         public string imagePath { get; set; }
+        public string markerPath { get; set; }
     }
 }

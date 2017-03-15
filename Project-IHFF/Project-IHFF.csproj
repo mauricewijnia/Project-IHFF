@@ -213,6 +213,9 @@
     <Compile Include="Models\Exhibitions.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\MapLocations.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\RestaurantViewModel.cs" />
     <Compile Include="Models\SpecialViewModel.cs" />
     <Compile Include="Models\Films.cs">

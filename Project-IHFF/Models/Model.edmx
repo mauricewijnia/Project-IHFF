@@ -11,6 +11,7 @@
     <EntitySet Name="Persons" EntityType="Model.Store.Persons" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="TicketsSet" EntityType="Model.Store.TicketsSet" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Exhibitions" EntityType="Model.Store.Exhibitions" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="MapLocationsSet" EntityType="Model.Store.MapLocationsSet" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Items_Films" EntityType="Model.Store.Items_Films" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="TicketsSet_RestaurantReservation" EntityType="Model.Store.TicketsSet_RestaurantReservation" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Items_Restaurants" EntityType="Model.Store.Items_Restaurants" store:Type="Tables" Schema="dbo" />
@@ -117,6 +118,21 @@
     <Property Name="startTime" Type="datetime" Nullable="false" />
     <Property Name="endTime" Type="datetime" Nullable="true" />
     <Property Name="filmId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="MapLocationsSet">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="placeName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="geoLong" Type="float" Nullable="false" />
+    <Property Name="geoLat" Type="float" Nullable="false" />
+    <Property Name="adress" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="city" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="phone" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="email" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="imagePath" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="markerPath" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
   <EntityType Name="Items_Films">
     <Key>
@@ -379,6 +395,7 @@
             <End Role="FilmTickets" EntitySet="TicketsSet" />
             <End Role="ExhibitionsSet" EntitySet="Exhibitions" />
           </AssociationSet>
+          <EntitySet Name="MapLocationsSet" EntityType="Model.MapLocations" />
           </EntityContainer>
         <EntityType Name="Orders">
           <Key>
@@ -540,6 +557,21 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="MapLocations">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="placeName" Type="String" Nullable="false" />
+          <Property Name="geoLong" Type="Double" Nullable="false" />
+          <Property Name="geoLat" Type="Double" Nullable="false" />
+          <Property Name="adress" Type="String" Nullable="false" />
+          <Property Name="city" Type="String" Nullable="false" />
+          <Property Name="phone" Type="String" Nullable="false" />
+          <Property Name="email" Type="String" Nullable="false" />
+          <Property Name="imagePath" Type="String" Nullable="false" />
+          <Property Name="markerPath" Type="String" Nullable="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -645,6 +677,22 @@
           <ScalarProperty Name="startTime" ColumnName="startTime" />
           <ScalarProperty Name="endTime" ColumnName="endTime" />
           <ScalarProperty Name="filmId" ColumnName="filmId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MapLocationsSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Model.MapLocations)">
+        <MappingFragment StoreEntitySet="MapLocationsSet">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="placeName" ColumnName="placeName" />
+          <ScalarProperty Name="geoLong" ColumnName="geoLong" />
+          <ScalarProperty Name="geoLat" ColumnName="geoLat" />
+          <ScalarProperty Name="adress" ColumnName="adress" />
+          <ScalarProperty Name="city" ColumnName="city" />
+          <ScalarProperty Name="phone" ColumnName="phone" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="imagePath" ColumnName="imagePath" />
+          <ScalarProperty Name="markerPath" ColumnName="markerPath" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

@@ -31,6 +31,7 @@
         <EntityTypeShape EntityType="Model.Accounts" Width="1.5" PointX="5" PointY="3.375" />
         <InheritanceConnector EntityType="Model.Accounts" />
         <AssociationConnector Association="Model.FilmTicketsExhibitionsSet" />
+        <EntityTypeShape EntityType="Model.MapLocations" Width="1.75" PointX="0.5" PointY="0.875" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
