@@ -1,19 +1,20 @@
-﻿
-@{
-    ViewBag.Title = "Login";
+﻿@using Project_IHFF.Models;
+@model LoginModel
+
+<h2>Login</h2>
+<hr />
+@using (Html.BeginForm("Login", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+
+    @Html.LabelFor(x => x.email)    <br />
+    @Html.TextBoxFor(x => x.email, new { @class = "form-control" })
+    @Html.ValidationMessageFor(x => x.email, "",  new { @class = "text-danger" })
+    <br />
+
+    @Html.LabelFor(x => x.password) <br />
+        @Html.PasswordFor(x => x.password, new { @class = "form-control" })
+        @Html.ValidationMessageFor(x => x.password, "", new { @class = "text-danger" })
+        <br />
+
+    <input type="submit" class="btn btn-primary" value="Login" />
 }
-
-
-<h3>@ViewBag.Login</h3>
-<hr />
-<form method="post" action="Login">
-    <p>Emailadress:</p>
-    <input type="text" name="EmailAdress" class="form-control" />
-    <br />
-    <p>Password:</p>
-    <input type="password" name="password" class="form-control"/>
-    <br />
-    <input type="submit" value="Login" class="btn btn-primary" />
-</form>
-<hr />
-@Html.ActionLink("Make a New Account", "Register", "Account", null, new { @class = "btn btn-primary"})

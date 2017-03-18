@@ -1,4 +1,10 @@
-﻿<script src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyBNsEnJz7K0fRtRb9xg8cw6RthggU8KeeI" type="text/javascript"></script>
+﻿@using Project_IHFF.Models
+@using Newtonsoft.Json;
+
+@model List<MapLocations>
+
+
+<script src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyBNsEnJz7K0fRtRb9xg8cw6RthggU8KeeI" type="text/javascript"></script>
 
 <div id="block">
     <h1 id="MainCategory"> Culture </h1>
@@ -81,42 +87,31 @@
                 var map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
 
                 // een lijst met de deelnemende restaurants, theaters en culturele activiteiten die in de buurt liggen
-                var data = [
-                                          { "Id": 1, "PlaceName": "Stempels Brasserie", "GeoLong": "52.380827", "GeoLat": "4.638282", "Adress": "Klokhuisplein 9", "City": "2011 HK, Haarlem", "Phone": "+023 512 39 10", "Email": "info@stempelsinhaarlem.nl", "image": "../img/restaurants/stempels.png", "Marker": "http://labs.google.com/ridefinder/images/mm_20_yellow.png" },
-                                          { "Id": 2, "PlaceName": "De Uitkijk", "GeoLong": "52.410086", "GeoLat": "4.604256", "Adress": "Hoge Duin en Daalseweg 6", "City": "2061 AG, Bloemendaal", "Phone": "+023 525 11 62", "Email": "restaurant@uitkijk-kopjebloemendaal.nl", "image": "../img/restaurants/deuitkijk.png", "Marker": "http://labs.google.com/ridefinder/images/mm_20_yellow.png" },
-                                          { "Id": 3, "PlaceName": "Dijkers", "GeoLong": "52.380533", "GeoLat": "4.636618", "Adress": "Warmoesstraat 5", "City": "2011 HN Haarlem", "Phone": "+023 551 15 64", "Email": "info@restaurantdijkers.nl", "image": "../img/restaurants/dijkers.png", "Marker": "http://labs.google.com/ridefinder/images/mm_20_yellow.png" },
-                                          { "Id": 4, "PlaceName": "Terra", "GeoLong": "52.406732", "GeoLat": "4.622309", "Adress": "Kerkplein 16A", "City": "2061 JD Bloemendaal", "Phone": "+023 527 7856", "Email": "info@terra.nl", "image": "../img/restaurants/terra.png", "Marker": "http://labs.google.com/ridefinder/images/mm_20_yellow.png" },
-                                          { "Id": 5, "PlaceName": "Ratatouille", "GeoLong": "52.378701", "GeoLat": "4.637673", "Adress": "Spaarne 96", "City": "2011 CL Haarlem", "Phone": "+023 542 7270", "Email": "info@ratatouillefoodandwine.nl", "image": "../img/restaurants/ratatouille.png", "Marker": "http://labs.google.com/ridefinder/images/mm_20_yellow.png" },
-                                          { "Id": 6, "PlaceName": "De Ark", "GeoLong": "52.377178", "GeoLat": "4.633261", "Adress": "Nieuw Heiligland 3", "City": "2011EM, Haarlem", "Phone": "+023 531 1078", "Email": "info@deark.nl", "image": "../img/restaurants/deark.png", "Marker": "http://labs.google.com/ridefinder/images/mm_20_yellow.png" },
-                                          { "Id": 7, "PlaceName": "Philharmonie", "GeoLong": "52.381537", "GeoLat": "4.638797", "Adress": "Lange Begijnestraat 11", "City": "2011 HH, Haarlem", "Phone": "+023 512 1212", "Email": "service@theater-haarlem.nl", "image": "../img/theathers/philharmonie.jpg", "Marker": "http://labs.google.com/ridefinder/images/mm_20_blue.png" },
-                                          { "Id": 8, "PlaceName": "Toneelschuur ", "GeoLong": "52.381997", "GeoLat": "4.639054", "Adress": "Lange Begijnestraat 9", "City": "2011 HH, Haarlem", "Phone": "+023 517 3910", "Email": "informatie@toneelschuur.nl", "image": "../img/theathers/toneelschuur.jpg", "Marker": "http://labs.google.com/ridefinder/images/mm_20_blue.png" },
-                                          { "Id": 9, "PlaceName": "Pathé ", "GeoLong": "52.381764", "GeoLat": "4.629414", "Adress": "Zijlvest 41-43", "City": "2011 VB, Haarlem", "Phone": "+0900 1458", "Email": "informatie@toneelschuur.nl", "image": "../img/theathers/pathe.png", "Marker": "http://labs.google.com/ridefinder/images/mm_20_blue.png" },
-                                          { "Id": 10, "PlaceName": "Sint Bavo Kathedraal", "GeoLong": "52.376474", "GeoLat": "4.622860", "Adress": "Leidsevaart 146", "City": "2014 HE, Haarlem", "Phone": "+023 532 30 77", "Email": "info@rkbavo.nl", "image": "../img/cultuur/stbavo.jpg", "Marker": "http://labs.google.com/ridefinder/images/mm_20_red.png" },
-                                          { "Id": 11, "PlaceName": "Sint Bavo Kerk", "GeoLong": "52.381053", "GeoLat": "4.637279", "Adress": "Grote Markt 22", "City": " 2011 RD, Haarlem", "Phone": "+023 553 2040", "Email": "info@bavo.nl", "image": "../img/cultuur/stbavokerk.jpg", "Marker": "http://labs.google.com/ridefinder/images/mm_20_red.png" },
-                                          { "Id": 12, "PlaceName": "De Adriaan", "GeoLong": "52.383701", "GeoLat": "4.642732", "Adress": "Papentorenvest 1A", "City": "2011 AV, Haarlem", "Phone": "+023 545 0259", "Email": "informatie@toneelschuur.nl", "image": "../img/cultuur/deadriaan.jpg", "Marker": "http://labs.google.com/ridefinder/images/mm_20_red.png" },
-                                          { "Id": 13, "PlaceName": "Teylers Museum", "GeoLong": "52.380351", "GeoLat": "4.640345", "Adress": "Spaarne 16", "City": "2011 CH, Haarlem", "Phone": "+023 516 0960", "Email": "info@teylersmuseum.nl", "image": "../img/cultuur/teylersmuseum.jpg", "Marker": "http://labs.google.com/ridefinder/images/mm_20_red.png" },
-                                          { "Id": 14, "PlaceName": "Frans Hals Museum", "GeoLong": "52.376597", "GeoLat": "4.633682", "Adress": "Groot Heiligland 62", "City": "2011 ES, Haarlem", "Phone": "+023 545 0259", "Email": "office@franshalsmuseum.nl", "image": "../img/cultuur/franshalsmuseum.jpg", "Marker": "http://labs.google.com/ridefinder/images/mm_20_red.png" },
-                                          { "Id": 15, "PlaceName": "Het Dolhuys", "GeoLong": "52.390475", "GeoLat": "4.638044", "Adress": "Schotersingel 2", "City": "2021 GE, Haarlem", "Phone": "+023 541 0670", "Email": "info@hetdolhuys.nl", "image": "../img/cultuur/hetdolhuys.jpg", "Marker": "http://labs.google.com/ridefinder/images/mm_20_red.png" },
-                                          { "Id": 16, "PlaceName": "De Hallen", "GeoLong": "52.381067", "GeoLat": "4.636037", "Adress": "Grote Markt 16", "City": "2011 RD, Haarlem", "Phone": "+023 511 5775", "Email": "office@dehallen.nl", "image": "../img/cultuur/dehallen.jpg", "Marker": "http://labs.google.com/ridefinder/images/mm_20_red.png" },
-                                          { "Id": 17, "PlaceName": "Taverne de Waag", "GeoLong": "52.380213", "GeoLat": "4.639755", "Adress": "Damstraat 29", "City": "2011 HA, Haarlem", "Phone": "+023 5 31 16 40", "Email": "sjef@tavernedewaag.nl", "image": "../img/cultuur/dewaag.jpg", "Marker": "http://labs.google.com/ridefinder/images/mm_20_red.png" },
-                ];
+                var data =
+                    //C# code
+                    @{
 
+                string data = "";
+                data = JsonConvert.SerializeObject(Model);
+
+                @Html.Raw(data + ';');
+            }
 
                 //  met een jquery "each" selector door te lijst gaan en alle markers neerzetten
                 $.each(data, function (i, item) {
                     var marker = new google.maps.Marker({
-                        'position': new google.maps.LatLng(item.GeoLong, item.GeoLat),
+                        'position': new google.maps.LatLng(item.geoLong, item.geoLat),
                         'map': map,
-                        'title': item.PlaceName,
-                        'icon': item.Marker
+                        'title': item.placeName,
+                        'icon': item.markerPath
                     });
 
                     // string voor de infowindow
                     var contentString = '<div id="contentStr" style="margin-left:15px; margin-top:3px;overflow:hidden;">' + '<div id="bodyContent">'
-                        + '<img src=' + item.image + ' style="width:172px;height:110px;"/>'
+                        + '<img src=' + item.imagePath + ' style="width:172px;height:110px;"/>'
                         + '<br><p style="font:13px verdana;margin-left:5px; margin-top:10px;">'
-                        + item.PlaceName + '</p><div style="font:13px verdana;margin-left:5px;">' + item.Adress + '<br>' + item.City +
-                        '<br>' + item.Phone + '<br>' + item.Email + '</div>' + '</div>';
+                        + item.placeName + '</p><div style="font:13px verdana;margin-left:5px;">' + item.adress + '<br>' + item.city +
+                        '<br>' + item.phone + '<br>' + item.email + '</div>' + '</div>';
 
                     var infowindow = new google.maps.InfoWindow({
                         content: contentString,

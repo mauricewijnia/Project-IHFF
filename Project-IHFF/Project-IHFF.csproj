@@ -213,9 +213,11 @@
     <Compile Include="Models\Exhibitions.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\MapLocations.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\RegisterModel.cs" />
     <Compile Include="Models\RestaurantViewModel.cs" />
     <Compile Include="Models\SpecialViewModel.cs" />
     <Compile Include="Models\Films.cs">
@@ -267,6 +269,7 @@
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\CultureRepository.cs" />
     <Compile Include="Repositories\IFilmRepository.cs" />
     <Compile Include="Repositories\IItemsRepository.cs" />
     <Compile Include="Repositories\IAccountRepository.cs" />

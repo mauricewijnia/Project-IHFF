@@ -26,41 +26,87 @@ namespace Project_IHFF.Controllers
             return View();
         }
 
-        [HttpPost]
-        public ActionResult Register(string firstName, string lastName, string phoneNumber, string EmailAdress, string Password, string Passwordcheck)
-        {
-            if (Password != Passwordcheck)
-            {
-                return RedirectToAction("Register", "Account", new { error = "The filled in passwords do not match!" });
-            }
-            ViewBag.Registering = "Account has been made, log in here";
-            accountRepository.CreateAccount(firstName, lastName, phoneNumber, EmailAdress, Password);
+        //oude stuff
+        //[HttpPost]
+        //public ActionResult Register(string firstName, string lastName, string phoneNumber, string EmailAdress, string Password, string Passwordcheck)
+        //{
+        //    if (Password != Passwordcheck)
+        //    {
+        //        return RedirectToAction("Register", "Account", new { error = "The filled in passwords do not match!" });
+        //    }
+        //    ViewBag.Registering = "Account has been made, log in here";
+        //    accountRepository.CreateAccount(firstName, lastName, phoneNumber, EmailAdress, Password);
 
-            return View("login");
+        //    return View("login");
+        //}
+
+        //public ActionResult Login()
+        //{
+        //    ViewBag.login = "Login";
+        //    return View();
+        //}
+
+        //[HttpPost]
+        //public ActionResult Login(string Emailadress, string Password)
+        //{
+        //    Accounts account = accountRepository.GetAccount(Emailadress, Password);
+        //    if (account != null)
+        //    {
+        //        FormsAuthentication.SetAuthCookie(account.email, false);
+        //        Session["loggedin_account"] = account;
+
+        //        return RedirectToAction("Index", "Home");
+        //    }
+        //    else
+        //    {
+        //        ViewBag.Login = "Login";
+        //        return RedirectToAction("Login");
+        //    }
+        //}
+
+
+        //nieuwe stuff
+
+        [HttpPost]
+        public ActionResult Register(RegisterModel register_account)
+        {
+            if (!ModelState.IsValid)
+            {
+                ModelState.AddModelError("register-error", "Something went wrong.");
+                return View();
+            }
+
+            Accounts account = new Accounts(register_account.firstName, register_account.lastName, register_account.phoneNumber, register_account.email, register_account.Password);
+            accountRepository.CreateAccount(account);
+
+            return RedirectToAction("Login", "Account");
         }
 
         public ActionResult Login()
         {
-            ViewBag.login = "Login";
             return View();
         }
 
         [HttpPost]
-        public ActionResult Login(string Emailadress, string Password)
+        public ActionResult Login(LoginModel login_account)
         {
-            Accounts account = accountRepository.GetAccount(Emailadress, Password);
-            if (account != null)
+            if (ModelState.IsValid)
             {
-                FormsAuthentication.SetAuthCookie(account.email, false);
-                Session["loggedin_account"] = account;
+                Accounts account = accountRepository.GetAccount(login_account.email);
+                if (account != null && account.password == login_account.password)
+                {
+                    FormsAuthentication.SetAuthCookie(account.email, false);
 
-                return RedirectToAction("Index", "Home");
+                    Session["loggedin_account"] = account;
+
+                    return RedirectToAction("Index", "Home");
+                }
+                else
+                {
+                    ModelState.AddModelError("login-error", "The user name or password provided is incorrect.");
+                }
             }
-            else
-            {
-                ViewBag.Login = "Login";
-                return RedirectToAction("Login");
-            }
+            return View(login_account);
         }
 
         [HttpPost]

@@ -16,5 +16,20 @@ namespace Project_IHFF.Models
     {
         public string password { get; set; }
         public string phoneNumber { get; set; }
+
+        public Accounts()
+        {
+        }
+
+        public Accounts(string firstName, string lastName, string phoneNumber, string emailAddres, string password)
+        {
+            this.firstName = firstName;
+            this.lastName = lastName;
+            this.phoneNumber = phoneNumber;
+            this.email = emailAddres;
+            this.password = password;
+        }
+
+
     }
 }
