@@ -22,7 +22,7 @@
                 <p>@film.Location</p>
             </div>
             <div class="clearfix"></div>
-            <div class="col-md-12 verticalCenter">
+            <div class="col-md-12 verticalCenter noSelect">
                 <span id="@("add"+film.ExhibitionId)" class="glyphicon glyphicon-plus-sign qtyBtn"></span>
                 <span id="@("qty"+film.ExhibitionId)">1</span>
                 <span id="@("min"+film.ExhibitionId)" class="glyphicon glyphicon-minus-sign qtyBtn"></span>
@@ -55,3 +55,4 @@ $(document).ready(function()
     });
 });
 </script>
+
