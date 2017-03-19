@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Project_IHFF.Repositories;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,7 +12,9 @@ namespace Project_IHFF.Controllers
         // GET: Culture
         public ActionResult Index()
         {
-            return View();
+            CultureRepository repo = new CultureRepository();
+            return View(repo.locaties());
+
         }
     }
 }

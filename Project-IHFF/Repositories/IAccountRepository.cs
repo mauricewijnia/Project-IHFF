@@ -10,13 +10,14 @@ namespace Project_IHFF.Repositories
 {
     interface IAccountRepository
     {
-        Accounts GetAccount(string emailAddress, string password);
-        void CreateAccount(string firstName, string LastName, string phoneNumber, string Emailadress, string Password);
+        Accounts GetAccount(string emailAddress);  //, string password);
+        void CreateAccount(string firstName, string lastName, string phoneNumber, string Emailadress, string Password);
         int GetContactIdByMail(string Emailaddress);
         IEnumerable<Accounts> GetAllAccount();
 
         Accounts GetAccountById(int Id);
         Accounts GetAccountByAccountId(int id);
+        void CreateAccount(Accounts account);
     }
 }
     public class DbAccountRepository : IAccountRepository
@@ -25,26 +26,30 @@ namespace Project_IHFF.Repositories
 
     private ModelContainer ctx = new ModelContainer();
 
-    public void CreateAccount(string firstName, string lastName, string phoneNumber, string Emailadress, string Password)
+    public void CreateAccount(string firstName, string lastName, string phoneNumber, string email, string password)
     {
         Accounts account = new Accounts();
         account.firstName = firstName;
         account.lastName = lastName;
         account.phoneNumber = phoneNumber;
-        account.email = Emailadress;
-        account.password = Password;
+        account.email = email;
+        account.password = password;
         ctx.Persons.Add(account);
         ctx.SaveChanges();
     }
 
-    public Accounts GetAccount(string emailAddress, string password)
+    public Accounts GetAccount(string emailAddress)  //, string password)
     {
         Accounts account;
-        account = ctx.Persons.OfType<Accounts>().SingleOrDefault(a => a.email == emailAddress && a.password == password);
+        account = ctx.Persons.OfType<Accounts>().SingleOrDefault(a => a.email == emailAddress);  // && a.password == password);
         return account;
     }
 
-
+    public void CreateAccount(Accounts account)
+    {
+        ctx.Persons.Add(account);
+        ctx.SaveChanges();
+    }
 
 
     /// 
