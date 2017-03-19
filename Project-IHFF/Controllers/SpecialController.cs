@@ -9,22 +9,21 @@ using Project_IHFF.Repositories;
 
 namespace Project_IHFF.Controllers
 {
-    public class FilmController : Controller
+    public class SpecialController : Controller
     {
 
 
-        private IFilmRepository filmRepository = new DbFilmRepository();
-        // GET: Film
+        private ISpecialRepository specialRepository = new DbSpecialRepository();
+        // GET: Special
         public ActionResult Index()
         {
 
-            IEnumerable<ExhibitionViewModel> allFilms = filmRepository.GetAllFilms();
+            IEnumerable<SpecialViewModel> allSpecial = specialRepository.GetAllSpecials();
 
-
-            return View(allFilms);
+            return View(allSpecial);
         }
 
-        public virtual ActionResult FilmsView(string day, string place, string sort)
+        public virtual ActionResult SpecialsView(string day, string place, string sort)
         {
             //a code to check wich filters are active, and wich query to run
             string filterCode = (day != null) ? "1" : "0";
@@ -35,33 +34,32 @@ namespace Project_IHFF.Controllers
             if (day != null) {
                 switch (day)
                 {
-                    //dayNr is +1 
-                    //query comparision with datetime adds one day to datetime when turned in day
+                    case "sunday": dayNr = 1; break;
                     case "monday": dayNr = 2; break;
                     case "tuesday": dayNr = 3; break;
                     case "wednesday": dayNr = 4; break;
                     case "thursday": dayNr = 5; break;
                     case "friday": dayNr = 6; break;
                     case "saturday": dayNr = 7; break;
-                    case "sunday": dayNr = 1; break;
                 }
             }
 
-            IEnumerable<ExhibitionViewModel> filmList;
+        
+            IEnumerable<SpecialViewModel> specialList = specialRepository.GetAllSpecials();
             //fill filmlist with correct filters applied
             switch (filterCode)
             {
-                case "100": filmList = filmRepository.GetFilmsByDay(dayNr); break;
-                case "010": filmList = filmRepository.GetFilmsByPlace(place); break;
-                case "110": filmList = filmRepository.GetFilmsByDayPlace(dayNr, place); break;
-                case "001": filmList = filmRepository.GetAllFilmsByTitle(); break;
-                case "101": filmList = filmRepository.GetFilmsByDayTitle(dayNr); break;
-                case "011": filmList = filmRepository.GetFilmsByPlaceTitle(place); break;
-                case "111": filmList = filmRepository.GetFilmsByDayPlaceTitle(dayNr, place); break;
-                default: filmList = filmRepository.GetAllFilms(); break;
+                case "100": specialList = specialRepository.GetSpecialsByDay(dayNr); break;
+                case "010": specialList = specialRepository.GetSpecialsByPlace(place); break;
+                case "110": specialList = specialRepository.GetSpecialsByDayPlace(dayNr, place); break;
+                case "001": specialList = specialRepository.GetAllSpecialsByTitle(); break;
+                case "101": specialList = specialRepository.GetSpecialsByDayTitle(dayNr); break;
+                case "011": specialList = specialRepository.GetSpecialsByPlaceTitle(place); break;
+                case "111": specialList = specialRepository.GetSpecialsByDayPlaceTitle(dayNr, place); break;
+                default: specialList = specialRepository.GetAllSpecials(); break;
             }
 
-            return PartialView(filmList);
+            return PartialView(specialList);
         }
 
         public PartialViewResult SortedFilms(int day, string sort)
