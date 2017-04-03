@@ -44,12 +44,14 @@
                                 TimeSpan time = @restaurant.TimeOpen;
                                 TimeSpan finalTime = @restaurant.TimeClosed.Subtract(TimeSpan.FromHours(1.5)); //last reservation 1.5hour before closing time
                                 TimeSpan interval = TimeSpan.FromMinutes(30);
-
-                                while (time <= finalTime){
-                                    string timeStr = time.ToString(@"hh\:mm");
-                                    <option value="@time.ToString(@"hh\:mm")">@time.ToString(@"hh\:mm")</option>
-                                    time = time.Add(interval);
                             }
+                            @while (time <= finalTime)
+                            {
+
+                                <option value="@time.ToString(@"hh\:mm")">@time.ToString(@"hh\:mm")</option>
+                                time = time.Add(interval);
+                            }
+                            
                         </select>
 
                     </p>
