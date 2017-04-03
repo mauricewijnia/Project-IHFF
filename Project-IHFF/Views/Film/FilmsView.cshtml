@@ -35,40 +35,52 @@
 }
 
 <script type="text/javascript">
-$(document).ready(function()
-{
-    
-    $(".qtyBtn").click(function ()
+    $(document).ready(function()
     {
-        
-        var id = $(this).attr('id');
-        var idNr = id.slice(3);
-        
-        var qty = parseInt($("#qty" + idNr).html());
 
-        if (id.substring(0, 3) == "add") {
-            $("#qty" + idNr).html(qty + 1);
-        } else if (id.substring(0, 3) == "min" && qty != "1") {
-            $("#qty" + idNr).html(qty - 1);
-        }
-        
-    });
+        $(".qtyBtn").click(function (e)
+        {
+
+            var id = $(this).attr('id');
+            var idNr = id.slice(3);
+
+            var qty = parseInt($("#qty" + idNr).html());
+
+            if (id.substring(0, 3) == "add") {
+                $("#qty" + idNr).html(qty + 1);
+            } else if (id.substring(0, 3) == "min" && qty != "1") {
+                $("#qty" + idNr).html(qty - 1);
+            }
+
+        });
 
 
-    $('.shopBtn').on('click', function () {
+        $('.shopBtn').on('click', function (e) {
+
         var fullId = $(this).attr('id');
         var storage = (fullId.substring(5, 9) == "Cart") ? "cart" : "programme";
         var exhibitionId = (storage == "cart") ? fullId.slice(9) : fullId.slice(14);
-        var qty = 3;
+        var qty = 5;
         var fout = false;
-        alert(storage + " " + exhibitionId);
+        //alert(storage + " " + exhibitionId);
         //var getItemId = parseInt($(this).closest('td').prop('id'));
         //var getUserName = $('.divName').html();
-        
+
+        e.preventDefault();
         $.ajax({
+
+            //url: $(this).attr("href"),
+            url: '@Url.Action("Add", "ShoppingCart", new { id = 3 Quantity = 3, shopcart = true, remove = false }, null)',
+            //data: "{ 'id':' " + exhibitionId + "','quantity':' " + qty + "','shopcart':' " + fout + " ','remove':' " + fout + " ' }",
+            success: function(){
+                alert("Value Added");
+            }
+
+        });
+        /*$.ajax({
             type: 'POST',
             contentType: 'application/json; charset=utf-8',
-            url: 'ShoppingCart/Add',
+            url: '/ShoppingCart/Add',
             data: "{ 'id':' " + exhibitionId + "','quantity':' " + qty + "','shopcart':' " + fout + " ','remove':' " + fout + " ' }",
             success: function (data) {
                 alert(data);
@@ -76,10 +88,14 @@ $(document).ready(function()
             error: function (data) {
                 alert(data);
             }
-        });
-    });
+        });*/
 
+
+
+    });
 });
+
+
 
 </script>
 
