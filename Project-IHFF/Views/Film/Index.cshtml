@@ -4,7 +4,7 @@
 @model IEnumerable<ExhibitionViewModel>
 
 <div class="col-md-8">
-    <div id="filmsContainer">
+    <div id="itemsContainer">
         @Html.Partial("FilmsView")
     </div>
 </div>
@@ -60,22 +60,23 @@
 
 
 <script>
-// this script is used to load the partialview movies list
+// this script is used to load the partialview list
 $(document).ready(function ()
     {
         $(".sortBtn").click(function ()
         {
-            //all selected filters
+            //all (old) selected filters
             var day = $('input[name=filterDay]:checked').attr('id');
             var place = $('input[name=filterPlace]:checked').attr('id');
             var order = $('input[name=filterOrder]:checked').attr('id');
 
+            //replace new selected with old selected
             if ($(this).hasClass("sortDay")) { day = $(this).attr('id') }
             if ($(this).hasClass("sortPlace")) { place = $(this).attr('id') }
             if ($(this).hasClass("sortOrder")) { order = $(this).attr('id') }
 
-            $("#filmsContainer").load("@Url.Action("FilmsView","Film")", { 'day': day, 'place': place, 'sort': order });
+            $("#itemsContainer").load("@Url.Action("FilmsView","Film")", { 'day': day, 'place': place, 'sort': order });
         });
 });
-
 </script>
+

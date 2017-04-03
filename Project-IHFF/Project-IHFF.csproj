@@ -200,6 +200,7 @@
     <Compile Include="Controllers\BoothController.cs" />
     <Compile Include="Controllers\CultureController.cs" />
     <Compile Include="Controllers\FakeFilmController.cs" />
+    <Compile Include="Controllers\RestaurantController.cs" />
     <Compile Include="Controllers\SpecialController.cs" />
     <Compile Include="Controllers\FilmController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -275,6 +276,7 @@
     <Compile Include="Repositories\IItemsRepository.cs" />
     <Compile Include="Repositories\IAccountRepository.cs" />
     <Compile Include="Repositories\IShoppingCartRepository.cs" />
+    <Compile Include="Repositories\IRestaurantRepository.cs" />
     <Compile Include="Repositories\ISpecialRepository.cs" />
     <Compile Include="Repositories\ISpecialsRepository.cs" />
     <Compile Include="Startup.cs" />
@@ -419,6 +421,8 @@
     <Content Include="Views\ShoppingCart\_SpecialLines.cshtml" />
     <Content Include="Views\WishList\Index.cshtml" />
     <Content Include="Views\Special\SpecialsView.cshtml" />
+    <Content Include="Views\Restaurant\Index.cshtml" />
+    <Content Include="Views\Restaurant\ReservationTimes.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

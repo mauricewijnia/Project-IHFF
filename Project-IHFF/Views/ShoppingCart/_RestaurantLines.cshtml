@@ -24,7 +24,7 @@ else
 
     <li style="margin-left:96px"><p>@Reserveringstijd.ToString("dddd")</p></li>
     <li style="margin-left:92px">
-        <a class="glyphicon glyphicon-plus FloatLeft MinPlusKnop MarginLeft10px" href='@Url.Action("ChangeQuantity", "ShoppingCart", new { id = (((RestaurantReservation)Model).id), aantal = 1, shopcart = shopcartContr}, null)'></a>
+        <a class="glyphicon glyphicon-plus FloatLeft MinPlusKnop MarginLeft10px" href='@Url.Action("AddToCart", "ShoppingCart", new { id = (((RestaurantReservation)Model).id), aantal = 1, shopcart = shopcartContr}, null)'></a>
         <p class="FloatLeft MarginLeft10px">@(((RestaurantReservation)Model).quantity)</p>
         <a class="glyphicon glyphicon-minus FloatLeft MinPlusKnop MarginLeft10px" href='@Url.Action("ChangeQuantity", "ShoppingCart", new { id = (((RestaurantReservation)Model).id), aantal = -1, shopcart = shopcartContr}, null)'></a>
     </li>

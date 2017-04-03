@@ -57,7 +57,62 @@ namespace Project_IHFF.Controllers
 
             return View(tickets);
         }
+ 
 
+
+        public void AddToCart(int id, int Quantity, bool shopcart, bool remove)
+        {
+            Tickets ticket = new Tickets();
+            List<Tickets> Alltickets = AllTickets();
+            List<Tickets> tickets = new List<Tickets>();
+            string sessie;
+
+            if (!shopcart) //als het naar shopping cart doe wishlist sessie en anders product sessie
+            {
+                sessie = "wishlist";
+            }
+            else
+            {
+                sessie = "products";
+            }
+
+            foreach (Tickets item in Alltickets) // zoek toegevoegde ticket in lijst met alle tickets
+            {
+                if (item.id == id)
+                {
+                    ticket = item;
+                    ticket.quantity = Quantity;
+                }
+            }
+            if (Session[sessie] != null) // haal lijst met producten van winkelwagentje op als ze er zijn
+            {
+                tickets = Session[sessie] as List<Tickets>;
+            }
+
+            int breaker = 1;
+            if (Session[sessie] as List<Tickets> != null) // als winkelmandje leeg is moet product sws worden toegevoegd
+            {
+                foreach (Tickets film in Session[sessie] as List<Tickets>) // kijk of toegevoegde ticket al bestaat in winkelwagentje
+                {
+                    if (film.id == id)
+                    {
+                        film.quantity = film.quantity + Quantity; // hoog de quantity op in plaats van hem toe te voegen
+                        breaker = 2;
+                    }
+                }
+                if (breaker == 1) //als de Quantity niet veranderd is, toevoegen
+                {
+                    tickets.Add(ticket);
+                }
+            }
+            else
+            {
+                tickets.Add(ticket);
+            }
+
+
+            Session[sessie] = tickets;
+        }
         public ActionResult Add(int id, int Quantity, bool shopcart, bool remove)
         {
             Tickets ticket = new Tickets();

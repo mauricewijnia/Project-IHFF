@@ -26,8 +26,8 @@
                 <span id="@("add"+film.ExhibitionId)" class="glyphicon glyphicon-plus-sign qtyBtn"></span>
                 <span id="@("qty"+film.ExhibitionId)">1</span>
                 <span id="@("min"+film.ExhibitionId)" class="glyphicon glyphicon-minus-sign qtyBtn"></span>
-                <a class="btn btn-default shopBtn" href='@Url.Action("Add", "ShoppingCart", new { id = @film.FilmId, Quantity = 3, shopcart = false, remove = false }, null)'>To Programme</a>
-                <a class="btn btn-default shopBtn" href='@Url.Action("Add", "ShoppingCart", new { id = @film.FilmId, Quantity = 3, shopcart = true, remove = false }, null)'>To shopping Cart</a>
+                <a class="btn btn-default shopBtn" id="@("addToProgramme"+film.ExhibitionId)">To Programme</a>
+                <a class="btn btn-default shopBtn" id="@("addToCart"+film.ExhibitionId)">To shopping Cart</a>
             </div>
         </div>
         <div class="clearfix"></div>
@@ -53,6 +53,33 @@ $(document).ready(function()
         }
         
     });
+
+
+    $('.shopBtn').on('click', function () {
+        var fullId = $(this).attr('id');
+        var storage = (fullId.substring(5, 9) == "Cart") ? "cart" : "programme";
+        var exhibitionId = (storage == "cart") ? fullId.slice(9) : fullId.slice(14);
+        var qty = 3;
+        var fout = false;
+        alert(storage + " " + exhibitionId);
+        //var getItemId = parseInt($(this).closest('td').prop('id'));
+        //var getUserName = $('.divName').html();
+        
+        $.ajax({
+            type: 'POST',
+            contentType: 'application/json; charset=utf-8',
+            url: 'ShoppingCart/Add',
+            data: "{ 'id':' " + exhibitionId + "','quantity':' " + qty + "','shopcart':' " + fout + " ','remove':' " + fout + " ' }",
+            success: function (data) {
+                alert(data);
+            },
+            error: function (data) {
+                alert(data);
+            }
+        });
+    });
+
 });
+
 </script>
 

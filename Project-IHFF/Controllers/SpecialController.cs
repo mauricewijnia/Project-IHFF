@@ -62,12 +62,5 @@ namespace Project_IHFF.Controllers
             return PartialView(specialList);
         }
 
-        public PartialViewResult SortedFilms(int day, string sort)
-        {
-
-            return PartialView();
-
-            
-        }
     }
 }

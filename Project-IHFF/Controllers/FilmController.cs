@@ -37,13 +37,14 @@ namespace Project_IHFF.Controllers
                 {
                     //dayNr is +1 
                     //query comparision with datetime adds one day to datetime when turned in day
+                    case "sunday": dayNr = 1; break;
                     case "monday": dayNr = 2; break;
                     case "tuesday": dayNr = 3; break;
                     case "wednesday": dayNr = 4; break;
                     case "thursday": dayNr = 5; break;
                     case "friday": dayNr = 6; break;
                     case "saturday": dayNr = 7; break;
-                    case "sunday": dayNr = 1; break;
+                    
                 }
             }
 
@@ -66,10 +67,8 @@ namespace Project_IHFF.Controllers
 
         public PartialViewResult SortedFilms(int day, string sort)
         {
-
             return PartialView();
-
-            
+  
         }
     }
 }

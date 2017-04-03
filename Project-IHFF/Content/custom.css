@@ -319,11 +319,15 @@ input[type="color"]:focus,
 
 
 /* Rene Css, ik verplaats/sorteer dit later */
-.contentBox {
+.contentBox, .notification{
     margin-bottom: 15px;
     padding: 10px;
     border-radius: 5px;
     background-color: #666666;
+}
+.notification{
+    text-align: center;
+    border: 5px solid #FF9900;
 }
 .shopBtn {
     width: 12em;
@@ -331,7 +335,14 @@ input[type="color"]:focus,
     background-color: #FF9900;
     border-color: #FF9900;
 }
-.shopBtn:hover{
+.shopBtnRestaurant {
+    width: 9em;
+    margin: 2px 2px 20px 2px;
+    padding: 6px 0px;
+    background-color: #FF9900;
+    border-color: #FF9900;
+}
+.shopBtn:hover, .shopBtnRestaurant:hover{
     background-color: #ff6600;
 }
 .sortBtn{
@@ -367,11 +378,16 @@ input[type="color"]:focus,
 .subTitle, .title {
     margin: 0.2em 0;
 }
-
+.times{
+    font-weight: 900;
+    font-size: 1.2em;
+}
 .description {
     font-size: 0.8em;
 }
-
+.OrangeText {
+    color: #FF9900;
+}
 .whiteText {
     color: #F2F2F2;
 }
