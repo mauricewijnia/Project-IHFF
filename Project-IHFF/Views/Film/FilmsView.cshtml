@@ -58,9 +58,10 @@
         $('.shopBtn').on('click', function (e) {
 
         var fullId = $(this).attr('id');
-        var storage = (fullId.substring(5, 9) == "Cart") ? "cart" : "programme";
-        var exhibitionId = (storage == "cart") ? fullId.slice(9) : fullId.slice(14);
-        var qty = 5;
+        var cart = (fullId.substring(5, 9) == "Cart") ? true : false;
+        var exhibitionId = (cart == true) ? fullId.slice(9) : fullId.slice(14);
+            //var qty = $("#qty"+ exhibitionId).html;
+        var qty = document.getElementById('qty' + exhibitionId).innerHTML;
         var fout = false;
         //alert(storage + " " + exhibitionId);
         //var getItemId = parseInt($(this).closest('td').prop('id'));
@@ -70,9 +71,11 @@
         $.ajax({
 
             //url: $(this).attr("href"),
-            url: '@Url.Action("Add", "ShoppingCart", new { id = 3 Quantity = 3, shopcart = true, remove = false }, null)',
-            //data: "{ 'id':' " + exhibitionId + "','quantity':' " + qty + "','shopcart':' " + fout + " ','remove':' " + fout + " ' }",
-            success: function(){
+            url: '/ShoppingCart/Add',
+            data: {id:exhibitionId, Quantity:qty, shopcart:cart, remove:false},
+            //data: "{ 'id':' " + exhibitionId + "','quantity':' " + qty + "','shopcart':' " + true + " ','remove':' " + fout + " ' }",
+            //data: "{ 'id':' " + 3 + "','quantity':' " + 3 + "','shopcart':' " + true + " ','remove':' " + false + " ' }",
+            success: function(data){
                 alert("Value Added");
             }
 

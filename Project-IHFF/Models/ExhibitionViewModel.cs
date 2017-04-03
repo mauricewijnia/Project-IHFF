@@ -7,7 +7,6 @@ namespace Project_IHFF.Models
 {
     public class ExhibitionViewModel
     {
-        public Items film { get; set; }
         public int FilmId { get; set; }
         public int ExhibitionId { get; set; }
         public string Name { get; set; }
