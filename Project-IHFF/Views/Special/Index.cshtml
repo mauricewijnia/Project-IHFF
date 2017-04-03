@@ -4,7 +4,8 @@
 @model IEnumerable<SpecialViewModel>
 
 <div class="col-md-8">
-    <div id="itemsContainer">
+    <!--data-request-url provides javascript with the Url.action-->
+    <div id="itemsContainer" data-request-url="@Url.Action("SpecialsView", "Special")">
         @Html.Partial("SpecialsView")
     </div>
 </div>
@@ -54,26 +55,3 @@
         </div>
     </div>
 </div>
-@Scripts.Render("~/Scripts/custom.js")
-
-
-<script>
-// this script is used to load the partialview list
-$(document).ready(function ()
-    {
-        $(".sortBtn").click(function ()
-        {
-            //all (old) selected filters
-            var day = $('input[name=filterDay]:checked').attr('id');
-            var place = $('input[name=filterPlace]:checked').attr('id');
-            var order = $('input[name=filterOrder]:checked').attr('id');
-            
-            //replace new selected with old selected
-            if ($(this).hasClass("sortDay")) { day = $(this).attr('id') }
-            if ($(this).hasClass("sortPlace")) { place = $(this).attr('id') }
-            if ($(this).hasClass("sortOrder")) { order = $(this).attr('id') }
-
-            $("#itemsContainer").load("@Url.Action("SpecialsView","Special")", { 'day': day, 'place': place, 'sort': order });
-        });
-});
-</script>
