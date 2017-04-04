@@ -39,7 +39,7 @@ namespace Project_IHFF.Controllers
             return View(repository.GetAllRestaurants().OrderBy(x => x.name));
         }
 
-
+        //Verwijder film uit database
         public ActionResult DeleteFilm(int id)
         {
             if(repository.GetFilmById(id) != null)
@@ -51,23 +51,40 @@ namespace Project_IHFF.Controllers
             }
             else
             {
-                return RedirectToAction("Index", "Error", new { errorMessage = "This filmid doesn't exist." });
+                return RedirectToAction("Index", "Error", new { errorMessage = "This film does not exist." });
             }
             
         }
 
+        //Verwijder special uit database
         public ActionResult DeleteSpecial(int id)
         {
-            DeleteImageByItemId(id);
-            repository.DeleteItem(id);
-            return RedirectToAction("Specials");
+            if(repository.GetItemById(id) != null)
+            {
+                DeleteImageByItemId(id);
+                repository.DeleteItem(id);
+                return RedirectToAction("Specials");
+            }
+            else
+            {
+                return RedirectToAction("Index", "Error", new { errorMessage = "This special does not exist." });
+            }
+            
         }
 
+        //Verwijder restaurant uit database
         public ActionResult DeleteRestaurant(int id)
         {
-            DeleteImageByItemId(id);
-            repository.DeleteItem(id);
-            return RedirectToAction("Restaurants");
+            if(repository.GetItemById(id) != null)
+            {
+                DeleteImageByItemId(id);
+                repository.DeleteItem(id);
+                return RedirectToAction("Restaurants");
+            }
+            else
+            {
+                return RedirectToAction("Index", "Error", new { errorMessage = "This special does not exist." });
+            }
         }
 
         public ActionResult EditFilm(int id)
