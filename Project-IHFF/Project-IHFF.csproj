@@ -199,6 +199,7 @@
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\BoothController.cs" />
     <Compile Include="Controllers\CultureController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\FakeFilmController.cs" />
     <Compile Include="Controllers\RestaurantController.cs" />
     <Compile Include="Controllers\SpecialController.cs" />
@@ -419,10 +420,11 @@
     <Content Include="Views\ShoppingCart\_FilmLines.cshtml" />
     <Content Include="Views\ShoppingCart\_RestaurantLines.cshtml" />
     <Content Include="Views\ShoppingCart\_SpecialLines.cshtml" />
-    <Content Include="Views\WishList\Index.cshtml" />
     <Content Include="Views\Special\SpecialsView.cshtml" />
     <Content Include="Views\Restaurant\Index.cshtml" />
     <Content Include="Views\Restaurant\ReservationTimes.cshtml" />
+    <Content Include="Views\WishList\index.cshtml" />
+    <Content Include="Views\Error\index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -42,7 +42,13 @@
     <div class="cmsButtonGroup">
         <input type="submit" value="Submit" class="btn btn-primary" />
         @Html.ActionLink("Cancel", "Restaurants", null, new { @class = "btn btn-primary" })
-        @Html.ActionLink("Delete", "DeleteRestaurant", new { id = Model.id }, new { @class = "btn btn-danger" })
+        @Html.ActionLink("Delete", "DeleteRestaurant", new { id = Model.id }, new { @class = "btn btn-danger", onclick="return confirmDelete()" })
     </div>
+
+    <script type="text/javascript">
+        function confirmDelete() {
+            return window.confirm("Are you sure you want to delete this restaurant?")
+        }
+    </script>
     
 }
