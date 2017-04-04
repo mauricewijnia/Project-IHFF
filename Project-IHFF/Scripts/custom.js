@@ -57,7 +57,7 @@
         var fullId = $(this).attr('id');
         var cart = (fullId.substring(5, 9) == "Cart") ? true : false;
         var itemId = (cart == true) ? fullId.slice(9) : fullId.slice(14);
-        var reservation = new Date("2017-03-20T00:00:00");//default
+        var reservation = new Date("2017-03-20T00:00:00Z").toISOString();//default
 
         var cartEvent = true; //can stop call to cart controller if conditions aren't met(if turned false)
 
