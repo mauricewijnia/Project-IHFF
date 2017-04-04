@@ -18,12 +18,12 @@ namespace Project_IHFF.Controllers
         public ActionResult Index()
         {
             List<Tickets> tickets = new List<Tickets>();
-            if (Session["products"] != null)
+            if (Session["products"] != null) // als de shopping cart niet leeg is haal de tickets er uit
             {
                 tickets = Session["products"] as List<Tickets>;
             }
 
-            Session["Products"] = tickets;
+            Session["Products"] = tickets; 
             decimal totaalprijs = 0;
             decimal Korting = 0;
 
@@ -46,7 +46,7 @@ namespace Project_IHFF.Controllers
                         }
                     }
                 }
-                if (tickets.Count > 1)
+                if (tickets.Count > 1) // als er meer dan 2 tickets zij bekeren 5% korting
                 {
                     Korting = totaalprijs * (decimal)0.05;
                     totaalprijs = totaalprijs - Korting;
@@ -80,11 +80,11 @@ namespace Project_IHFF.Controllers
             {
                 if (item.id == id)
                 {
-                    if (item is RestaurantReservation)
+                    if (item is RestaurantReservation) // als het een restaurant ticket is word tijd toegevoed via methode
                     {
                         ticket = RestaurantToevoegen(((RestaurantReservation)item), Quantity, tijd);
                     }
-                    else
+                    else // als het gewonen tickets zijn voeg hem toe aan 'ticket'
                     {
                         ticket = item;
                         ticket.quantity = Quantity;
@@ -112,7 +112,7 @@ namespace Project_IHFF.Controllers
                     tickets.Add(ticket);
                 }
             }
-            else
+            else // als hij er niet al inzit voeg gewoon toe
             {
                 tickets.Add(ticket);
             }
@@ -120,13 +120,13 @@ namespace Project_IHFF.Controllers
             
 
             Session[sessie] = tickets;
-            if (remove)
+            if (remove) // als de ticket verwijderd moet worden
             {
                 bool shopping = false;
                 return RedirectToAction("Remove", new { id = id, shopcart = shopping });
             }
 
-            if (shopcart)
+            if (shopcart) 
             {
                 return RedirectToAction("Index");
             }
@@ -156,7 +156,7 @@ namespace Project_IHFF.Controllers
             return restaurant;
         }
 
-        private List<Tickets> AllTickets()
+        private List<Tickets> AllTickets() // haal alle tickets op
         {
             List<Tickets> tickets = new List<Tickets>();
             IEnumerable<ExhibitionViewModel> allFilms = filmRepository.GetAllFilms();
@@ -226,7 +226,7 @@ namespace Project_IHFF.Controllers
             }
             List<Tickets> tickets = Session[sessie] as List<Tickets>;
             List<Tickets> tickets2 = new List<Tickets>();
-            foreach (Tickets ticket in tickets)
+            foreach (Tickets ticket in tickets) // voeg alle tickets toe behalve de geene die verwijderd moet worden
             {
                 if (ticket.id != id)
                 {
@@ -260,9 +260,9 @@ namespace Project_IHFF.Controllers
 
             foreach (Tickets ticket in tickets)
             {
-                if (ticket.id == id)
+                if (ticket.id == id) // zoek de bepaalde ticket
                 {
-                    ticket.quantity = ticket.quantity + aantal;
+                    ticket.quantity = ticket.quantity + aantal; // verhoog huidige hoeveelheid met 'aantal'
                 }
             }
 
@@ -311,6 +311,10 @@ namespace Project_IHFF.Controllers
         public ActionResult PurchaseDone()
         {
             Accounts account = Session["loggedin_account"] as Accounts;
+            if (account == null)
+            {
+                return RedirectToAction("Login", "Account");
+            }
             List<Tickets> tickets = new List<Tickets>();
             if (Session["products"] != null)
             {

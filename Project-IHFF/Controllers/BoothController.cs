@@ -15,6 +15,10 @@ public class BoothController : Controller
     public ActionResult Index()
     {
         Accounts account = Session["loggedin_account"] as Accounts;
+        if (account == null)
+        {
+            return RedirectToAction("Login", "Account");
+        }
         List<Tickets> tickets = new List<Tickets>();
         if (Session["products"] != null)
         {

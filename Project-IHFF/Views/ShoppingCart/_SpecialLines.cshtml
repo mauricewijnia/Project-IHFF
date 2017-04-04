@@ -36,7 +36,7 @@ else
         <li>
             <a id="ShoppingCart" class="glyphicon glyphicon-shopping-cart NavIcons" style="margin-left: -50px;
     font-size: 25px;
-    color: #ff9900;" href='@Url.Action("Add", "ShoppingCart", new { id =  id, Quantity = (((SpecialTicket)Model).quantity), shopcart = true, remove = true }, null)'></a>
+    color: #ff9900;" href='@Url.Action("Add", "ShoppingCart", new { id =  id, Quantity = (((SpecialTicket)Model).quantity), shopcart = true, remove = true, tijd = Specialtje.startTime }, null)'></a>
         </li>
     }
 </ul>
