@@ -28,13 +28,13 @@
                             <span class="glyphicon glyphicon-calendar"></span>
                             <select id="@("date"+restaurant.ItemId)">
                                 <option value="-">-</option>
-                                <option value="monday">Monday</option>
-                                <option value="tuesday">Tuesday</option>
-                                <option value="wednesday">Wednesday</option>
-                                <option value="thursday">Thursday</option>
-                                <option value="friday">Friday</option>
-                                <option value="saturday">Saturday</option>
-                                <option value="sunday">Sunday</option>
+                                <option value="2017-03-20">Monday</option>
+                                <option value="2017-03-21">Tuesday</option>
+                                <option value="2017-03-22">Wednesday</option>
+                                <option value="2017-03-23">Thursday</option>
+                                <option value="2017-03-24">Friday</option>
+                                <option value="2017-03-25">Saturday</option>
+                                <option value="2017-03-26">Sunday</option>
                             </select>
 
                             <span class="glyphicon glyphicon-time"></span>
@@ -48,7 +48,7 @@
                                 @while (time <= finalTime)
                                 {
 
-                                    <option value="@time.ToString(@"hh\:mm")">@time.ToString(@"hh\:mm")</option>
+                                    <option value="@time.ToString(@"hh\:mm\:ss")">@time.ToString(@"hh\:mm")</option>
                                     time = time.Add(interval);
                                 }
 

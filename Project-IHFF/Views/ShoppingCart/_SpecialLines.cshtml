@@ -1,5 +1,4 @@
-﻿
-@using Project_IHFF.Models;
+﻿@using Project_IHFF.Models;
 @model SpecialTicket
 
 @{Specials Specialtje = (((SpecialTicket)Model).Specials);
@@ -31,12 +30,13 @@ else
         <a class="glyphicon glyphicon-minus FloatLeft MinPlusKnop MarginLeft10px" href='@Url.Action("ChangeQuantity", "ShoppingCart", new { id = (((SpecialTicket)Model).id), aantal = -1, shopcart = shopcartContr}, null)'></a>
     </li>
     <li><p style="margin-left:-60px;">€,-</p></li>
-    @if (ViewContext.RouteData.Values["Controller"].ToString().ToLower() == "shoppingcart")
+
+    @if (ViewContext.RouteData.Values["Controller"].ToString().ToLower() != "shoppingcart")
     {
         <li>
             <a id="ShoppingCart" class="glyphicon glyphicon-shopping-cart NavIcons" style="margin-left: -50px;
     font-size: 25px;
-    color: #ff9900;" @Url.Action("Add", "ShoppingCart", new { id = @Specialtje.id, Quantity = (((SpecialTicket)Model).quantity), shopcart = true }, null)></a>
+    color: #ff9900;" href='@Url.Action("Add", "ShoppingCart", new { id =  id, Quantity = (((SpecialTicket)Model).quantity), shopcart = true, remove = true }, null)'></a>
         </li>
     }
 </ul>

@@ -19,7 +19,7 @@
         var url = $("#itemsContainer").data('request-url');
 
         //use action result and pass parameters, load it in the container div
-        $("#itemsContainer").load(url, { 'day': day, 'place': place, 'sort': order });
+        $("#itemsContainer").load(url, { 'day': day, 'place': place, 'sort': order, 'dateTime': dateTime });
     });
 
 
@@ -57,6 +57,7 @@
         var fullId = $(this).attr('id');
         var cart = (fullId.substring(5, 9) == "Cart") ? true : false;
         var itemId = (cart == true) ? fullId.slice(9) : fullId.slice(14);
+        var reservation = new Date("2017-03-20T00:00:00");//default
 
         var cartEvent = true; //can stop call to cart controller if conditions aren't met(if turned false)
 
@@ -65,6 +66,9 @@
             if ($("#date" + itemId).val() == "-" || $("#time" + itemId).val() == "-") {
                 alert("please select a date and time for your reservation")
                 var cartEvent = false;
+            } else {
+                alert($("#date" + itemId).val() + "T" + $("#time" + itemId).val());
+                reservation = ($("#date" + itemId).val() + "T" + $("#time" + itemId).val()+ "+01:00"); // date+time+timezone for dateTime parameter
             }
         }
 
@@ -76,7 +80,7 @@
             e.preventDefault();
             $.ajax({
                 url: '/ShoppingCart/Add',
-                data: { id: itemId, Quantity: qty, shopcart: cart, remove: false },
+                data: { id: itemId, Quantity: qty, shopcart: cart, remove: false, tijd: reservation },
                 success: function () {
                     alert("Product added");
                 }

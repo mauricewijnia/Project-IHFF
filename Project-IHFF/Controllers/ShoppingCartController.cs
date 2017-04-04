@@ -58,11 +58,13 @@ namespace Project_IHFF.Controllers
             return View(tickets);
         }
 
-        public ActionResult Add(int id, int Quantity, bool shopcart, bool remove)
+
+        public ActionResult Add(int id, int Quantity, bool shopcart, bool remove, DateTime tijd)
         {
             Tickets ticket = new Tickets();
             List<Tickets> Alltickets = AllTickets();
             List<Tickets> tickets = new List<Tickets>();
+
             string sessie;
 
             if (!shopcart) //als het naar shopping cart doe wishlist sessie en anders product sessie
@@ -78,8 +80,15 @@ namespace Project_IHFF.Controllers
             {
                 if (item.id == id)
                 {
-                    ticket = item;
-                    ticket.quantity = Quantity;
+                    if (item is RestaurantReservation)
+                    {
+                        ticket = RestaurantToevoegen(((RestaurantReservation)item), Quantity, tijd);
+                    }
+                    else
+                    {
+                        ticket = item;
+                        ticket.quantity = Quantity;
+                    }
                 }
             }
             if (Session[sessie] != null) // haal lijst met producten van winkelwagentje op als ze er zijn
@@ -108,6 +117,7 @@ namespace Project_IHFF.Controllers
                 tickets.Add(ticket);
             }
 
+            
 
             Session[sessie] = tickets;
             if (remove)
@@ -125,6 +135,25 @@ namespace Project_IHFF.Controllers
                 return RedirectToAction("Index", "WishList");
             }
 
+        }
+
+        private Tickets RestaurantToevoegen(RestaurantReservation res, int Quantity, DateTime tijd)
+        {
+            Restaurants restauranttje = (((RestaurantReservation)res).Restaurants);            
+
+            Restaurants restaurattje = new Restaurants();
+            restauranttje.name = restauranttje.name;
+            restauranttje.id = restauranttje.id;
+            restauranttje.price = 10;
+
+            RestaurantReservation restaurant = new RestaurantReservation();
+            restaurant.id = res.id;
+            restaurant.reservationTime = tijd;
+            restaurant.quantity = Quantity;
+            restaurant.Restaurants = restauranttje;
+            
+
+            return restaurant;
         }
 
         private List<Tickets> AllTickets()
