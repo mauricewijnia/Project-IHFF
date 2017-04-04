@@ -20,32 +20,40 @@ namespace Project_IHFF.Controllers
         {
             return View();
         }
-
-        public ActionResult AddItem()
-        {
-            return View();
-        }
+        
+        //Link naar admin filmoverzicht
         public ActionResult Films()
         {
             return View(repository.GetAllFilms().OrderBy(x => x.name));
         }
 
+        //Link naar admin specialoverzicht
         public ActionResult Specials()
         {
             return View(repository.GetAllSpecials().OrderBy(x => x.name));
         }
 
+        //Link naar admin restaurant overzicht
         public ActionResult Restaurants()
         {
             return View(repository.GetAllRestaurants().OrderBy(x => x.name));
         }
 
+
         public ActionResult DeleteFilm(int id)
         {
-            DeleteImageByItemId(id);
-            repository.DeleExhibitionsForFilm(id);
-            repository.DeleteItem(id);
-            return RedirectToAction("Films");
+            if(repository.GetFilmById(id) != null)
+            {
+                DeleteImageByItemId(id);
+                repository.DeleExhibitionsForFilm(id);
+                repository.DeleteItem(id);
+                return RedirectToAction("Films");
+            }
+            else
+            {
+                return RedirectToAction("Index", "Error", new { errorMessage = "This filmid doesn't exist." });
+            }
+            
         }
 
         public ActionResult DeleteSpecial(int id)

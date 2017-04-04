@@ -1,0 +1,32 @@
+﻿@using Project_IHFF.Models;
+@model List<Tickets>
+@{
+    ViewBag.Title = "Index";
+}
+<div id="WinkelWagenInhoud">
+    <h1 id="Tickets">Tickets</h1>
+    <ul id="ShoppingCartRegelKop">
+        <li><h4>Event</h4></li>
+        <li><h4>Time</h4></li>
+        <li><h4>Day</h4></li>
+        <li><h4>Amound</h4></li>
+        <li><h4>Price</h4></li>
+        <li><h4>To Cart</h4></li>
+    </ul>
+    @foreach (Tickets ticket in Model)
+    {
+        if (ticket is FilmTickets)
+        {
+            @Html.Partial("~/Views/ShoppingCart/_FilmLines.cshtml", ticket);
+        }
+        else if (ticket is RestaurantReservation)
+        {
+            @Html.Partial("~/Views/ShoppingCart/_RestaurantLines.cshtml", ticket);
+        }
+        else if (ticket is SpecialTicket)
+        {
+            @Html.Partial("~/Views/ShoppingCart/_SpecialLines.cshtml", ticket);
+        }
+    }
+</div>
+<p><a href="@Url.Action("MoveAllToCart", "ShoppingCart")" class="btn btn-primary btn-lg RekenAf-btn">Move all to cart &raquo;</a></p>
