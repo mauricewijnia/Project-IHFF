@@ -331,7 +331,7 @@ input[type="color"]:focus,
 }
 .shopBtn {
     width: 12em;
-    margin: 4px 4px 20px 4px;
+    margin: 4px;
     background-color: #FF9900;
     border-color: #FF9900;
 }
@@ -370,6 +370,10 @@ input[type="color"]:focus,
 .noPadd{
     padding: 0px;
 }
+.textSpecial{
+    padding-left: 2em;
+    min-height: 10em;
+}
 .verticalCenter {
    min-height: 5em;
    display: table-cell;
@@ -381,8 +385,11 @@ input[type="color"]:focus,
 .lower {
     padding-top: 1em;
 }
-.title {
+.title, .titleSpecial {
     color: #FF9900;
+}
+.titleSpecial {
+    font-size:2.2em;
 }
 
 .subTitle, .title {
@@ -398,6 +405,10 @@ input[type="color"]:focus,
 .price {
     font-weight: bold;
     padding-right:2em;
+}
+.qtySection{
+    padding-top: 0.5em;
+    padding-right: 1em;
 }
 .OrangeText {
     color: #FF9900;

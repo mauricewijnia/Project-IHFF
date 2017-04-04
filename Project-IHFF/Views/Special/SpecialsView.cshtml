@@ -10,25 +10,38 @@
             <img src="@special.Image" style="height:13em" />
         </div>
         <div class="col-md-10 noPadd whiteText">
-            <div class="col-md-9">
-                <h1 class="title">@special.Name</h1>
+            <div class="col-md-9 textSpecial">
+                <h1 class="title titleSpecial">@special.Name</h1>
                 <h3 class="subTitle">@special.Host</h3>
                 <p class="description">@special.Description</p>
             </div>
             <div class="col-md-3">
-                <p>@special.StartTime.DayOfWeek</p>
-                <p>@special.StartTime.ToString("HH:mm") - @special.EndTime.ToString("HH:mm")</p>
-                <p>@special.Location</p>
+                <div class="times">
+                    <span>@special.StartTime.DayOfWeek</span><br />
+                    <span class="OrangeText">@special.StartTime.ToString("HH:mm") - @special.EndTime.ToString("HH:mm")</span>
+                </div>
+                <div class="lower">
+                    <span>@special.Location</span>
+                </div>
+
             </div>
+
             <div class="clearfix"></div>
-            <div class="col-md-12 verticalCenter noSelect">
-                <span id="@("add"+special.ItemId)" class="glyphicon glyphicon-plus-sign qtyBtn"></span>
-                <span id="@("qty"+special.ItemId)">1</span>
-                <span id="@("min"+special.ItemId)" class="glyphicon glyphicon-minus-sign qtyBtn"></span>
-                <a class="btn btn-default shopBtn" id="@("addToProgramme"+special.ItemId)">To Programme</a>
-                <a class="btn btn-default shopBtn" id="@("addToCart"+special.ItemId)">To shopping Cart</a>
+
+            <div class="col-md-12 noSelect">
+                <div class="right">
+                    <a class="btn btn-default shopBtn" id="@("addToProgramme"+special.ItemId)">To Programme</a>
+                    <a class="btn btn-default shopBtn" id="@("addToCart"+special.ItemId)">To shopping Cart</a>
+                </div>
+                <div class="qtySection right">
+                    <span class="price">Free</span>
+                    <span id="@("add"+special.ItemId)" class="glyphicon glyphicon-plus-sign qtyBtn"></span>
+                    <span id="@("qty"+special.ItemId)">1</span>
+                    <span id="@("min"+special.ItemId)" class="glyphicon glyphicon-minus-sign qtyBtn"></span>
+                </div>
             </div>
         </div>
+
         <div class="clearfix"></div>
     </div>
 }

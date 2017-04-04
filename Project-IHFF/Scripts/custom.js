@@ -30,16 +30,23 @@
         var idNr = id.slice(3); //remove "qty" leaves the idNr
 
         var qty = parseInt($("#qty" + idNr).html()); //gets the the current qty 
-        var price = parseInt($("#price" + idNr).html().slice(2)) //gets the the current price, cuts off "€ "
-        //var price = parseInt(priceStr); //gets the the current price
-        
-        //add or substracts qty AND price
         if (id.substring(0, 3) == "add") {
             $("#qty" + idNr).html(qty + 1);
-            $("#price" + idNr).html("€ "+(price / qty) * (qty + 1));
         } else if (id.substring(0, 3) == "min" && qty != "1") {
             $("#qty" + idNr).html(qty - 1);
-            $("#price" + idNr).html("€ "+(price / qty) * (qty - 1));
+        }
+
+        // if on films, change price
+        if ($(this).hasClass('qtyBtnfilm')) {
+            var price = parseInt($("#price" + idNr).html().slice(2)) //gets the the current price, cuts off "€ "
+            //var price = parseInt(priceStr); //gets the the current price
+
+            //add or substracts qty AND price
+            if (id.substring(0, 3) == "add") {
+                $("#price" + idNr).html("€ " + (price / qty) * (qty + 1));
+            } else if (id.substring(0, 3) == "min" && qty != "1") {
+                $("#price" + idNr).html("€ " + (price / qty) * (qty - 1));
+            }
         }
     });
 
@@ -52,6 +59,7 @@
         var itemId = (cart == true) ? fullId.slice(9) : fullId.slice(14);
 
         var cartEvent = true; //can stop call to cart controller if conditions aren't met(if turned false)
+
         //if restaurant, check if date and time is selected
         if ($(this).hasClass('shopBtnRestaurant')) {
             if ($("#date" + itemId).val() == "-" || $("#time" + itemId).val() == "-") {

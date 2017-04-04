@@ -34,7 +34,7 @@ namespace Project_IHFF.Repositories
                              Description = items.description,
                              Host = specials.host,
                              Image = items.imagePath,
-                             Location = SqlFunctions.DatePart("dw", specials.startTime).ToString(),
+                             Location = items.location,
                              Price = items.price,
                              Capacity = specials.capacity,
                              StartTime = specials.startTime,

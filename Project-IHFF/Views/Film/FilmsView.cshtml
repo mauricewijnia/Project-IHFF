@@ -31,12 +31,14 @@
  
             <div class="col-md-12 noSelect">
                 <div class="right">
-                    <span class="price" id="@("price"+film.FilmId)">€ @film.Price</span>
-                    <span id="@("add"+film.FilmId)" class="glyphicon glyphicon-plus-sign qtyBtn"></span>
-                    <span id="@("qty"+film.FilmId)">1</span>
-                    <span id="@("min"+film.FilmId)" class="glyphicon glyphicon-minus-sign qtyBtn"></span>
                     <a class="btn btn-default shopBtn" id="@("addToProgramme"+film.FilmId)">To Programme</a>
                     <a class="btn btn-default shopBtn" id="@("addToCart"+film.FilmId)">To shopping Cart</a>
+                </div>
+                <div class="qtySection right">
+                    <span class="price" id="@("price"+film.FilmId)">€ @film.Price</span>
+                    <span id="@("add"+film.FilmId)" class="glyphicon glyphicon-plus-sign qtyBtn qtyBtnfilm"></span>
+                    <span id="@("qty"+film.FilmId)">1</span>
+                    <span id="@("min"+film.FilmId)" class="glyphicon glyphicon-minus-sign qtyBtn qtyBtnfilm"></span>
                 </div>
             </div>
         </div>
