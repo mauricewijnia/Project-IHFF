@@ -59,7 +59,7 @@ namespace Project_IHFF.Controllers
         //Verwijder special uit database
         public ActionResult DeleteSpecial(int id)
         {
-            if(repository.GetItemById(id) != null)
+            if(repository.GetItemById(id) != null && repository.GetItemById(id) is Specials)
             {
                 DeleteImageByItemId(id);
                 repository.DeleteItem(id);
@@ -75,7 +75,7 @@ namespace Project_IHFF.Controllers
         //Verwijder restaurant uit database
         public ActionResult DeleteRestaurant(int id)
         {
-            if(repository.GetItemById(id) != null)
+            if(repository.GetItemById(id) != null && repository.GetItemById(id) is Restaurants)
             {
                 DeleteImageByItemId(id);
                 repository.DeleteItem(id);
@@ -83,16 +83,25 @@ namespace Project_IHFF.Controllers
             }
             else
             {
-                return RedirectToAction("Index", "Error", new { errorMessage = "This special does not exist." });
+                return RedirectToAction("Index", "Error", new { errorMessage = "This restaurant does not exist." });
             }
         }
 
+        //Haal film uit database om te wijzigen
         public ActionResult EditFilm(int id)
         {
-            FilmsViewModel viewModel = new FilmsViewModel();
-            viewModel.film = repository.GetFilmById(id);
-            viewModel.exhibitions = repository.GetExhibitionForFilmID(id);
-            return View(viewModel);
+            if(repository.GetFilmById(id) != null)
+            {
+                FilmsViewModel viewModel = new FilmsViewModel();
+                viewModel.film = repository.GetFilmById(id);
+                viewModel.exhibitions = repository.GetExhibitionForFilmID(id);
+                return View(viewModel);
+            }
+            else
+            {
+                return RedirectToAction("Index", "Error", new { errorMessage = "This film does not exist." });
+            }
+
         }
 
         [HttpPost]
@@ -100,6 +109,7 @@ namespace Project_IHFF.Controllers
         {
             if (ModelState.IsValid)
             {
+                //Verwijder oude afbeelding en upload nieuwe afbeelding wanneer deze is gewijzigd
                 if (upload != null && upload.ContentLength > 0)
                 {
                     DeleteImageByItemId(filmViewModel.film.id);
@@ -123,6 +133,7 @@ namespace Project_IHFF.Controllers
             }
         }
 
+        //Voeg nieuwe film toe
         public ActionResult AddFilm()
         {
             FilmsViewModel filmsViewModel = InitFilmsViewModel();
@@ -153,6 +164,8 @@ namespace Project_IHFF.Controllers
                         }
                     }
                 }
+
+
                 else
                 {
                     ModelState.AddModelError("", "A film with that name already exists");
@@ -169,9 +182,18 @@ namespace Project_IHFF.Controllers
             }
         }
 
+        //Haal special uit database om te wijzigen
         public ActionResult EditSpecial(int id)
-        {     
-            return View(repository.GetItemById(id));
+        {
+            if (repository.GetItemById(id) != null && repository.GetItemById(id) is Specials)
+            {
+                return View(repository.GetItemById(id));
+            }
+            else
+            {
+                return RedirectToAction("Index", "Error", new { errorMessage = "This special does not exist." });
+            }
+            
         }
 
         [HttpPost]
@@ -200,6 +222,7 @@ namespace Project_IHFF.Controllers
             
         }
 
+        //Voeg special toe
         public ActionResult AddSpecial()
         {
             Specials special = new Specials();
@@ -233,10 +256,18 @@ namespace Project_IHFF.Controllers
             
         }
 
+        //Haal restaurant uit database om te wijzigen
         public ActionResult EditRestaurant(int id)
         {
-            return View(repository.GetItemById(id));
-        }
+            if (repository.GetItemById(id) != null && repository.GetItemById(id) is Restaurants)
+            {
+                return View(repository.GetItemById(id));
+            }
+            else
+            {
+                return RedirectToAction("Index", "Error", new { errorMessage = "This restaurant does not exist." });
+            }
+                    }
 
         [HttpPost]
         public ActionResult EditRestaurant(Restaurants restaurant, HttpPostedFileBase upload)
@@ -261,6 +292,7 @@ namespace Project_IHFF.Controllers
             
         }
 
+        //Voeg restaurant toe
         public ActionResult AddRestaurant()
         {
             Restaurants restaurant = new Restaurants();
@@ -289,6 +321,7 @@ namespace Project_IHFF.Controllers
             
         }
 
+        //Update filmtentoonstellingen
         public void UpdateExhibition(Exhibitions exhibition)
         {
             if(exhibition.startTime != baseTime)
@@ -297,7 +330,6 @@ namespace Project_IHFF.Controllers
                 {
                     repository.AddFilmExhibition(exhibition);
                 }
-
                 else
                 {
                     repository.UpdateExhibition(exhibition);
@@ -312,6 +344,7 @@ namespace Project_IHFF.Controllers
             }
         }
 
+        //Verwijder afbeelding van een item.
         public void DeleteImageByItemId(int id)
         {
             string imagePath = repository.GetItemById(id).imagePath;
@@ -325,6 +358,7 @@ namespace Project_IHFF.Controllers
             }
         }
 
+        //Intitialiseer het filmsviewmodel voor een nieuwe film.
         public FilmsViewModel InitFilmsViewModel()
         {
             FilmsViewModel filmsViewModel = new FilmsViewModel();

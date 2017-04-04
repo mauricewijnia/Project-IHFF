@@ -11,6 +11,7 @@ namespace Project_IHFF.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     
     public partial class Specials : Items
     {
@@ -19,12 +20,18 @@ namespace Project_IHFF.Models
         {
             this.SpecialTicket = new HashSet<SpecialTicket>();
         }
-    
+
+        [Required(AllowEmptyStrings = false)]
         public string host { get; set; }
+        [Required(AllowEmptyStrings = false)]
         public int capacity { get; set; }
+        [Required(AllowEmptyStrings = false)]
+        [DataType(DataType.DateTime)]
         public System.DateTime startTime { get; set; }
+        [Required(AllowEmptyStrings = false)]
+        [DataType(DataType.DateTime)]
         public System.DateTime endTime { get; set; }
-    
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SpecialTicket> SpecialTicket { get; set; }
     }

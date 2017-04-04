@@ -94,7 +94,7 @@
     <div class="cmsButtonGroup">
         <input type="submit" value="Submit" class="btn btn-primary" onclick="return validateForm()" />
         @Html.ActionLink("Cancel", "Films", null, new { @class = "btn btn-primary" })
-        @Html.ActionLink("Delete", "DeleteFilm", new { id = Model.film.id }, new { @class = "btn btn-danger" })
+        @Html.ActionLink("Delete", "DeleteFilm", new { id = Model.film.id }, new { @class = "btn btn-danger", onclick="return confirmDelete()" })
     </div>
     
 
@@ -127,6 +127,9 @@
             return bool;
         })
 
+    }
+    function confirmDelete() {
+        return window.confirm("Are you sure you want to delete this movie?")
     }
 
 
