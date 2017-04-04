@@ -22,50 +22,9 @@ namespace Project_IHFF.Controllers
         [HttpGet]
         public ActionResult Register()
         {
-            ViewBag.newAccount = "Make a new account";
+            ViewBag.newAccount = "Create a new account.";
             return View();
         }
-
-        //oude stuff
-        //[HttpPost]
-        //public ActionResult Register(string firstName, string lastName, string phoneNumber, string EmailAdress, string Password, string Passwordcheck)
-        //{
-        //    if (Password != Passwordcheck)
-        //    {
-        //        return RedirectToAction("Register", "Account", new { error = "The filled in passwords do not match!" });
-        //    }
-        //    ViewBag.Registering = "Account has been made, log in here";
-        //    accountRepository.CreateAccount(firstName, lastName, phoneNumber, EmailAdress, Password);
-
-        //    return View("login");
-        //}
-
-        //public ActionResult Login()
-        //{
-        //    ViewBag.login = "Login";
-        //    return View();
-        //}
-
-        //[HttpPost]
-        //public ActionResult Login(string Emailadress, string Password)
-        //{
-        //    Accounts account = accountRepository.GetAccount(Emailadress, Password);
-        //    if (account != null)
-        //    {
-        //        FormsAuthentication.SetAuthCookie(account.email, false);
-        //        Session["loggedin_account"] = account;
-
-        //        return RedirectToAction("Index", "Home");
-        //    }
-        //    else
-        //    {
-        //        ViewBag.Login = "Login";
-        //        return RedirectToAction("Login");
-        //    }
-        //}
-
-
-        //nieuwe stuff
 
         [HttpPost]
         public ActionResult Register(RegisterModel register_account)
@@ -103,7 +62,7 @@ namespace Project_IHFF.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError("login-error", "The user name or password provided is incorrect.");
+                    ModelState.AddModelError("login-error", "The email address or password provided is incorrect.");
                 }
             }
             return View(login_account);

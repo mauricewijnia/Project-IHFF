@@ -466,3 +466,11 @@ input[type="color"]:focus,
     outline: solid white 1px;
 }
 /*culture page CSS*/
+
+/*register css fix*/
+
+.errormessage
+{
+    margin-left: -100px;
+    margin-top: 6px;
+}

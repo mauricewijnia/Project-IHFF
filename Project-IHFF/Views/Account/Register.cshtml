@@ -1,60 +1,78 @@
 ﻿@using Project_IHFF.Models;
 @model RegisterModel
 
-@{
-    ViewBag.Title = "Register";
-}
-
-<h2>@ViewBag.Title</h2>
+<h2>Register</h2>
 
 @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
     @Html.AntiForgeryToken()
-    <h5>Create a new account</h5>
+    <h5>@ViewBag.newAccount</h5>
     <hr />
 
-    @Html.ValidationSummary("", new { @class = "text-danger" })
+    // @Html.ValidationSummary("", new { @class = "text-danger" })
 
     <div class="form-group">
         @Html.LabelFor(m => m.firstName, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
+        <div class="col-md-4">
             @Html.TextBoxFor(m => m.firstName, new { @class = "form-control" })
+        </div>
+        <div class="col-md-4 errormessage">
+            @Html.ValidationMessageFor(m => m.firstName, "", new { @class = "text-danger" })
         </div>
     </div>
 
     <div class="form-group">
         @Html.LabelFor(m => m.lastName, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
+        <div class="col-md-4">
             @Html.TextBoxFor(m => m.lastName, new { @class = "form-control" })
+        </div>
+        <div class="col-md-4 errormessage">
+            @Html.ValidationMessageFor(m => m.lastName, "", new { @class = "text-danger" })
         </div>
     </div>
 
     <div class="form-group">
         @Html.LabelFor(m => m.phoneNumber, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
+        <div class="col-md-4">
             @Html.TextBoxFor(m => m.phoneNumber, new { @class = "form-control" })
+        </div>
+        <div class="col-md-4 errormessage">
+            @Html.ValidationMessageFor(m => m.phoneNumber, "", new { @class = "text-danger" })
         </div>
     </div>
 
     <div class="form-group">
         @Html.LabelFor(m => m.email, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
+        <div class="col-md-4">
             @Html.TextBoxFor(m => m.email, new { @class = "form-control" })
+        </div>
+        <div class="col-md-4 errormessage">
+            @Html.ValidationMessageFor(m => m.email, "", new { @class = "text-danger" })
         </div>
     </div>
 
     <div class="form-group">
         @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
+        <div class="col-md-4">
             @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+        </div>
+        <div class="col-md-4 errormessage">
+            @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
         </div>
     </div>
 
     <div class="form-group">
         @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
+        <div class="col-md-4">
             @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
         </div>
+        <div class="col-md-4 errormessage">
+            @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group col-md-4">
+        @Html.ValidationMessage("register-error", new { @class = "text-danger" })
     </div>
 
     <div class="form-group">

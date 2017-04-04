@@ -10,7 +10,7 @@ namespace Project_IHFF.Repositories
 {
     interface IAccountRepository
     {
-        Accounts GetAccount(string emailAddress);  //, string password);
+        Accounts GetAccount(string emailAddress);
         void CreateAccount(string firstName, string lastName, string phoneNumber, string Emailadress, string Password);
         int GetContactIdByMail(string Emailaddress);
         IEnumerable<Accounts> GetAllAccount();
@@ -38,10 +38,10 @@ namespace Project_IHFF.Repositories
         ctx.SaveChanges();
     }
 
-    public Accounts GetAccount(string emailAddress)  //, string password)
+    public Accounts GetAccount(string emailAddress)
     {
         Accounts account;
-        account = ctx.Persons.OfType<Accounts>().SingleOrDefault(a => a.email == emailAddress);  // && a.password == password);
+        account = ctx.Persons.OfType<Accounts>().SingleOrDefault(a => a.email == emailAddress);
         return account;
     }
 
@@ -50,9 +50,8 @@ namespace Project_IHFF.Repositories
         ctx.Persons.Add(account);
         ctx.SaveChanges();
     }
-
-
     /// 
+    
 
 
     public Accounts GetAccountByAccountId(int id)
