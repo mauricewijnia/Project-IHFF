@@ -54,7 +54,7 @@
     padding-top: 15px;
     margin-top: -23px;
     margin-top: 102px;
-    padding-bottom: 100%;
+    min-height: 100%;
     background-color:#CCCCCC;
 }
 
@@ -325,6 +325,28 @@ input[type="color"]:focus,
     border-radius: 5px;
     background-color: #666666;
 }
+#shopPopupContent
+{
+    display: none; /*hide the div initialy*/
+    width: 320px; /*set the width of the div*/
+    height: 150px;
+    border: 3px solid black; /*define a styling border*/
+    box-shadow: 0px 0px 7px;
+    position: fixed; /*postition the div in center of screen*/
+    top: 50%;
+    left: 50%;
+    margin: -75px 0 0 -125px;
+    background-color: #FF9900;
+}
+.messagePopup{
+    margin-top: 10px;
+    padding: 10px;
+}
+.btnsPopup {
+    margin-top: 10px;
+    padding: 10px;
+}
+
 .notification{
     text-align: center;
     border: 5px solid #FF9900;

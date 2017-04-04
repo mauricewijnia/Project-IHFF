@@ -19,7 +19,7 @@
         var url = $("#itemsContainer").data('request-url');
 
         //use action result and pass parameters, load it in the container div
-        $("#itemsContainer").load(url, { 'day': day, 'place': place, 'sort': order, 'dateTime': dateTime });
+        $("#itemsContainer").load(url, { 'day': day, 'place': place, 'sort': order});
     });
 
 
@@ -67,7 +67,6 @@
                 alert("please select a date and time for your reservation")
                 var cartEvent = false;
             } else {
-                alert($("#date" + itemId).val() + "T" + $("#time" + itemId).val());
                 reservation = ($("#date" + itemId).val() + "T" + $("#time" + itemId).val()+ "+01:00"); // date+time+timezone for dateTime parameter
             }
         }
@@ -82,11 +81,26 @@
                 url: '/ShoppingCart/Add',
                 data: { id: itemId, Quantity: qty, shopcart: cart, remove: false, tijd: reservation },
                 success: function () {
-                    alert("Product added");
+                    if (cart) {
+                        $("#shopPopupMessage").html("cart")
+                        $("#shopPopupProgramme").hide();
+                        $("#shopPopupCart").show();
+                    } else {
+                        $("#shopPopupMessage").html("programme")
+                        $("#shopPopupProgramme").show();
+                        $("#shopPopupCart").hide();
+                    }
+                    $("#shopPopupContent").show();
+
                 }
             });
         }
     });
+
+    $(".closePopup").click(function () {
+        $("#shopPopupContent").hide();
+    });
+
 
 });
 
