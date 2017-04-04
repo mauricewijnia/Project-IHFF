@@ -6,15 +6,33 @@
 @using (Html.BeginForm("Login", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
 
-    @Html.LabelFor(x => x.email)    <br />
-    @Html.TextBoxFor(x => x.email, new { @class = "form-control" })
-    @Html.ValidationMessageFor(x => x.email, "",  new { @class = "text-danger" })
-    <br />
+    <div class="form-group">
+        @Html.LabelFor(x => x.email, new { @class = "col-md-2 control-label" })
+        <div class="col-md-4">
+            @Html.TextBoxFor(x => x.email, new { @class = "form-control" })
+        </div>
+        <div class="col-md-4 errormessage">
+            @Html.ValidationMessageFor(x => x.email, "", new { @class = "text-danger" })
+        </div>
+    </div>
 
-    @Html.LabelFor(x => x.password) <br />
-        @Html.PasswordFor(x => x.password, new { @class = "form-control" })
-        @Html.ValidationMessageFor(x => x.password, "", new { @class = "text-danger" })
-        <br />
+    <div class="form-group">
+        @Html.LabelFor(x => x.password, new { @class = "col-md-2 control-label" })
+        <div class="col-md-4">
+            @Html.PasswordFor(x => x.password, new { @class = "form-control" })
+        </div>
+        <div class="col-md-4 errormessage">
+            @Html.ValidationMessageFor(x => x.password, "", new { @class = "text-danger" })
+        </div>
+    </div>
 
-    <input type="submit" class="btn btn-primary" value="Login" />
+    <div class="form-group col-md-6">
+        @Html.ValidationMessage("login-error", new { @class = "text-danger" })
+    </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" class="btn btn-primary" value="Login" />
+            </div>
+        </div>
 }
