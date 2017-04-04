@@ -30,12 +30,16 @@
         var idNr = id.slice(3); //remove "qty" leaves the idNr
 
         var qty = parseInt($("#qty" + idNr).html()); //gets the the current qty 
-
-        //add or substracts qty
+        var price = parseInt($("#price" + idNr).html().slice(2)) //gets the the current price, cuts off "€ "
+        //var price = parseInt(priceStr); //gets the the current price
+        
+        //add or substracts qty AND price
         if (id.substring(0, 3) == "add") {
             $("#qty" + idNr).html(qty + 1);
+            $("#price" + idNr).html("€ "+(price / qty) * (qty + 1));
         } else if (id.substring(0, 3) == "min" && qty != "1") {
             $("#qty" + idNr).html(qty - 1);
+            $("#price" + idNr).html("€ "+(price / qty) * (qty - 1));
         }
     });
 
