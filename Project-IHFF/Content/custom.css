@@ -54,7 +54,7 @@
     padding-top: 15px;
     margin-top: -23px;
     margin-top: 102px;
-    min-height: 100%;
+    min-height: 350px;
     background-color:#CCCCCC;
 }
 
@@ -324,6 +324,10 @@ input[type="color"]:focus,
     padding: 10px;
     border-radius: 5px;
     background-color: #666666;
+}
+.filterBox { 
+    position: fixed;
+    width: 350px;
 }
 #shopPopupContent
 {
