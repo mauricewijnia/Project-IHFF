@@ -348,8 +348,12 @@ input[type="color"]:focus,
 .sortBtn{
     width: 4em;
     margin: 4px;
+    padding: 6px 0px;
     background-color: #FF9900;
     border-color: #FF9900;
+}
+.sortBtn.sortPlace{
+    width: 7em;
 }
 .sortBtn:hover{
     background-color: #ff6600;
@@ -371,6 +375,12 @@ input[type="color"]:focus,
    display: table-cell;
    vertical-align: middle;
 }
+.right{
+    float: right;
+}
+.lower {
+    padding-top: 1em;
+}
 .title {
     color: #FF9900;
 }
@@ -379,11 +389,15 @@ input[type="color"]:focus,
     margin: 0.2em 0;
 }
 .times{
-    font-weight: 900;
+    font-weight: bold;
     font-size: 1.2em;
 }
 .description {
     font-size: 0.8em;
+}
+.price {
+    font-weight: bold;
+    padding-right:2em;
 }
 .OrangeText {
     color: #FF9900;
@@ -394,7 +408,6 @@ input[type="color"]:focus,
 .noSelect {
   -webkit-touch-callout: none; /* iOS Safari */
     -webkit-user-select: none; /* Safari */
-     -khtml-user-select: none; /* Konqueror HTML */
        -moz-user-select: none; /* Firefox */
         -ms-user-select: none; /* Internet Explorer/Edge */
             user-select: none; /* Non-prefixed version, currently
