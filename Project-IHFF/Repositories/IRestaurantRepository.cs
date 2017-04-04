@@ -10,7 +10,6 @@ namespace Project_IHFF.Repositories
     interface IRestaurantRepository
     {
         IEnumerable<RestaurantViewModel> GetAllRestaurants();
-        IEnumerable<RestaurantViewModel> GetOpeningTimesRestaurants();
     }
 
     public class DbRestaurantRepository : IRestaurantRepository
@@ -29,21 +28,6 @@ namespace Project_IHFF.Repositories
                              Image = items.imagePath,
                              Location = items.location,
                              Price = items.price,
-                             TimeOpen = restaurants.timeOpen,
-                             TimeClosed = restaurants.timeClosed
-
-                         }).ToList();
-            return query;
-        }
-
-        public IEnumerable<RestaurantViewModel> GetOpeningTimesRestaurants()
-        {
-            var query = (from restaurants in ctx.Items.OfType<Restaurants>()
-                         join items in ctx.Items on restaurants.id equals items.id
-                         orderby items.name ascending
-                         select new RestaurantViewModel()
-                         {
-                             ItemId = restaurants.id,
                              TimeOpen = restaurants.timeOpen,
                              TimeClosed = restaurants.timeClosed
 
