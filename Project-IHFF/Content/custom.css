@@ -327,12 +327,12 @@ input[type="color"]:focus,
 }
 #shopPopupContent
 {
-    display: none; /*hide the div initialy*/
-    width: 320px; /*set the width of the div*/
+    display: none;
+    width: 320px; 
     height: 150px;
-    border: 3px solid black; /*define a styling border*/
+    border: 3px solid black; 
     box-shadow: 0px 0px 7px;
-    position: fixed; /*postition the div in center of screen*/
+    position: fixed;
     top: 50%;
     left: 50%;
     margin: -75px 0 0 -125px;
@@ -345,6 +345,9 @@ input[type="color"]:focus,
 .btnsPopup {
     margin-top: 10px;
     padding: 10px;
+}
+#shopPopupProgramme, #shopPopupCart {
+    display: none;
 }
 
 .notification{

@@ -64,7 +64,8 @@
         //if restaurant, check if date and time is selected
         if ($(this).hasClass('shopBtnRestaurant')) {
             if ($("#date" + itemId).val() == "-" || $("#time" + itemId).val() == "-") {
-                alert("please select a date and time for your reservation")
+                $("#shopPopupMessage").html("please select a date and time for your reservation");
+                $("#shopPopupContent").show();
                 var cartEvent = false;
             } else {
                 reservation = ($("#date" + itemId).val() + "T" + $("#time" + itemId).val()+ "+01:00"); // date+time+timezone for dateTime parameter
@@ -82,13 +83,11 @@
                 data: { id: itemId, Quantity: qty, shopcart: cart, remove: false, tijd: reservation },
                 success: function () {
                     if (cart) {
-                        $("#shopPopupMessage").html("cart")
-                        $("#shopPopupProgramme").hide();
+                        $("#shopPopupMessage").html("The article is succesfully added to your cart");
                         $("#shopPopupCart").show();
                     } else {
-                        $("#shopPopupMessage").html("programme")
+                        $("#shopPopupMessage").html("The article is succesfully added to your programme");
                         $("#shopPopupProgramme").show();
-                        $("#shopPopupCart").hide();
                     }
                     $("#shopPopupContent").show();
 
@@ -99,6 +98,8 @@
 
     $(".closePopup").click(function () {
         $("#shopPopupContent").hide();
+        $("#shopPopupProgramme").hide();
+        $("#shopPopupCart").hide();
     });
 
 
