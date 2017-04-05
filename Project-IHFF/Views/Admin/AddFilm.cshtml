@@ -4,9 +4,14 @@
 <div class="addPageTitle">
     <h2>Add Film</h2>
 </div>
+@if (TempData["Success"] != null)
+{
+    <p class="text-success">@TempData["Success"].ToString()</p>
+}
 
 
-@Html.ValidationSummary()
+
+@Html.ValidationSummary()   
 @using (Html.BeginForm("AddFilm", "Admin", FormMethod.Post, new { @enctype = "multipart/form-data" }))
 {
     <div class="row">
@@ -84,6 +89,7 @@
 }
 
 <script type="text/javascript">
+
     function validateForm() {
         var bool = true;
         var x = $("#startTime").val();

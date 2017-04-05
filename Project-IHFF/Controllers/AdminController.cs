@@ -173,6 +173,7 @@ namespace Project_IHFF.Controllers
                 }
                                
                 ModelState.Clear();
+                TempData["Success"] = "Film successfully added.";
                 return RedirectToAction("AddFilm");
             }
             else
@@ -246,6 +247,7 @@ namespace Project_IHFF.Controllers
                 repository.AddItem(special);
 
                 ModelState.Clear();
+                TempData["Success"] = "Special successfully added.";
                 return View();
             }
             else
@@ -311,6 +313,7 @@ namespace Project_IHFF.Controllers
                 }
                 repository.AddItem(restaurant);
                 ModelState.Clear();
+                TempData["Success"] = "Restaurant successfully added.";
                 return View();
             }
             else

@@ -4,6 +4,10 @@
 <div class="addPageTitle">
     <h2>Add Restaurant</h2>
 </div>
+@if (TempData["Success"] != null)
+{
+    <p class="text-success">@TempData["Success"].ToString()</p>
+}
 
 
 @Html.ValidationSummary()
